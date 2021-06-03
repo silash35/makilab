@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  justify-content: center;
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 80%;
+    padding: 30px;
+  }
+}
+
+.contactButton {
+  text-decoration: none;
+  color: white;
+  background-color: #ff9926;
+}

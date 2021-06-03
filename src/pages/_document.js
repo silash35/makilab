@@ -19,10 +19,7 @@ class MyDocument extends Document {
           <meta property="og:url" content="https://makilab.vercel.app/" />
           <meta property="og:locale" content="pt_BR" />
           <meta property="og:image" content="https://makilab.vercel.app/card.png" />
-          <meta
-            property="og:image:alt"
-            content="Logotipo do MakiLab. Uma coruja com o nome MakiLab ao lado com a frase 'Automação, refrigeração e maquinas' em baixo"
-          />
+          <meta property="og:image:alt" content="Logotipo do MakiLab. Uma coruja com o nome MakiLab ao lado com a frase 'Automação, refrigeração e maquinas' em baixo" />
 
           {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
@@ -45,10 +42,7 @@ class MyDocument extends Document {
 
           {/* Fonts */}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-            rel="stylesheet"
-          />
+          <link href="https://fonts.googleapis.com/css2?family=Aleo&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />

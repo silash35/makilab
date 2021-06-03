@@ -7,7 +7,7 @@
 
   "overrides": [
     {
-      "files": ["_document.jsx"],
+      "files": ["_document.js"],
       "options": {
         "printWidth": 999
       }

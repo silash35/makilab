@@ -1,5 +1,7 @@
 import Head from "next/head";
 
+import Header from "../components/header";
+
 export default function Home() {
   return (
     <>
@@ -7,9 +9,13 @@ export default function Home() {
         <title>MakiLab Serviços</title>
       </Head>
 
-      <main></main>
+      <Header />
 
-      <footer>Powered by</footer>
+      <main>
+        main
+        <div id="contact">contato</div>
+      </main>
+      <footer>footer</footer>
     </>
   );
 }
