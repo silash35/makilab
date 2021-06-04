@@ -12,7 +12,8 @@ export default function Home() {
       <Header />
 
       <main>
-        main
+        <div id="about">sobre</div>
+
         <div id="contact">contato</div>
       </main>
       <footer>footer</footer>

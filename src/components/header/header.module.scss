@@ -7,12 +7,37 @@
     justify-content: space-between;
 
     width: 80%;
-    padding: 30px;
+    padding: 20px;
   }
 }
 
-.contactButton {
+.image {
+  line-height: 0;
+}
+
+.headerButton {
+  margin-left: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 1.2rem;
   text-decoration: none;
-  color: white;
-  background-color: #ff9926;
+  font-family: "Noto Sans", sans-serif;
+  text-transform: uppercase;
+  color: #000000cc;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #000000;
+  }
+}
+
+.contact {
+  color: #c00000cc;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #c00000;
+  }
 }
