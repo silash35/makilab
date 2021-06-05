@@ -1,0 +1,7 @@
+$breakMedium: 750px;
+
+@mixin forMedium() {
+  @media screen and (max-width: $breakMedium) {
+    @content;
+  }
+}

@@ -1,3 +1,5 @@
+@use "../../styles/media" as m;
+
 .header {
   display: flex;
   justify-content: center;
@@ -8,6 +10,14 @@
 
     width: 80%;
     padding: 20px;
+
+    @include m.forMedium() {
+      justify-content: center;
+
+      div {
+        display: none;
+      }
+    }
   }
 }
 
@@ -23,21 +33,21 @@
   text-decoration: none;
   font-family: "Noto Sans", sans-serif;
   text-transform: uppercase;
-  color: #000000cc;
+  color: #000000;
 
   &:hover,
   &:focus,
   &:active {
-    color: #000000;
+    border-bottom: black 2px solid;
   }
 }
 
 .contact {
-  color: #c00000cc;
+  color: #c00000;
 
   &:hover,
   &:focus,
   &:active {
-    color: #c00000;
+    border-bottom: #c00000 2px solid;
   }
 }
