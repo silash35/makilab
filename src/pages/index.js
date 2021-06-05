@@ -1,5 +1,6 @@
 import Head from "next/head";
 
+import About from "../components/about";
 import Header from "../components/header";
 
 export default function Home() {
@@ -12,11 +13,12 @@ export default function Home() {
       <Header />
 
       <main>
-        <div id="about">sobre</div>
-
-        <div id="contact">contato</div>
+        <About />
       </main>
+
+      {/*
       <footer>footer</footer>
+      */}
     </>
   );
 }

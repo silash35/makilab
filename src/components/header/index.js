@@ -5,7 +5,7 @@ export default function Header() {
     <header className={styles.header}>
       <nav>
         <a href="/" className={styles.image}>
-          <img alt="Ícone do MakiLab; Um desenho de uma Coruja" src="/text.png" height="40"></img>
+          <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/text.png" height="40"></img>
         </a>
 
         <div>
