@@ -1,3 +1,5 @@
+@use "../../styles/media" as m;
+
 .about {
   width: 100%;
   min-height: calc(100vh - 80px);
@@ -15,10 +17,22 @@
     width: min-content;
     h1 {
       font-size: 3em;
+      text-align: center;
     }
 
     p {
       text-align: justify;
+    }
+  }
+
+  img {
+    max-width: 50%;
+  }
+
+  @include m.forMedium() {
+    flex-direction: column;
+    section {
+      min-width: 80%;
     }
   }
 }

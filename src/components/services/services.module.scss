@@ -6,10 +6,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: gray;
 
-  h1 {
-    font-size: 3em;
+  background-color: #212121;
+  color: white;
+
+  h2 {
+    font-size: 2em;
   }
 }
 
@@ -18,9 +20,14 @@
   justify-content: space-around;
   flex-wrap: wrap;
 
-  p {
+  article {
     width: 300px;
-    text-align: justify;
     margin: 25px;
+    h3 {
+      text-align: center;
+    }
+    p {
+      text-align: justify;
+    }
   }
 }

@@ -14,7 +14,7 @@ export default function About() {
           qualquer obra escrita.
         </p>
       </section>
-      <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/icon.svg" height="500"></img>
+      <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/icon.svg" width="500"></img>
     </article>
   );
 }
