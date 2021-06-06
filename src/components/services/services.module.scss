@@ -1,0 +1,26 @@
+.services {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+
+  h1 {
+    font-size: 3em;
+  }
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  p {
+    width: 300px;
+    text-align: justify;
+    margin: 25px;
+  }
+}

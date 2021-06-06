@@ -9,9 +9,16 @@
   section {
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-items: center;
+
+    min-width: 40%;
+    width: min-content;
     h1 {
       font-size: 3em;
+    }
+
+    p {
+      text-align: justify;
     }
   }
 }
