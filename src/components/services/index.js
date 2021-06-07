@@ -19,6 +19,7 @@ export default function Services() {
               palavras escritas, em livro, folheto, documento etc. ( a comentários, aditamentos,
               sumário etc.); redação original de qualquer obra escrita.conjunto das palavras
               escritas, em livro, folheto, documento etc. ( a comentários, aditamentos, sumário
+              etc.); redação original de qualquer obra escrita.( a comentários, aditamentos, sumário
               etc.); redação original de qualquer obra escrita.
             </p>
           </article>

@@ -1,3 +1,5 @@
+@use "../../styles/media" as m;
+
 .services {
   width: 100%;
   min-height: 100vh;
@@ -22,8 +24,9 @@
 
   article {
     width: 300px;
+    max-width: 70vw;
     margin: 25px;
-    padding: 25px;
+    padding: 0 25px;
 
     border: white 1px solid;
 
@@ -32,6 +35,10 @@
     }
     p {
       text-align: justify;
+    }
+
+    @include m.forMedium() {
+      margin: 5px;
     }
   }
 }
