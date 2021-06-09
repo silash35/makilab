@@ -9,7 +9,7 @@ export default function Header() {
         </a>
 
         <div>
-          <a className={styles.headerButton} href="#contact">
+          <a className={styles.headerButton} href="#services">
             Serviços
           </a>
           <a className={styles.headerButton} href="#partners">
