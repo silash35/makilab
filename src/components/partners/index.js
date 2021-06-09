@@ -8,12 +8,18 @@ export default function Partners() {
       </section>
       <section className={styles.cards}>
         <ul>
-          <li>
-            <a href="http://www.makita.com.br/">
-              <img src="/partners/makita.svg" width="300" />
-              <h3>Makita</h3>
-            </a>
-          </li>
+          {[0, 1, 2, 3, 4, 5].map((key) => {
+            return (
+              <li className={styles.card} key={key}>
+                <a href="http://www.makita.com.br/">
+                  <img src="/partners/makita.svg" />
+                  <div>
+                    <h3>Makita {key}</h3>
+                  </div>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </section>
     </article>
