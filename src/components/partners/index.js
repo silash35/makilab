@@ -12,7 +12,7 @@ export default function Partners() {
             return (
               <li className={styles.card} key={key}>
                 <a href="http://www.makita.com.br/">
-                  <img src="/partners/makita.svg" />
+                  <img src="/resources/partners/makita.svg" />
                   <div>
                     <h3>Makita {key}</h3>
                   </div>

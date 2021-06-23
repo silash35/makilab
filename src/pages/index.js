@@ -1,9 +1,10 @@
 import Head from "next/head";
 
 import About from "../components/about";
+import Contact from "../components/contact";
 import Header from "../components/header";
-import Services from "../components/services";
 import Partners from "../components/partners";
+import Services from "../components/services";
 
 export default function Home() {
   return (
@@ -18,11 +19,8 @@ export default function Home() {
         <About />
         <Services />
         <Partners />
+        <Contact />
       </main>
-
-      {/*
-      <footer>footer</footer>
-      */}
     </>
   );
 }

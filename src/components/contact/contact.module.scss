@@ -1,0 +1,37 @@
+@use "../../styles/media" as m;
+
+.contact {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #212121;
+  color: white;
+
+  h2 {
+    font-size: 2em;
+  }
+}
+
+.card {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  article {
+    ul {
+      list-style: none;
+      li {
+        display: flex;
+        align-items: center;
+        img {
+          margin: 8px;
+        }
+      }
+    }
+  }
+}
