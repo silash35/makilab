@@ -1,5 +1,6 @@
 import styles from "./contact.module.scss";
 import Divider from "./divider";
+import Form from "./form";
 
 export default function Contact() {
   return (
@@ -39,9 +40,7 @@ export default function Contact() {
             </ul>
           </article>
           <article>
-            <form>
-              <button></button>
-            </form>
+            <Form />
           </article>
         </section>
       </article>
