@@ -2,7 +2,7 @@ import styles from "./form.module.scss";
 
 export default function Form() {
   return (
-    <form className={styles.form}>
+    <form className={styles.form} action="https://formsubmit.co/silash35@gmail.com" method="POST">
       <div>
         <div className={styles.textField}>
           <label htmlFor="name">Seu nome:</label>
@@ -18,7 +18,7 @@ export default function Form() {
         <textarea aria-label="Insira sua mensagem" name="message" />
       </div>
 
-      <button>Enviar</button>
+      <button type="submit">Enviar</button>
     </form>
   );
 }
