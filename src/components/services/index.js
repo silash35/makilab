@@ -4,7 +4,7 @@ import styles from "./services.module.scss";
 export default function Services() {
   return (
     <>
-      <Divider />
+      <Divider top />
 
       <article id="services" className={styles.services}>
         <section>
@@ -47,6 +47,8 @@ export default function Services() {
           </article>
         </section>
       </article>
+
+      <Divider />
     </>
   );
 }

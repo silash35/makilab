@@ -5,7 +5,7 @@ import Form from "./form";
 export default function Contact() {
   return (
     <>
-      <Divider invert />
+      <Divider top />
 
       <article id="contact" className={styles.contact}>
         <section>

@@ -1,6 +1,4 @@
 .divider {
-  transform: rotate(180deg);
-
   svg {
     display: block;
     width: calc(100% + 1.3px);
@@ -8,6 +6,6 @@
   }
 }
 
-.invert {
-  transform: scaleX(-1);
+.top {
+  transform: rotate(180deg);
 }
