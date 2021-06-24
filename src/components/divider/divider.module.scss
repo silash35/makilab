@@ -1,0 +1,13 @@
+.divider {
+  transform: rotate(180deg);
+
+  svg {
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 64px;
+  }
+}
+
+.invert {
+  transform: scaleX(-1);
+}

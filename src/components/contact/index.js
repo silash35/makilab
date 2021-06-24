@@ -1,11 +1,11 @@
+import Divider from "../divider";
 import styles from "./contact.module.scss";
-import Divider from "./divider";
 import Form from "./form";
 
 export default function Contact() {
   return (
     <>
-      <Divider />
+      <Divider invert />
 
       <article id="contact" className={styles.contact}>
         <section>

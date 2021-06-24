@@ -1,4 +1,4 @@
-import Divider from "./divider";
+import Divider from "../divider";
 import styles from "./services.module.scss";
 
 export default function Services() {
