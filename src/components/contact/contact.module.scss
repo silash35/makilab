@@ -21,35 +21,4 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-
-  article {
-    ul {
-      list-style: none;
-      padding: 16px;
-
-      li {
-        display: flex;
-        align-items: center;
-        img {
-          margin: 8px;
-        }
-        a {
-          all: unset;
-          cursor: pointer;
-
-          color: white;
-          border-bottom: white solid 1px;
-          transition: border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-          &:hover {
-            border-color: transparent;
-          }
-        }
-      }
-    }
-  }
-}
-
-.whatsapp {
-  background-color: white;
-  color: #212121;
 }
