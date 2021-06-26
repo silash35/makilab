@@ -9,12 +9,8 @@ export default function Contact() {
         <h2>Entre em Contato</h2>
       </section>
       <section className={styles.card}>
-        <article>
-          <Links />
-        </article>
-        <article>
-          <Form />
-        </article>
+        <Links />
+        <Form />
       </section>
     </article>
   );
