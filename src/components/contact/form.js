@@ -4,7 +4,7 @@ export default function Form() {
   return (
     <article>
       <form className={styles.form} action="https://formsubmit.co/silash35@gmail.com" method="POST">
-        <div>
+        <div className={styles.row}>
           <div className={styles.textField}>
             <label htmlFor="name">Seu nome:</label>
             <input name="name" required />

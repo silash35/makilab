@@ -1,21 +1,17 @@
-.title {
-  margin: 0;
-}
-
 .form {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+}
 
-  div {
-    display: flex;
-    gap: 8px;
-  }
+.row {
+  display: flex;
+  gap: 16px;
 }
 
 .textField {
   display: flex;
   flex-direction: column;
-  margin: 12px 0;
 
   label {
     font-weight: 600;
@@ -26,6 +22,8 @@
     all: unset;
     place-items: center;
     padding: 12px;
+
+    margin-top: 8px;
 
     border: 1px solid #ffffff80;
     font-size: 1rem;
