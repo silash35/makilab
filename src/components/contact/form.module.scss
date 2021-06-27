@@ -1,22 +1,24 @@
+.title {
+  margin: 0;
+}
+
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
 
   div {
     display: flex;
+    gap: 8px;
   }
 }
 
 .textField {
   display: flex;
   flex-direction: column;
-  margin: 0 12px;
+  margin: 12px 0;
 
   label {
     font-weight: 600;
-    margin-bottom: 8px;
   }
 
   input,
@@ -44,7 +46,7 @@
     flex-grow: 1;
     resize: none;
     overflow-wrap: break-word;
-    min-height: 300px;
+    min-height: 256px;
   }
 }
 
@@ -56,7 +58,7 @@
   align-self: flex-end;
   box-sizing: border-box;
 
-  margin: 0 12px;
+  margin: 0;
   padding: 4px 12px;
   height: 40px;
   width: 128px;

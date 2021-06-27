@@ -5,10 +5,9 @@ import Links from "./links";
 export default function Contact() {
   return (
     <article id="contact" className={styles.contact}>
-      <section>
-        <h2>Entre em Contato</h2>
-      </section>
-      <section className={styles.card}>
+      <h2 className={styles.title}>Entre em Contato</h2>
+
+      <section className={styles.flex}>
         <Links />
         <Form />
       </section>

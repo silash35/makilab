@@ -1,12 +1,15 @@
 .links {
   display: flex;
   flex-direction: column;
-  margin-right: 32px;
+
+  padding: 16px;
+  border: white solid 1px;
+  height: fit-content;
+
+  margin: 16px;
 
   h3 {
     margin: 0;
-    margin-top: 16px;
-    text-align: left;
   }
 
   ul {
