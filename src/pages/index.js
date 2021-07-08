@@ -7,7 +7,7 @@ import Partners from "../components/partners";
 import ScrollBack from "../components/scrollBack";
 import Services from "../components/services";
 
-export default function Home() {
+export default function Home()
   return (
     <>
       <Head>
