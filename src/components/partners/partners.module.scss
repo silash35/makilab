@@ -1,3 +1,5 @@
+@use "/src/styles/variables" as v;
+
 .partners {
   width: 100%;
   min-height: 100vh;
@@ -30,7 +32,7 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #212121;
+  background-color: v.$dark-background;
 
   img {
     display: block;

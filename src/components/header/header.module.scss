@@ -1,4 +1,5 @@
-@use "../../styles/media" as m;
+@use "/src/styles/media" as m;
+@use "/src/styles/variables" as v;
 
 .header {
   display: flex;
@@ -33,7 +34,7 @@
   text-decoration: none;
   font-family: "Noto Sans", sans-serif;
   text-transform: uppercase;
-  color: #000000;
+  color: black;
 
   &:hover,
   &:focus,
@@ -43,11 +44,11 @@
 }
 
 .contact {
-  color: #c00000;
+  color: v.$primary;
 
   &:hover,
   &:focus,
   &:active {
-    border-bottom: #c00000 2px solid;
+    border-bottom: v.$primary 2px solid;
   }
 }

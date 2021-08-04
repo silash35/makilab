@@ -1,4 +1,5 @@
-@use "../../styles/media" as m;
+@use "/src/styles/media" as m;
+@use "/src/styles/variables" as v;
 
 .flex {
   display: flex;
@@ -21,6 +22,6 @@
   width: 100%;
   min-height: 100vh;
 
-  background-color: #212121;
+  background-color: v.$dark-background;
   color: white;
 }

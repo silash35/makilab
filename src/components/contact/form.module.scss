@@ -1,3 +1,5 @@
+@use "/src/styles/variables" as v;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -61,7 +63,7 @@
   height: 40px;
   width: 128px;
 
-  background-color: #c00000;
+  background-color: v.$primary;
   border: white solid 2px;
 
   text-transform: uppercase;
@@ -72,11 +74,11 @@
 
   &:hover {
     cursor: pointer;
-    background-color: #cf0707;
+    background-color: v.$primaryHover;
   }
 
   &:focus {
-    background-color: #7c0e0e;
+    background-color: v.$primaryFocus;
   }
 
   img {
