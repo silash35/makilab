@@ -1,19 +1,5 @@
 @use "/src/styles/variables" as v;
 
-.partners {
-  width: 100%;
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  h2 {
-    font-size: 2em;
-  }
-}
-
 .cards {
   display: flex;
   justify-content: space-around;

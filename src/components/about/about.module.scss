@@ -1,12 +1,8 @@
 @use "../../styles/media" as m;
 
 .about {
-  width: 100%;
   min-height: calc(100vh - 80px);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
 
   section {
     display: flex;

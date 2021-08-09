@@ -1,22 +1,4 @@
 @use "/src/styles/media" as m;
-@use "/src/styles/variables" as v;
-
-.services {
-  width: 100%;
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  background-color: v.$dark-background;
-  color: white;
-
-  h2 {
-    font-size: 2em;
-  }
-}
 
 .cards {
   display: flex;

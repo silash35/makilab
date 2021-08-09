@@ -1,8 +1,9 @@
+import Screen from "../screen";
 import styles from "./services.module.scss";
 
 export default function Services() {
   return (
-    <article id="services" className={styles.services}>
+    <Screen id="services" background="dark">
       <section>
         <h2>Serviços Oferecidos</h2>
       </section>
@@ -42,6 +43,6 @@ export default function Services() {
           </p>
         </article>
       </section>
-    </article>
+    </Screen>
   );
 }

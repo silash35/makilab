@@ -1,8 +1,9 @@
+import Screen from "../screen";
 import styles from "./about.module.scss";
 
 export default function About() {
   return (
-    <article id="about" className={styles.about}>
+    <Screen id="about" otherStyles={styles.about}>
       <section>
         <h1>MakiLab Serviços</h1>
         <p>
@@ -15,6 +16,6 @@ export default function About() {
         </p>
       </section>
       <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/icon.svg" width="500"></img>
-    </article>
+    </Screen>
   );
 }

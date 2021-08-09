@@ -1,27 +1,8 @@
 @use "/src/styles/media" as m;
-@use "/src/styles/variables" as v;
 
 .flex {
   display: flex;
 
   width: 100%;
   justify-content: center;
-}
-
-.title {
-  font-size: 2em;
-  margin: 0;
-}
-
-.contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-
-  width: 100%;
-  min-height: 100vh;
-
-  background-color: v.$dark-background;
-  color: white;
 }
