@@ -1,14 +1,23 @@
 @use "/src/styles/variables" as v;
+@use "/src/styles/media" as m;
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @include m.forMedium() {
+    margin: 16px;
+  }
 }
 
 .row {
   display: flex;
   gap: 16px;
+
+  @include m.forMedium() {
+    flex-direction: column;
+  }
 }
 
 .textField {

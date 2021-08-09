@@ -1,3 +1,5 @@
+@use "/src/styles/media" as m;
+
 .links {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,11 @@
   height: fit-content;
 
   margin: 0 32px 16px 16px;
+
+  @include m.forMedium() {
+    margin: 16px;
+    margin-top: 0;
+  }
 
   ul {
     list-style: none;
