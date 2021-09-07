@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Screen from "../screen";
 import styles from "./about.module.scss";
 
@@ -14,7 +16,9 @@ export default function About() {
           folheto, documento etc. ( a comentários, aditamentos, sumário etc.); redação original de
           qualquer obra escrita.
         </p>
-        <a className={styles.button}>Acompanhe seu reparo</a>
+        <Link as="/track" href="/track">
+          <a className={styles.button}>Acompanhe seu reparo</a>
+        </Link>
       </section>
       <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/icon.svg" width="500"></img>
     </Screen>
