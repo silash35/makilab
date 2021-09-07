@@ -1,6 +1,6 @@
 @use "/src/styles/variables" as v;
 @use "/src/styles/media" as m;
-@use "./button.module.scss" as b;
+@use "/src/styles/button" as b;
 
 .links {
   display: flex;
