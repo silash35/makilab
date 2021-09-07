@@ -65,16 +65,7 @@
 }
 
 .send {
-  @extend %button;
+  @extend %primaryButton;
 
   align-self: flex-end;
-  background-color: v.$primary;
-
-  &:hover {
-    background-color: v.$primaryHover;
-  }
-
-  &:focus {
-    background-color: v.$primaryFocus;
-  }
 }
