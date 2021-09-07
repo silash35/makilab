@@ -28,7 +28,7 @@ export default function Track() {
         Verifique o status do seu <span>produto</span>
       </h1>
       <form onSubmit={handleSearch}>
-        <label>
+        <label className={styles.search}>
           <input type="text" ref={searchInputRef}></input>
           <button type="submit">Pesquisar</button>
         </label>
