@@ -1,5 +1,6 @@
 @use "/src/styles/variables" as v;
 @use "/src/styles/media" as m;
+@use "./button.module.scss" as b;
 
 .form {
   display: flex;
@@ -9,6 +10,10 @@
   @include m.forMedium() {
     margin: 16px;
   }
+
+  padding: 16px;
+  border: white solid 1px;
+  border-radius: v.$radius;
 }
 
 .row {
@@ -60,37 +65,16 @@
 }
 
 .send {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  overflow: hidden;
+  @extend %button;
+
   align-self: flex-end;
-  box-sizing: border-box;
-
-  margin: 0;
-  padding: 4px 12px;
-  height: 40px;
-  width: 128px;
-
   background-color: v.$primary;
-  border: white solid 2px;
-
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 0.12em;
-
-  transition: background-color 80ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    cursor: pointer;
     background-color: v.$primaryHover;
   }
 
   &:focus {
     background-color: v.$primaryFocus;
-  }
-
-  img {
-    margin-right: 8px;
   }
 }

@@ -1,3 +1,5 @@
+@use "/src/styles/variables" as v;
+
 .button {
   position: fixed;
   bottom: 32px;
@@ -7,5 +9,5 @@
   line-height: 0;
 
   background-color: black;
-  border-radius: 12px;
+  border-radius: v.$radius;
 }
