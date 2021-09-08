@@ -1,4 +1,5 @@
 @use "/src/styles/variables" as v;
+@use "/src/styles/media" as m;
 
 .track {
   min-height: calc(100vh - 80px);
@@ -9,11 +10,17 @@
   justify-content: center;
 
   h1 {
+    text-align: center;
+
     font-size: 3.75rem;
     margin-top: 0;
     padding: 16px;
     span {
       color: v.$primary;
+    }
+
+    @include m.forMedium() {
+      margin-bottom: 10px;
     }
   }
 }
@@ -33,10 +40,14 @@
   input {
     all: unset;
     width: 600px;
-    max-width: 70vw;
+    max-width: 50vw;
     height: 50px;
 
     margin: 6px 12px;
+
+    @include m.forMedium() {
+      height: 40px;
+    }
   }
 
   button {
@@ -55,6 +66,11 @@
     }
     &:focus {
       background-color: v.$primaryFocus;
+    }
+
+    @include m.forMedium() {
+      font-size: 1rem;
+      padding: 3px 6px;
     }
   }
 }
