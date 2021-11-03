@@ -5,3 +5,9 @@ body {
   font-family: "Noto Serif", serif;
   scroll-behavior: smooth;
 }
+
+a,
+button {
+  all: unset;
+  cursor: pointer;
+}

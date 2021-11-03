@@ -1,4 +1,5 @@
 @use "/src/styles/variables" as v;
+@use "/src/styles/shadow" as s;
 @use "/src/styles/media" as m;
 
 .track {
@@ -30,12 +31,7 @@
   overflow: hidden;
   border-radius: v.$radius;
 
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12),
-    0 3px 3px -2px rgba(0, 0, 0, 0.4);
-  transition: box-shadow 75ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.36);
-  }
+  @extend %animatedShadow;
 
   input {
     all: unset;
@@ -51,7 +47,6 @@
   }
 
   button {
-    all: unset;
     padding: 6px 12px;
 
     text-transform: uppercase;
