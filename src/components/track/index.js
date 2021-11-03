@@ -1,14 +1,17 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
+import Equipment from "./equipment";
 import styles from "./track.module.scss";
 
 export default function Track() {
+  const [equipment, setEquipment] = useState(false);
   const searchInputRef = useRef();
 
   const handleSearch = async (event) => {
     event.preventDefault();
     const search = searchInputRef.current?.value;
 
+    /*
     const res = await fetch("?", {
       method: "???",
       headers: {
@@ -19,7 +22,9 @@ export default function Track() {
     });
 
     const data = await res.json();
-    data;
+    */
+
+    setEquipment(search);
   };
 
   return (
@@ -37,6 +42,8 @@ export default function Track() {
           <button type="submit">Pesquisar</button>
         </label>
       </form>
+
+      <Equipment equipment={equipment} />
     </article>
   );
 }
