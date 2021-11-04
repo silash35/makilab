@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@storyofams/next-password-protect": "^1.5.12",
     "next": "^12.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
