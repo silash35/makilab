@@ -16,8 +16,6 @@ export default function TrackPage() {
       <main>
         <Track />
       </main>
-
-      <ScrollBack />
     </>
   );
 }
