@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 
-import Equipment from "./equipment";
+import Product from "./product";
 import styles from "./track.module.scss";
 
 export default function Track() {
-  const [equipment, setEquipment] = useState(false);
+  const [product, setProduct] = useState(false);
   const searchInputRef = useRef();
 
   const handleSearch = async (event) => {
@@ -24,7 +24,7 @@ export default function Track() {
     const data = await res.json();
     */
 
-    setEquipment(search);
+    setProduct(search);
   };
 
   return (
@@ -43,7 +43,7 @@ export default function Track() {
         </label>
       </form>
 
-      <Equipment equipment={equipment} />
+      <Product product={product} />
     </article>
   );
 }
