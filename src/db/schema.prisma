@@ -21,8 +21,8 @@ model Equipment {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  product String
-  status  Int    @default(0)
+  name   String
+  status Int    @default(0)
 
   owner   Client @relation(fields: [ownerId], references: [id])
   ownerId Int
