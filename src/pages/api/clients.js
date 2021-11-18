@@ -5,7 +5,6 @@ export default async function clients(req, res) {
   try {
     const cookies = cookie.parse(req.headers.cookie);
     const cookieName = "authorization";
-    console.log(cookies?.[cookieName]);
     jwt.verify(cookies?.[cookieName], process.env.PASSWORD);
   } catch (err) {
     res.statusCode = 401;
