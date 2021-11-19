@@ -13,17 +13,46 @@ model Client {
   updatedAt DateTime @updatedAt
 
   name      String
+  email     String?
+  adress    String?
+  zip       Int?
+  whatsapp  Int?
+  tel       Int?
+  cpfOrCnpj String?
+
+
   equipment Equipment[]
 }
 
 model Equipment {
-  id        Int      @id @unique @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id Int @id @unique @default(autoincrement())
 
-  name   String
-  status Int    @default(0)
+  name               String
+  brand              String?
+  model              String?
+  product_number     String?
+  batchOrImei        String?
+  problemDescription String?
+  productCondition   String?
+  accessories        String?
+  listOfServices     String?
+
+  isUnderWarranty Boolean
+  attendedBy      String
+  attendedOn      String  @default("balcão")
+
 
   owner   Client @relation(fields: [ownerId], references: [id])
   ownerId Int
+
+  wasEdited        Boolean  @default(false)
+  isBudgetApproved Boolean?
+
+  createdAt                  DateTime  @default(now())
+  registeredInManufacturerAt DateTime?
+  avalietedAt                DateTime?
+  budgetApprovedAt           DateTime?
+  PartsArrivedAt             DateTime?
+  repairedAt                 DateTime?
+  deliveredToCustomerAt      DateTime?
 }
