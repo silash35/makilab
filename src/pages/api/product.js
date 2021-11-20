@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
+import removeNull from "/src/helpers/removeNull";
+
 const prisma = new PrismaClient();
 
 export default async function product(req, res) {
@@ -26,7 +28,8 @@ export default async function product(req, res) {
 const filterEquipment = (equipment) => {
   const filteredEquipment = {};
 
-  filteredEquipment.name = equipment.name + equipment.brand + equipment.model;
+  filteredEquipment.name =
+    equipment.name + removeNull(equipment.brand) + removeNull(equipment.model);
   filteredEquipment.isUnderWarranty = equipment.isUnderWarranty;
   filteredEquipment.isBudgetApproved = equipment.isBudgetApproved;
 
