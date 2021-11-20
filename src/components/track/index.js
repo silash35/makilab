@@ -11,7 +11,7 @@ export default function Track() {
     event.preventDefault();
     const search = searchInputRef.current?.value;
 
-    const res = await fetch(`/api/product/${search}`, {
+    const res = await fetch(`/api/product/?id=${search}`, {
       method: "GET",
       headers: {
         Accept: "application/json",

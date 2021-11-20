@@ -1,10 +1,24 @@
 import "../styles/globals.scss";
 
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
+import { red } from "@mui/material/colors";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import Head from "next/head";
 
-function MyApp({ Component, pageProps }) {
+function createEmotionCache() {
+  return createCache({ key: "css" });
+}
+
+const clientSideEmotionCache = createEmotionCache();
+
+function MyApp(props) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Head>
         {/* Viewport meta tag should not be used in _document.tsx. That's why it's in this file */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,9 +37,28 @@ function MyApp({ Component, pageProps }) {
           key="twitterDescription"
         />
       </Head>
-      <Component {...pageProps} />
-    </>
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
+
+// Create a theme instance.
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#556cd6",
+    },
+    secondary: {
+      main: "#19857b",
+    },
+    error: {
+      main: red.A400,
+    },
+  },
+});
 
 export default MyApp;
