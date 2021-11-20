@@ -10,4 +10,8 @@
   max-width: 90vw;
 
   @include s.box_shadow(3);
+
+  h2 {
+    text-align: center;
+  }
 }

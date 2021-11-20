@@ -1,0 +1,7 @@
+@use "/src/styles/variables" as v;
+@use "/src/styles/shadow" as s;
+
+.list {
+  list-style: none;
+  padding: 0;
+}
