@@ -1,7 +1,23 @@
 import { withPasswordProtect } from "@storyofams/next-password-protect";
+import Head from "next/head";
+
+import AdminOptions from "/src/components/adminOptions";
+import Header from "/src/components/header";
 
 function Admin() {
-  return <p>Olá vc está logado e numa pagina secreta</p>;
+  return (
+    <>
+      <Head>
+        <title>Gerenciar Ordens de Serviço</title>
+      </Head>
+
+      <Header />
+
+      <main>
+        <AdminOptions />
+      </main>
+    </>
+  );
 }
 
 export default withPasswordProtect(Admin, {

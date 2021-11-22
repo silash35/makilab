@@ -1,0 +1,52 @@
+@use "/src/styles/variables" as v;
+@use "/src/styles/shadow" as s;
+
+.adminOptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+  min-height: calc(100vh - 80px);
+
+  button {
+    @extend %buttonShadow;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 250px;
+    height: 180px;
+    padding: 16px;
+    margin: 40px;
+
+    border-radius: v.$radius;
+    color: white;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+
+    transition: background-color 80ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.red {
+  background-color: #c71f1f;
+
+  &:hover {
+    background-color: #ca0000;
+  }
+
+  &:focus {
+    background-color: #c74848;
+  }
+}
+
+button.disabled {
+  color: rgba(0, 0, 0, 0.26);
+  background-color: rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+}

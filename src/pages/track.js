@@ -7,7 +7,7 @@ export default function TrackPage() {
   return (
     <>
       <Head>
-        <title>MakiLab Serviços</title>
+        <title>Verifique o status do seu produto</title>
       </Head>
 
       <Header />
