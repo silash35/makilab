@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "prisma": {
-    "schema": "src/db/schema.prisma"
+    "schema": "src/database/schema.prisma"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
