@@ -1,9 +1,13 @@
+import Link from "next/link";
+
 import styles from "./adminOptions.module.scss";
 
 export default function AdminOptions() {
   return (
     <div className={styles.adminOptions}>
-      <button className={styles.red}>Adicionar Equipamento</button>
+      <Link as="admin/newEquipment" href="admin/newEquipment">
+        <a className={styles.red}>Adicionar Equipamento</a>
+      </Link>
       <button disabled className={styles.disabled}>
         Adicionar Cliente <br />
         (Em breve)

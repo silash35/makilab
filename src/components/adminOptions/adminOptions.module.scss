@@ -9,7 +9,8 @@
 
   min-height: calc(100vh - 80px);
 
-  button {
+  button,
+  a {
     @extend %buttonShadow;
 
     display: flex;
@@ -49,4 +50,8 @@ button.disabled {
   color: rgba(0, 0, 0, 0.26);
   background-color: rgba(0, 0, 0, 0.12);
   box-shadow: none;
+
+  &:hover {
+    box-shadow: none;
+  }
 }
