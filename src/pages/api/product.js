@@ -28,8 +28,9 @@ export default async function product(req, res) {
 const filterEquipment = (equipment) => {
   const filteredEquipment = {};
 
-  filteredEquipment.name =
-    equipment.name + removeNull(equipment.brand) + removeNull(equipment.model);
+  filteredEquipment.name = `${equipment.name}  ${removeNull(equipment.brand)}  ${removeNull(
+    equipment.model
+  )}`;
   filteredEquipment.isUnderWarranty = equipment.isUnderWarranty;
   filteredEquipment.isBudgetApproved = equipment.isBudgetApproved;
 

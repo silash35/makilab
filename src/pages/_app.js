@@ -2,10 +2,8 @@ import "../styles/globals.scss";
 
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import { red } from "@mui/material/colors";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 
 function createEmotionCache() {
@@ -48,6 +46,14 @@ function MyApp(props) {
 
 // Create a theme instance.
 const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#cf0707",
+      main: "#c00000",
+      dark: "#7c0e0e",
+      contrastText: "#fff",
+    },
+  },
   typography: {
     fontFamily: ["Noto Serif", "serif"].join(","),
   },

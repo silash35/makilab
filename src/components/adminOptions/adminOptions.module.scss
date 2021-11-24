@@ -35,14 +35,12 @@
 }
 
 .red {
-  background-color: #c71f1f;
-
+  background-color: v.$primary;
   &:hover {
-    background-color: #ca0000;
+    background-color: v.$primaryHover;
   }
-
   &:focus {
-    background-color: #c74848;
+    background-color: v.$primaryFocus;
   }
 }
 

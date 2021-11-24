@@ -1,14 +1,20 @@
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
 import TextField from "@mui/material/TextField";
 
 import styles from "./equipmentForm.module.scss";
 
+const attendants = ["Rodrigo Icaro", "Silas Henrique"];
+
 export default function EquipmentForm() {
-  const common = { variant: "outlined", fullWidth: true };
+  const common = { variant: "outlined", margin: "normal", fullWidth: true };
 
   return (
     <form className={styles.form} action="/api/places" method="POST">
-      <h2>Cadastrar Equipamento</h2>
+      <h1>Cadastrar Equipamento</h1>
       <TextField
         name="id"
         label="N° da Ordem de Serviço"
@@ -16,40 +22,21 @@ export default function EquipmentForm() {
         required
         {...common}
       />
-      <TextField name="userMail" label="Seu E-Mail" type="email" required {...common} />
-
-      <h2>Dados básicos do local</h2>
-      <TextField name="name" label="Nome" required {...common} />
-      <TextField name="address" label="Endereço" required {...common} />
-      <TextField name="description" label="Descrição" multiline required {...common} />
-      <TextField
-        name="key"
-        label="Chave para alteração"
-        helperText="Autenticação para editar as informações cadastradas"
-        type="password"
-        required
-        {...common}
+      <TextField name="brand" label="Marca" required {...common} />
+      <TextField name="model" label="Modelo" required {...common} />
+      <Autocomplete
+        freeSolo
+        options={attendants.map((attendant) => attendant)}
+        renderInput={(params) => (
+          <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
+        )}
       />
 
-      <h2>Informações extras</h2>
-      <TextField name="email" label="Email do local" {...common} type="email" />
-      <TextField
-        name="phone"
-        label="Telefone do local"
-        type="tel"
-        {...common}
-        inputProps={{ pattern: "[0-9,\\-,\\(,\\), ]{8,}" }}
-      />
-      <TextField name="website" label="Site do local" type="url" {...common} />
-      <TextField
-        name="imageURL"
-        label="Foto do local"
-        helperText="Cole a URL de uma imagem da Web"
-        type="url"
-        {...common}
-      />
+      <FormGroup>
+        <FormControlLabel control={<Checkbox name="isUnderWarranty" required />} label="Garantia" />
+      </FormGroup>
 
-      <Button variant="outlined" color="primary" size="large" type="submit">
+      <Button variant="contained" color="primary" size="large" type="submit">
         Cadastrar
       </Button>
     </form>

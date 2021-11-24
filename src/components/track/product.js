@@ -1,6 +1,8 @@
+import { blue, green } from "@mui/material/colors";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMediaQuery } from "react-responsive";
 
 import Dates from "./dates";
@@ -19,25 +21,37 @@ export default function Product({ product }) {
 
   const steps = getSteps(product);
   const activeStep = getActiveStep(product);
+  const isFinished = getIsFinished(activeStep, product.isUnderWarranty);
   const text = getStepText(activeStep, product.isUnderWarranty, product.isBudgetApproved);
+
+  const theme = createTheme({
+    palette: {
+      primary: isFinished ? green : blue,
+    },
+  });
 
   return (
     <section className={styles.product}>
       <h2>{product.name}</h2>
 
-      <Stepper activeStep={activeStep} orientation={isMobile ? "vertical" : "horizontal"}>
-        {steps.map((step) => {
-          const labelProps = {};
+      <ThemeProvider theme={theme}>
+        <Stepper
+          activeStep={isFinished ? activeStep + 1 : activeStep}
+          orientation={isMobile ? "vertical" : "horizontal"}
+        >
+          {steps.map((step) => {
+            const labelProps = {};
 
-          labelProps.error = step.error;
+            labelProps.error = step.error;
 
-          return (
-            <Step key={step.label}>
-              <StepLabel {...labelProps}>{step.label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
+            return (
+              <Step key={step.label}>
+                <StepLabel {...labelProps}>{step.label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+      </ThemeProvider>
 
       <p>{text}</p>
 
@@ -45,6 +59,16 @@ export default function Product({ product }) {
     </section>
   );
 }
+
+const getIsFinished = (activeStep, isUnderWarranty) => {
+  if (isUnderWarranty && activeStep === 3) {
+    return true;
+  } else if (activeStep === 4) {
+    return true;
+  }
+
+  return false;
+};
 
 const getSteps = (product) => {
   const steps = [];
@@ -56,7 +80,7 @@ const getSteps = (product) => {
   if (!product.isUnderWarranty) {
     steps.push({
       label: "Aguardando aprovação do orçamento",
-      error: product.isBudgetApproved === false,
+      error: product.isBudgetApproved === false && getActiveStep(product) < 2,
     });
   }
 
