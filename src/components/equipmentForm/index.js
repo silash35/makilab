@@ -13,8 +13,8 @@ export default function EquipmentForm() {
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
 
   return (
-    <form className={styles.form} action="/api/places" method="POST">
-      <h1>Cadastrar Equipamento</h1>
+    <form className={styles.form} action="/api/admin/equipments" method="POST">
+      <h1>Cadastrar Equipamento</h1>places
       <TextField
         name="id"
         label="N° da Ordem de Serviço"
@@ -31,11 +31,9 @@ export default function EquipmentForm() {
           <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
         )}
       />
-
       <FormGroup>
         <FormControlLabel control={<Checkbox name="isUnderWarranty" required />} label="Garantia" />
       </FormGroup>
-
       <Button variant="contained" color="primary" size="large" type="submit">
         Cadastrar
       </Button>
