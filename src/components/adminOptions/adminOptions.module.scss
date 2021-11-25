@@ -44,6 +44,16 @@
   }
 }
 
+.yellow {
+  background-color: #ff9926;
+  &:hover {
+    background-color: #ffba6b;
+  }
+  &:focus {
+    background-color: #ff8800;
+  }
+}
+
 button.disabled {
   color: rgba(0, 0, 0, 0.26);
   background-color: rgba(0, 0, 0, 0.12);
