@@ -21,7 +21,7 @@ export default function EquipmentForm() {
 
   return (
     <form className={styles.form} action="/api/admin/equipments" method="POST">
-      <h1>Cadastrar Equipamento</h1>places
+      <h1>Cadastrar Equipamento</h1>
       <TextField
         name="id"
         label="N° da Ordem de Serviço"
@@ -38,20 +38,26 @@ export default function EquipmentForm() {
           <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
         )}
       />
-      <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
-        <DateTimePicker
-          label="Data de criação da OS"
-          renderInput={(params) => <TextField margin="normal" {...params} />}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-        />
-      </LocalizationProvider>
-      <FormGroup>
-        <FormControlLabel control={<Checkbox name="isUnderWarranty" required />} label="Garantia" />
-      </FormGroup>
-      <Button variant="contained" color="primary" size="large" type="submit">
+      <div className={styles.flex}>
+        <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
+          <DateTimePicker
+            label="Data de criação da OS"
+            renderInput={(params) => <TextField {...common} {...params} />}
+            value={value}
+            onChange={(newValue) => {
+              setValue(newValue);
+            }}
+          />
+        </LocalizationProvider>
+
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox name="isUnderWarranty" required />}
+            label="Garantia"
+          />
+        </FormGroup>
+      </div>
+      <Button variant="contained" fullWidth color="primary" size="large" type="submit">
         Cadastrar
       </Button>
     </form>
