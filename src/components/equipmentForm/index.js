@@ -1,3 +1,6 @@
+import DateAdapter from "@mui/lab/AdapterDayjs";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -31,6 +34,12 @@ export default function EquipmentForm() {
           <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
         )}
       />
+      <LocalizationProvider dateAdapter={DateAdapter}>
+        <DateTimePicker
+          label="Selecione a data de criação da OS"
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider>
       <FormGroup>
         <FormControlLabel control={<Checkbox name="isUnderWarranty" required />} label="Garantia" />
       </FormGroup>
