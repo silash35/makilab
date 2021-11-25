@@ -8,12 +8,15 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import TextField from "@mui/material/TextField";
 import ptBR from "dayjs/locale/pt-br";
+import { useState } from "react";
 
 import styles from "./equipmentForm.module.scss";
 
 const attendants = ["Rodrigo Icaro", "Silas Henrique"];
 
 export default function EquipmentForm() {
+  const [value, setValue] = useState(new Date());
+
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
 
   return (
@@ -37,8 +40,12 @@ export default function EquipmentForm() {
       />
       <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
         <DateTimePicker
-          label="Selecione a data de criação da OS"
-          renderInput={(params) => <TextField {...params} />}
+          label="Data de criação da OS"
+          renderInput={(params) => <TextField margin="normal" {...params} />}
+          value={value}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
         />
       </LocalizationProvider>
       <FormGroup>
