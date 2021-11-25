@@ -7,6 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import TextField from "@mui/material/TextField";
+import ptBR from "dayjs/locale/pt-br";
 
 import styles from "./equipmentForm.module.scss";
 
@@ -34,7 +35,7 @@ export default function EquipmentForm() {
           <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
         )}
       />
-      <LocalizationProvider dateAdapter={DateAdapter}>
+      <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
         <DateTimePicker
           label="Selecione a data de criação da OS"
           renderInput={(params) => <TextField {...params} />}
