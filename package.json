@@ -15,24 +15,24 @@
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@mui/lab": "^5.0.0-alpha.57",
-    "@mui/material": "^5.1.1",
-    "@storyofams/next-password-protect": "^1.5.12",
+    "@mui/material": "^5.2.1",
+    "@storyofams/next-password-protect": "^1.5.14",
     "dayjs": "^1.10.7",
-    "next": "^12.0.2",
+    "next": "^12.0.4",
     "prisma": "^3.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-responsive": "^9.0.0-beta.4"
+    "react-responsive": "^9.0.0-beta.5"
   },
   "devDependencies": {
     "@prisma/client": "^3.5.0",
-    "eslint": "^8.1.0",
+    "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "prettier": "^2.4.1",
-    "sass": "^1.43.4",
+    "prettier": "^2.5.0",
+    "sass": "^1.43.5",
     "yarn-upgrade-all": "^0.5.4"
   }
 }
