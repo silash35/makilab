@@ -27,16 +27,18 @@ export default async function Equipments(req, res) {
         res.end("Internal Server Error");
       }
     },
-    /*
+
     async POST() {
-      await placesManager.insert(req.body);
+      await prisma.Equipment.create({
+        data: processEquipment(req.body),
+      });
 
       res.writeHead(302, {
-        Location: "/",
+        Location: "/admin",
       });
       res.end();
     },
-
+    /*
     async PUT() {
       res.setHeader("Content-Type", "application/json");
       places = await placesManager.find(req.body.search);
@@ -58,3 +60,24 @@ export default async function Equipments(req, res) {
     res.statusCode = 404;
   }
 }
+
+const processEquipment = (body) => {
+  const newBody = {
+    id: body.id,
+    name: filterString(body.name),
+    brand: filterString(body.brand),
+    model: filterString(body.model),
+    attendedBy: filterString(body.attendedBy),
+    isUnderWarranty: body.isUnderWarranty === "on",
+  };
+
+  return newBody;
+};
+
+const filterString = (string) => {
+  if (typeof string === "string" && string.length > 1) {
+    return string;
+  } else {
+    return undefined;
+  }
+};

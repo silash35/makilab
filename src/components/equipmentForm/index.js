@@ -15,7 +15,7 @@ import styles from "./equipmentForm.module.scss";
 const attendants = ["Rodrigo Icaro", "Silas Henrique"];
 
 export default function EquipmentForm() {
-  const [value, setValue] = useState(new Date());
+  const [dateValue, setDateValue] = useState(new Date());
 
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
 
@@ -29,8 +29,9 @@ export default function EquipmentForm() {
         required
         {...common}
       />
-      <TextField name="brand" label="Marca" required {...common} />
-      <TextField name="model" label="Modelo" required {...common} />
+      <TextField name="name" label="Equipamento" required {...common} />
+      <TextField name="brand" label="Marca" {...common} />
+      <TextField name="model" label="Modelo" {...common} />
       <Autocomplete
         freeSolo
         options={attendants.map((attendant) => attendant)}
@@ -42,19 +43,16 @@ export default function EquipmentForm() {
         <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
           <DateTimePicker
             label="Data de criação da OS"
-            renderInput={(params) => <TextField {...common} {...params} />}
-            value={value}
+            renderInput={(params) => <TextField required {...common} {...params} />}
+            value={dateValue}
             onChange={(newValue) => {
-              setValue(newValue);
+              setDateValue(newValue);
             }}
           />
         </LocalizationProvider>
 
         <FormGroup>
-          <FormControlLabel
-            control={<Checkbox name="isUnderWarranty" required />}
-            label="Garantia"
-          />
+          <FormControlLabel control={<Checkbox name="isUnderWarranty" />} label="Garantia" />
         </FormGroup>
       </div>
       <Button variant="contained" fullWidth color="primary" size="large" type="submit">
