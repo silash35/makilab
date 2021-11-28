@@ -11,7 +11,7 @@ export default async function product(req, res) {
 
       const equipment = await prisma.equipment.findUnique({
         where: {
-          id: search,
+          OS_number: search,
         },
       });
       res.json(filterEquipment(equipment));

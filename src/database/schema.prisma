@@ -25,7 +25,8 @@ model Client {
 }
 
 model Equipment {
-  id Int @id @unique @default(autoincrement())
+  id        Int @id @unique @default(autoincrement())
+  OS_number Int @unique
 
   name               String
   brand              String?

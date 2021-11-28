@@ -29,14 +29,20 @@ export default async function Equipments(req, res) {
     },
 
     async POST() {
-      await prisma.Equipment.create({
-        data: processEquipment(req.body),
-      });
+      try {
+        await prisma.equipment.create({
+          data: processEquipment(req.body),
+        });
 
-      res.writeHead(302, {
-        Location: "/admin",
-      });
-      res.end();
+        res.writeHead(302, {
+          Location: "/admin",
+        });
+      } catch (e) {
+        console.log(e);
+        console.log(typeof e);
+      } finally {
+        res.end();
+      }
     },
     /*
     async PUT() {
@@ -63,12 +69,18 @@ export default async function Equipments(req, res) {
 
 const processEquipment = (body) => {
   const newBody = {
-    id: body.id,
+    OS_number: Number(body.OS_number),
     name: filterString(body.name),
     brand: filterString(body.brand),
     model: filterString(body.model),
     attendedBy: filterString(body.attendedBy),
     isUnderWarranty: body.isUnderWarranty === "on",
+    createdAt: filterString(body.createdAt),
+    owner: {
+      connect: {
+        id: 1,
+      },
+    },
   };
 
   return newBody;

@@ -23,7 +23,7 @@ export default function EquipmentForm() {
     <form className={styles.form} action="/api/admin/equipments" method="POST">
       <h1>Cadastrar Equipamento</h1>
       <TextField
-        name="id"
+        name="OS_number"
         label="N° da Ordem de Serviço"
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         required
@@ -43,7 +43,9 @@ export default function EquipmentForm() {
         <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
           <DateTimePicker
             label="Data de criação da OS"
-            renderInput={(params) => <TextField required {...common} {...params} />}
+            renderInput={(params) => (
+              <TextField name="createdAt" required {...common} {...params} />
+            )}
             value={dateValue}
             onChange={(newValue) => {
               setDateValue(newValue);
