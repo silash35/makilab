@@ -37,11 +37,9 @@ export default async function Equipments(req, res) {
         res.writeHead(302, {
           Location: "/admin",
         });
-      } catch (e) {
-        console.log(e);
-        console.log(typeof e);
-      } finally {
         res.end();
+      } catch (e) {
+        res.end(String(e));
       }
     },
     /*
