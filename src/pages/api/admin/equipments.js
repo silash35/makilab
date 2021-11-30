@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import cookie from "cookie";
+import dayjs from "dayjs";
 import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
@@ -73,7 +74,7 @@ const processEquipment = (body) => {
     model: filterString(body.model),
     attendedBy: filterString(body.attendedBy),
     isUnderWarranty: body.isUnderWarranty === "on",
-    createdAt: filterString(body.createdAt),
+    createdAt: stringToDate(body.createdAt),
     owner: {
       connect: {
         id: 1,
@@ -82,6 +83,14 @@ const processEquipment = (body) => {
   };
 
   return newBody;
+};
+
+const stringToDate = (string) => {
+  if (filterString(string) === undefined) {
+    return undefined;
+  } else {
+    return dayjs(string, "DD/MM/YYYY HH:mm").toDate();
+  }
 };
 
 const filterString = (string) => {
