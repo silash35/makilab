@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import cookie from "cookie";
-import dayjs from "dayjs";
 import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
@@ -89,7 +88,7 @@ const stringToDate = (string) => {
   if (filterString(string) === undefined) {
     return undefined;
   } else {
-    return dayjs(string, "DD/MM/YYYY HH:mm").toDate();
+    return new Date(`${string} UTC`);
   }
 };
 
