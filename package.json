@@ -14,6 +14,7 @@
     "@date-io/dayjs": "^2.11.0",
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.0",
     "@mui/lab": "^5.0.0-alpha.57",
     "@mui/material": "^5.2.1",
     "@storyofams/next-password-protect": "^1.5.14",
