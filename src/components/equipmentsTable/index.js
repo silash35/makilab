@@ -34,7 +34,7 @@ function Equipment({ equipment }) {
         <TableCell align="right">{equipment.name}</TableCell>
         <TableCell align="right">{equipment.brand}</TableCell>
         <TableCell align="right">{equipment.model}</TableCell>
-        <TableCell align="right">{"Aguardando aprovação"}</TableCell>
+        <TableCell align="right">{getEquipmentStatus(equipment)}</TableCell>
         <TableCell align="right">
           <Button variant="contained" onClick={() => setOpenDialog(true)}>
             Atualizar Status
@@ -57,8 +57,8 @@ function Equipment({ equipment }) {
               <p>{equipment.accessories ? `Acessorios: ${equipment.accessories}` : undefined}</p>
               <p>{equipment.batchOrImei ? `Lote ou IMEI: ${equipment.batchOrImei}` : undefined}</p>
               <p>
-                {equipment.product_number
-                  ? `Numero de Serie: ${equipment.product_number}`
+                {equipment.equipment_number
+                  ? `Numero de Serie: ${equipment.equipment_number}`
                   : undefined}
               </p>
               <p>{equipment.attendedBy ? `Atendido Por: ${equipment.attendedBy}` : undefined}</p>
@@ -80,8 +80,8 @@ function Equipment({ equipment }) {
               </p>
               <br />
               <p>
-                {equipment.productCondition
-                  ? `Condição do equipamento: ${equipment.productCondition}`
+                {equipment.equipmentCondition
+                  ? `Condição do equipamento: ${equipment.equipmentCondition}`
                   : undefined}
               </p>
               <p>
@@ -132,3 +132,35 @@ export default function CollapsibleTable({ equipments }) {
     </TableContainer>
   );
 }
+
+const getEquipmentStatus = (equipment) => {
+  if (equipment.deliveredToCustomerAt != null) {
+    return "Finalizado";
+  }
+
+  if (equipment.repairedAt != null) {
+    return "Aguardando Retirada";
+  }
+
+  if (equipment.isBudgetApproved === true || equipment.partsArrivedAt != null) {
+    return "Aguardando Reparo";
+  }
+
+  if (equipment.avalietedAt != null) {
+    if (equipment.isUnderWarranty) {
+      return "Aguardando Peças";
+    } else {
+      return "Aguardando Aprovação do Orçamento";
+    }
+  }
+
+  if (equipment.registeredInManufacturerAt != null) {
+    return "Esperando Avaliação";
+  }
+
+  if (equipment.isUnderWarranty) {
+    return "Esperando criar OSF";
+  } else {
+    return "Esperando Avaliação";
+  }
+};
