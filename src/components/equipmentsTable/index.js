@@ -147,6 +147,10 @@ const getEquipmentStatus = (equipment) => {
     return "Aguardando Reparo";
   }
 
+  if (equipment.isBudgetApproved === false) {
+    return "Orçamento Negado";
+  }
+
   if (equipment.avalietedAt != null) {
     if (equipment.isUnderWarranty) {
       return "Aguardando Peças";

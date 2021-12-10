@@ -112,6 +112,6 @@ const filterString = (string) => {
   if (typeof string === "string" && string.length > 1) {
     return string;
   } else {
-    return undefined;
+    return null;
   }
 };

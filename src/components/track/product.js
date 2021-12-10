@@ -115,7 +115,11 @@ const getActiveStep = (product) => {
       return 3;
     }
     if (product.budgetAnsweredAt != null) {
-      return 2;
+      if (product.isBudgetApproved) {
+        return 2;
+      } else {
+        return 1;
+      }
     }
   }
 

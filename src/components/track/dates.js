@@ -13,7 +13,7 @@ export default function Dates({ product }) {
   }
   if (product.budgetAnsweredAt != null) {
     dates.push([
-      <li key={3}>Data da aprovação do Orçamento: {dateToText(product.budgetAnsweredAt)}</li>,
+      <li key={3}>Data da resposta do Orçamento: {dateToText(product.budgetAnsweredAt)}</li>,
     ]);
   }
   if (product.repairedAt != null) {
