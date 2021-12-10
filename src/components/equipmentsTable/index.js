@@ -16,33 +16,6 @@ import * as React from "react";
 
 import UpdateStatusDialog from "../updateStatusDialog";
 
-/*
-OS_number: 22
-PartsArrivedAt: null
-accessories: null
-attendedBy: "Silas Henrique"
-attendedOn: "balcão"
-avalietedAt: null
-batchOrImei: null
-brand: ""
-budgetApprovedAt: null
-createdAt: "2011-01-12T11:38:00.000Z"
-deliveredToCustomerAt: null
-id: 21
-isBudgetApproved: null
-isUnderWarranty: false
-listOfServices: null
-model: "52352345"
-name: "Multimetro"
-ownerId: 1
-problemDescription: null
-productCondition: null
-product_number: null
-registeredInManufacturerAt: null
-repairedAt: null
-wasEdited: false
-*/
-
 function Equipment({ equipment }) {
   const [openRow, setOpenRow] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -83,12 +56,17 @@ function Equipment({ equipment }) {
               </p>
               <p>{equipment.accessories ? `Acessorios: ${equipment.accessories}` : undefined}</p>
               <p>{equipment.batchOrImei ? `Lote ou IMEI: ${equipment.batchOrImei}` : undefined}</p>
+              <p>
+                {equipment.product_number
+                  ? `Numero de Serie: ${equipment.product_number}`
+                  : undefined}
+              </p>
               <p>{equipment.attendedBy ? `Atendido Por: ${equipment.attendedBy}` : undefined}</p>
               <p>
                 {equipment.attendedOn ? `Local de Atendimento: ${equipment.attendedOn}` : undefined}
               </p>
               <p>
-                {() => {
+                {(() => {
                   if (equipment.isUnderWarranty === false) {
                     if (equipment.isBudgetApproved === null) {
                       return "Orçamento ainda não aprovado";
@@ -98,27 +76,34 @@ function Equipment({ equipment }) {
                       return "Orçamento Aprovado";
                     }
                   }
-                }}
+                })()}
               </p>
-
-              {/*
-listOfServices: null
-model: "52352345"
-name: "Multimetro"
-ownerId: 1
-problemDescription: null
-productCondition: null
-product_number: null
-registeredInManufacturerAt: null
-repairedAt: null
-wasEdited: false
-              */}
+              <br />
+              <p>
+                {equipment.productCondition
+                  ? `Condição do equipamento: ${equipment.productCondition}`
+                  : undefined}
+              </p>
+              <p>
+                {equipment.problemDescription
+                  ? `Descrição do problema: ${equipment.problemDescription}`
+                  : undefined}
+              </p>
+              <p>
+                {equipment.listOfServices
+                  ? `Lista de serviços: ${equipment.listOfServices}`
+                  : undefined}
+              </p>
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
 
-      <UpdateStatusDialog open={openDialog} handleClose={() => setOpenDialog(false)} />
+      <UpdateStatusDialog
+        open={openDialog}
+        handleClose={() => setOpenDialog(false)}
+        equipment={equipment}
+      />
     </React.Fragment>
   );
 }

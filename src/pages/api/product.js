@@ -37,7 +37,7 @@ const filterEquipment = (equipment) => {
 
   filteredEquipment.createdAt = equipment.createdAt;
   filteredEquipment.avalietedAt = equipment.avalietedAt;
-  filteredEquipment.budgetApprovedAt = equipment.budgetApprovedAt;
+  filteredEquipment.budgetAnsweredAt = equipment.budgetAnsweredAt;
   filteredEquipment.repairedAt = equipment.repairedAt;
   filteredEquipment.deliveredToCustomerAt = equipment.deliveredToCustomerAt;
 

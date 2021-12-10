@@ -9,9 +9,9 @@ export default function Dates({ product }) {
   if (product.avalietedAt != null) {
     dates.push([<li key={2}>Data da avaliação do produto: {dateToText(product.avalietedAt)}</li>]);
   }
-  if (product.budgetApprovedAt != null) {
+  if (product.budgetAnsweredAt != null) {
     dates.push([
-      <li key={3}>Data da aprovação do Orçamento: {dateToText(product.budgetApprovedAt)}</li>,
+      <li key={3}>Data da aprovação do Orçamento: {dateToText(product.budgetAnsweredAt)}</li>,
     ]);
   }
   if (product.repairedAt != null) {

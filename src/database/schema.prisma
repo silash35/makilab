@@ -52,8 +52,8 @@ model Equipment {
   createdAt                  DateTime  @default(now())
   registeredInManufacturerAt DateTime?
   avalietedAt                DateTime?
-  budgetApprovedAt           DateTime?
-  PartsArrivedAt             DateTime?
+  budgetAnsweredAt           DateTime?
+  partsArrivedAt             DateTime?
   repairedAt                 DateTime?
   deliveredToCustomerAt      DateTime?
 }

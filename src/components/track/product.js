@@ -114,7 +114,7 @@ const getActiveStep = (product) => {
     if (product.repairedAt != null) {
       return 3;
     }
-    if (product.budgetApprovedAt != null) {
+    if (product.budgetAnsweredAt != null) {
       return 2;
     }
   }
