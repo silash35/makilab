@@ -139,11 +139,17 @@ const getStepText = (activeStep, isUnderWarranty, isBudgetApproved) => {
 
   switch (activeStep) {
     case 0:
-      text = "Seu produto está passando pela avaliação tecnica. Aguarde de 3 a 5 dias";
+      text =
+        "Recebemos seu produto para avaliação técnica. Aguarde nosso contato pelo Whatsapp ou Email";
       break;
     case 1:
-      text =
-        "Seu produto foi avaliado e está aguardando a aprovação do orçamento. Confira seu Whatsapp!";
+      if (isUnderWarranty) {
+        text =
+          "Seu produto já foi avaliado e está aguardando a chegada das peças para fazer o reparo";
+      } else {
+        text =
+          "Seu produto foi avaliado e está aguardando a aprovação do orçamento. Confira seu Whatsapp!";
+      }
       break;
     case 2:
       text =
@@ -151,7 +157,7 @@ const getStepText = (activeStep, isUnderWarranty, isBudgetApproved) => {
       break;
     case 3:
       text =
-        "Seu produto já está pronto para retirada. Venha busca-lo e não se esqueça de trazer o papel da Ordem de Serviço";
+        "Seu produto já está pronto para retirada. Nescessario trazer comprovante da Ordem de Serviço";
       break;
     case 4:
       text = "Seu produto foi finalizado e já foi retirado";
@@ -159,7 +165,7 @@ const getStepText = (activeStep, isUnderWarranty, isBudgetApproved) => {
   }
 
   if (isBudgetApproved === false && activeStep === 1) {
-    text = "O orçamento não foi aprovado";
+    text = "O orçamento reprovado, aguarde contato para retirada do produto";
   }
 
   return text;
