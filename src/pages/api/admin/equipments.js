@@ -92,11 +92,18 @@ const processEditEquipment = (data) => {
     registeredInManufacturerAt: filterString(data.registeredInManufacturerAt),
     avalietedAt: filterString(data.avalietedAt),
     budgetAnsweredAt: filterString(data.budgetAnsweredAt),
-    isBudgetApproved: typeof data.isBudgetApproved == "boolean" ? data.isBudgetApproved : undefined,
     partsArrivedAt: filterString(data.partsArrivedAt),
     repairedAt: filterString(data.repairedAt),
     deliveredToCustomerAt: filterString(data.deliveredToCustomerAt),
   };
+
+  if (data.isBudgetApproved === null && filterString(data.budgetAnsweredAt) != null) {
+    newData.isBudgetApproved = false;
+  } else {
+    newData.isBudgetApproved =
+      typeof data.isBudgetApproved == "boolean" ? data.isBudgetApproved : undefined;
+  }
+
   return newData;
 };
 
