@@ -31,7 +31,7 @@ export default async function Equipments(req, res) {
     async POST() {
       try {
         await prisma.equipment.create({
-          data: processEquipment(req.body),
+          data: processNewEquipment(req.body),
         });
 
         res.writeHead(302, {
@@ -42,19 +42,21 @@ export default async function Equipments(req, res) {
         res.end(String(e));
       }
     },
-    /*
-    async PUT() {
-      res.setHeader("Content-Type", "application/json");
-      places = await placesManager.find(req.body.search);
 
-      res.statusCode = 200;
-      res.end(
-        JSON.stringify({
-          body: places,
-        })
-      );
+    async PUT() {
+      try {
+        await prisma.equipment.update({
+          where: {
+            id: req.body.id,
+          },
+          data: processEditEquipment(req.body.data),
+        });
+        res.statusCode = 200;
+        res.end();
+      } catch (e) {
+        res.end(String(e));
+      }
     },
-    */
   };
 
   const requestedMethod = methods[req.method];
@@ -65,7 +67,7 @@ export default async function Equipments(req, res) {
   }
 }
 
-const processEquipment = (body) => {
+const processNewEquipment = (body) => {
   const newBody = {
     OS_number: Number(body.OS_number),
     name: filterString(body.name),
@@ -84,9 +86,23 @@ const processEquipment = (body) => {
   return newBody;
 };
 
+const processEditEquipment = (data) => {
+  const newData = {
+    createdAt: stringToDate(data.createdAt),
+    registeredInManufacturerAt: stringToDate(data.registeredInManufacturerAt),
+    avalietedAt: stringToDate(data.avalietedAt),
+    budgetAnsweredAt: stringToDate(data.budgetAnsweredAt),
+    isBudgetApproved: typeof data.isBudgetApproved == "boolean" ? data.isBudgetApproved : undefined,
+    partsArrivedAt: stringToDate(data.partsArrivedAt),
+    repairedAt: stringToDate(data.repairedAt),
+    deliveredToCustomerAt: stringToDate(data.deliveredToCustomerAt),
+  };
+  return newData;
+};
+
 const stringToDate = (string) => {
   if (filterString(string) === undefined) {
-    return undefined;
+    return null;
   } else {
     return new Date(`${string} UTC`);
   }

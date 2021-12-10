@@ -17,20 +17,6 @@ import { useState } from "react";
 
 import styles from "./updateStatusDialog.module.scss";
 
-/*
-OS_number: 22
-isBudgetApproved: null
-isUnderWarranty: false
-
-createdAt: "2011-01-12T11:38:00.000Z"
-*registeredInManufacturerAt: null
-avalietedAt: null
-*budgetAnsweredAt: null
-partsArrivedAt: null
-repairedAt: null
-deliveredToCustomerAt: null
-*/
-
 const UpdateStatusDialog = (props) => {
   const [createdAt, setCreatedAt] = useState(props.equipment.createdAt);
 
@@ -44,8 +30,8 @@ const UpdateStatusDialog = (props) => {
   const [avalietedAt, setAvalietedAt] = useState(props.equipment.avalietedAt);
   const [avalietedAtSwitch, setAvalietedAtSwitch] = useState(avalietedAt != null);
 
-  const [budgetAnsweredAt, setbudgetAnsweredAt] = useState(props.equipment.budgetAnsweredAt);
-  const [budgetAnsweredAtSwitch, setbudgetAnsweredAtSwitch] = useState(budgetAnsweredAt != null);
+  const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(props.equipment.budgetAnsweredAt);
+  const [budgetAnsweredAtSwitch, setBudgetAnsweredAtSwitch] = useState(budgetAnsweredAt != null);
 
   const [isBudgetApproved, setIsBudgetApproved] = useState(props.equipment.isBudgetApproved);
 
@@ -73,15 +59,24 @@ const UpdateStatusDialog = (props) => {
   };
 
   const sendData = async () => {
-    const key = createdAt;
+    const data = {};
 
-    const data = {
+    data.createdAt = createdAt;
+    data.registeredInManufacturerAt = registeredInManufacturerAt;
+    data.avalietedAt = avalietedAt;
+    data.budgetAnsweredAt = budgetAnsweredAt;
+    data.isBudgetApproved = isBudgetApproved;
+    data.partsArrivedAt = partsArrivedAt;
+    data.repairedAt = repairedAt;
+    data.deliveredToCustomerAt = deliveredToCustomerAt;
+
+    const request = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ key: key }),
+      body: JSON.stringify({ id: props.equipment.id, data: data }),
     };
 
-    await fetch(`/api/place?id=${props.id}`, data);
+    await fetch("/api/admin/equipments", request);
 
     props.handleClose();
   };
@@ -150,7 +145,7 @@ const UpdateStatusDialog = (props) => {
                 <Switch
                   checked={budgetAnsweredAtSwitch}
                   onChange={(e) => {
-                    onSwitchChange(e, setbudgetAnsweredAtSwitch, setbudgetAnsweredAt);
+                    onSwitchChange(e, setBudgetAnsweredAtSwitch, setBudgetAnsweredAt);
                   }}
                 />
                 <DateTimePicker
@@ -159,7 +154,7 @@ const UpdateStatusDialog = (props) => {
                   renderInput={(params) => <TextField fullWidth margin="normal" {...params} />}
                   value={budgetAnsweredAt}
                   onChange={(newValue) => {
-                    setbudgetAnsweredAt(newValue);
+                    setBudgetAnsweredAt(newValue);
                   }}
                 />
               </div>
