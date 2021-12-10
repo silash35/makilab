@@ -88,14 +88,14 @@ const processNewEquipment = (body) => {
 
 const processEditEquipment = (data) => {
   const newData = {
-    createdAt: stringToDate(data.createdAt),
-    registeredInManufacturerAt: stringToDate(data.registeredInManufacturerAt),
-    avalietedAt: stringToDate(data.avalietedAt),
-    budgetAnsweredAt: stringToDate(data.budgetAnsweredAt),
+    createdAt: filterString(data.createdAt),
+    registeredInManufacturerAt: filterString(data.registeredInManufacturerAt),
+    avalietedAt: filterString(data.avalietedAt),
+    budgetAnsweredAt: filterString(data.budgetAnsweredAt),
     isBudgetApproved: typeof data.isBudgetApproved == "boolean" ? data.isBudgetApproved : undefined,
-    partsArrivedAt: stringToDate(data.partsArrivedAt),
-    repairedAt: stringToDate(data.repairedAt),
-    deliveredToCustomerAt: stringToDate(data.deliveredToCustomerAt),
+    partsArrivedAt: filterString(data.partsArrivedAt),
+    repairedAt: filterString(data.repairedAt),
+    deliveredToCustomerAt: filterString(data.deliveredToCustomerAt),
   };
   return newData;
 };
@@ -104,7 +104,7 @@ const stringToDate = (string) => {
   if (filterString(string) === undefined) {
     return null;
   } else {
-    return new Date(`${string} UTC`);
+    return new Date(`${string}`);
   }
 };
 

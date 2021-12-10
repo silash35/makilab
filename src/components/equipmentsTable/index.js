@@ -16,7 +16,7 @@ import * as React from "react";
 
 import UpdateStatusDialog from "../updateStatusDialog";
 
-function Equipment({ equipment }) {
+function Equipment({ equipment, reload }) {
   const [openRow, setOpenRow] = React.useState(false);
   const [openDialog, setOpenDialog] = React.useState(false);
 
@@ -102,13 +102,14 @@ function Equipment({ equipment }) {
       <UpdateStatusDialog
         open={openDialog}
         handleClose={() => setOpenDialog(false)}
+        reload={reload}
         equipment={equipment}
       />
     </React.Fragment>
   );
 }
 
-export default function CollapsibleTable({ equipments }) {
+export default function CollapsibleTable({ equipments, reload }) {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -125,7 +126,7 @@ export default function CollapsibleTable({ equipments }) {
         </TableHead>
         <TableBody>
           {equipments.map((equipment) => (
-            <Equipment key={equipment.OS_number} equipment={equipment} />
+            <Equipment key={equipment.OS_number} equipment={equipment} reload={reload} />
           ))}
         </TableBody>
       </Table>

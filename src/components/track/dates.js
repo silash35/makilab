@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 import styles from "./dates.module.scss";
 
 export default function Dates({ product }) {
@@ -27,6 +29,5 @@ export default function Dates({ product }) {
 }
 
 const dateToText = (date) => {
-  date = date.substring(0, date.indexOf("T"));
-  return date.replace(/-/gi, "/");
+  return dayjs(date).format("DD/MM/YYYY");
 };

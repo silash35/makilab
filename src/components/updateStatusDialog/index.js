@@ -71,12 +71,13 @@ const UpdateStatusDialog = (props) => {
     data.deliveredToCustomerAt = deliveredToCustomerAt;
 
     const request = {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: props.equipment.id, data: data }),
     };
 
     await fetch("/api/admin/equipments", request);
+    await props.reload();
 
     props.handleClose();
   };
