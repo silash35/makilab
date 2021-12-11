@@ -14,4 +14,15 @@
   h2 {
     text-align: center;
   }
+
+  img {
+    margin: 0px;
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }

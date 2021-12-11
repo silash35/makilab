@@ -3,6 +3,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 
 import Dates from "./dates";
@@ -53,9 +54,21 @@ export default function Product({ product }) {
         </Stepper>
       </ThemeProvider>
 
-      <p>{text}</p>
+      <div className={styles.flex}>
+        <div>
+          <p>{text}</p>
+          <Dates product={product} />
+        </div>
 
-      <Dates product={product} />
+        <Link
+          as="https://api.whatsapp.com/send?phone=5571985447786"
+          href="https://api.whatsapp.com/send?phone=5571985447786"
+        >
+          <a>
+            <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/whatsapp.png" height="100" />
+          </a>
+        </Link>
+      </div>
     </section>
   );
 }
