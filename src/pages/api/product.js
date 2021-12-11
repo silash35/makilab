@@ -14,7 +14,11 @@ export default async function product(req, res) {
           OS_number: search,
         },
       });
-      res.json(filterEquipment(equipment));
+      if (equipment === null) {
+        res.json({});
+      } else {
+        res.json(filterEquipment(equipment));
+      }
     } else {
       res.json({});
     }
