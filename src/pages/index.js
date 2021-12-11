@@ -1,29 +1,20 @@
 import Head from "next/head";
 
-import About from "../components/about";
-import Contact from "../components/contact";
 import Header from "../components/header";
-import Partners from "../components/partners";
-import ScrollBack from "../components/scrollBack";
-import Services from "../components/services";
+import Track from "../components/track";
 
-export default function Home() {
+export default function TrackPage() {
   return (
     <>
       <Head>
-        <title>MakiLab Serviços</title>
+        <title>Verifique o status do seu produto</title>
       </Head>
 
       <Header />
 
       <main>
-        <About />
-        <Services />
-        <Partners />
-        <Contact />
+        <Track />
       </main>
-
-      <ScrollBack />
     </>
   );
 }

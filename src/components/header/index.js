@@ -13,14 +13,20 @@ export default function Header() {
         </Link>
 
         <div>
-          <Link as="/#services" href="/#services">
-            <a className={styles.headerButton}>Serviços</a>
+          <Link as="https://makilab.com.br/" href="https://makilab.com.br/">
+            <a className={styles.headerButton}>Home</a>
           </Link>
-          <Link as="/#partners" href="/#partners">
-            <a className={styles.headerButton}>Parceiros</a>
+          <Link
+            as="https://www.instagram.com/makilabservicos/"
+            href="https://www.instagram.com/makilabservicos/"
+          >
+            <a className={styles.headerButton}>Instagram</a>
           </Link>
-          <Link as="/#contact" href="/#contact">
-            <a className={`${styles.headerButton} ${styles.contact}`}>Contato</a>
+          <Link
+            as="https://api.whatsapp.com/send?phone=5571985447786"
+            href="https://api.whatsapp.com/send?phone=5571985447786"
+          >
+            <a className={`${styles.headerButton} ${styles.contact}`}>Whatsapp</a>
           </Link>
         </div>
       </nav>
