@@ -1,33 +1,44 @@
+import "dayjs/locale/pt-br";
+
 import dayjs from "dayjs";
 
 import styles from "./dates.module.scss";
+
+dayjs.locale("pt-br");
 
 export default function Dates({ product }) {
   const dates = [];
 
   if (product.createdAt != null) {
-    dates.push([<li key={1}>Data da entrada do produto: {dateToText(product.createdAt)}</li>]);
+    dates.push(<DateItem text="Produto chegou na Makilab" date={product.createdAt} />);
   }
   if (product.avalietedAt != null) {
-    dates.push([<li key={2}>Data da avaliação do produto: {dateToText(product.avalietedAt)}</li>]);
+    dates.push(<DateItem text="Produto foi avaliado" date={product.avalietedAt} />);
   }
   if (product.budgetAnsweredAt != null) {
-    dates.push([
-      <li key={3}>Data da resposta do Orçamento: {dateToText(product.budgetAnsweredAt)}</li>,
-    ]);
+    dates.push(<DateItem text="Orçamento respondido" date={product.budgetAnsweredAt} />);
   }
   if (product.repairedAt != null) {
-    dates.push([<li key={4}>Data da conclusão do reparo: {dateToText(product.repairedAt)}</li>]);
+    dates.push(<DateItem text="Reparo concluido com sucesso" date={product.repairedAt} />);
   }
   if (product.deliveredToCustomerAt != null) {
-    dates.push([
-      <li key={5}>Data da retirada pelo Cliente: {dateToText(product.deliveredToCustomerAt)}</li>,
-    ]);
+    dates.push(
+      <DateItem text="Produto foi entregue ao cliente" date={product.deliveredToCustomerAt} />
+    );
   }
 
   return <ul className={styles.list}>{dates}</ul>;
 }
 
-const dateToText = (date) => {
-  return dayjs(date).format("DD/MM/YYYY");
-};
+function DateItem({ text, date }) {
+  return (
+    <li className={styles.item}>
+      <p className={styles.date}>{dayjs(date).format("dddd d MMMM, YYYY")}</p>
+
+      <div className={styles.flex}>
+        <p className={styles.time}>{dayjs(date).format("hh:mm A")}</p>
+        <p className={styles.text}>{text}</p>
+      </div>
+    </li>
+  );
+}
