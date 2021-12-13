@@ -1,11 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import cookie from "cookie";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
-dayjs.extend(customParseFormat);
 
 export default async function Equipments(req, res) {
   // Verify if user is authenticated
@@ -36,13 +33,11 @@ export default async function Equipments(req, res) {
         await prisma.equipment.create({
           data: processNewEquipment(req.body),
         });
-
-        res.writeHead(302, {
-          Location: "/admin",
-        });
+        res.statusCode = 200;
         res.end();
       } catch (e) {
-        res.end(String(e));
+        res.statusCode = 400;
+        res.json({ error: String(e) });
       }
     },
 
@@ -86,8 +81,6 @@ const processNewEquipment = (body) => {
     },
   };
 
-  console.log(newBody);
-
   return newBody;
 };
 
@@ -116,7 +109,7 @@ const stringToDate = (string) => {
   if (filterString(string) === undefined) {
     return null;
   } else {
-    return dayjs(string, "DD/MM/YYYY HH:mm").toDate();
+    return new Date(string);
   }
 };
 

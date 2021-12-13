@@ -8,7 +8,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import TextField from "@mui/material/TextField";
 import ptBR from "dayjs/locale/pt-br";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useRef, useState } from "react";
 
 import styles from "./equipmentForm.module.scss";
 
@@ -16,11 +17,36 @@ const attendants = ["Rodrigo Icaro", "Silas Henrique", "Amanda Pimenta", "Rai Ne
 
 export default function EquipmentForm() {
   const [dateValue, setDateValue] = useState(new Date());
+  const router = useRouter();
+  const form = useRef(null);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    var formData = new FormData(form.current);
+
+    const data = Object.fromEntries(formData);
+
+    data.createdAt = dateValue;
+
+    const request = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    const res = await fetch("/api/admin/equipments", request);
+
+    if (res.status === 200) {
+      router.push("/admin");
+    } else {
+      const body = await res.json();
+      alert("ERRO: " + body.error);
+    }
+  };
 
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
-
   return (
-    <form className={styles.form} action="/api/admin/equipments" method="POST">
+    <form className={styles.form} ref={form} onSubmit={handleSubmit}>
       <h1>Cadastrar Equipamento</h1>
       <TextField
         name="OS_number"
