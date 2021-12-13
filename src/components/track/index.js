@@ -9,6 +9,8 @@ export default function Track() {
 
   const handleSearch = async (event) => {
     event.preventDefault();
+    setProduct("loading");
+
     const search = searchInputRef.current?.value;
 
     const res = await fetch(`/api/product/?id=${search}`, {
