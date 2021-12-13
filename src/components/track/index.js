@@ -31,11 +31,7 @@ export default function Track() {
       </h1>
       <form onSubmit={handleSearch}>
         <label className={styles.search}>
-          <input
-            type="text"
-            placeholder="Digite a Ordem de serviço. Ex. 190XXX"
-            ref={searchInputRef}
-          ></input>
+          <input type="text" placeholder="Digite a Ordem de serviço" ref={searchInputRef}></input>
           <button type="submit">Pesquisar</button>
         </label>
       </form>

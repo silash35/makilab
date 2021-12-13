@@ -1,5 +1,6 @@
 @use "/src/styles/variables" as v;
 @use "/src/styles/shadow" as s;
+@use "/src/styles/media" as m;
 
 .product {
   margin: 80px;
@@ -25,4 +26,12 @@
   align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  @include m.forMedium() {
+    justify-content: center;
+
+    img {
+      height: 80px;
+    }
+  }
 }
