@@ -1,8 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import cookie from "cookie";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
+dayjs.extend(customParseFormat);
 
 export default async function Equipments(req, res) {
   // Verify if user is authenticated
@@ -83,6 +86,8 @@ const processNewEquipment = (body) => {
     },
   };
 
+  console.log(newBody);
+
   return newBody;
 };
 
@@ -111,7 +116,7 @@ const stringToDate = (string) => {
   if (filterString(string) === undefined) {
     return null;
   } else {
-    return new Date(`${string}`);
+    return dayjs(string, "DD/MM/YYYY HH:mm").toDate();
   }
 };
 
