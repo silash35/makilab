@@ -1,3 +1,4 @@
+import CircularProgress from "@mui/material/CircularProgress";
 import { blue, green } from "@mui/material/colors";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -14,6 +15,14 @@ export default function Product({ product }) {
 
   if (product === false) {
     return null;
+  }
+
+  if (product === "loading") {
+    return (
+      <div className={styles.loading}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (!product.name) {
