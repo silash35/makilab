@@ -17,7 +17,11 @@ export default async function Equipments(req, res) {
   const methods = {
     async GET() {
       try {
-        const allEquipments = await prisma.equipment.findMany();
+        const allEquipments = await prisma.equipment.findMany({
+          include: {
+            owner: true,
+          },
+        });
 
         res.setHeader("Content-Type", "application/json");
         res.statusCode = 200;

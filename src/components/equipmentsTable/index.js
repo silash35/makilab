@@ -12,16 +12,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+import { useState } from "react";
 
 import UpdateStatusDialog from "../updateStatusDialog";
+import SendMail from "./sendMail";
 
 function Equipment({ equipment, reload }) {
-  const [openRow, setOpenRow] = React.useState(false);
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [openRow, setOpenRow] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   return (
-    <React.Fragment>
+    <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpenRow(!openRow)}>
@@ -94,6 +95,8 @@ function Equipment({ equipment, reload }) {
                   ? `Lista de serviços: ${equipment.listOfServices}`
                   : undefined}
               </p>
+
+              <SendMail equipment={equipment} />
             </Box>
           </Collapse>
         </TableCell>
@@ -105,7 +108,7 @@ function Equipment({ equipment, reload }) {
         reload={reload}
         equipment={equipment}
       />
-    </React.Fragment>
+    </>
   );
 }
 
