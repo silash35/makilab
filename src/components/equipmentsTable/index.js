@@ -14,6 +14,8 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
+import getEquipmentStatus from "/src/utils/getEquipmentStatus";
+
 import UpdateStatusDialog from "../updateStatusDialog";
 import SendMail from "./sendMail";
 
@@ -35,7 +37,7 @@ function Equipment({ equipment, reload }) {
         <TableCell align="right">{equipment.name}</TableCell>
         <TableCell align="right">{equipment.brand}</TableCell>
         <TableCell align="right">{equipment.model}</TableCell>
-        <TableCell align="right">{getEquipmentStatus(equipment)}</TableCell>
+        <TableCell align="right">{getEquipmentStatus(equipment).name}</TableCell>
         <TableCell align="right">
           <Button variant="contained" onClick={() => setOpenDialog(true)}>
             Atualizar Status
@@ -136,39 +138,3 @@ export default function CollapsibleTable({ equipments, reload }) {
     </TableContainer>
   );
 }
-
-const getEquipmentStatus = (equipment) => {
-  if (equipment.deliveredToCustomerAt != null) {
-    return "Finalizado";
-  }
-
-  if (equipment.repairedAt != null) {
-    return "Aguardando Retirada";
-  }
-
-  if (equipment.isBudgetApproved === true || equipment.partsArrivedAt != null) {
-    return "Aguardando Reparo";
-  }
-
-  if (equipment.isBudgetApproved === false) {
-    return "Orçamento Negado";
-  }
-
-  if (equipment.avalietedAt != null) {
-    if (equipment.isUnderWarranty) {
-      return "Aguardando Peças";
-    } else {
-      return "Aguardando Aprovação do Orçamento";
-    }
-  }
-
-  if (equipment.registeredInManufacturerAt != null) {
-    return "Esperando Avaliação";
-  }
-
-  if (equipment.isUnderWarranty) {
-    return "Esperando criar OSF";
-  } else {
-    return "Esperando Avaliação";
-  }
-};
