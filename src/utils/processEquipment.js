@@ -1,6 +1,6 @@
 export default function processEquipment(equipment) {
   if (typeof equipment === "object" && equipment !== null) {
-    equipment.name = (() => {
+    equipment.statusName = (() => {
       if (equipment.deliveredToCustomerAt != null) {
         return "Finalizado";
       }
