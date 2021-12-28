@@ -74,7 +74,7 @@ export default function Product({ product }) {
           href="https://api.whatsapp.com/send?phone=5571985447786"
         >
           <a>
-            <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/whatsapp.png" height="100" />
+            <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/WhatsApp.png" height="100" />
           </a>
         </Link>
       </div>
@@ -111,7 +111,7 @@ const getSteps = (product) => {
   });
 
   steps.push({
-    label: "Disponivel para retirada",
+    label: "Disponível para retirada",
   });
 
   steps.push({

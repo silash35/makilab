@@ -13,7 +13,7 @@ import { useRef, useState } from "react";
 
 import styles from "./equipmentForm.module.scss";
 
-const attendants = ["Rodrigo Icaro", "Silas Henrique", "Amanda Pimenta", "Rai Neto"];
+const attendants = ["Rodrigo Ícaro", "Silas Henrique", "Amanda Pimenta", "Rai Neto"];
 
 export default function EquipmentForm() {
   const [dateValue, setDateValue] = useState(new Date());

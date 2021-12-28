@@ -19,7 +19,7 @@ export default function Dates({ product }) {
     dates.push(<DateItem text="Orçamento respondido" date={product.budgetAnsweredAt} />);
   }
   if (product.repairedAt != null) {
-    dates.push(<DateItem text="Reparo concluido com sucesso" date={product.repairedAt} />);
+    dates.push(<DateItem text="Reparo concluído com sucesso" date={product.repairedAt} />);
   }
   if (product.deliveredToCustomerAt != null) {
     dates.push(

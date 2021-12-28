@@ -26,7 +26,7 @@ export default function Header() {
             as="https://api.whatsapp.com/send?phone=5571985447786"
             href="https://api.whatsapp.com/send?phone=5571985447786"
           >
-            <a className={`${styles.headerButton} ${styles.contact}`}>Whatsapp</a>
+            <a className={`${styles.headerButton} ${styles.contact}`}>WhatsApp</a>
           </Link>
         </div>
       </nav>
