@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 
+import processProduct from "/src/utils/processProduct";
+
 import Product from "./product";
 import styles from "./track.module.scss";
 
@@ -23,7 +25,7 @@ export default function Track() {
 
     const data = await res.json();
 
-    setProduct(data);
+    setProduct(processProduct(data));
   };
 
   return (

@@ -29,14 +29,9 @@ export default function Product({ product }) {
     return <p>Nenhum produto encontrado, você digitou a OS corretamente?</p>;
   }
 
-  const steps = getSteps(product);
-  const activeStep = getActiveStep(product);
-  const isFinished = getIsFinished(activeStep, product.isUnderWarranty);
-  const text = getStepText(activeStep, product.isUnderWarranty, product.isBudgetApproved);
-
   const theme = createTheme({
     palette: {
-      primary: isFinished ? green : blue,
+      primary: product.isFinished ? green : blue,
     },
   });
 
@@ -45,11 +40,8 @@ export default function Product({ product }) {
       <h2>{product.name}</h2>
 
       <ThemeProvider theme={theme}>
-        <Stepper
-          activeStep={isFinished ? activeStep + 1 : activeStep}
-          orientation={isMobile ? "vertical" : "horizontal"}
-        >
-          {steps.map((step) => {
+        <Stepper activeStep={product.activeStep} orientation={isMobile ? "vertical" : "horizontal"}>
+          {product.steps.map((step) => {
             const labelProps = {};
 
             labelProps.error = step.error;
@@ -65,7 +57,7 @@ export default function Product({ product }) {
 
       <div className={styles.flex}>
         <div>
-          <p>{text}</p>
+          <p>{product.stepText}</p>
           <Dates product={product} />
         </div>
 
@@ -81,114 +73,3 @@ export default function Product({ product }) {
     </section>
   );
 }
-
-const getIsFinished = (activeStep, isUnderWarranty) => {
-  if (isUnderWarranty && activeStep === 3) {
-    return true;
-  } else if (activeStep === 4) {
-    return true;
-  }
-
-  return false;
-};
-
-const getSteps = (product) => {
-  const steps = [];
-
-  steps.push({
-    label: "Em Avaliação",
-  });
-
-  if (!product.isUnderWarranty) {
-    steps.push({
-      label: "Aguardando aprovação do orçamento",
-      error: product.isBudgetApproved === false && getActiveStep(product) < 2,
-    });
-  }
-
-  steps.push({
-    label: "Aguardando peça",
-  });
-
-  steps.push({
-    label: "Disponível para retirada",
-  });
-
-  steps.push({
-    label: "Finalizado",
-  });
-
-  return steps;
-};
-
-const getActiveStep = (product) => {
-  if (product.isUnderWarranty) {
-    if (product.deliveredToCustomerAt != null) {
-      return 3;
-    }
-    if (product.repairedAt != null) {
-      return 2;
-    }
-  } else {
-    if (product.deliveredToCustomerAt != null) {
-      return 4;
-    }
-    if (product.repairedAt != null) {
-      return 3;
-    }
-    if (product.budgetAnsweredAt != null) {
-      if (product.isBudgetApproved) {
-        return 2;
-      } else {
-        return 1;
-      }
-    }
-  }
-
-  if (product.avalietedAt != null) {
-    return 1;
-  }
-
-  return 0;
-};
-
-const getStepText = (activeStep, isUnderWarranty, isBudgetApproved) => {
-  let text;
-
-  if (isUnderWarranty && activeStep > 1) {
-    activeStep++;
-  }
-
-  switch (activeStep) {
-    case 0:
-      text =
-        "Recebemos seu produto para avaliação técnica. Aguarde nosso contato pelo Whatsapp ou Email";
-      break;
-    case 1:
-      if (isUnderWarranty) {
-        text =
-          "Seu produto já foi avaliado e está aguardando a chegada das peças para fazer o reparo";
-      } else {
-        text =
-          "Seu produto foi avaliado e está aguardando a aprovação do orçamento. Confira seu Whatsapp!";
-      }
-      break;
-    case 2:
-      text =
-        "Seu produto já foi avaliado e está aguardando a chegada das peças para fazer o reparo";
-      break;
-    case 3:
-      text =
-        "Seu produto já está pronto para retirada. Nescessario trazer comprovante da Ordem de Serviço";
-      break;
-    case 4:
-      text = "Seu produto foi finalizado e já foi retirado";
-      break;
-  }
-
-  if (isBudgetApproved === false && activeStep === 1) {
-    text = "O orçamento reprovado, aguarde contato para retirada do produto";
-  }
-
-  return text;
-};

@@ -33,7 +33,7 @@ export default function Dates({ product }) {
 function DateItem({ text, date }) {
   return (
     <li className={styles.item}>
-      <p>{dayjs(date).format("dddd d MMMM, YYYY")}</p>
+      <p>{dayjs(date).format("dddd D MMMM, YYYY")}</p>
 
       <div className={styles.flex}>
         <p className={styles.time}>{dayjs(date).format("hh:mm A")}</p>
