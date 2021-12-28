@@ -14,8 +14,6 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
-import getEquipmentStatus from "/src/utils/getEquipmentStatus";
-
 import UpdateStatusDialog from "../updateStatusDialog";
 import SendMail from "./sendMail";
 
@@ -37,7 +35,7 @@ function Equipment({ equipment, reload }) {
         <TableCell align="right">{equipment.name}</TableCell>
         <TableCell align="right">{equipment.brand}</TableCell>
         <TableCell align="right">{equipment.model}</TableCell>
-        <TableCell align="right">{getEquipmentStatus(equipment).name}</TableCell>
+        <TableCell align="right">{equipment.statusName}</TableCell>
         <TableCell align="right">
           <Button variant="contained" onClick={() => setOpenDialog(true)}>
             Atualizar Status
@@ -57,7 +55,7 @@ function Equipment({ equipment, reload }) {
                   ? "Equipamento em Garantia"
                   : "Equipamento Fora de Garantia"}
               </p>
-              <p>{equipment.accessories ? `Acessorios: ${equipment.accessories}` : undefined}</p>
+              <p>{equipment.accessories ? `Acessórios: ${equipment.accessories}` : undefined}</p>
               <p>{equipment.batchOrImei ? `Lote ou IMEI: ${equipment.batchOrImei}` : undefined}</p>
               <p>
                 {equipment.equipment_number

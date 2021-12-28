@@ -1,9 +1,12 @@
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import EquipmentsTable from "/src/components/equipmentsTable";
 import Header from "/src/components/header";
+import processEquipment from "/src/utils/processEquipment";
 
 function EditEquipments() {
   const [equipments, setEquipments] = useState(null);
@@ -19,8 +22,16 @@ function EditEquipments() {
 
     const data = await res.json();
 
-    setEquipments(data);
+    if (Array.isArray(data)) {
+      const processedEquipments = data.map((equipment) => {
+        return processEquipment(equipment);
+      });
+      setEquipments(processedEquipments);
+    } else {
+      return null;
+    }
   };
+
   useEffect(async () => {
     await load();
   }, []);
@@ -34,7 +45,13 @@ function EditEquipments() {
       <Header />
 
       <main style={{ margin: "10vh 5vw" }}>
-        {equipments && <EquipmentsTable equipments={equipments} reload={load} />}
+        {equipments ? (
+          <EquipmentsTable equipments={equipments} reload={load} />
+        ) : (
+          <Stack alignItems="center">
+            <CircularProgress />
+          </Stack>
+        )}
       </main>
     </>
   );
