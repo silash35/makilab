@@ -83,6 +83,9 @@ export default function EquipmentForm() {
           <FormControlLabel control={<Checkbox name="isUnderWarranty" />} label="Garantia" />
         </FormGroup>
       </div>
+
+      <p>*Campo Obrigatório</p>
+
       <Button variant="contained" fullWidth color="primary" size="large" type="submit">
         Cadastrar
       </Button>

@@ -11,11 +11,10 @@ export default function AdminOptions() {
       <Link as="admin/editEquipments" href="admin/editEquipments">
         <a className={styles.yellow}>Gerenciar Equipamentos</a>
       </Link>
+      <Link as="admin/newClient" href="admin/newClient">
+        <a className={styles.cyan}>Adicionar Cliente</a>
+      </Link>
 
-      <button disabled className={styles.disabled}>
-        Adicionar Cliente <br />
-        (Em breve)
-      </button>
       <button disabled className={styles.disabled}>
         Gerenciar Clientes <br />
         (Em breve)

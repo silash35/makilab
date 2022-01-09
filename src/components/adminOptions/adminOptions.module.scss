@@ -54,6 +54,16 @@
   }
 }
 
+.cyan {
+  background-color: #00e4c5;
+  &:hover {
+    background-color: #41ffe6;
+  }
+  &:focus {
+    background-color: #1daa97;
+  }
+}
+
 button.disabled {
   color: rgba(0, 0, 0, 0.26);
   background-color: rgba(0, 0, 0, 0.12);
