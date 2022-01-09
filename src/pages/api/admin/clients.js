@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
 
+import { filterNumber, filterString } from "/src/utils/filters";
+
 const prisma = new PrismaClient();
 
 export default async function Equipments(req, res) {
@@ -82,20 +84,4 @@ const processClient = (body) => {
   };
 
   return newBody;
-};
-
-const filterNumber = (string) => {
-  if (typeof string === "string" && string.length > 1) {
-    return Number(string);
-  } else {
-    return null;
-  }
-};
-
-const filterString = (string) => {
-  if (typeof string === "string" && string.length > 1) {
-    return string;
-  } else {
-    return null;
-  }
 };
