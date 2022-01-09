@@ -91,7 +91,7 @@ export default function Equipment({ equipment, reload }) {
                   : undefined}
               </p>
 
-              <SendMail equipment={equipment} />
+              {equipment.owner.email ? <SendMail equipment={equipment} /> : undefined}
             </Box>
           </Collapse>
         </TableCell>
