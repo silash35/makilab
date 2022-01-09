@@ -12,8 +12,20 @@ export default function SendMail({ equipment, email = null }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [text, setText] = useState(email === null ? equipment.defaultEmail : email);
 
-  const sendData = () => {
-    setOpenDialog(false);
+  const sendData = async () => {
+    const request = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ to: equipment.owner.email, text: text }),
+    };
+    const res = await fetch("/api/admin/sendMail", request);
+
+    if (res.status === 200) {
+      setOpenDialog(false);
+    } else {
+      const body = await res.json();
+      alert("ERRO: " + body.error);
+    }
   };
 
   return (
