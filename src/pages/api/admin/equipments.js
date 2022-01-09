@@ -5,15 +5,6 @@ import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
 
 export default async function Equipments(req, res) {
-  // Verify if user is authenticated
-  try {
-    const cookies = cookie.parse(req.headers.cookie);
-    jwt.verify(cookies?.[process.env.COOKIE_NAME], process.env.PASSWORD);
-  } catch (err) {
-    res.statusCode = 401;
-    res.end("Unauthorized");
-  }
-
   const methods = {
     async GET() {
       try {
@@ -61,11 +52,21 @@ export default async function Equipments(req, res) {
     },
   };
 
-  const requestedMethod = methods[req.method];
-  if (requestedMethod != undefined) {
-    await requestedMethod();
-  } else {
-    res.statusCode = 404;
+  try {
+    // Verify if user is authenticated
+    const cookies = cookie.parse(req.headers.cookie);
+    jwt.verify(cookies?.[process.env.COOKIE_NAME], process.env.PASSWORD);
+
+    // Run requestedMethod
+    const requestedMethod = methods[req.method];
+    if (requestedMethod != undefined) {
+      await requestedMethod();
+    } else {
+      res.statusCode = 404;
+    }
+  } catch (err) {
+    res.statusCode = 401;
+    res.end("Unauthorized");
   }
 }
 
