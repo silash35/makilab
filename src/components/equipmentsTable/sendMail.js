@@ -1,13 +1,16 @@
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-export default function SendMail({ equipment }) {
+export default function SendMail({ equipment, email = null }) {
   const [openDialog, setOpenDialog] = useState(false);
+  const [text, setText] = useState(email === null ? equipment.defaultEmail : email);
 
   const sendData = () => {
     setOpenDialog(false);
@@ -16,7 +19,6 @@ export default function SendMail({ equipment }) {
   return (
     <section>
       <Button onClick={() => setOpenDialog(true)}>Enviar Email</Button>
-      <p style={{ weight: "50vw" }}>{JSON.stringify(equipment)}</p>
 
       <Dialog
         open={openDialog}
@@ -27,7 +29,26 @@ export default function SendMail({ equipment }) {
           Confirmar Envio do Email para {equipment.owner.email}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>Texto do Email aaaaa</DialogContentText>
+          {text === null && (
+            <Alert severity="warning">
+              O status atual do equipamento não requer envio de email. Você realmente deseja enviar
+              uma mensagem ao cliente?
+            </Alert>
+          )}
+          <DialogContentText>
+            <TextField
+              label="Texto do Email"
+              variant="outlined"
+              margin="normal"
+              minRows={5}
+              fullWidth
+              multiline
+              value={text}
+              onChange={(event) => {
+                setText(event.target.value);
+              }}
+            />
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)} color="primary">

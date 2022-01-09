@@ -50,11 +50,6 @@ function Equipment({ equipment, reload }) {
                 Informações Detalhadas
               </Typography>
 
-              <p>
-                {equipment.isUnderWarranty
-                  ? "Equipamento em Garantia"
-                  : "Equipamento Fora de Garantia"}
-              </p>
               <p>{equipment.accessories ? `Acessórios: ${equipment.accessories}` : undefined}</p>
               <p>{equipment.batchOrImei ? `Lote ou IMEI: ${equipment.batchOrImei}` : undefined}</p>
               <p>
@@ -65,6 +60,11 @@ function Equipment({ equipment, reload }) {
               <p>{equipment.attendedBy ? `Atendido Por: ${equipment.attendedBy}` : undefined}</p>
               <p>
                 {equipment.attendedOn ? `Local de Atendimento: ${equipment.attendedOn}` : undefined}
+              </p>
+              <p>
+                {equipment.isUnderWarranty
+                  ? "Equipamento em Garantia"
+                  : "Equipamento Fora de Garantia"}
               </p>
               <p>
                 {(() => {
