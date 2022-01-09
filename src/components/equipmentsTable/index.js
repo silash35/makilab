@@ -14,8 +14,8 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
+import SendMail from "../sendMail";
 import UpdateStatusDialog from "../updateStatusDialog";
-import SendMail from "./sendMail";
 
 function Equipment({ equipment, reload }) {
   const [openRow, setOpenRow] = useState(false);
