@@ -1,8 +1,16 @@
 import TextField from "@mui/material/TextField";
+import { useEffect, useState } from "react";
 
 import styles from "./clientInputs.module.scss";
 
-export default function Inputs() {
+export default function Inputs({ client }) {
+  const [name, setName] = useState("");
+  const handleChangeName = (event) => setName(event.target.value);
+
+  useEffect(() => {
+    setName(client.name);
+  }, [client]);
+
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
   const phoneCommon = {
     placeholder: "5571999999999",
@@ -12,7 +20,14 @@ export default function Inputs() {
 
   return (
     <>
-      <TextField name="name" label="Nome completo" required {...common} />
+      <TextField
+        name="name"
+        label="Nome completo"
+        required
+        {...common}
+        value={name}
+        onChange={handleChangeName}
+      />
       <TextField name="email" label="E-mail" type={"email"} {...common} />
       <TextField
         name="cpfOrCnpj"

@@ -53,7 +53,7 @@ export default function ClientData({ selectorValue, setSelectorValue }) {
         renderInput={(params) => <TextField {...params} label="Cliente" />}
       />
 
-      <ClientInputs />
+      <ClientInputs client={selectorValue} />
     </>
   );
 }
