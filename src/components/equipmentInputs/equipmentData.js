@@ -72,14 +72,14 @@ export default function EquipmentInputs({ dateValue, setDateValue }) {
         <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
           <DateTimePicker
             label="Data de criação da OS"
-            renderInput={(params) => (
-              <TextField name="createdAt" required {...common} {...params} />
-            )}
+            renderInput={(params) => <TextField required {...common} {...params} />}
             value={dateValue}
             onChange={(newValue) => {
               setDateValue(newValue);
             }}
           />
+
+          <input type="hidden" name="createdAt" value={dateValue} />
         </LocalizationProvider>
 
         <FormGroup>

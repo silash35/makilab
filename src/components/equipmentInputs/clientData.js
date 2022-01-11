@@ -53,6 +53,8 @@ export default function ClientData({ selectorValue, setSelectorValue }) {
         renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
 
+      <input type="hidden" name="clientID" value={selectorValue.id} />
+
       <ClientInputs client={selectorValue} />
     </>
   );

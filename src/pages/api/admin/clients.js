@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
 
-import { filterNumber, filterString } from "/src/utils/filters";
+import parseClient from "/src/utils/parseClient";
 
 const prisma = new PrismaClient();
 
@@ -28,7 +28,7 @@ export default async function Equipments(req, res) {
     async POST() {
       try {
         await prisma.client.create({
-          data: processClient(req.body),
+          data: parseClient(req.body),
         });
         res.statusCode = 200;
         res.end();
@@ -44,7 +44,7 @@ export default async function Equipments(req, res) {
           where: {
             id: req.body.id,
           },
-          data: processClient(req.body.data),
+          data: parseClient(req.body.data),
         });
         res.statusCode = 200;
         res.end();
@@ -71,17 +71,3 @@ export default async function Equipments(req, res) {
     res.end("Unauthorized");
   }
 }
-
-const processClient = (body) => {
-  const newBody = {
-    name: filterString(body.name),
-    email: filterString(body.email),
-    address: filterString(body.address),
-    zip: filterNumber(body.zip),
-    whatsapp: filterNumber(body.whatsapp),
-    tel: filterNumber(body.tel),
-    cpfOrCnpj: filterString(body.cpfOrCnpj),
-  };
-
-  return newBody;
-};

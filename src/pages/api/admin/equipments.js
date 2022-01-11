@@ -3,6 +3,7 @@ import cookie from "cookie";
 import jwt from "jsonwebtoken";
 
 import { filterNumber, filterString } from "/src/utils/filters";
+import parseClient from "/src/utils/parseClient";
 
 const prisma = new PrismaClient();
 
@@ -28,7 +29,7 @@ export default async function Equipments(req, res) {
     async POST() {
       try {
         await prisma.equipment.create({
-          data: processNewEquipment(req.body),
+          data: parseNewEquipment(req.body),
         });
         res.statusCode = 200;
         res.end();
@@ -72,20 +73,41 @@ export default async function Equipments(req, res) {
   }
 }
 
-const processNewEquipment = (body) => {
+const parseNewEquipment = (body) => {
+  const client = parseClient({
+    id: body.clientID,
+    name: body.name,
+    email: body.email,
+    cpfOrCnpj: body.cpfOrCnpj,
+    address: body.address,
+    zip: body.zip,
+    whatsapp: body.whatsapp,
+    tel: body.tel,
+  });
+
+  let owner = {};
+
+  if (client.id == 0) {
+    client.id = undefined;
+    owner.create = client;
+  } else {
+    owner.update = {
+      where: {
+        id: client.id,
+      },
+      data: client,
+    };
+  }
+
   const newBody = {
     OS_number: filterNumber(body.OS_number),
-    name: filterString(body.name),
+    name: filterString(body.equipment),
     brand: filterString(body.brand),
     model: filterString(body.model),
     attendedBy: filterString(body.attendedBy),
     isUnderWarranty: body.isUnderWarranty === "on",
     createdAt: filterString(body.createdAt),
-    owner: {
-      connect: {
-        id: 1,
-      },
-    },
+    owner: owner,
   };
 
   return newBody;
