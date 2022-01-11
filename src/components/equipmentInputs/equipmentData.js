@@ -11,6 +11,7 @@ import ptBR from "dayjs/locale/pt-br";
 import styles from "./equipmentInputs.module.scss";
 
 const attendants = ["Rodrigo Ícaro", "Silas Henrique", "Amanda Pimenta", "Rai Neto"];
+const servicePlace = ["Balcão", "Telefone"];
 
 export default function EquipmentInputs({ dateValue, setDateValue }) {
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
@@ -24,15 +25,49 @@ export default function EquipmentInputs({ dateValue, setDateValue }) {
         {...common}
       />
       <TextField name="equipment" label="Equipamento" required {...common} />
-      <TextField name="brand" label="Marca" {...common} />
-      <TextField name="model" label="Modelo" {...common} />
-      <Autocomplete
-        freeSolo
-        options={attendants.map((attendant) => attendant)}
-        renderInput={(params) => (
-          <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
-        )}
+      <div className={styles.flex}>
+        <TextField name="brand" label="Marca" {...common} />
+        <TextField name="model" label="Modelo" {...common} />
+      </div>
+      <div className={styles.flex}>
+        <TextField name="product_number" label="Product Number" {...common} />
+        <TextField name="batchOrImei" label="N° de Serie ou IMEI" {...common} />
+      </div>
+      <TextField name="accessories" label="Acessórios" {...common} />
+      <TextField name="productCondition" label="Estado do equipamento" {...common} />
+      <TextField
+        name="listOfServices"
+        label="Lista de serviços"
+        defaultValue={"Avaliação Técnica"}
+        {...common}
       />
+
+      <div className={styles.flex}>
+        <Autocomplete
+          freeSolo
+          options={attendants}
+          renderInput={(params) => (
+            <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
+          )}
+          sx={{ width: "100%" }}
+        />
+
+        <Autocomplete
+          freeSolo
+          options={servicePlace}
+          defaultValue={servicePlace[0]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              name="attendedOn"
+              label="Local de atendimento"
+              required
+              {...common}
+            />
+          )}
+          sx={{ width: "100%" }}
+        />
+      </div>
       <div className={styles.flex}>
         <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
           <DateTimePicker

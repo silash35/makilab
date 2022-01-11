@@ -40,7 +40,7 @@ model Equipment {
 
   isUnderWarranty Boolean
   attendedBy      String
-  attendedOn      String  @default("balcão")
+  attendedOn      String
 
 
   owner   Client @relation(fields: [ownerId], references: [id])
