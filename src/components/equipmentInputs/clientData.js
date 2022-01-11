@@ -41,6 +41,7 @@ export default function ClientData({ selectorValue, setSelectorValue }) {
   return (
     <>
       <Autocomplete
+        options={clients}
         value={selectorValue}
         onChange={(e, newValue) => {
           setSelectorValue(newValue);
@@ -49,7 +50,6 @@ export default function ClientData({ selectorValue, setSelectorValue }) {
         onInputChange={(e, newInputValue) => {
           setSelectorInputValue(newInputValue);
         }}
-        options={clients}
         renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
 

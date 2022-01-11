@@ -23,7 +23,7 @@ export default function EquipmentInputs({ dateValue, setDateValue }) {
         required
         {...common}
       />
-      <TextField name="name" label="Equipamento" required {...common} />
+      <TextField name="equipment" label="Equipamento" required {...common} />
       <TextField name="brand" label="Marca" {...common} />
       <TextField name="model" label="Modelo" {...common} />
       <Autocomplete
