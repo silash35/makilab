@@ -50,7 +50,7 @@ export default function ClientData({ selectorValue, setSelectorValue }) {
           setSelectorInputValue(newInputValue);
         }}
         options={clients}
-        renderInput={(params) => <TextField {...params} label="Cliente" />}
+        renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
 
       <ClientInputs client={selectorValue} />
