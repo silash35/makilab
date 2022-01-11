@@ -1,7 +1,8 @@
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 
-import ClientForm from "/src/components/clientForm";
+import ClientInputs from "/src/components/clientInputs";
+import Form from "/src/components/form";
 import Header from "/src/components/header";
 
 function NewClient() {
@@ -14,7 +15,7 @@ function NewClient() {
       <Header />
 
       <main>
-        <ClientForm />
+        <Form Inputs={ClientInputs} URL="/api/admin/clients" title="Cadastrar Equipamento" />
       </main>
     </>
   );

@@ -1,0 +1,10 @@
+@use "/src/styles/media" as m;
+
+.form {
+  max-width: 80vw;
+  margin: 40px auto;
+
+  button {
+    margin: 16px 0;
+  }
+}

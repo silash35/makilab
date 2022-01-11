@@ -8,7 +8,7 @@ import FormGroup from "@mui/material/FormGroup";
 import TextField from "@mui/material/TextField";
 import ptBR from "dayjs/locale/pt-br";
 
-import styles from "./equipmentForm.module.scss";
+import styles from "./equipmentInputs.module.scss";
 
 const attendants = ["Rodrigo Ícaro", "Silas Henrique", "Amanda Pimenta", "Rai Neto"];
 

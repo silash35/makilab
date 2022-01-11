@@ -1,0 +1,12 @@
+@use "media" as m;
+
+%flex {
+  display: flex;
+
+  align-items: center;
+  gap: 16px;
+
+  @include m.forMedium() {
+    display: contents;
+  }
+}

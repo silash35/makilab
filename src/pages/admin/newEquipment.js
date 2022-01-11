@@ -1,7 +1,8 @@
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 
-import EquipmentForm from "/src/components/equipmentForm";
+import EquipmentInputs from "/src/components/equipmentInputs";
+import Form from "/src/components/form";
 import Header from "/src/components/header";
 
 function NewEquipment() {
@@ -14,7 +15,7 @@ function NewEquipment() {
       <Header />
 
       <main>
-        <EquipmentForm />
+        <Form Inputs={EquipmentInputs} URL="/api/admin/equipments" title="Cadastrar Equipamento" />
       </main>
     </>
   );

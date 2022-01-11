@@ -1,14 +1,10 @@
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
-import ClientInputs from "./clientInputs";
-import styles from "./equipmentForm.module.scss";
-import EquipmentInputs from "./equipmentInputs";
+import styles from "./Form.module.scss";
 
-export default function EquipmentForm() {
-  const [clientSelectorValue, setClientSelectorValue] = useState({});
-  const [dateValue, setDateValue] = useState(new Date());
+export default function Form({ Inputs, URL, title }) {
   const router = useRouter();
   const form = useRef(null);
 
@@ -19,14 +15,12 @@ export default function EquipmentForm() {
 
     const data = Object.fromEntries(formData);
 
-    data.createdAt = dateValue;
-
     const request = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    const res = await fetch("/api/admin/equipments", request);
+    const res = await fetch(URL, request);
 
     if (res.status === 200) {
       router.push("/admin");
@@ -38,16 +32,13 @@ export default function EquipmentForm() {
 
   return (
     <form className={styles.form} ref={form} onSubmit={handleSubmit}>
-      <h1>Cadastrar Equipamento</h1>
+      <h1>{title}</h1>
 
-      <h2>Dados do Cliente</h2>
-      <ClientInputs selectorValue={clientSelectorValue} setSelectorValue={setClientSelectorValue} />
-
-      <h2>Dados do Equipamento</h2>
-      <EquipmentInputs dateValue={dateValue} setDateValue={setDateValue} />
+      <Inputs />
 
       <p>*Campo Obrigatório</p>
       <p>**Insira apenas números</p>
+
       <Button variant="contained" fullWidth color="primary" size="large" type="submit">
         Cadastrar
       </Button>
