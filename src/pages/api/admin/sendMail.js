@@ -1,88 +1,71 @@
-import cookie from "cookie";
-import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 
-export default async function Equipments(req, res) {
-  const methods = {
-    async POST() {
-      try {
-        let transporter = nodemailer.createTransport({
-          host: process.env.EMAIL_HOST,
-          port: 587,
-          secure: false,
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_USER,
-          },
-        });
+import apiFactory from "/src/utils/apiFactory";
 
-        // send mail with defined transport object
-        await transporter.sendMail({
-          from: `"Makilab Serviços" <${process.env.EMAIL_USER}`,
-          to: `${process.env.EMAIL_USER}, ${req.body.to}`,
-          subject: "Atualizações sobre o seu equipamento",
-          text: req.body.text,
-          html: `<div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: sans-serif;
-          "
-          class="flex"
-        >
-          <img
-            src="https://track.makilab.com.br/logo.png"
-            alt="Logo da Makilab Serviços"
-            style="width: 40vw"
-          />
+const methods = {
+  async POST(req, res) {
+    try {
+      let transporter = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_USER,
+        },
+      });
 
-          <h1 style="margin: 0; padding: 8vw; text-align: center">Atualizações sobre o seu produto</h1>
+      // send mail with defined transport object
+      await transporter.sendMail({
+        from: `"Makilab Serviços" <${process.env.EMAIL_USER}`,
+        to: `${process.env.EMAIL_USER}, ${req.body.to}`,
+        subject: "Atualizações sobre o seu equipamento",
+        text: req.body.text,
+        html: `<div
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-family: sans-serif;
+        "
+        class="flex"
+      >
+        <img
+          src="https://track.makilab.com.br/logo.png"
+          alt="Logo da Makilab Serviços"
+          style="width: 40vw"
+        />
 
-          <div style="width: 100%; color: white; background-color: red">
-            <p style="text-align: center; color: white; background-color: red; padding: 8vw; margin: 0">
-              ${req.body.text}
-            </p>
-          </div>
+        <h1 style="margin: 0; padding: 8vw; text-align: center">Atualizações sobre o seu produto</h1>
 
-          <a href="https://api.whatsapp.com/send?phone=5571985447786">
-            <img
-              src="https://track.makilab.com.br/whatsapp.png"
-              alt="Whatsapp da Makilab Serviços"
-              style="width: 30vw; margin: 8vw"
-          /></a>
-
-          <p style="text-align: center; color: gray; margin: 0">
-            🤖 Essa mensagem foi enviada automaticamente por um serviço em fase de teste. Por isso o seu
-            feedback é importante para nós. Qualquer problema reporte para o nosso WhatsApp.
+        <div style="width: 100%; color: white; background-color: red">
+          <p style="text-align: center; color: white; background-color: red; padding: 8vw; margin: 0">
+            ${req.body.text}
           </p>
-        </div>`,
-        });
+        </div>
 
-        res.statusCode = 200;
-        res.end("ok");
-      } catch (e) {
-        res.statusCode = 400;
-        res.end({ error: String(e) });
-      }
-    },
-  };
+        <a href="https://api.whatsapp.com/send?phone=5571985447786">
+          <img
+            src="https://track.makilab.com.br/whatsapp.png"
+            alt="Whatsapp da Makilab Serviços"
+            style="width: 30vw; margin: 8vw"
+        /></a>
 
-  try {
-    // Verify if user is authenticated
-    const cookies = cookie.parse(req.headers.cookie);
-    jwt.verify(cookies?.[process.env.COOKIE_NAME], process.env.PASSWORD);
+        <p style="text-align: center; color: gray; margin: 0">
+          🤖 Essa mensagem foi enviada automaticamente por um serviço em fase de teste. Por isso o seu
+          feedback é importante para nós. Qualquer problema reporte para o nosso WhatsApp.
+        </p>
+      </div>`,
+      });
 
-    // Run requestedMethod
-    const requestedMethod = methods[req.method];
-    if (requestedMethod != undefined) {
-      await requestedMethod();
-    } else {
-      res.statusCode = 404;
+      res.statusCode = 200;
+      res.end("ok");
+    } catch (e) {
+      res.statusCode = 400;
+      res.end({ error: String(e) });
     }
-  } catch (err) {
-    res.statusCode = 401;
-    res.end("Unauthorized");
-  }
-}
+  },
+};
+
+export default apiFactory(methods, true);
