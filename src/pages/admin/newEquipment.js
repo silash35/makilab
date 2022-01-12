@@ -15,7 +15,7 @@ function NewEquipment() {
       <Header />
 
       <main>
-        <Form Inputs={EquipmentInputs} URL="/api/admin/equipments" title="Cadastrar Equipamento" />
+        <Form Inputs={EquipmentInputs} URL="/api/admin/clients" title="Cadastrar Equipamento" />
       </main>
     </>
   );

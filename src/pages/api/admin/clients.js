@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
 import apiFactory from "/src/utils/apiFactory";
-import parseClient from "/src/utils/parseClient";
+
+import { filterDate, filterNumber, filterString } from "./filters";
 
 const prisma = new PrismaClient();
 
@@ -25,9 +26,21 @@ const methods = {
 
   async POST(req, res) {
     try {
-      await prisma.client.create({
-        data: parseClient(req.body),
-      });
+      const body = req.body;
+
+      if (Number(body.clientID) == 0) {
+        await prisma.client.create({
+          data: parseClient(body),
+        });
+      } else {
+        await prisma.client.update({
+          where: {
+            id: Number(body.clientID),
+          },
+          data: parseClient(body),
+        });
+      }
+
       res.statusCode = 200;
       res.end();
     } catch (e) {
@@ -35,21 +48,40 @@ const methods = {
       res.json({ error: String(e) });
     }
   },
-
-  async PUT(req, res) {
-    try {
-      await prisma.equipment.update({
-        where: {
-          id: req.body.id,
-        },
-        data: parseClient(req.body.data),
-      });
-      res.statusCode = 200;
-      res.end();
-    } catch (e) {
-      res.end(String(e));
-    }
-  },
 };
 
 export default apiFactory(methods, true);
+
+const parseClient = (body) => {
+  const client = {
+    name: filterString(body.name),
+    email: filterString(body.email),
+    cpfOrCnpj: filterString(body.cpfOrCnpj),
+    address: filterString(body.address),
+    zip: filterNumber(body.zip),
+    whatsapp: filterNumber(body.whatsapp),
+    tel: filterNumber(body.tel),
+  };
+
+  if (body.equipment != undefined) {
+    client.equipment = {
+      create: {
+        OS_number: filterNumber(body.OS_number),
+        name: filterString(body.equipment),
+        brand: filterString(body.brand),
+        model: filterString(body.model),
+        product_number: filterString(body.product_number),
+        batchOrImei: filterString(body.batchOrImei),
+        accessories: filterString(body.accessories),
+        productCondition: filterString(body.productCondition),
+        createdAt: filterDate(body.createdAt),
+        listOfServices: filterString(body.listOfServices),
+        attendedBy: filterString(body.attendedBy),
+        attendedOn: filterString(body.attendedOn),
+        isUnderWarranty: body.isUnderWarranty === "on",
+      },
+    };
+  }
+
+  return client;
+};
