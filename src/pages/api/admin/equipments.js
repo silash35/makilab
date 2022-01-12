@@ -30,32 +30,18 @@ export default async function Equipments(req, res) {
       try {
         const body = req.body;
 
-        /*
-        await prisma.client.upsert({
-          data: parseNewEquipment(body),
-        });
-
-        await prisma.equipment.create({
-          data: parseNewEquipment(body),
-        });
-
-        if (body.clientID != 0) {
-          prisma.client.update({
+        if (Number(body.clientID) == 0) {
+          await prisma.client.create({
+            data: parseOwner(body),
+          });
+        } else {
+          await prisma.client.update({
             where: {
-              id: body.clientID,
+              id: Number(body.clientID),
             },
-            data: parseClient({
-              name: body.name,
-              email: body.email,
-              cpfOrCnpj: body.cpfOrCnpj,
-              address: body.address,
-              zip: body.zip,
-              whatsapp: body.whatsapp,
-              tel: body.tel,
-            }),
+            data: parseOwner(body),
           });
         }
-        */
 
         res.statusCode = 200;
         res.end();
@@ -99,47 +85,36 @@ export default async function Equipments(req, res) {
   }
 }
 
-const parseNewEquipment = (body) => {
-  let owner = {};
+const parseOwner = (body) => {
+  const owner = parseClient({
+    name: body.name,
+    email: body.email,
+    cpfOrCnpj: body.cpfOrCnpj,
+    address: body.address,
+    zip: body.zip,
+    whatsapp: body.whatsapp,
+    tel: body.tel,
+  });
 
-  if (body.clientID == 0) {
-    const client = parseClient({
-      id: body.clientID,
-      name: body.name,
-      email: body.email,
-      cpfOrCnpj: body.cpfOrCnpj,
-      address: body.address,
-      zip: body.zip,
-      whatsapp: body.whatsapp,
-      tel: body.tel,
-    });
-
-    client.id = null;
-    owner.create = client;
-  } else {
-    owner.connect = {
-      id: body.clientID,
-    };
-  }
-
-  const newBody = {
-    OS_number: filterNumber(body.OS_number),
-    name: filterString(body.equipment),
-    brand: filterString(body.brand),
-    model: filterString(body.model),
-    product_number: filterString(body.product_number),
-    batchOrImei: filterString(body.batchOrImei),
-    accessories: filterString(body.accessories),
-    productCondition: filterString(body.productCondition),
-    createdAt: filterDate(body.createdAt),
-    listOfServices: filterString(body.listOfServices),
-    attendedBy: filterString(body.attendedBy),
-    attendedOn: filterString(body.attendedOn),
-    isUnderWarranty: body.isUnderWarranty === "on",
-    owner: owner,
+  owner.equipment = {
+    create: {
+      OS_number: filterNumber(body.OS_number),
+      name: filterString(body.equipment),
+      brand: filterString(body.brand),
+      model: filterString(body.model),
+      product_number: filterString(body.product_number),
+      batchOrImei: filterString(body.batchOrImei),
+      accessories: filterString(body.accessories),
+      productCondition: filterString(body.productCondition),
+      createdAt: filterDate(body.createdAt),
+      listOfServices: filterString(body.listOfServices),
+      attendedBy: filterString(body.attendedBy),
+      attendedOn: filterString(body.attendedOn),
+      isUnderWarranty: body.isUnderWarranty === "on",
+    },
   };
 
-  return newBody;
+  return owner;
 };
 
 const processEditEquipment = (data) => {
