@@ -6,6 +6,14 @@ const filterString = (string) => {
   }
 };
 
+const filterDate = (string) => {
+  if (filterString(string) === null) {
+    return null;
+  } else {
+    return new Date(string);
+  }
+};
+
 const filterNumber = (string) => {
   if (filterString(string) === null) {
     return null;
@@ -14,4 +22,4 @@ const filterNumber = (string) => {
   }
 };
 
-export { filterNumber, filterString };
+export { filterDate, filterNumber, filterString };

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
 
-import { filterNumber, filterString } from "/src/utils/filters";
+import { filterDate, filterNumber, filterString } from "/src/utils/filters";
 import parseClient from "/src/utils/parseClient";
 
 const prisma = new PrismaClient();
@@ -28,9 +28,35 @@ export default async function Equipments(req, res) {
 
     async POST() {
       try {
-        await prisma.equipment.create({
-          data: parseNewEquipment(req.body),
+        const body = req.body;
+
+        /*
+        await prisma.client.upsert({
+          data: parseNewEquipment(body),
         });
+
+        await prisma.equipment.create({
+          data: parseNewEquipment(body),
+        });
+
+        if (body.clientID != 0) {
+          prisma.client.update({
+            where: {
+              id: body.clientID,
+            },
+            data: parseClient({
+              name: body.name,
+              email: body.email,
+              cpfOrCnpj: body.cpfOrCnpj,
+              address: body.address,
+              zip: body.zip,
+              whatsapp: body.whatsapp,
+              tel: body.tel,
+            }),
+          });
+        }
+        */
+
         res.statusCode = 200;
         res.end();
       } catch (e) {
@@ -74,28 +100,25 @@ export default async function Equipments(req, res) {
 }
 
 const parseNewEquipment = (body) => {
-  const client = parseClient({
-    id: body.clientID,
-    name: body.name,
-    email: body.email,
-    cpfOrCnpj: body.cpfOrCnpj,
-    address: body.address,
-    zip: body.zip,
-    whatsapp: body.whatsapp,
-    tel: body.tel,
-  });
-
   let owner = {};
 
-  if (client.id == 0) {
-    client.id = undefined;
+  if (body.clientID == 0) {
+    const client = parseClient({
+      id: body.clientID,
+      name: body.name,
+      email: body.email,
+      cpfOrCnpj: body.cpfOrCnpj,
+      address: body.address,
+      zip: body.zip,
+      whatsapp: body.whatsapp,
+      tel: body.tel,
+    });
+
+    client.id = null;
     owner.create = client;
   } else {
-    owner.update = {
-      where: {
-        id: client.id,
-      },
-      data: client,
+    owner.connect = {
+      id: body.clientID,
     };
   }
 
@@ -104,9 +127,15 @@ const parseNewEquipment = (body) => {
     name: filterString(body.equipment),
     brand: filterString(body.brand),
     model: filterString(body.model),
+    product_number: filterString(body.product_number),
+    batchOrImei: filterString(body.batchOrImei),
+    accessories: filterString(body.accessories),
+    productCondition: filterString(body.productCondition),
+    createdAt: filterDate(body.createdAt),
+    listOfServices: filterString(body.listOfServices),
     attendedBy: filterString(body.attendedBy),
+    attendedOn: filterString(body.attendedOn),
     isUnderWarranty: body.isUnderWarranty === "on",
-    createdAt: filterString(body.createdAt),
     owner: owner,
   };
 
@@ -115,16 +144,16 @@ const parseNewEquipment = (body) => {
 
 const processEditEquipment = (data) => {
   const newData = {
-    createdAt: filterString(data.createdAt),
-    registeredInManufacturerAt: filterString(data.registeredInManufacturerAt),
-    avalietedAt: filterString(data.avalietedAt),
-    budgetAnsweredAt: filterString(data.budgetAnsweredAt),
-    partsArrivedAt: filterString(data.partsArrivedAt),
-    repairedAt: filterString(data.repairedAt),
-    deliveredToCustomerAt: filterString(data.deliveredToCustomerAt),
+    createdAt: filterDate(data.createdAt),
+    registeredInManufacturerAt: filterDate(data.registeredInManufacturerAt),
+    avalietedAt: filterDate(data.avalietedAt),
+    budgetAnsweredAt: filterDate(data.budgetAnsweredAt),
+    partsArrivedAt: filterDate(data.partsArrivedAt),
+    repairedAt: filterDate(data.repairedAt),
+    deliveredToCustomerAt: filterDate(data.deliveredToCustomerAt),
   };
 
-  if (data.isBudgetApproved === null && filterString(data.budgetAnsweredAt) != null) {
+  if (data.isBudgetApproved === null && filterDate(data.budgetAnsweredAt) != null) {
     newData.isBudgetApproved = false;
   } else {
     newData.isBudgetApproved =
