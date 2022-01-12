@@ -16,6 +16,8 @@ export default function Equipment({ equipment, reload }) {
   const [openRow, setOpenRow] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
 
+  const owner = equipment.owner;
+
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -41,20 +43,16 @@ export default function Equipment({ equipment, reload }) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
+              <Typography variant="h5" gutterBottom component="div">
                 Informações Detalhadas
               </Typography>
 
-              <p>{equipment.accessories ? `Acessórios: ${equipment.accessories}` : undefined}</p>
-              <p>{equipment.batchOrImei ? `Lote ou IMEI: ${equipment.batchOrImei}` : undefined}</p>
+              <Typography variant="h6" gutterBottom component="div">
+                Sobre o Equipamento
+              </Typography>
+              <p>{equipment.batchOrImei && `Lote ou IMEI: ${equipment.batchOrImei}`}</p>
               <p>
-                {equipment.equipment_number
-                  ? `Numero de Serie: ${equipment.equipment_number}`
-                  : undefined}
-              </p>
-              <p>{equipment.attendedBy ? `Atendido Por: ${equipment.attendedBy}` : undefined}</p>
-              <p>
-                {equipment.attendedOn ? `Local de Atendimento: ${equipment.attendedOn}` : undefined}
+                {equipment.equipment_number && `Numero de Serie: ${equipment.equipment_number}`}
               </p>
               <p>
                 {equipment.isUnderWarranty
@@ -74,24 +72,35 @@ export default function Equipment({ equipment, reload }) {
                   }
                 })()}
               </p>
-              <br />
+              <p>{equipment.accessories && `Acessórios: ${equipment.accessories}`}</p>
               <p>
-                {equipment.equipmentCondition
-                  ? `Condição do equipamento: ${equipment.equipmentCondition}`
-                  : undefined}
+                {equipment.equipmentCondition &&
+                  `Condição do equipamento: ${equipment.equipmentCondition}`}
               </p>
               <p>
-                {equipment.problemDescription
-                  ? `Descrição do problema: ${equipment.problemDescription}`
-                  : undefined}
-              </p>
-              <p>
-                {equipment.listOfServices
-                  ? `Lista de serviços: ${equipment.listOfServices}`
-                  : undefined}
+                {equipment.problemDescription &&
+                  `Descrição do problema: ${equipment.problemDescription}`}
               </p>
 
-              {equipment.owner.email ? <SendMail equipment={equipment} /> : undefined}
+              <Typography variant="h6" gutterBottom component="div">
+                Sobre o Atendimento
+              </Typography>
+              <p>{equipment.attendedBy && `Atendido Por: ${equipment.attendedBy}`}</p>
+              <p>{equipment.attendedOn && `Local de Atendimento: ${equipment.attendedOn}`}</p>
+              <p>{equipment.listOfServices && `Lista de serviços: ${equipment.listOfServices}`}</p>
+
+              <Typography variant="h6" gutterBottom component="div">
+                Sobre o Cliente
+              </Typography>
+              <p>{owner.name && `Nome: ${owner.name}`}</p>
+              <p>{owner.email && `Email: ${owner.email}`}</p>
+              <p>{owner.address && `Endereço: ${owner.address}`}</p>
+              <p>{owner.zip && `CEP: ${owner.zip}`}</p>
+              <p>{owner.whatsapp && `WhatsApp: ${owner.whatsapp}`}</p>
+              <p>{owner.tel && `Telefone: ${owner.tel}`}</p>
+              <p>{owner.cpfOrCnpj && `CPF: ${owner.cpfOrCnpj}`}</p>
+
+              {owner.email && <SendMail equipment={equipment} />}
             </Box>
           </Collapse>
         </TableCell>
