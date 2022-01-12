@@ -25,7 +25,7 @@ export default function CollapsibleTable({ equipments, reload }) {
         </TableHead>
         <TableBody>
           {equipments.map((equipment) => (
-            <Equipment key={equipment.OS_number} equipment={equipment} reload={reload} />
+            <Equipment key={equipment.id} equipment={equipment} reload={reload} />
           ))}
         </TableBody>
       </Table>

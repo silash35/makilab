@@ -17,13 +17,6 @@ export default function EquipmentInputs({ dateValue, setDateValue }) {
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
   return (
     <>
-      <TextField
-        name="OS_number"
-        label="N° da Ordem de Serviço"
-        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-        required
-        {...common}
-      />
       <TextField name="equipment" label="Equipamento" required {...common} />
       <div className={styles.flex}>
         <TextField name="brand" label="Marca" {...common} />

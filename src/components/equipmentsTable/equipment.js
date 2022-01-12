@@ -25,7 +25,7 @@ export default function Equipment({ equipment, reload }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {equipment.OS_number}
+          {equipment.id}
         </TableCell>
         <TableCell align="right">{equipment.name}</TableCell>
         <TableCell align="right">{equipment.brand}</TableCell>

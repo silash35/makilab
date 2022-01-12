@@ -11,7 +11,7 @@ export default async function product(req, res) {
 
       const equipment = await prisma.equipment.findUnique({
         where: {
-          OS_number: search,
+          id: search,
         },
       });
       if (equipment === null) {
@@ -32,6 +32,8 @@ export default async function product(req, res) {
 
 const filterEquipment = (equipment) => {
   const filteredEquipment = {};
+
+  filteredEquipment.id = equipment.id;
 
   filteredEquipment.name = `${equipment.name}  ${removeNull(equipment.brand)}  ${removeNull(
     equipment.model

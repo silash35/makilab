@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import apiFactory from "/src/utils/apiFactory";
-
-import { filterDate, filterNumber, filterString } from "./filters";
+import { filterDate, filterNumber, filterString } from "/src/utils/filters";
 
 const prisma = new PrismaClient();
 
@@ -66,7 +65,6 @@ const parseClient = (body) => {
   if (body.equipment != undefined) {
     client.equipment = {
       create: {
-        OS_number: filterNumber(body.OS_number),
         name: filterString(body.equipment),
         brand: filterString(body.brand),
         model: filterString(body.model),
