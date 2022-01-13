@@ -1,8 +1,15 @@
 html,
 body {
+  height: 100%;
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
+}
+
+#__next {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 
 a,

@@ -44,7 +44,7 @@ function EditEquipments() {
 
       <Header />
 
-      <main style={{ margin: "10vh 5vw" }}>
+      <main style={{ padding: "10vh 5vw" }}>
         {equipments ? (
           <EquipmentsTable equipments={equipments} reload={load} />
         ) : (

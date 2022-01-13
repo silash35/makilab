@@ -12,7 +12,7 @@ export default function TrackPage() {
 
       <Header />
 
-      <main>
+      <main style={{ display: "contents" }}>
         <Track />
       </main>
     </>
