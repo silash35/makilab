@@ -8,15 +8,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-export default function SendMail({ equipment, email = null }) {
+export default function SendMail({ client, email = null }) {
   const [openDialog, setOpenDialog] = useState(false);
-  const [text, setText] = useState(email === null ? equipment.defaultEmail : email);
+  const [text, setText] = useState(email === null ? client.defaultEmail : email);
 
   const sendData = async () => {
     const request = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to: equipment.owner.email, text: text }),
+      body: JSON.stringify({ to: client.email, text: text }),
     };
     const res = await fetch("/api/admin/sendMail", request);
 
@@ -38,7 +38,7 @@ export default function SendMail({ equipment, email = null }) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          Confirmar Envio do Email para {equipment.owner.email}
+          Confirmar Envio do Email para {client.email}
         </DialogTitle>
         <DialogContent>
           {text === null && (

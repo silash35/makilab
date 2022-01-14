@@ -49,7 +49,7 @@ export default function processEquipment(equipment) {
       }
     })();
 
-    equipment.defaultEmail = null;
+    equipment.owner.defaultEmail = null;
     let defaultEmailStart = `Prezado(a) ${equipment.owner.name}, seu produto (${equipment.name} ${equipment.brand}) de OS ${equipment.id}`;
 
     switch (statusNumber) {
@@ -61,7 +61,7 @@ export default function processEquipment(equipment) {
         break;
       case 20:
         equipment.statusName = "Aguardando Aprovação do Orçamento";
-        equipment.defaultEmail = `${defaultEmailStart} foi avaliado e está aguardando a aprovação do orçamento. Confira seu Whatsapp!`;
+        equipment.owner.defaultEmail = `${defaultEmailStart} foi avaliado e está aguardando a aprovação do orçamento. Confira seu Whatsapp!`;
         break;
       case 30:
         equipment.statusName = "Aguardando Peças";
@@ -74,7 +74,7 @@ export default function processEquipment(equipment) {
         break;
       case 60:
         equipment.statusName = "Aguardando Retirada";
-        equipment.defaultEmail = `${defaultEmailStart} está pronto para retirada. Nescessario trazer comprovante da Ordem de Serviço`;
+        equipment.owner.defaultEmail = `${defaultEmailStart} está pronto para retirada. Nescessario trazer comprovante da Ordem de Serviço`;
         break;
       case 70:
         equipment.statusName = "Finalizado";

@@ -12,6 +12,8 @@ function EditEquipments() {
   const [equipments, setEquipments] = useState(null);
 
   const load = async () => {
+    setEquipments(null);
+
     const res = await fetch("/api/admin/equipments", {
       method: "GET",
       headers: {

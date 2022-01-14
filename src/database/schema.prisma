@@ -30,7 +30,7 @@ model Equipment {
   name               String
   brand              String?
   model              String?
-  product_number     String?
+  productNumber     String?
   batchOrImei        String?
   problemDescription String?
   productCondition   String?

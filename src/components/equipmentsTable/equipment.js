@@ -9,6 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
+import EditDialog from "../editDialog";
+import EquipmentInputs from "../equipmentInputs/equipmentData";
 import SendMail from "../sendMail";
 import UpdateStatusDialog from "../updateStatusDialog";
 
@@ -100,7 +102,13 @@ export default function Equipment({ equipment, reload }) {
               <p>{owner.tel && `Telefone: ${owner.tel}`}</p>
               <p>{owner.cpfOrCnpj && `CPF: ${owner.cpfOrCnpj}`}</p>
 
-              {owner.email && <SendMail equipment={equipment} />}
+              {owner.email && <SendMail client={equipment.owner} />}
+              <EditDialog
+                Inputs={<EquipmentInputs equipment={equipment} />}
+                URL={"/api/admin/equipments"}
+                title="Editar Equipamento"
+                reload={reload}
+              />
             </Box>
           </Collapse>
         </TableCell>

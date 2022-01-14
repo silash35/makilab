@@ -5,7 +5,6 @@ import EquipmentData from "./equipmentData";
 
 export default function EquipmentForm() {
   const [clientSelectorValue, setClientSelectorValue] = useState({});
-  const [dateValue, setDateValue] = useState(new Date());
 
   return (
     <>
@@ -13,7 +12,7 @@ export default function EquipmentForm() {
       <ClientData selectorValue={clientSelectorValue} setSelectorValue={setClientSelectorValue} />
 
       <h2>Dados do Equipamento</h2>
-      <EquipmentData dateValue={dateValue} setDateValue={setDateValue} />
+      <EquipmentData />
     </>
   );
 }

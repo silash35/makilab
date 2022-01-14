@@ -68,7 +68,7 @@ const parseClient = (body) => {
         name: filterString(body.equipment),
         brand: filterString(body.brand),
         model: filterString(body.model),
-        product_number: filterString(body.product_number),
+        productNumber: filterString(body.productNumber),
         batchOrImei: filterString(body.batchOrImei),
         accessories: filterString(body.accessories),
         productCondition: filterString(body.productCondition),
