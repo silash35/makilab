@@ -1,3 +1,4 @@
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -44,6 +45,10 @@ export default function EditDialog({ Inputs, URL, title, reload }) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
+        <Alert severity="warning" sx={{ maxWidth: " 90%", margin: "auto" }}>
+          Você está editando uma OS que já foi impressa. Então é recomendado a reimpressão da OS com
+          as novas informações.
+        </Alert>
         <form ref={form} onSubmit={handleSubmit}>
           <DialogContent>{Inputs}</DialogContent>
           <DialogActions>
