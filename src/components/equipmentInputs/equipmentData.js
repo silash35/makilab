@@ -13,7 +13,7 @@ import styles from "./equipmentInputs.module.scss";
 const attendants = ["Rodrigo Ícaro", "Silas Henrique", "Amanda Pimenta", "Rai Neto"];
 const servicePlace = ["Balcão", "Telefone"];
 
-export default function EquipmentInputs({ equipment }) {
+export default function EquipmentInputs({ equipment = {} }) {
   const [dateValue, setDateValue] = useState(new Date(equipment.createdAt));
 
   const common = { variant: "outlined", margin: "normal", fullWidth: true };

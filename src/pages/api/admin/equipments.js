@@ -43,6 +43,7 @@ const methods = {
           attendedBy: filterString(body.attendedBy),
           attendedOn: filterString(body.attendedOn),
           isUnderWarranty: body.isUnderWarranty === "on",
+          wasEdited: true,
         },
       });
       res.statusCode = 200;
