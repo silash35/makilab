@@ -4,9 +4,9 @@ import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-import EquipmentsTable from "/src/components/equipmentsTable";
-import Header from "/src/components/header";
-import processEquipment from "/src/utils/processEquipment";
+import EquipmentsTable from "@/components/equipmentsTable";
+import Header from "@/components/header";
+import processEquipment from "@/utils/processEquipment";
 
 function EditEquipments() {
   const [equipments, setEquipments] = useState(null);

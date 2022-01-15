@@ -1,8 +1,8 @@
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 
-import AdminOptions from "/src/components/adminOptions";
-import Header from "/src/components/header";
+import AdminOptions from "@/components/adminOptions";
+import Header from "@/components/header";
 
 function Admin() {
   return (

@@ -1,6 +1,6 @@
-@use "/src/styles/variables" as v;
-@use "/src/styles/shadow" as s;
-@use "/src/styles/media" as m;
+@use "@/styles/variables" as v;
+@use "@/styles/shadow" as s;
+@use "@/styles/media" as m;
 
 .product {
   margin: 80px;

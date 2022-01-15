@@ -2,7 +2,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
-import ClientInputs from "/src/components/clientInputs";
+import ClientInputs from "@/components/clientInputs";
 
 const novoCliente = { label: "Novo Cliente", id: 0 };
 

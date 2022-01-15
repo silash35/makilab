@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
-import apiFactory from "/src/utils/apiFactory";
-import { filterDate, filterNumber, filterString } from "/src/utils/filters";
+import apiFactory from "@/utils/apiFactory";
+import { filterDate, filterNumber, filterString } from "@/utils/filters";
 
 const prisma = new PrismaClient();
 

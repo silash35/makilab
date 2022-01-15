@@ -1,4 +1,4 @@
-import "../styles/globals.scss";
+import "@/styles/globals.scss";
 
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";

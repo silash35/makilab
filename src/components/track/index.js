@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import processProduct from "/src/utils/processProduct";
+import processProduct from "@/utils/processProduct";
 
 import Product from "./product";
 import styles from "./track.module.scss";

@@ -1,5 +1,5 @@
-@use "/src/styles/variables" as v;
-@use "/src/styles/shadow" as s;
+@use "@/styles/variables" as v;
+@use "@/styles/shadow" as s;
 
 .adminOptions {
   display: flex;

@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-import removeNull from "/src/utils/removeNull";
+import removeNull from "@/utils/removeNull";
 
 const prisma = new PrismaClient();
 

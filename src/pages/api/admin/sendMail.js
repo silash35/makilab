@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-import apiFactory from "/src/utils/apiFactory";
+import apiFactory from "@/utils/apiFactory";
 
 const methods = {
   async POST(req, res) {
