@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import ptBR from "dayjs/locale/pt-br";
 import { useState } from "react";
 
-import styles from "./equipmentInputs.module.scss";
+import styles from "./inputs.module.scss";
 
 const attendants = ["Rodrigo Ícaro", "Silas Henrique", "Amanda Pimenta", "Rai Neto"];
 const servicePlace = ["Balcão", "Telefone"];

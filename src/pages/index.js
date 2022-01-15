@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import Header from "@/components/header";
-import Track from "@/components/track";
+import Header from "@/components/common/header";
+import Track from "@/components/index/track";
 
 export default function TrackPage() {
   return (

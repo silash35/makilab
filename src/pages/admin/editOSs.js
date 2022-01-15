@@ -4,8 +4,8 @@ import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-import EquipmentsTable from "@/components/equipmentsTable";
-import Header from "@/components/header";
+import Header from "@/components/common/header";
+import EquipmentsTable from "@/components/editEquipments/table";
 import processEquipment from "@/utils/processEquipment";
 
 function EditEquipments() {
@@ -41,7 +41,7 @@ function EditEquipments() {
   return (
     <>
       <Head>
-        <title>Editar Ordens de Serviço</title>
+        <title>Gerenciar Ordens de Serviço</title>
       </Head>
 
       <Header />

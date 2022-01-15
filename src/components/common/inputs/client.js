@@ -1,9 +1,9 @@
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
-import styles from "./clientInputs.module.scss";
+import styles from "./inputs.module.scss";
 
-export default function Inputs({ client }) {
+export default function ClientInputs({ client }) {
   const [name, setName] = useState("");
   const handleChangeName = (event) => setName(event.target.value);
 

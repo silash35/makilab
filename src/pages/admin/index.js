@@ -1,10 +1,10 @@
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 
-import AdminOptions from "@/components/adminOptions";
-import Header from "@/components/header";
+import AdminMenu from "@/components/adminMenu";
+import Header from "@/components/common/header";
 
-function Admin() {
+function AdminMenuPage() {
   return (
     <>
       <Head>
@@ -14,13 +14,13 @@ function Admin() {
       <Header />
 
       <main>
-        <AdminOptions />
+        <AdminMenu />
       </main>
     </>
   );
 }
 
-export default withPasswordProtect(Admin, {
+export default withPasswordProtect(AdminMenuPage, {
   loginComponentProps: {
     backUrl: "/",
     logo: "/logo.png",

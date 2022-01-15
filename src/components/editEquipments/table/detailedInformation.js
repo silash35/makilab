@@ -4,10 +4,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-import EditDialog from "../editDialog";
-import EquipmentInputs from "../equipmentInputs/equipmentData";
-import SendMail from "../sendMail";
-import styles from "./equipmentsTable.module.scss";
+import EditDialog from "@/components/common/editDialog";
+import EquipmentInputs from "@/components/common/inputs/equipment";
+import SendMail from "@/components/common/sendMail";
+
+import styles from "./detailedInformation.module.scss";
 
 export default function DetailedInformation({ equipment, reload }) {
   const owner = equipment.owner;

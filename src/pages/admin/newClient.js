@@ -1,9 +1,9 @@
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 
-import ClientInputs from "@/components/clientInputs";
-import Form from "@/components/form";
-import Header from "@/components/header";
+import Form from "@/components/common/form";
+import Header from "@/components/common/header";
+import ClientInputs from "@/components/common/inputs/client";
 
 function NewClient() {
   return (

@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 
-import Dates from "./dates";
+import Dates from "../dates";
 import styles from "./product.module.scss";
 
 export default function Product({ product }) {

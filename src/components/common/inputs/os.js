@@ -2,13 +2,15 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
-import ClientInputs from "@/components/clientInputs";
+import ClientInputs from "@/components/common/inputs/client";
+import EquipmentInputs from "@/components/common/inputs/equipment";
 
 const novoCliente = { label: "Novo Cliente", id: 0 };
 
-export default function ClientData({ selectorValue, setSelectorValue }) {
+export default function OSInputs() {
   const [clients, setClients] = useState([novoCliente]);
   const [selectorInputValue, setSelectorInputValue] = useState(clients[0].label);
+  const [clientSelectorValue, setClientSelectorValue] = useState(clients[0]);
 
   const load = async () => {
     const res = await fetch("/api/admin/clients", {
@@ -34,17 +36,18 @@ export default function ClientData({ selectorValue, setSelectorValue }) {
   };
 
   useEffect(async () => {
-    setSelectorValue(novoCliente);
+    setClientSelectorValue(novoCliente);
     await load();
   }, []);
 
   return (
     <>
+      <h2>Dados do Cliente</h2>
       <Autocomplete
         options={clients}
-        value={selectorValue}
+        value={clientSelectorValue}
         onChange={(e, newValue) => {
-          setSelectorValue(newValue);
+          setClientSelectorValue(newValue);
         }}
         inputValue={selectorInputValue}
         onInputChange={(e, newInputValue) => {
@@ -52,10 +55,11 @@ export default function ClientData({ selectorValue, setSelectorValue }) {
         }}
         renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
+      <input type="hidden" name="clientID" value={clientSelectorValue.id} />
+      <ClientInputs client={clientSelectorValue} />
 
-      <input type="hidden" name="clientID" value={selectorValue.id} />
-
-      <ClientInputs client={selectorValue} />
+      <h2>Dados do Equipamento</h2>
+      <EquipmentInputs />
     </>
   );
 }
