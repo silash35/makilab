@@ -13,10 +13,10 @@ export default function AdminMenu() {
         style={{
           backgroundColor: "#ff9926",
           "&:focus": {
-            backgroundColor: "#ffba6b",
+            backgroundColor: "#ffca5a",
           },
           "&:hover": {
-            backgroundColor: "#ff8800",
+            backgroundColor: "#c66a00",
           },
         }}
       >
@@ -28,10 +28,10 @@ export default function AdminMenu() {
         style={{
           backgroundColor: "#00e4c5",
           "&:focus": {
-            backgroundColor: "#41ffe6",
+            backgroundColor: "#67fff8",
           },
           "&:hover": {
-            backgroundColor: "#1daa97",
+            backgroundColor: "#00b195",
           },
         }}
       >
