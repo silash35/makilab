@@ -8,33 +8,11 @@ export default function AdminMenu() {
     <div className={styles.adminMenu}>
       <BigButton link="admin/newOS">Criar nova Ordem de Serviço</BigButton>
 
-      <BigButton
-        link="admin/editOSs"
-        style={{
-          backgroundColor: "#ff9926",
-          "&:focus": {
-            backgroundColor: "#ffca5a",
-          },
-          "&:hover": {
-            backgroundColor: "#c66a00",
-          },
-        }}
-      >
+      <BigButton link="admin/editOSs" color={styles.orange}>
         Gerenciar Ordens de Serviço
       </BigButton>
 
-      <BigButton
-        link="admin/newClient"
-        style={{
-          backgroundColor: "#00e4c5",
-          "&:focus": {
-            backgroundColor: "#67fff8",
-          },
-          "&:hover": {
-            backgroundColor: "#00b195",
-          },
-        }}
-      >
+      <BigButton link="admin/newClient" color={styles.cyan}>
         Adicionar Cliente
       </BigButton>
 
@@ -46,22 +24,14 @@ export default function AdminMenu() {
   );
 }
 
-function BigButton({ children, style, disabled, component = "a", link }) {
-  const sx = {
-    width: "250px",
-    height: "180px",
-    padding: "16px",
-    margin: "40px",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: "larger",
-    textTransform: "none",
-
-    ...style,
-  };
-
+function BigButton({ children, color, disabled, component = "a", link }) {
   const button = (
-    <Button variant="contained" component={component} sx={sx} disabled={disabled}>
+    <Button
+      variant="contained"
+      component={component}
+      disabled={disabled}
+      className={`${styles.bigButton} ${color}`}
+    >
       {children}
     </Button>
   );

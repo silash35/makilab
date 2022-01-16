@@ -14,6 +14,7 @@ const Span = styled("span")(({ theme }) => ({
 
 export default function Track() {
   const [product, setProduct] = useState(false);
+  const [paperElevation, setPaperElevation] = useState(4);
   const searchInputRef = useRef();
 
   const handleSearch = async (event) => {
@@ -42,14 +43,11 @@ export default function Track() {
       </h1>
       <form onSubmit={handleSearch}>
         <Paper
-          sx={{
-            "&:hover": {
-              boxShadow: 8,
-            },
-          }}
           className={styles.search}
           component="label"
-          elevation={4}
+          elevation={paperElevation}
+          onMouseOver={() => setPaperElevation(8)}
+          onMouseOut={() => setPaperElevation(4)}
         >
           <input type="text" placeholder="Digite a Ordem de serviço" ref={searchInputRef}></input>
           <Button type="submit" variant="contained">

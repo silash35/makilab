@@ -3,3 +3,7 @@
 .flex {
   @extend %flex;
 }
+
+.width {
+  width: 100%;
+}

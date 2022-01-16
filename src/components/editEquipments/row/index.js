@@ -7,8 +7,9 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
+import DetailedInformation from "../detailedInformation";
 import UpdateStatusDialog from "../updateStatusDialog";
-import DetailedInformation from "./detailedInformation";
+import styles from "./row.module.scss";
 
 export default function Equipment({ equipment, reload }) {
   const [openRow, setOpenRow] = useState(false);
@@ -16,7 +17,7 @@ export default function Equipment({ equipment, reload }) {
 
   return (
     <>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow className={styles.row}>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpenRow(!openRow)}>
             {openRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}

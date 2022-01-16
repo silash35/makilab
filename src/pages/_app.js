@@ -57,6 +57,7 @@ const theme = createTheme({
   typography: {
     fontFamily: ["Noto Serif", "serif"].join(","),
   },
+  components: { MuiButton: { styleOverrides: { root: { fontWeight: "bold" } } } },
 });
 
 export default MyApp;

@@ -9,3 +9,33 @@
 
   height: 100%;
 }
+
+a.bigButton {
+  width: 250px;
+  height: 180px;
+  padding: 16px;
+  margin: 40px;
+  text-align: center;
+  font-size: larger;
+  text-transform: none;
+}
+
+a.orange {
+  background-color: #ff9926;
+  &:focus {
+    background-color: #ffca5a;
+  }
+  &:hover {
+    background-color: #c66a00;
+  }
+}
+
+a.cyan {
+  background-color: #00e4c5;
+  &:focus {
+    background-color: #67fff8;
+  }
+  &:hover {
+    background-color: #00b195;
+  }
+}

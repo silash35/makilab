@@ -72,7 +72,7 @@ export default function EquipmentInputs({ equipment = {} }) {
           renderInput={(params) => (
             <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
           )}
-          sx={{ width: "100%" }}
+          className={styles.width}
         />
 
         <Autocomplete
@@ -88,7 +88,7 @@ export default function EquipmentInputs({ equipment = {} }) {
               {...common}
             />
           )}
-          sx={{ width: "100%" }}
+          className={styles.width}
         />
       </div>
       <div className={styles.flex}>

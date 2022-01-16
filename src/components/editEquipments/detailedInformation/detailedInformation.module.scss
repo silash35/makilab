@@ -1,0 +1,22 @@
+@use "@/styles/utils";
+
+.detailedInformation {
+  margin: 16px;
+  max-width: 100vw;
+}
+
+.flex {
+  @extend %flex;
+}
+
+.cardsContainer {
+  margin: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-around;
+
+  & > div {
+    flex-grow: 1;
+  }
+}

@@ -14,21 +14,13 @@ export default function DetailedInformation({ equipment, reload }) {
   const owner = equipment.owner;
 
   return (
-    <Box sx={{ margin: 2, maxWidth: "100vw" }}>
+    <Box className={styles.detailedInformation}>
       <Typography variant="h5" gutterBottom component="div">
         Informações Detalhadas
       </Typography>
 
-      <Box
-        sx={{
-          margin: 2,
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 2,
-          justifyContent: "space-around",
-        }}
-      >
-        <Card variant="outlined" sx={{ flexGrow: 1 }}>
+      <Box className={styles.cardsContainer}>
+        <Card variant="outlined">
           <CardContent>
             <Typography variant="h6" gutterBottom component="div">
               Sobre o Equipamento
@@ -66,7 +58,7 @@ export default function DetailedInformation({ equipment, reload }) {
           </CardContent>
         </Card>
 
-        <Card variant="outlined" sx={{ flexGrow: 1 }}>
+        <Card variant="outlined">
           <CardContent>
             <Typography variant="h6" gutterBottom component="div">
               Sobre o Cliente
@@ -81,7 +73,7 @@ export default function DetailedInformation({ equipment, reload }) {
           </CardContent>
         </Card>
 
-        <Card variant="outlined" sx={{ flexGrow: 1 }}>
+        <Card variant="outlined">
           <CardContent>
             <Typography variant="h6" gutterBottom component="div">
               Sobre o Atendimento

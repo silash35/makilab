@@ -7,6 +7,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useRef } from "react";
 
+import styles from "./editDialog.module.scss";
+
 export default function EditDialog({ Inputs, URL, title, reload }) {
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -45,7 +47,7 @@ export default function EditDialog({ Inputs, URL, title, reload }) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-        <Alert severity="warning" sx={{ maxWidth: " 90%", margin: "auto" }}>
+        <Alert severity="warning" className={styles.alert}>
           Você está editando uma OS que já foi impressa. Então é recomendado a reimpressão da OS com
           as novas informações.
         </Alert>
