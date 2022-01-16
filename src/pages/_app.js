@@ -48,9 +48,9 @@ function MyApp(props) {
 const theme = createTheme({
   palette: {
     primary: {
-      light: "#cf0707",
+      light: "#fb4c2e",
       main: "#c00000",
-      dark: "#7c0e0e",
+      dark: "#880000",
       contrastText: "#fff",
     },
   },

@@ -55,7 +55,6 @@ function BigButton({ children, style, disabled, component = "a", link }) {
     textAlign: "center",
     fontWeight: "bold",
     fontSize: "larger",
-    borderRadius: "16px",
     textTransform: "none",
 
     ...style,

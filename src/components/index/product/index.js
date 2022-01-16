@@ -1,5 +1,6 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import { blue, green } from "@mui/material/colors";
+import Paper from "@mui/material/Paper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
@@ -36,7 +37,7 @@ export default function Product({ product }) {
   });
 
   return (
-    <section className={styles.product}>
+    <Paper elevation={5} className={styles.product} component="section">
       <h2>{product.name}</h2>
 
       <ThemeProvider theme={theme}>
@@ -70,6 +71,6 @@ export default function Product({ product }) {
           </a>
         </Link>
       </div>
-    </section>
+    </Paper>
   );
 }

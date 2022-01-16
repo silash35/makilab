@@ -1,9 +1,16 @@
+import { Button } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 import { useRef, useState } from "react";
 
 import processProduct from "@/utils/processProduct";
 
 import Product from "../product";
 import styles from "./track.module.scss";
+
+const Span = styled("span")(({ theme }) => ({
+  color: theme.palette.primary.main,
+}));
 
 export default function Track() {
   const [product, setProduct] = useState(false);
@@ -31,13 +38,24 @@ export default function Track() {
   return (
     <article className={styles.track}>
       <h1>
-        Verifique o status do seu <span>produto</span>
+        Verifique o status do seu <Span>produto</Span>
       </h1>
       <form onSubmit={handleSearch}>
-        <label className={styles.search}>
+        <Paper
+          sx={{
+            "&:hover": {
+              boxShadow: 8,
+            },
+          }}
+          className={styles.search}
+          component="label"
+          elevation={4}
+        >
           <input type="text" placeholder="Digite a Ordem de serviço" ref={searchInputRef}></input>
-          <button type="submit">Pesquisar</button>
-        </label>
+          <Button type="submit" variant="contained">
+            Pesquisar
+          </Button>
+        </Paper>
       </form>
 
       <Product product={product} />

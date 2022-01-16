@@ -1,16 +1,12 @@
 @use "@/styles/variables" as v;
-@use "@/styles/shadow" as s;
 @use "@/styles/media" as m;
 
 .product {
   margin: 80px;
   padding: 40px;
-  border-radius: v.$radius;
 
   width: 1200px;
   max-width: 90vw;
-
-  @include s.box_shadow(3);
 
   h2 {
     text-align: center;
