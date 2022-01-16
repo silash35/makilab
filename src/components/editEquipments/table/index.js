@@ -5,12 +5,17 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Toolbar from "@mui/material/Toolbar";
 
 import Equipment from "../row";
+import styles from "./table.module.scss";
 
 export default function CollapsibleTable({ equipments, reload }) {
   return (
     <TableContainer component={Paper}>
+      <Toolbar>
+        <h1 className={styles.title}>Ordens de Serviço</h1>
+      </Toolbar>
       <Table>
         <TableHead>
           <TableRow>

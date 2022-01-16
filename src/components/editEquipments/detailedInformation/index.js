@@ -2,7 +2,6 @@ import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 
 import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
@@ -17,16 +16,12 @@ export default function DetailedInformation({ equipment, reload }) {
 
   return (
     <Box className={styles.detailedInformation}>
-      <Typography variant="h5" gutterBottom component="div">
-        Informações Detalhadas
-      </Typography>
+      <h2>Informações Detalhadas</h2>
 
       <Box className={styles.cardsContainer}>
         <Card variant="outlined">
           <CardContent>
-            <Typography variant="h6" gutterBottom component="div">
-              Sobre o Equipamento
-            </Typography>
+            <h3>Sobre o Equipamento</h3>
             <p>{equipment.batchOrImei && `Lote ou IMEI: ${equipment.batchOrImei}`}</p>
             <p>{equipment.equipment_number && `Numero de Serie: ${equipment.equipment_number}`}</p>
             <p>
@@ -62,9 +57,7 @@ export default function DetailedInformation({ equipment, reload }) {
 
         <Card variant="outlined">
           <CardContent>
-            <Typography variant="h6" gutterBottom component="div">
-              Sobre o Cliente
-            </Typography>
+            <h3>Sobre o Cliente</h3>
             <p>{owner.name && `Nome: ${owner.name}`}</p>
             <p>{owner.email && `Email: ${owner.email}`}</p>
             <p>{owner.address && `Endereço: ${owner.address}`}</p>
@@ -77,9 +70,7 @@ export default function DetailedInformation({ equipment, reload }) {
 
         <Card variant="outlined">
           <CardContent>
-            <Typography variant="h6" gutterBottom component="div">
-              Sobre o Atendimento
-            </Typography>
+            <h3>Sobre o Atendimento</h3>
             <p>{equipment.attendedBy && `Atendido Por: ${equipment.attendedBy}`}</p>
             <p>{equipment.attendedOn && `Local de Atendimento: ${equipment.attendedOn}`}</p>
             <p>{equipment.listOfServices && `Lista de serviços: ${equipment.listOfServices}`}</p>
