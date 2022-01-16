@@ -1,9 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-
+import prisma from "@/database/prisma";
 import apiFactory from "@/utils/apiFactory";
 import { filterDate, filterString } from "@/utils/filters";
-
-const prisma = new PrismaClient();
 
 const methods = {
   async GET(req, res) {
@@ -60,6 +57,20 @@ const methods = {
           id: req.body.id,
         },
         data: processUpdateEquipment(req.body.data),
+      });
+      res.statusCode = 200;
+      res.end();
+    } catch (e) {
+      res.end(String(e));
+    }
+  },
+
+  async DELETE(req, res) {
+    try {
+      await prisma.equipment.delete({
+        where: {
+          id: req.body.id,
+        },
       });
       res.statusCode = 200;
       res.end();

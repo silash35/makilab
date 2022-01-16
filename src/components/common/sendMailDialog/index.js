@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-export default function SendMail({ client, email = null }) {
+export default function SendMailDialog({ client, email = null }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [text, setText] = useState(email === null ? client.defaultEmail : email);
 
@@ -29,8 +29,10 @@ export default function SendMail({ client, email = null }) {
   };
 
   return (
-    <section>
-      <Button onClick={() => setOpenDialog(true)}>Enviar Email</Button>
+    <>
+      <Button variant="outlined" onClick={() => setOpenDialog(true)}>
+        Enviar Email
+      </Button>
 
       <Dialog
         open={openDialog}
@@ -69,6 +71,6 @@ export default function SendMail({ client, email = null }) {
           </Button>
         </DialogActions>
       </Dialog>
-    </section>
+    </>
   );
 }

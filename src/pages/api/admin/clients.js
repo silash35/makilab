@@ -1,9 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-
+import prisma from "@/database/prisma";
 import apiFactory from "@/utils/apiFactory";
 import { filterDate, filterNumber, filterString } from "@/utils/filters";
-
-const prisma = new PrismaClient();
 
 const methods = {
   async GET(req, res) {

@@ -4,10 +4,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
+import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
 import EquipmentInputs from "@/components/common/inputs/equipment";
-import SendMail from "@/components/common/sendMail";
+import SendMailDialog from "@/components/common/sendMailDialog";
 
+import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./detailedInformation.module.scss";
 
 export default function DetailedInformation({ equipment, reload }) {
@@ -86,13 +88,20 @@ export default function DetailedInformation({ equipment, reload }) {
       </Box>
 
       <div className={styles.flex}>
-        {owner.email && <SendMail client={equipment.owner} />}
+        <DeleteDialog
+          id={equipment.id}
+          URL={"/api/admin/equipments"}
+          name={`a OS ${equipment.id}`}
+          reload={reload}
+        />
+        {owner.email && <SendMailDialog client={equipment.owner} />}
         <EditDialog
           Inputs={<EquipmentInputs equipment={equipment} />}
           URL={"/api/admin/equipments"}
           title="Editar Equipamento"
           reload={reload}
         />
+        <UpdateStatusDialog equipment={equipment} reload={reload} />
       </div>
     </Box>
   );

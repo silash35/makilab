@@ -1,6 +1,5 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Button from "@mui/material/Button";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import TableCell from "@mui/material/TableCell";
@@ -13,7 +12,6 @@ import styles from "./row.module.scss";
 
 export default function Equipment({ equipment, reload }) {
   const [openRow, setOpenRow] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false);
 
   return (
     <>
@@ -31,9 +29,7 @@ export default function Equipment({ equipment, reload }) {
         <TableCell align="right">{equipment.model}</TableCell>
         <TableCell align="right">{equipment.statusName}</TableCell>
         <TableCell align="right">
-          <Button variant="contained" onClick={() => setOpenDialog(true)}>
-            Atualizar Status
-          </Button>
+          <UpdateStatusDialog reload={reload} equipment={equipment} />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -43,13 +39,6 @@ export default function Equipment({ equipment, reload }) {
           </Collapse>
         </TableCell>
       </TableRow>
-
-      <UpdateStatusDialog
-        open={openDialog}
-        handleClose={() => setOpenDialog(false)}
-        reload={reload}
-        equipment={equipment}
-      />
     </>
   );
 }

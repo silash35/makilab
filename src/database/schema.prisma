@@ -30,7 +30,7 @@ model Equipment {
   name               String
   brand              String?
   model              String?
-  productNumber     String?
+  productNumber      String?
   batchOrImei        String?
   problemDescription String?
   productCondition   String?
@@ -46,7 +46,9 @@ model Equipment {
   ownerId Int
 
   wasEdited        Boolean  @default(false)
+  deleted          Boolean  @default(false)
   isBudgetApproved Boolean?
+
 
   createdAt                  DateTime  @default(now())
   registeredInManufacturerAt DateTime?

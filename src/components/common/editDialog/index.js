@@ -38,8 +38,10 @@ export default function EditDialog({ Inputs, URL, title, reload }) {
   };
 
   return (
-    <section>
-      <Button onClick={() => setOpenDialog(true)}>{title}</Button>
+    <>
+      <Button variant="outlined" onClick={() => setOpenDialog(true)}>
+        {title}
+      </Button>
 
       <Dialog
         open={openDialog}
@@ -61,6 +63,6 @@ export default function EditDialog({ Inputs, URL, title, reload }) {
           </DialogActions>
         </form>
       </Dialog>
-    </section>
+    </>
   );
 }
