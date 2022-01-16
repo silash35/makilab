@@ -13,7 +13,7 @@ function AdminMenuPage() {
 
       <Header />
 
-      <main>
+      <main style={{ display: "contents" }}>
         <AdminMenu />
       </main>
     </>
