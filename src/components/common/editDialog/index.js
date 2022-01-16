@@ -54,10 +54,8 @@ export default function EditDialog({ Inputs, URL, title, reload }) {
         <form ref={form} onSubmit={handleSubmit}>
           <DialogContent>{Inputs}</DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpenDialog(false)} color="primary">
-              Cancelar
-            </Button>
-            <Button variant="outlined" color="primary" type="submit">
+            <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
+            <Button variant="outlined" type="submit">
               Enviar
             </Button>
           </DialogActions>

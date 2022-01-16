@@ -63,10 +63,8 @@ export default function SendMail({ client, email = null }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenDialog(false)} color="primary">
-            Cancelar
-          </Button>
-          <Button variant="outlined" color="primary" onClick={sendData}>
+          <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
+          <Button variant="outlined" onClick={sendData}>
             Enviar
           </Button>
         </DialogActions>

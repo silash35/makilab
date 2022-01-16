@@ -1,5 +1,4 @@
-@use "@/styles/variables" as v;
-@use "@/styles/shadow" as s;
+@use "@/styles/variables.module" as v;
 @use "@/styles/media" as m;
 
 .track {
@@ -19,6 +18,10 @@
     font-size: 3rem;
     margin-top: 0;
     padding: 16px;
+
+    span {
+      color: v.$primaryMain;
+    }
 
     @include m.forMedium() {
       padding: 0;

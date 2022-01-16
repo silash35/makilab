@@ -39,7 +39,7 @@ export default function Form({ Inputs, URL, title }) {
       <p>*Campo Obrigatório</p>
       <p>**Insira apenas números</p>
 
-      <Button variant="contained" fullWidth color="primary" size="large" type="submit">
+      <Button variant="contained" fullWidth size="large" type="submit">
         Cadastrar
       </Button>
     </form>

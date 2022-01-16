@@ -126,10 +126,8 @@ const UpdateStatusDialog = (props) => {
         </LocalizationProvider>
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.handleClose} color="primary">
-          Cancelar
-        </Button>
-        <Button variant="outlined" color="primary" onClick={sendData}>
+        <Button onClick={props.handleClose}>Cancelar</Button>
+        <Button variant="outlined" onClick={sendData}>
           Salvar Alterações
         </Button>
       </DialogActions>

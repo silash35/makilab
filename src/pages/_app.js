@@ -6,6 +6,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 
+import variables from "@/styles/variables.module.scss";
+
 function createEmotionCache() {
   return createCache({ key: "css" });
 }
@@ -48,9 +50,9 @@ function MyApp(props) {
 const theme = createTheme({
   palette: {
     primary: {
-      light: "#fb4c2e",
-      main: "#c00000",
-      dark: "#880000",
+      light: variables.primaryLight,
+      main: variables.primaryMain,
+      dark: variables.primaryDark,
       contrastText: "#fff",
     },
   },

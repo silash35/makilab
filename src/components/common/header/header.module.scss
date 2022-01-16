@@ -1,5 +1,5 @@
 @use "@/styles/media" as m;
-@use "@/styles/variables" as v;
+@use "@/styles/variables.module" as v;
 
 .header {
   display: flex;
@@ -44,11 +44,11 @@
 }
 
 .contact {
-  color: v.$primary;
+  color: v.$primaryMain;
 
   &:hover,
   &:focus,
   &:active {
-    border-bottom: v.$primary 2px solid;
+    border-bottom: v.$primaryMain 2px solid;
   }
 }
