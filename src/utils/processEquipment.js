@@ -60,7 +60,7 @@ export default function processEquipment(equipment) {
         equipment.statusName = "Esperando Avaliação";
         break;
       case 20:
-        equipment.statusName = "Aguardando Aprovação do Orçamento";
+        equipment.statusName = "Aguardando Aprovação";
         equipment.owner.defaultEmail = `${defaultEmailStart} foi avaliado e está aguardando a aprovação do orçamento. Confira seu Whatsapp!`;
         break;
       case 30:

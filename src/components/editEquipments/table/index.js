@@ -16,7 +16,28 @@ import Equipment from "../row";
 import styles from "./table.module.scss";
 
 export default function CollapsibleTable({ equipments, reload }) {
-  const [sortDirection, setSortDirection] = useState("desc");
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [sortProperty, setSortProperty] = useState("id");
+
+  function compare(a, b) {
+    if (sortDirection == "asc") {
+      if (a[sortProperty] < b[sortProperty]) {
+        return -1;
+      }
+      if (a[sortProperty] > b[sortProperty]) {
+        return 1;
+      }
+    } else {
+      if (a[sortProperty] < b[sortProperty]) {
+        return 1;
+      }
+      if (a[sortProperty] > b[sortProperty]) {
+        return -1;
+      }
+    }
+    return 0;
+  }
+  equipments.sort(compare);
 
   // Search
   const [search, setSearch] = useState("");
@@ -25,6 +46,8 @@ export default function CollapsibleTable({ equipments, reload }) {
 
     return searchText.toLowerCase().includes(search.toLowerCase());
   });
+
+  const common = { setSortDirection: setSortDirection, setSortProperty: setSortProperty };
 
   return (
     <TableContainer component={Paper}>
@@ -36,7 +59,7 @@ export default function CollapsibleTable({ equipments, reload }) {
           onChange={(event) => setSearch(event.target.value)}
           InputProps={{
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <SearchIcon />
               </InputAdornment>
             ),
@@ -47,18 +70,22 @@ export default function CollapsibleTable({ equipments, reload }) {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>
-              <TableSortLabel
-                direction={sortDirection}
-                onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
-              >
-                OS
-              </TableSortLabel>
-            </TableCell>
-            <TableCell align="right">Nome</TableCell>
-            <TableCell align="right">Marca</TableCell>
-            <TableCell align="right">Modelo</TableCell>
-            <TableCell align="right">Situação</TableCell>
+            <TableCellWithSort property="id" {...common}>
+              OS
+            </TableCellWithSort>
+            <TableCellWithSort align="right" property="name" {...common}>
+              Equipamento
+            </TableCellWithSort>
+            <TableCellWithSort align="right" property="brand" {...common}>
+              Marca
+            </TableCellWithSort>
+            <TableCellWithSort align="right" property="Model" {...common}>
+              Modelo
+            </TableCellWithSort>
+            <TableCellWithSort align="right" property="statusName" {...common}>
+              Situação
+            </TableCellWithSort>
+
             <TableCell align="right">Ações</TableCell>
           </TableRow>
         </TableHead>
@@ -69,5 +96,25 @@ export default function CollapsibleTable({ equipments, reload }) {
         </TableBody>
       </Table>
     </TableContainer>
+  );
+}
+
+function TableCellWithSort({ children, property, setSortDirection, setSortProperty, align }) {
+  const [sortDirection, setThisSortDirection] = useState("asc");
+
+  return (
+    <TableCell align={align}>
+      <TableSortLabel
+        direction={sortDirection}
+        onClick={() => {
+          const newSortDirection = sortDirection === "asc" ? "desc" : "asc";
+          setSortProperty(property);
+          setSortDirection(newSortDirection);
+          setThisSortDirection(newSortDirection);
+        }}
+      >
+        {children}
+      </TableSortLabel>
+    </TableCell>
   );
 }
