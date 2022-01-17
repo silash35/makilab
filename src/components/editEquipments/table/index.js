@@ -7,6 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
@@ -15,8 +16,10 @@ import Equipment from "../row";
 import styles from "./table.module.scss";
 
 export default function CollapsibleTable({ equipments, reload }) {
-  const [search, setSearch] = useState("");
+  const [sortDirection, setSortDirection] = useState("desc");
 
+  // Search
+  const [search, setSearch] = useState("");
   equipments = equipments.filter(({ name, id, brand, model, owner, statusName }) => {
     const searchText = name + id + brand + model + owner.name + statusName;
 
@@ -44,7 +47,14 @@ export default function CollapsibleTable({ equipments, reload }) {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>OS</TableCell>
+            <TableCell>
+              <TableSortLabel
+                direction={sortDirection}
+                onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
+              >
+                OS
+              </TableSortLabel>
+            </TableCell>
             <TableCell align="right">Nome</TableCell>
             <TableCell align="right">Marca</TableCell>
             <TableCell align="right">Modelo</TableCell>
