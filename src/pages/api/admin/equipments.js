@@ -5,15 +5,26 @@ import { filterDate, filterString } from "@/utils/filters";
 const methods = {
   async GET(req, res) {
     try {
-      const allEquipments = await prisma.equipment.findMany({
-        include: {
-          owner: true,
-        },
-      });
-
+      let answer;
+      if (req.query.id === undefined) {
+        answer = await prisma.equipment.findMany({
+          include: {
+            owner: true,
+          },
+        });
+      } else {
+        answer = await prisma.equipment.findUnique({
+          where: {
+            id: Number(req.query.id),
+          },
+          include: {
+            owner: true,
+          },
+        });
+      }
       res.setHeader("Content-Type", "application/json");
       res.statusCode = 200;
-      res.json(allEquipments);
+      res.json(answer);
     } catch (err) {
       res.statusCode = 500;
       res.end("Internal Server Error");

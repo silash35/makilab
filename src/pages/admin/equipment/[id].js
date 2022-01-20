@@ -1,10 +1,12 @@
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import Header from "@/components/common/header";
+import Main from "@/components/equipment/main";
 import Pdf from "@/components/equipment/pdf";
 import processEquipment from "@/utils/processEquipment";
 
@@ -53,12 +55,18 @@ function Equipment() {
 
       <Header />
 
-      <main style={{ display: "flex" }}>
-        <Pdf equipment={equipment} />
-        <Button variant="contained" onClick={print}>
-          Gerar PDF
-        </Button>
-      </main>
+      <Main>
+        {equipment ? (
+          <>
+            <Pdf equipment={equipment} />
+            <Button variant="contained" onClick={print}>
+              Gerar PDF
+            </Button>
+          </>
+        ) : (
+          <CircularProgress />
+        )}
+      </Main>
     </>
   );
 }
