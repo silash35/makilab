@@ -56,14 +56,48 @@ export default function Pdf({ equipment }) {
           <th>Hora de entrada:</th>
           <td>{dayjs(equipment.createdAt).format("HH:mm")}</td>
         </tr>
+        <tr>
+          <th colSpan="4">Equipamento/Marca/Modelo/Lote/PN</th>
+        </tr>
+        <tr>
+          <td colSpan="4">
+            {equipment.name} {equipment.brand} {equipment.model} {equipment.batchOrImei}
+            {equipment.productNumber}
+          </td>
+        </tr>
+        <tr>
+          <th>Estado:</th>
+          <td>{filter(equipment.productCondition)}</td>
+          <th>Garantia:</th>
+          <td>{equipment.isUnderWarranty ? "Sim" : "Não"}</td>
+        </tr>
+        <tr>
+          <th colSpan="4">Descrição do problema (Defeito(s) Reclamado(s))</th>
+        </tr>
+        <tr>
+          <td colSpan="4">{filter(equipment.problemDescription)}</td>
+        </tr>
+        <tr>
+          <td>Acessórios:</td>
+          <td colSpan="3">{filter(equipment.accessories, "Sem acessórios")}</td>
+        </tr>
+        <tr>
+          <td colSpan="4">
+            Autorizo e concordo com a realização dos serviços listados acima conforme combinado.
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="2">{equipment.attendedBy}</td>
+          <td colSpan="2">{owner.name}</td>
+        </tr>
       </table>
     </section>
   );
 }
 
-const filter = (string) => {
+const filter = (string, altText = "Não informado") => {
   if (string == undefined || string == "") {
-    return "Não informado";
+    return altText;
   } else {
     return string;
   }
