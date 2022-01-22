@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 
 import processProduct from "@/utils/processProduct";
 
@@ -12,13 +13,11 @@ export default function Track() {
   const [paperElevation, setPaperElevation] = useState(4);
   const searchInputRef = useRef();
 
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    setProduct("loading");
+  const router = useRouter();
+  const { id } = router.query;
 
-    const search = searchInputRef.current?.value;
-
-    const res = await fetch(`/api/product/?id=${search}`, {
+  const load = async (id) => {
+    const res = await fetch(`/api/product/?id=${id}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -30,6 +29,18 @@ export default function Track() {
 
     setProduct(processProduct(data));
   };
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    setProduct("loading");
+    load(searchInputRef.current?.value);
+  };
+
+  useEffect(() => {
+    if (id != undefined) {
+      load(id);
+    }
+  }, [id]);
 
   return (
     <article className={styles.track}>
@@ -44,7 +55,12 @@ export default function Track() {
           onMouseOver={() => setPaperElevation(8)}
           onMouseOut={() => setPaperElevation(4)}
         >
-          <input type="text" placeholder="Digite a Ordem de serviço" ref={searchInputRef}></input>
+          <input
+            type="text"
+            placeholder="Digite a Ordem de serviço"
+            ref={searchInputRef}
+            defaultValue={id}
+          ></input>
           <Button type="submit" variant="contained">
             Pesquisar
           </Button>
