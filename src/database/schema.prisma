@@ -17,9 +17,9 @@ model Client {
   name      String
   email     String?
   address   String?
-  zip       Int?
-  whatsapp  Int?
-  tel       Int?
+  zip       String?
+  whatsapp  String?
+  tel       String?
   cpfOrCnpj String?
 
 

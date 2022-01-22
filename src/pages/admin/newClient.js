@@ -19,9 +19,7 @@ function NewClient() {
           Inputs={ClientInputs}
           URL="/api/admin/clients"
           title="Cadastrar novo Cliente"
-          next={() => {
-            return "/admin";
-          }}
+          next={() => "/admin"}
         />
       </main>
     </>

@@ -14,12 +14,4 @@ const filterDate = (string) => {
   }
 };
 
-const filterNumber = (string) => {
-  if (filterString(string) === null) {
-    return null;
-  } else {
-    return Number(string);
-  }
-};
-
-export { filterDate, filterNumber, filterString };
+export { filterDate, filterString };

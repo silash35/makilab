@@ -48,11 +48,6 @@ export default function ClientInputs({ client }) {
   }, [client]);
 
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
-  const phoneCommon = {
-    placeholder: "5571999999999",
-    inputProps: { inputMode: "numeric", pattern: "[0-9]{8,13}" },
-    ...common,
-  };
 
   return (
     <>
@@ -74,8 +69,7 @@ export default function ClientInputs({ client }) {
       />
       <TextField
         name="cpfOrCnpj"
-        label="CPF ou CNPJ **"
-        inputProps={{ inputMode: "numeric", pattern: "[0-9]{11,14}" }}
+        label="CPF ou CNPJ"
         value={cpfOrCnpj}
         onChange={handleChangeCpfOrCnpj}
         {...common}
@@ -89,29 +83,24 @@ export default function ClientInputs({ client }) {
           value={address}
           onChange={handleChangeAddress}
         />
-        <TextField
-          name="zip"
-          label="CEP **"
-          inputProps={{ inputMode: "numeric", pattern: "[0-9]{8}" }}
-          value={zip}
-          onChange={handleChangeZip}
-          {...common}
-        />
+        <TextField name="zip" label="CEP" value={zip} onChange={handleChangeZip} {...common} />
       </div>
       <div className={styles.flex}>
         <TextField
           name="whatsapp"
-          label="WhatsApp **"
+          label="WhatsApp"
           value={whatsapp}
           onChange={handleChangeWhatsapp}
-          {...phoneCommon}
+          placeholder="+55 71 99999-9999"
+          {...common}
         />
         <TextField
           name="tel"
-          label="Telefone **"
+          label="Telefone"
           value={tel}
           onChange={handleChangeTel}
-          {...phoneCommon}
+          placeholder="+55 71 99999-9999"
+          {...common}
         />
       </div>
 
