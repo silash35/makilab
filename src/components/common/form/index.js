@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 import styles from "./Form.module.scss";
 
-export default function Form({ Inputs, URL, title }) {
+export default function Form({ Inputs, URL, title, next }) {
   const router = useRouter();
   const form = useRef(null);
 
@@ -21,11 +21,11 @@ export default function Form({ Inputs, URL, title }) {
       body: JSON.stringify(data),
     };
     const res = await fetch(URL, request);
+    const body = await res.json();
 
     if (res.status === 200) {
-      router.push("/admin");
+      router.push(next(body));
     } else {
-      const body = await res.json();
       alert("ERRO: " + body.error);
     }
   };

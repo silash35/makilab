@@ -9,8 +9,10 @@ generator client {
 
 model Client {
   id        Int       @id @unique @default(autoincrement())
+  deleted   Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+
 
   name      String
   email     String?

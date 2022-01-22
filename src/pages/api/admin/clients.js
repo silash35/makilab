@@ -24,22 +24,28 @@ const methods = {
     try {
       const body = req.body;
 
+      let client;
       if (Number(body.clientID) == 0) {
-        await prisma.client.create({
+        client = await prisma.client.create({
           data: parseClient(body),
+          include: {
+            equipment: true,
+          },
         });
       } else {
-        const returned = await prisma.client.update({
+        client = await prisma.client.update({
           where: {
             id: Number(body.clientID),
           },
           data: parseClient(body),
+          include: {
+            equipment: true,
+          },
         });
-
-        console.log(returned);
       }
 
       res.statusCode = 200;
+      res.json(client);
       res.end();
     } catch (e) {
       res.statusCode = 400;

@@ -14,7 +14,9 @@ const attendants = ["Rodrigo Ícaro", "Silas Henrique", "Amanda Pimenta", "Rai N
 const servicePlace = ["Balcão", "Telefone"];
 
 export default function EquipmentInputs({ equipment = {} }) {
-  const [dateValue, setDateValue] = useState(new Date(equipment.createdAt));
+  const [dateValue, setDateValue] = useState(
+    equipment.createdAt ? new Date(equipment.createdAt) : new Date()
+  );
 
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
   return (

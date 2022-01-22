@@ -35,7 +35,7 @@ const methods = {
     try {
       const body = req.body;
 
-      await prisma.equipment.update({
+      const equipment = await prisma.equipment.update({
         where: {
           id: Number(body.id),
         },
@@ -55,7 +55,7 @@ const methods = {
         },
       });
       res.statusCode = 200;
-      res.end();
+      res.json(equipment);
     } catch (e) {
       res.end(String(e));
     }

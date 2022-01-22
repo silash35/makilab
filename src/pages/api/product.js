@@ -21,7 +21,6 @@ export default async function product(req, res) {
     }
     res.statusCode = 200;
   } catch (err) {
-    console.log(err);
     res.statusCode = 500;
     res.end("Internal Server Error");
   }

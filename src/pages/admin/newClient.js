@@ -15,7 +15,14 @@ function NewClient() {
       <Header />
 
       <main>
-        <Form Inputs={ClientInputs} URL="/api/admin/clients" title="Cadastrar novo Cliente" />
+        <Form
+          Inputs={ClientInputs}
+          URL="/api/admin/clients"
+          title="Cadastrar novo Cliente"
+          next={() => {
+            return "/admin";
+          }}
+        />
       </main>
     </>
   );

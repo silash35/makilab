@@ -15,7 +15,14 @@ function NewEquipment() {
       <Header />
 
       <main>
-        <Form Inputs={OSInputs} URL="/api/admin/clients" title="Cadastrar Nova Ordem de Serviço" />
+        <Form
+          Inputs={OSInputs}
+          URL="/api/admin/clients"
+          title="Cadastrar Nova Ordem de Serviço"
+          next={(res) => {
+            return `/admin/equipment/${res.equipment[res.equipment.length - 1].id}`;
+          }}
+        />
       </main>
     </>
   );

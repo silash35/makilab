@@ -25,6 +25,9 @@ export default function ClientInputs({ client }) {
   const [tel, setTel] = useState("");
   const handleChangeTel = (event) => setTel(event.target.value);
 
+  const [id, setId] = useState("");
+  const handleChangeId = (event) => setId(event.target.value);
+
   const setWithFilter = (set, value) => {
     if (value == undefined) {
       set("");
@@ -41,6 +44,7 @@ export default function ClientInputs({ client }) {
     setWithFilter(setZip, client?.zip);
     setWithFilter(setWhatsapp, client?.whatsapp);
     setWithFilter(setTel, client?.tel);
+    setWithFilter(setId, client?.id);
   }, [client]);
 
   const common = { variant: "outlined", margin: "normal", fullWidth: true };
@@ -77,8 +81,6 @@ export default function ClientInputs({ client }) {
         {...common}
       />
 
-      <input type="hidden" name="clientID" value={client.id} />
-
       <div className={styles.flex}>
         <TextField
           name="address"
@@ -112,6 +114,8 @@ export default function ClientInputs({ client }) {
           {...phoneCommon}
         />
       </div>
+
+      <input type="hidden" name="clientID" value={id} onChange={handleChangeId} />
     </>
   );
 }
