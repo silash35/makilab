@@ -29,12 +29,14 @@ const methods = {
           data: parseClient(body),
         });
       } else {
-        await prisma.client.update({
+        const returned = await prisma.client.update({
           where: {
             id: Number(body.clientID),
           },
           data: parseClient(body),
         });
+
+        console.log(returned);
       }
 
       res.statusCode = 200;

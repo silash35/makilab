@@ -1,6 +1,10 @@
 .page {
   height: 297mm;
   width: 210mm;
+  min-height: 297mm;
+  min-width: 210mm;
+  max-width: 210mm;
+
   border: 1px solid black;
   padding: 16px;
   font-size: 12px;

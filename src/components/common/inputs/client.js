@@ -77,6 +77,8 @@ export default function ClientInputs({ client }) {
         {...common}
       />
 
+      <input type="hidden" name="clientID" value={client.id} />
+
       <div className={styles.flex}>
         <TextField
           name="address"

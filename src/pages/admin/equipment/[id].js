@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
@@ -7,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import Header from "@/components/common/header";
 import Main from "@/components/equipment/main";
+import Options from "@/components/equipment/options";
 import Pdf from "@/components/equipment/pdf";
 import processEquipment from "@/utils/processEquipment";
 
@@ -36,15 +36,6 @@ function Equipment() {
     await load();
   }, [id]);
 
-  const print = () => {
-    setIsPrinting(true);
-
-    setTimeout(() => {
-      window.print();
-      setIsPrinting(false);
-    }, 100);
-  };
-
   return isPrinting ? (
     <Pdf equipment={equipment} />
   ) : (
@@ -59,9 +50,7 @@ function Equipment() {
         {equipment ? (
           <>
             <Pdf equipment={equipment} />
-            <Button variant="contained" onClick={print}>
-              Gerar PDF
-            </Button>
+            <Options equipment={equipment} setIsPrinting={setIsPrinting} reload={load} />
           </>
         ) : (
           <CircularProgress />

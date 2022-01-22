@@ -55,7 +55,6 @@ export default function OSInputs() {
         }}
         renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
-      <input type="hidden" name="clientID" value={clientSelectorValue.id} />
       <ClientInputs client={clientSelectorValue} />
 
       <h2>Dados do Equipamento</h2>
