@@ -12,24 +12,27 @@ import processEquipment from "@/utils/processEquipment";
 
 function Equipment() {
   const [isPrinting, setIsPrinting] = useState(false);
-  const [equipment, setEquipment] = useState(null);
+  const [equipment, setEquipment] = useState("loading");
   const router = useRouter();
   const { id } = router.query;
 
   const load = async () => {
-    setEquipment(null);
+    setEquipment("loading");
 
-    const res = await fetch(`/api/admin/equipments?id=${id}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await fetch(`/api/admin/equipments?id=${id}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
 
-    const data = await res.json();
-
-    setEquipment(processEquipment(data));
+      const data = await res.json();
+      setEquipment(processEquipment(data));
+    } catch (error) {
+      setEquipment("error");
+    }
   };
 
   useEffect(async () => {
@@ -47,14 +50,20 @@ function Equipment() {
       <Header />
 
       <Main>
-        {equipment ? (
-          <>
-            <Pdf equipment={equipment} />
-            <Options equipment={equipment} setIsPrinting={setIsPrinting} reload={load} />
-          </>
-        ) : (
-          <CircularProgress />
-        )}
+        {(() => {
+          if (equipment === "loading") {
+            return <CircularProgress />;
+          } else if (equipment?.id == id) {
+            return (
+              <>
+                <Pdf equipment={equipment} />
+                <Options equipment={equipment} setIsPrinting={setIsPrinting} reload={load} />
+              </>
+            );
+          } else {
+            return <p>ERRO: ID {id} Invalido. Nenhuma OS encontrada</p>;
+          }
+        })()}
       </Main>
     </>
   );
