@@ -34,7 +34,7 @@ function Equipment() {
 
   useEffect(async () => {
     await load();
-  }, []);
+  }, [id]);
 
   const print = () => {
     setIsPrinting(true);

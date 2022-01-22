@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 
 import styles from "./pdf.module.scss";
+import QrCode from "./qrCode";
 
 dayjs.locale("pt-br");
 
@@ -66,6 +67,53 @@ export default function Pdf({ equipment }) {
             Descrição do problema
           </th>
         </tr>
+        <tr>
+          <td colSpan="4" className={styles.disableBorder}>
+            {filter(equipment.problemDescription)}
+          </td>
+        </tr>
+      </table>
+      <div className={styles.info}>
+        <p>
+          IMPORTANTE! Será concedido garantia, desde que o defeito seja de fabricação, de acordo com
+          as instruções contidas no Manual do Produto e Certificado de Garantia, e que esteja dentro
+          do prazo de garantia. O prazo para conserto em garantia é de até 30 dias. (ART. 18 do
+          CDC). Entrega somente mediante a apresentação deste canhoto. Declaro estar ciente que a
+          garantia de fábrica cessa quando constatado mau uso. Garantia de balcão, não inclui visita
+          técnica. Nosso orçamento é válido por 5 dias. Após 90 dias sem aprovação nem retirada do
+          equipamento o mesmo será descartado ou vendido para custear despesas de armazenamento.
+        </p>
+        <QrCode id={equipment.id} />
+      </div>
+
+      <hr />
+
+      <table className={styles.table}>
+        <tr>
+          <td className={styles.disableBorder}>{filter(owner.name)}</td>
+          <td rowSpan="2" className={styles.disableBorder}>
+            <strong>
+              {equipment.name} {equipment.brand} {equipment.model} {equipment.batchOrImei}
+              {equipment.productNumber}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.disableBorder}>
+            <strong>NÚMERO DA OS: {filter(equipment.id)}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.disableBorder}>
+            DATA DA ENTRADA:{dayjs(equipment.createdAt).format("DD/MM/YYYY")}
+          </td>
+          <td rowSpan="2" className={styles.disableBorder}>
+            <strong> {filter(equipment.problemDescription)}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.disableBorder}>WhatsApp: {filter(owner.whatsapp)}</td>
+        </tr>
       </table>
     </section>
   );
@@ -74,7 +122,7 @@ export default function Pdf({ equipment }) {
 function Header() {
   return (
     <div className={styles.header}>
-      <img src="/logo2.png" alt="Logo da Makilab Serviços" width={150} />
+      <img src="/logo2.png" alt="Logo da Makilab Serviços" width={100} />
       <h2>Ordem de Serviço de Entrada</h2>
       <ul>
         <li>Makilab Serviços</li>
