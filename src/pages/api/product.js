@@ -1,30 +1,30 @@
 import prisma from "@/database/prisma";
+import apiFactory from "@/utils/apiFactory";
 import removeNull from "@/utils/removeNull";
 
-export default async function product(req, res) {
-  try {
-    if (!isNaN(req.query.id)) {
-      const search = Number(req.query.id);
-
-      const equipment = await prisma.equipment.findUnique({
-        where: {
-          id: search,
-        },
-      });
-      if (equipment === null) {
-        res.json({});
-      } else {
-        res.json(filterEquipment(equipment));
-      }
-    } else {
-      res.json({});
+const methods = {
+  async GET(req, res) {
+    if (isNaN(req.query.id)) {
+      throw { name: "Not Found" };
     }
+
+    const search = Number(req.query.id);
+    const equipment = await prisma.equipment.findUnique({
+      where: {
+        id: search,
+      },
+    });
+
+    if (equipment === null) {
+      throw { name: "Not Found" };
+    }
+
+    res.json(filterEquipment(equipment));
     res.statusCode = 200;
-  } catch (err) {
-    res.statusCode = 500;
-    res.end("Internal Server Error");
-  }
-}
+  },
+};
+
+export default apiFactory(methods, false);
 
 const filterEquipment = (equipment) => {
   const filteredEquipment = {};

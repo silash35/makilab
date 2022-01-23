@@ -1,5 +1,5 @@
 export default function processProduct(product) {
-  if (typeof product === "object" && product !== null) {
+  if (typeof product === "object" && product != null) {
     product.isFinished = false;
     if (product.deliveredToCustomerAt != null) {
       product.stepText = "Seu produto foi finalizado e já foi retirado";

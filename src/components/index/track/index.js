@@ -25,9 +25,12 @@ export default function Track() {
       },
     });
 
-    const data = await res.json();
-
-    setProduct(processProduct(data));
+    if (res.status === 200) {
+      const data = await res.json();
+      setProduct(processProduct(data));
+    } else {
+      setProduct({});
+    }
   };
 
   const handleSearch = async (event) => {
