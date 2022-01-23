@@ -5,14 +5,14 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
-import { useMediaQuery } from "react-responsive";
 
 import Dates from "../dates";
 import styles from "./product.module.scss";
 
 export default function Product({ product }) {
-  const isMobile = useMediaQuery({ query: `(max-width: 1100px)` });
+  const isMobile = useMediaQuery("(max-width: 1100px)");
 
   if (product === false) {
     return null;
