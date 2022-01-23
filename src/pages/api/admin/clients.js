@@ -1,6 +1,6 @@
 import prisma from "@/database/prisma";
 import apiFactory from "@/utils/apiFactory";
-import { filterDate, filterString } from "@/utils/filters";
+import { filterCpfOrCnpj, filterDate, filterPhoneNumber, filterString } from "@/utils/filters";
 
 const methods = {
   async GET(req, res) {
@@ -60,11 +60,11 @@ const parseClient = (body) => {
   const client = {
     name: filterString(body.name),
     email: filterString(body.email),
-    cpfOrCnpj: filterString(body.cpfOrCnpj),
+    cpfOrCnpj: filterCpfOrCnpj(body.cpfOrCnpj),
     address: filterString(body.address),
     zip: filterString(body.zip),
-    whatsapp: filterString(body.whatsapp),
-    tel: filterString(body.tel),
+    whatsapp: filterPhoneNumber(body.whatsapp),
+    tel: filterPhoneNumber(body.tel),
   };
 
   if (body.equipment != undefined) {

@@ -154,7 +154,7 @@ function Data({ equipment, variant }) {
         <th>Endereço</th>
         <td>{filter(owner.address)}</td>
         <th>Telefone</th>
-        <td>{filter(owner.phone)}</td>
+        <td>{filter(owner.tel)}</td>
       </tr>
       <tr>
         <th>CEP</th>
