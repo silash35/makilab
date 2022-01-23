@@ -20,6 +20,13 @@ export default function CollapsibleTable({ equipments, reload }) {
   const [sortProperty, setSortProperty] = useState("id");
 
   function compare(a, b) {
+    if (a.isUrgent && !b.isUrgent) {
+      return -1;
+    }
+    if (!a.isUrgent && b.isUrgent) {
+      return 1;
+    }
+
     if (sortDirection == "asc") {
       if (a[sortProperty] < b[sortProperty]) {
         return -1;

@@ -27,7 +27,15 @@ export default function Equipment({ equipment, reload }) {
         <TableCell align="right">{equipment.name}</TableCell>
         <TableCell align="right">{equipment.brand}</TableCell>
         <TableCell align="right">{equipment.model}</TableCell>
-        <TableCell align="right">{equipment.statusName}</TableCell>
+        <TableCell className={equipment.isUrgent && styles.urgent} align="right">
+          {equipment.statusName}
+          {equipment.isUrgent && (
+            <>
+              <br />
+              ATRASADO
+            </>
+          )}
+        </TableCell>
         <TableCell align="right">
           <UpdateStatusDialog reload={reload} equipment={equipment} />
         </TableCell>
