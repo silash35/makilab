@@ -4,24 +4,23 @@ import apiFactory from "@/utils/apiFactory";
 
 const methods = {
   async POST(req, res) {
-    try {
-      let transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_USER,
-        },
-      });
+    let transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_USER,
+      },
+    });
 
-      // send mail with defined transport object
-      await transporter.sendMail({
-        from: `"Makilab Serviços" <${process.env.EMAIL_USER}`,
-        to: `${process.env.EMAIL_USER}, ${req.body.to}`,
-        subject: "Atualizações sobre o seu equipamento",
-        text: req.body.text,
-        html: `<div
+    // send mail with defined transport object
+    await transporter.sendMail({
+      from: `"Makilab Serviços" <${process.env.EMAIL_USER}`,
+      to: `${process.env.EMAIL_USER}, ${req.body.to}`,
+      subject: "Atualizações sobre o seu equipamento",
+      text: req.body.text,
+      html: `<div
         style="
           display: flex;
           flex-direction: column;
@@ -57,14 +56,10 @@ const methods = {
           feedback é importante para nós. Qualquer problema reporte para o nosso WhatsApp.
         </p>
       </div>`,
-      });
+    });
 
-      res.statusCode = 200;
-      res.end("ok");
-    } catch (e) {
-      res.statusCode = 400;
-      res.end({ error: String(e) });
-    }
+    res.statusCode = 200;
+    res.end("ok");
   },
 };
 

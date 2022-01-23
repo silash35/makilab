@@ -10,53 +10,43 @@ import {
 
 const methods = {
   async GET(req, res) {
-    try {
-      const allClients = await prisma.client.findMany({
+    const allClients = await prisma.client.findMany({
+      include: {
+        equipment: true,
+      },
+    });
+
+    res.setHeader("Content-Type", "application/json");
+    res.statusCode = 200;
+    res.json(allClients);
+  },
+
+  async POST(req, res) {
+    const body = req.body;
+
+    let client;
+    if (Number(body.clientID) == 0) {
+      client = await prisma.client.create({
+        data: parseClient(body),
         include: {
           equipment: true,
         },
       });
-
-      res.setHeader("Content-Type", "application/json");
-      res.statusCode = 200;
-      res.json(allClients);
-    } catch (err) {
-      res.statusCode = 500;
-      res.end("Internal Server Error");
+    } else {
+      client = await prisma.client.update({
+        where: {
+          id: Number(body.clientID),
+        },
+        data: parseClient(body),
+        include: {
+          equipment: true,
+        },
+      });
     }
-  },
 
-  async POST(req, res) {
-    try {
-      const body = req.body;
-
-      let client;
-      if (Number(body.clientID) == 0) {
-        client = await prisma.client.create({
-          data: parseClient(body),
-          include: {
-            equipment: true,
-          },
-        });
-      } else {
-        client = await prisma.client.update({
-          where: {
-            id: Number(body.clientID),
-          },
-          data: parseClient(body),
-          include: {
-            equipment: true,
-          },
-        });
-      }
-
-      res.statusCode = 200;
-      res.json(client);
-      res.end();
-    } catch (e) {
-      res.statusCode = 400;
-      res.json({ error: String(e) });
-    }
+    res.statusCode = 200;
+    res.json(client);
+    res.end();
   },
 };
 

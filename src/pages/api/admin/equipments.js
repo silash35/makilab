@@ -4,90 +4,78 @@ import { filterDate, filterString } from "@/utils/filters";
 
 const methods = {
   async GET(req, res) {
-    try {
-      let answer;
-      if (req.query.id === undefined) {
-        answer = await prisma.equipment.findMany({
-          include: {
-            owner: true,
-          },
-        });
-      } else {
-        answer = await prisma.equipment.findUnique({
-          where: {
-            id: Number(req.query.id),
-          },
-          include: {
-            owner: true,
-          },
-        });
-      }
-      res.setHeader("Content-Type", "application/json");
-      res.statusCode = 200;
-      res.json(answer);
-    } catch (err) {
-      res.statusCode = 500;
-      res.end("Internal Server Error");
+    let answer;
+    if (req.query.id === undefined) {
+      answer = await prisma.equipment.findMany({
+        include: {
+          owner: true,
+        },
+      });
+    } else {
+      answer = await prisma.equipment.findUnique({
+        where: {
+          id: Number(req.query.id),
+        },
+        include: {
+          owner: true,
+        },
+      });
     }
+
+    if (!answer) {
+      throw { name: "Not Found" };
+    }
+
+    res.setHeader("Content-Type", "application/json");
+    res.statusCode = 200;
+    res.json(answer);
   },
 
   async POST(req, res) {
-    try {
-      const body = req.body;
+    const body = req.body;
 
-      const equipment = await prisma.equipment.update({
-        where: {
-          id: Number(body.id),
-        },
-        data: {
-          name: filterString(body.equipment),
-          brand: filterString(body.brand),
-          model: filterString(body.model),
-          productNumber: filterString(body.productNumber),
-          batchOrImei: filterString(body.batchOrImei),
-          accessories: filterString(body.accessories),
-          productCondition: filterString(body.productCondition),
-          listOfServices: filterString(body.listOfServices),
-          attendedBy: filterString(body.attendedBy),
-          attendedOn: filterString(body.attendedOn),
-          isUnderWarranty: body.isUnderWarranty === "on",
-          wasEdited: true,
-        },
-      });
-      res.statusCode = 200;
-      res.json(equipment);
-    } catch (e) {
-      res.end(String(e));
-    }
+    const equipment = await prisma.equipment.update({
+      where: {
+        id: Number(body.id),
+      },
+      data: {
+        name: filterString(body.equipment),
+        brand: filterString(body.brand),
+        model: filterString(body.model),
+        productNumber: filterString(body.productNumber),
+        batchOrImei: filterString(body.batchOrImei),
+        accessories: filterString(body.accessories),
+        productCondition: filterString(body.productCondition),
+        listOfServices: filterString(body.listOfServices),
+        attendedBy: filterString(body.attendedBy),
+        attendedOn: filterString(body.attendedOn),
+        isUnderWarranty: body.isUnderWarranty === "on",
+        wasEdited: true,
+      },
+    });
+    res.statusCode = 200;
+    res.json(equipment);
   },
 
   async PUT(req, res) {
-    try {
-      await prisma.equipment.update({
-        where: {
-          id: req.body.id,
-        },
-        data: processUpdateEquipment(req.body.data),
-      });
-      res.statusCode = 200;
-      res.end();
-    } catch (e) {
-      res.end(String(e));
-    }
+    await prisma.equipment.update({
+      where: {
+        id: req.body.id,
+      },
+      data: processUpdateEquipment(req.body.data),
+    });
+    res.statusCode = 200;
+    res.end();
   },
 
   async DELETE(req, res) {
-    try {
-      await prisma.equipment.delete({
-        where: {
-          id: req.body.id,
-        },
-      });
-      res.statusCode = 200;
-      res.end();
-    } catch (e) {
-      res.end(String(e));
-    }
+    await prisma.equipment.delete({
+      where: {
+        id: req.body.id,
+      },
+    });
+    res.statusCode = 200;
+    res.end();
   },
 };
 
