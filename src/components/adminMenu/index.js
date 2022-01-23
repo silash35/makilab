@@ -16,31 +16,19 @@ export default function AdminMenu() {
         Adicionar Cliente
       </BigButton>
 
-      <BigButton disabled component={undefined}>
-        Gerenciar Clientes <br />
-        (Em breve)
+      <BigButton link="admin/editClients" color={styles.green}>
+        Gerenciar Clientes
       </BigButton>
     </div>
   );
 }
 
-function BigButton({ children, color, disabled, component = "a", link }) {
-  const button = (
-    <Button
-      variant="contained"
-      component={component}
-      disabled={disabled}
-      className={`${styles.bigButton} ${color}`}
-    >
-      {children}
-    </Button>
-  );
-
-  return disabled ? (
-    button
-  ) : (
+function BigButton({ children, color, link }) {
+  return (
     <Link as={link} href={link}>
-      {button}
+      <Button variant="contained" component="a" className={`${styles.bigButton} ${color}`}>
+        {children}
+      </Button>
     </Link>
   );
 }

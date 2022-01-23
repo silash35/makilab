@@ -8,7 +8,7 @@ function AdminMenuPage() {
   return (
     <>
       <Head>
-        <title>Gerenciar Ordens de Serviço</title>
+        <title>Painel de Administração</title>
       </Head>
 
       <Header />

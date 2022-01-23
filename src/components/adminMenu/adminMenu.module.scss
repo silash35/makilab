@@ -30,11 +30,21 @@ a.orange {
 }
 
 a.cyan {
-  background-color: #00e4c5;
+  background-color: #0277bd;
   &:focus {
-    background-color: #67fff8;
+    background-color: #58a5f0;
   }
   &:hover {
-    background-color: #00b195;
+    background-color: #004c8c;
+  }
+}
+
+a.green {
+  background-color: #2e7d32;
+  &:focus {
+    background-color: #60ad5e;
+  }
+  &:hover {
+    background-color: #005005;
   }
 }
