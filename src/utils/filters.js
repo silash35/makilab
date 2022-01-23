@@ -53,4 +53,17 @@ const filterPhoneNumber = (string) => {
   return string;
 };
 
-export { filterCpfOrCnpj, filterDate, filterPhoneNumber, filterString };
+const filterZip = (string) => {
+  string = filterString(string);
+  if (string === null) {
+    return null;
+  }
+
+  string = string.replace(/\D/g, "");
+  if (string.length === 8) {
+    string = string.replace(/^(\d{5})(\d{3}).*/, "$1-$2");
+  }
+  return string;
+};
+
+export { filterCpfOrCnpj, filterDate, filterPhoneNumber, filterString, filterZip };
