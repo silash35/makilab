@@ -185,7 +185,7 @@ function Data({ equipment, variant }) {
       </tr>
       <tr>
         <th colSpan="4" className={styles.alignCenter}>
-          Equipamento/Marca/Modelo/Lote/PN
+          Equipamento/Marca/Modelo/N° de Serie/PN
         </th>
       </tr>
       <tr>

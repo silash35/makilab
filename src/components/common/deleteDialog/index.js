@@ -6,7 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 
-export default function SendMailDialog({ id, name, URL, reload }) {
+export default function DeleteDialog({ id, title, text, URL, reload }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const sendData = async () => {
@@ -37,9 +37,9 @@ export default function SendMailDialog({ id, name, URL, reload }) {
         onClose={() => setOpenDialog(false)}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Deletar {name}</DialogTitle>
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>Tem certeza que deseja excluir {name}?</DialogContentText>
+          <DialogContentText>{text}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>

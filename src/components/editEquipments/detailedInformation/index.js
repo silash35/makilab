@@ -22,8 +22,8 @@ export default function DetailedInformation({ equipment, reload }) {
         <Card variant="outlined">
           <CardContent>
             <h3>Sobre o Equipamento</h3>
-            <p>{equipment.batchOrImei && `Lote ou IMEI: ${equipment.batchOrImei}`}</p>
-            <p>{equipment.equipment_number && `Numero de Serie: ${equipment.equipment_number}`}</p>
+            <p>{equipment.batchOrImei && `N° de Serie ou IMEI: ${equipment.batchOrImei}`}</p>
+            <p>{equipment.productNumber && `Product Number: ${equipment.productNumber}`}</p>
             <p>
               {equipment.isUnderWarranty
                 ? "Equipamento em Garantia"
@@ -82,7 +82,8 @@ export default function DetailedInformation({ equipment, reload }) {
         <DeleteDialog
           id={equipment.id}
           URL={"/api/admin/equipments"}
-          name={`a OS ${equipment.id}`}
+          title={`Deletar ${equipment.id}`}
+          text={`Tem certeza que deseja excluir a OS ${equipment.id}?`}
           reload={reload}
         />
         {owner.email && <SendMailDialog client={equipment.owner} />}

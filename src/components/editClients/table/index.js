@@ -78,8 +78,7 @@ export default function CollapsibleTable({ clients, reload }) {
             </TableCellWithSort>
             <TableCell align="right">WhatsApp</TableCell>
             <TableCell align="right">Telefone</TableCell>
-            <TableCell align="right">CPF ou CNPJ</TableCell>
-            <TableCell align="right">Ações</TableCell>
+            <TableCell align="center">CPF ou CNPJ</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

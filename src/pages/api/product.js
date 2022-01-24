@@ -31,7 +31,7 @@ const filterEquipment = (equipment) => {
 
   filteredEquipment.id = equipment.id;
 
-  filteredEquipment.name = `${equipment.name}  ${removeNull(equipment.brand)}  ${removeNull(
+  filteredEquipment.name = `${equipment.name} ${removeNull(equipment.brand)} ${removeNull(
     equipment.model
   )}`;
   filteredEquipment.isUnderWarranty = equipment.isUnderWarranty;

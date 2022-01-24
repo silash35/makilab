@@ -54,8 +54,13 @@ export default function processEquipment(equipment) {
     if (statusNumber <= 10 && dayjs().isAfter(dayjs(equipment.createdAt).add(5, "day"))) {
       equipment.isUrgent = true;
     }
+
+    if (!equipment.owner) {
+      equipment.owner = {};
+    }
     equipment.owner.defaultEmail = null;
-    let defaultEmailStart = `Prezado(a) ${equipment.owner.name}, seu produto (${equipment.name} ${equipment.brand}) de OS ${equipment.id}`;
+
+    let defaultEmailStart = `Prezado(a) ${equipment.owner?.name}, seu produto (${equipment.name} ${equipment.brand}) de OS ${equipment.id}`;
 
     switch (statusNumber) {
       case 0:

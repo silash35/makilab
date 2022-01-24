@@ -19,6 +19,7 @@
 
 .flex {
   @extend %flex;
+  margin: 16px 0;
 }
 
 .cardsContainer {

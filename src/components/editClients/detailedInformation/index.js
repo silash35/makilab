@@ -1,14 +1,13 @@
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
-import EquipmentInputs from "@/components/common/inputs/equipment";
+import ClientInputs from "@/components/common/inputs/client";
 import SendMailDialog from "@/components/common/sendMailDialog";
+import processEquipment from "@/utils/processEquipment";
 
-import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./detailedInformation.module.scss";
 
 export default function DetailedInformation({ client, reload }) {
@@ -24,16 +23,41 @@ export default function DetailedInformation({ client, reload }) {
       <p>{client.tel && `Telefone: ${client.tel}`}</p>
       <p>{client.cpfOrCnpj && `CPF ou CNPJ: ${client.cpfOrCnpj}`}</p>
 
+      <div className={styles.flex}>
+        <DeleteDialog
+          id={client.id}
+          URL={"/api/admin/client"}
+          title={`Deletar ${client.name}`}
+          text={`Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`}
+          reload={reload}
+        />
+        {client.email && <SendMailDialog client={client} />}
+        <EditDialog
+          Inputs={<ClientInputs client={client} />}
+          URL={"/api/admin/clients"}
+          title="Editar Cliente"
+          reload={reload}
+        />
+      </div>
+
+      <h2>Equipamentos</h2>
+
       <Box className={styles.cardsContainer}>
         {client.equipment.map((equipment) => {
+          equipment = processEquipment(equipment);
           return (
             <Card variant="outlined" key={equipment.id}>
               <CardContent>
-                <h3>Sobre o Equipamento</h3>
-                <p>{equipment.batchOrImei && `Lote ou IMEI: ${equipment.batchOrImei}`}</p>
+                <h3>{equipment.id && "OS " + equipment.id}</h3>
                 <p>
-                  {equipment.equipment_number && `Numero de Serie: ${equipment.equipment_number}`}
+                  Equipamento:
+                  {equipment.name && " " + equipment.name}
+                  {equipment.brand && " " + equipment.brand}
+                  {equipment.model && " " + equipment.model}
                 </p>
+                <p>{equipment.statusName && `Situação: ${equipment.statusName}`}</p>
+                <p>{equipment.batchOrImei && `N° de Serie ou IMEI: ${equipment.batchOrImei}`}</p>
+                <p>{equipment.productNumber && `Product Number: ${equipment.productNumber}`}</p>
                 <p>
                   {equipment.isUnderWarranty
                     ? "Equipamento em Garantia"
@@ -52,40 +76,11 @@ export default function DetailedInformation({ client, reload }) {
                     }
                   })()}
                 </p>
-                <p>{equipment.accessories && `Acessórios: ${equipment.accessories}`}</p>
-                <p>
-                  {equipment.equipmentCondition &&
-                    `Condição do equipamento: ${equipment.equipmentCondition}`}
-                </p>
-                <p>
-                  {equipment.problemDescription &&
-                    `Descrição do problema: ${equipment.problemDescription}`}
-                </p>
-                {equipment.wasEdited && (
-                  <Alert severity="info">Esse equipamento já foi editado</Alert>
-                )}
               </CardContent>
             </Card>
           );
         })}
       </Box>
-
-      <div className={styles.flex}>
-        <DeleteDialog
-          id={client.id}
-          URL={"/api/admin/equipments"}
-          name={`a OS ${client.id}`}
-          reload={reload}
-        />
-        {client.email && <SendMailDialog client={client} />}
-        <EditDialog
-          Inputs={<EquipmentInputs equipment={client} />}
-          URL={"/api/admin/equipments"}
-          title="Editar Equipamento"
-          reload={reload}
-        />
-        <UpdateStatusDialog equipment={client} reload={reload} />
-      </div>
     </Box>
   );
 }
