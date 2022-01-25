@@ -1,4 +1,3 @@
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -51,7 +50,6 @@ export default function DetailedInformation({ equipment, reload }) {
               {equipment.problemDescription &&
                 `Descrição do problema: ${equipment.problemDescription}`}
             </p>
-            {equipment.wasEdited && <Alert severity="info">Esse equipamento já foi editado</Alert>}
           </CardContent>
         </Card>
 
