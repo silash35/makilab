@@ -10,20 +10,24 @@ export default function Dates({ product }) {
   const dates = [];
 
   if (product.createdAt != null) {
-    dates.push(<DateItem text="Produto chegou na Makilab" date={product.createdAt} />);
+    dates.push(<DateItem text="Produto chegou na Makilab" date={product.createdAt} key={1} />);
   }
   if (product.avalietedAt != null) {
-    dates.push(<DateItem text="Produto foi avaliado" date={product.avalietedAt} />);
+    dates.push(<DateItem text="Produto foi avaliado" date={product.avalietedAt} key={2} />);
   }
   if (product.budgetAnsweredAt != null) {
-    dates.push(<DateItem text="Orçamento respondido" date={product.budgetAnsweredAt} />);
+    dates.push(<DateItem text="Orçamento respondido" date={product.budgetAnsweredAt} key={3} />);
   }
   if (product.repairedAt != null) {
-    dates.push(<DateItem text="Reparo concluído com sucesso" date={product.repairedAt} />);
+    dates.push(<DateItem text="Reparo concluído com sucesso" date={product.repairedAt} key={4} />);
   }
   if (product.deliveredToCustomerAt != null) {
     dates.push(
-      <DateItem text="Produto foi entregue ao cliente" date={product.deliveredToCustomerAt} />
+      <DateItem
+        text="Produto foi entregue ao cliente"
+        date={product.deliveredToCustomerAt}
+        key={5}
+      />
     );
   }
 
