@@ -48,6 +48,24 @@ const methods = {
     res.json(client);
     res.end();
   },
+
+  async DELETE(req, res) {
+    console.log("chegou aqui");
+    await prisma.equipment.deleteMany({
+      where: {
+        ownerId: req.body.id,
+      },
+    });
+
+    await prisma.client.delete({
+      where: {
+        id: req.body.id,
+      },
+    });
+
+    res.statusCode = 200;
+    res.end();
+  },
 };
 
 export default apiFactory(methods, true);

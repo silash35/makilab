@@ -26,7 +26,7 @@ export default function DetailedInformation({ client, reload }) {
       <div className={styles.flex}>
         <DeleteDialog
           id={client.id}
-          URL={"/api/admin/client"}
+          URL={"/api/admin/clients"}
           title={`Deletar ${client.name}`}
           text={`Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`}
           reload={reload}
