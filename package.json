@@ -11,30 +11,30 @@
     "schema": "src/database/schema.prisma"
   },
   "dependencies": {
-    "@date-io/dayjs": "^2.11.0",
+    "@date-io/dayjs": "^2.13.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.2.5",
-    "@mui/lab": "^5.0.0-alpha.63",
-    "@mui/material": "^5.2.7",
+    "@mui/icons-material": "^5.3.1",
+    "@mui/lab": "^5.0.0-alpha.66",
+    "@mui/material": "^5.3.1",
     "@storyofams/next-password-protect": "^1.5.14",
     "dayjs": "^1.10.7",
     "easyqrcodejs": "^4.4.10",
-    "next": "^12.0.7",
+    "next": "^12.0.9",
     "nodemailer": "^6.7.2",
-    "prisma": "^3.7.0",
+    "prisma": "^3.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@prisma/client": "^3.7.0",
-    "eslint": "^8.6.0",
+    "@prisma/client": "^3.8.1",
+    "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.5.1",
-    "sass": "^1.47.0",
+    "sass": "^1.49.0",
     "yarn-upgrade-all": "^0.6.1"
   }
 }
