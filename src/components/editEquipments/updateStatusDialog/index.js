@@ -14,25 +14,26 @@ import { useState } from "react";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";
 
-const UpdateStatusDialog = (props) => {
+const UpdateStatusDialog = ({ equipment, reload }) => {
   const [open, setOpen] = useState(false);
 
-  const [createdAt, setCreatedAt] = useState(props.equipment.createdAt);
+  const [createdAt, setCreatedAt] = useState(equipment.createdAt);
   const [registeredInManufacturerAt, setRegisteredInManufacturerAt] = useState(
-    props.equipment.registeredInManufacturerAt
+    equipment.registeredInManufacturerAt
   );
-  const [avalietedAt, setAvalietedAt] = useState(props.equipment.avalietedAt);
-  const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(props.equipment.budgetAnsweredAt);
-  const [isBudgetApproved, setIsBudgetApproved] = useState(props.equipment.isBudgetApproved);
-  const [partsArrivedAt, setPartsArrivedAt] = useState(props.equipment.partsArrivedAt);
-  const [repairedAt, setRepairedAt] = useState(props.equipment.repairedAt);
+  const [avalietedAt, setAvalietedAt] = useState(equipment.avalietedAt);
+  const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(equipment.budgetAnsweredAt);
+  const [isBudgetApproved, setIsBudgetApproved] = useState(equipment.isBudgetApproved);
+  const [partsArrivedAt, setPartsArrivedAt] = useState(equipment.partsArrivedAt);
+  const [repairedAt, setRepairedAt] = useState(equipment.repairedAt);
   const [deliveredToCustomerAt, setDeliveredToCustomerAt] = useState(
-    props.equipment.deliveredToCustomerAt
+    equipment.deliveredToCustomerAt
   );
 
   const sendData = async () => {
     const data = {};
 
+    console.log(createdAt);
     data.createdAt = createdAt;
     data.registeredInManufacturerAt = registeredInManufacturerAt;
     data.avalietedAt = avalietedAt;
@@ -42,16 +43,18 @@ const UpdateStatusDialog = (props) => {
     data.repairedAt = repairedAt;
     data.deliveredToCustomerAt = deliveredToCustomerAt;
 
-    const request = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: props.equipment.id, data: data }),
-    };
+    if (createdAt.isValid()) {
+      const request = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: equipment.id, data: data }),
+      };
 
-    await fetch("/api/admin/equipments", request);
-    await props.reload();
+      await fetch("/api/admin/equipments", request);
+      await reload();
 
-    setOpen(false);
+      setOpen(false);
+    }
   };
 
   return (
@@ -67,7 +70,7 @@ const UpdateStatusDialog = (props) => {
           <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
             <DateTime label="Data de criação da OS" value={createdAt} setValue={setCreatedAt} />
 
-            {props.equipment.isUnderWarranty && (
+            {equipment.isUnderWarranty && (
               <DateTimeWithSwitch
                 label="Data de criação da OSF"
                 input={registeredInManufacturerAt}
@@ -81,7 +84,7 @@ const UpdateStatusDialog = (props) => {
               setInput={setAvalietedAt}
             />
 
-            {!props.equipment.isUnderWarranty && (
+            {!equipment.isUnderWarranty && (
               <>
                 <DateTimeWithSwitch
                   label="Data da Resposta do Orçamento"
@@ -125,7 +128,7 @@ const UpdateStatusDialog = (props) => {
           </LocalizationProvider>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClose}>Cancelar</Button>
+          <Button onClick={() => setOpen(false)}>Cancelar</Button>
           <Button variant="outlined" onClick={sendData}>
             Salvar Alterações
           </Button>
