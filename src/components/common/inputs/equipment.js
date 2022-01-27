@@ -5,7 +5,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
-import { ptBR } from "date-fns/locale";
+import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
 import styles from "./inputs.module.scss";

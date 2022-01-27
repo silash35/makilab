@@ -1,9 +1,9 @@
-import dayjs from "dayjs";
+import add from "date-fns/add";
+import format from "date-fns/format";
+import ptBR from "date-fns/locale/pt-BR";
 
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";
-
-dayjs.locale("pt-br");
 
 export default function Pdf({ equipment }) {
   const owner = equipment.owner;
@@ -42,9 +42,9 @@ export default function Pdf({ equipment }) {
         </tr>
         <tr>
           <td colSpan="4" className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
-            Autorizo e concordo com a realização dos serviços listados acima conforme combinado,{" "}
+            Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
             <br />
-            Salvador {dayjs().format("DD/MM/YYYY")}
+            Salvador {format(new Date(), "dd/MM/yyyy", { locale: ptBR })}
           </td>
         </tr>
         <tr>
@@ -105,7 +105,7 @@ export default function Pdf({ equipment }) {
         </tr>
         <tr>
           <td className={styles.disableBorder}>
-            DATA DA ENTRADA:{dayjs(equipment.createdAt).format("DD/MM/YYYY")}
+            DATA DA ENTRADA: {format(new Date(equipment.createdAt), "dd/MM/yyyy", { locale: ptBR })}
           </td>
           <td rowSpan="2" className={styles.disableBorder}>
             <strong> {filter(equipment.problemDescription)}</strong>
@@ -166,7 +166,7 @@ function Data({ equipment, variant }) {
         <th>Atendido por</th>
         <td>{filter(equipment.attendedBy)}</td>
         <th>Data de entrada</th>
-        <td>{dayjs(equipment.createdAt).format("DD/MM/YYYY")}</td>
+        <td>{format(new Date(equipment.createdAt), "dd/MM/yyyy", { locale: ptBR })}</td>
       </tr>
       <tr>
         <th>Atendimento</th>
@@ -174,12 +174,16 @@ function Data({ equipment, variant }) {
         {variant ? (
           <>
             <th>Previsão</th>
-            <td>{dayjs(equipment.createdAt).add(1, "M").format("DD/MM/YYYY")}</td>
+            <td>
+              {format(add(new Date(equipment.createdAt), { months: 1 }), "dd/MM/yyyy", {
+                locale: ptBR,
+              })}
+            </td>
           </>
         ) : (
           <>
             <th>Hora de entrada</th>
-            <td>{dayjs(equipment.createdAt).format("HH:mm")}</td>
+            <td>{format(new Date(equipment.createdAt), "HH:mm", { locale: ptBR })}</td>
           </>
         )}
       </tr>

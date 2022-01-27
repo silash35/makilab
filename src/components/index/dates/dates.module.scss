@@ -11,6 +11,13 @@
 }
 
 .item {
+  .date {
+    text-transform: capitalize;
+    span {
+      text-transform: lowercase;
+    }
+  }
+
   .flex {
     display: flex;
     margin-top: 4px;

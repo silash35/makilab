@@ -9,7 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import { ptBR } from "date-fns/locale";
+import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";

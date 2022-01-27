@@ -1,10 +1,7 @@
-import "dayjs/locale/pt-br";
-
-import dayjs from "dayjs";
+import format from "date-fns/format";
+import ptBR from "date-fns/locale/pt-BR";
 
 import styles from "./dates.module.scss";
-
-dayjs.locale("pt-br");
 
 export default function Dates({ product }) {
   const dates = [];
@@ -37,10 +34,16 @@ export default function Dates({ product }) {
 function DateItem({ text, date }) {
   return (
     <li className={styles.item}>
-      <p>{dayjs(date).format("dddd D MMMM, YYYY")}</p>
+      <p className={styles.date}>
+        {format(new Date(date), "EEEE, d ", { locale: ptBR })}
+        <span>de</span>
+        {format(new Date(date), " MMMM ", { locale: ptBR })}
+        <span>de</span>
+        {format(new Date(date), " yyyy", { locale: ptBR })}
+      </p>
 
       <div className={styles.flex}>
-        <p className={styles.time}>{dayjs(date).format("hh:mm A")}</p>
+        <p className={styles.time}>{format(new Date(date), "hh:mm a", { locale: ptBR })}</p>
         <p className={styles.text}>{text}</p>
       </div>
     </li>
