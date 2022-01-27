@@ -1,6 +1,5 @@
 import add from "date-fns/add";
 import format from "date-fns/format";
-import ptBR from "date-fns/locale/pt-BR";
 
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";
@@ -44,7 +43,7 @@ export default function Pdf({ equipment }) {
           <td colSpan="4" className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
             Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
             <br />
-            Salvador {format(new Date(), "dd/MM/yyyy", { locale: ptBR })}
+            Salvador {format(new Date(), "dd/MM/yyyy")}
           </td>
         </tr>
         <tr>
@@ -105,7 +104,7 @@ export default function Pdf({ equipment }) {
         </tr>
         <tr>
           <td className={styles.disableBorder}>
-            DATA DA ENTRADA: {format(new Date(equipment.createdAt), "dd/MM/yyyy", { locale: ptBR })}
+            DATA DA ENTRADA: {format(new Date(equipment.createdAt), "dd/MM/yyyy")}
           </td>
           <td rowSpan="2" className={styles.disableBorder}>
             <strong> {filter(equipment.problemDescription)}</strong>
@@ -166,7 +165,7 @@ function Data({ equipment, variant }) {
         <th>Atendido por</th>
         <td>{filter(equipment.attendedBy)}</td>
         <th>Data de entrada</th>
-        <td>{format(new Date(equipment.createdAt), "dd/MM/yyyy", { locale: ptBR })}</td>
+        <td>{format(new Date(equipment.createdAt), "dd/MM/yyyy")}</td>
       </tr>
       <tr>
         <th>Atendimento</th>
@@ -174,16 +173,12 @@ function Data({ equipment, variant }) {
         {variant ? (
           <>
             <th>Previsão</th>
-            <td>
-              {format(add(new Date(equipment.createdAt), { months: 1 }), "dd/MM/yyyy", {
-                locale: ptBR,
-              })}
-            </td>
+            <td>{format(add(new Date(equipment.createdAt), { months: 1 }), "dd/MM/yyyy")}</td>
           </>
         ) : (
           <>
             <th>Hora de entrada</th>
-            <td>{format(new Date(equipment.createdAt), "HH:mm", { locale: ptBR })}</td>
+            <td>{format(new Date(equipment.createdAt), "HH:mm")}</td>
           </>
         )}
       </tr>

@@ -1,4 +1,5 @@
-import dayjs from "dayjs";
+import add from "date-fns/add";
+import isAfter from "date-fns/isAfter";
 
 /*
 Status Possíveis e seus números:
@@ -51,7 +52,10 @@ export default function processEquipment(equipment) {
       }
     })();
 
-    if (statusNumber <= 10 && dayjs().isAfter(dayjs(equipment.createdAt).add(5, "day"))) {
+    if (
+      statusNumber <= 10 &&
+      isAfter(new Date(), add(new Date(equipment.createdAt), { days: 5 }))
+    ) {
       equipment.isUrgent = true;
     }
 
