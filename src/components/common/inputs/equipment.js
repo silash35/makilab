@@ -1,11 +1,11 @@
-import DateAdapter from "@mui/lab/AdapterDayjs";
+import DateAdapter from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
-import ptBR from "dayjs/locale/pt-br";
+import { ptBR } from "date-fns/locale";
 import { useState } from "react";
 
 import styles from "./inputs.module.scss";

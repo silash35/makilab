@@ -1,4 +1,4 @@
-import DateAdapter from "@mui/lab/AdapterDayjs";
+import DateAdapter from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -9,7 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import ptBR from "dayjs/locale/pt-br";
+import { ptBR } from "date-fns/locale";
 import { useState } from "react";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";
@@ -43,18 +43,16 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
     data.repairedAt = repairedAt;
     data.deliveredToCustomerAt = deliveredToCustomerAt;
 
-    if (createdAt.isValid()) {
-      const request = {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: equipment.id, data: data }),
-      };
+    const request = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: equipment.id, data: data }),
+    };
 
-      await fetch("/api/admin/equipments", request);
-      await reload();
+    await fetch("/api/admin/equipments", request);
+    await reload();
 
-      setOpen(false);
-    }
+    setOpen(false);
   };
 
   return (
