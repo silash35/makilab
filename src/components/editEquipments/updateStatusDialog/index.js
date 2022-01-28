@@ -12,6 +12,8 @@ import FormGroup from "@mui/material/FormGroup";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
+import request from "@/utils/request";
+
 import { DateTime, DateTimeWithSwitch } from "./fields";
 
 const UpdateStatusDialog = ({ equipment, reload }) => {
@@ -33,7 +35,6 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
   const sendData = async () => {
     const data = {};
 
-    console.log(createdAt);
     data.createdAt = createdAt;
     data.registeredInManufacturerAt = registeredInManufacturerAt;
     data.avalietedAt = avalietedAt;
@@ -43,16 +44,12 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
     data.repairedAt = repairedAt;
     data.deliveredToCustomerAt = deliveredToCustomerAt;
 
-    const request = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: equipment.id, data: data }),
-    };
-
-    await fetch("/api/admin/equipments", request);
-    await reload();
-
-    setOpen(false);
+    if (
+      (await request("/api/admin/equipments", "PUT", { id: equipment.id, data: data })) != "ERROR"
+    ) {
+      await reload();
+      setOpen(false);
+    }
   };
 
   return (

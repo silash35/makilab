@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import ClientInputs from "@/components/common/inputs/client";
 import EquipmentInputs from "@/components/common/inputs/equipment";
+import request from "@/utils/request";
 
 const novoCliente = { label: "Novo Cliente", id: 0 };
 
@@ -13,15 +14,7 @@ export default function OSInputs() {
   const [clientSelectorValue, setClientSelectorValue] = useState(clients[0]);
 
   const load = async () => {
-    const res = await fetch("/api/admin/clients", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await res.json();
+    const data = await request("/api/admin/clients", "GET");
 
     if (Array.isArray(data)) {
       const options = [novoCliente].concat(data);

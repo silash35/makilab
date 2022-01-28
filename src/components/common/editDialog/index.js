@@ -6,6 +6,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useRef } from "react";
 
+import request from "@/utils/request";
+
 export default function EditDialog({ Inputs, URL, title, reload }) {
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -13,24 +15,12 @@ export default function EditDialog({ Inputs, URL, title, reload }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     var formData = new FormData(form.current);
-
     const data = Object.fromEntries(formData);
 
-    const request = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    const res = await fetch(URL, request);
-
-    if (res.status === 200) {
+    if ((await request(URL, "POST", data)) != "ERROR") {
       setOpenDialog(false);
       reload();
-    } else {
-      const body = await res.json();
-      alert("ERRO: " + body.error);
     }
   };
 

@@ -6,23 +6,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 
+import request from "@/utils/request";
+
 export default function DeleteDialog({ id, title, text, URL, reload }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const sendData = async () => {
-    const request = {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id }),
-    };
-    const res = await fetch(URL, request);
-
-    if (res.status === 200) {
+    if ((await request(URL, "DELETE", { id })) != "ERROR") {
       setOpenDialog(false);
       reload();
-    } else {
-      const body = await res.json();
-      alert("ERRO: " + body.error);
     }
   };
 

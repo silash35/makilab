@@ -2,6 +2,8 @@ import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 
+import request from "@/utils/request";
+
 import styles from "./Form.module.scss";
 
 export default function Form({ Inputs, URL, title, next }) {
@@ -10,23 +12,12 @@ export default function Form({ Inputs, URL, title, next }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     var formData = new FormData(form.current);
-
     const data = Object.fromEntries(formData);
 
-    const request = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    const res = await fetch(URL, request);
-    const body = await res.json();
-
-    if (res.status === 200) {
-      router.push(next(body));
-    } else {
-      alert("ERRO: " + body.error);
+    const json = await request(URL, "POST", data);
+    if (json != "ERROR") {
+      router.push(next(json));
     }
   };
 

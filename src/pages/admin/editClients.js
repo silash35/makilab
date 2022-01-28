@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import Header from "@/components/common/header";
 import ClientsTable from "@/components/editClients/table";
+import request from "@/utils/request";
 
 function EditClients() {
   const [clients, setClients] = useState(null);
@@ -13,16 +14,7 @@ function EditClients() {
   const load = async () => {
     setClients(null);
 
-    const res = await fetch("/api/admin/clients", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await res.json();
-
+    const data = await request("/api/admin/clients", "GET");
     if (Array.isArray(data)) {
       setClients(data);
     } else {

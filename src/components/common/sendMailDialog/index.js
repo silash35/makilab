@@ -8,23 +8,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
+import request from "@/utils/request";
+
 export default function SendMailDialog({ client, email = null }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [text, setText] = useState(email === null ? client.defaultEmail : email);
 
   const sendData = async () => {
-    const request = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to: client.email, text: text }),
-    };
-    const res = await fetch("/api/admin/sendMail", request);
-
-    if (res.status === 200) {
+    if (
+      (await request("/api/admin/sendMail", "POST", { to: client.email, text: text })) != "ERROR"
+    ) {
       setOpenDialog(false);
-    } else {
-      const body = await res.json();
-      alert("ERRO: " + body.error);
     }
   };
 

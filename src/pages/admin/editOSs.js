@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Header from "@/components/common/header";
 import EquipmentsTable from "@/components/editEquipments/table";
 import processEquipment from "@/utils/processEquipment";
+import request from "@/utils/request";
 
 function EditEquipments() {
   const [equipments, setEquipments] = useState(null);
@@ -14,15 +15,7 @@ function EditEquipments() {
   const load = async () => {
     setEquipments(null);
 
-    const res = await fetch("/api/admin/equipments", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await res.json();
+    const data = await request("/api/admin/equipments", "GET");
 
     if (Array.isArray(data)) {
       const processedEquipments = data.map((equipment) => {

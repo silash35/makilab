@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
 import processProduct from "@/utils/processProduct";
+import request from "@/utils/request";
 
 import Product from "../product";
 import styles from "./track.module.scss";
@@ -17,16 +18,9 @@ export default function Track() {
   const { id } = router.query;
 
   const load = async (id) => {
-    const res = await fetch(`/api/product/?id=${id}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+    const data = await request(`/api/product/?id=${id}`, "GET");
 
-    if (res.status === 200) {
-      const data = await res.json();
+    if (data != "ERROR") {
       setProduct(processProduct(data));
     } else {
       setProduct({});

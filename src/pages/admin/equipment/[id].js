@@ -9,6 +9,7 @@ import Main from "@/components/equipment/main";
 import Options from "@/components/equipment/options";
 import Pdf from "@/components/equipment/pdf";
 import processEquipment from "@/utils/processEquipment";
+import request from "@/utils/request";
 
 function Equipment() {
   const [isPrinting, setIsPrinting] = useState(false);
@@ -20,15 +21,7 @@ function Equipment() {
     setEquipment("loading");
 
     try {
-      const res = await fetch(`/api/admin/equipments?id=${id}`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await res.json();
+      const data = await request(`/api/admin/equipments?id=${id}`, "GET");
       setEquipment(processEquipment(data));
     } catch (error) {
       setEquipment("error");
