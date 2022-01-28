@@ -112,6 +112,14 @@ export default function EquipmentInputs({ equipment = {} }) {
           label="Garantia"
         />
       </div>
+
+      <TextField
+        name="notes"
+        label="Observações extras"
+        defaultValue={equipment.notes}
+        multiline
+        {...common}
+      />
     </>
   );
 }

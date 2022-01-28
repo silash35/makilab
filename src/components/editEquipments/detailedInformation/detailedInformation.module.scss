@@ -31,4 +31,11 @@
   & > div {
     flex-grow: 1;
   }
+
+  .bigText {
+    overflow-y: scroll;
+    max-width: fit-content;
+    max-height: 100px;
+    white-space: pre-line;
+  }
 }

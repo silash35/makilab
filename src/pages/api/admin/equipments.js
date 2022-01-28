@@ -50,6 +50,7 @@ const methods = {
         attendedBy: filterString(body.attendedBy),
         attendedOn: filterString(body.attendedOn),
         isUnderWarranty: body.isUnderWarranty === "on",
+        notes: filterString(body.notes),
         wasEdited: true,
       },
     });

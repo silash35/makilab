@@ -50,6 +50,12 @@ export default function DetailedInformation({ equipment, reload }) {
               {equipment.problemDescription &&
                 `Descrição do problema: ${equipment.problemDescription}`}
             </p>
+
+            {equipment.notes && (
+              <>
+                <p>Obervações Extras:</p> <p className={styles.bigText}>{equipment.notes}</p>
+              </>
+            )}
           </CardContent>
         </Card>
 

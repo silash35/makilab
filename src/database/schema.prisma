@@ -38,6 +38,7 @@ model Equipment {
   productCondition   String?
   accessories        String?
   listOfServices     String?
+  notes              String? @db.MediumText
 
   isUnderWarranty Boolean
   attendedBy      String
