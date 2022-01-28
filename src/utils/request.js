@@ -5,11 +5,11 @@ export default async function request(URL, method, body) {
     body: body ? JSON.stringify(body) : undefined,
   });
   const json = await res.json();
-
+  console.log(res);
   if (res.status === 200) {
     return json;
   } else {
-    alert(`ERRO: ${res.status}\n${json.error}`);
+    alert(`ERRO: ${res.status} ${res.statusText}\n${json.error}`);
     return "ERROR";
   }
 }

@@ -20,7 +20,7 @@ function NewEquipment() {
           URL="/api/admin/clients"
           title="Cadastrar Nova Ordem de Serviço"
           next={(res) => {
-            return `/admin/equipment/${res.equipment[res.equipment.length - 1].id}`;
+            return `/admin/OS?id=${res.equipment[res.equipment.length - 1].id}`;
           }}
         />
       </main>

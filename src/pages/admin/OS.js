@@ -18,13 +18,20 @@ function Equipment() {
   const { id } = router.query;
 
   const load = async () => {
-    setEquipment("loading");
+    if (id != undefined) {
+      setEquipment("loading");
 
-    try {
       const data = await request(`/api/admin/equipments?id=${id}`, "GET");
-      setEquipment(processEquipment(data));
-    } catch (error) {
-      setEquipment("error");
+
+      if (data != "ERROR") {
+        setEquipment(processEquipment(data));
+      } else {
+        setEquipment("ERROR");
+      }
+    } else {
+      if (router.isReady) {
+        setEquipment(undefined);
+      }
     }
   };
 
@@ -46,15 +53,17 @@ function Equipment() {
         {(() => {
           if (equipment === "loading") {
             return <CircularProgress />;
-          } else if (equipment?.id == id) {
+          } else if (equipment === "ERROR") {
+            return <p>ERRO: ID &ldquo;{id}&rdquo; Invalido. Nenhuma OS encontrada</p>;
+          } else if (equipment === undefined) {
+            return <p>ERRO: Nenhum ID especificado</p>;
+          } else {
             return (
               <>
                 <Pdf equipment={equipment} />
                 <Options equipment={equipment} setIsPrinting={setIsPrinting} reload={load} />
               </>
             );
-          } else {
-            return <p>ERRO: ID {id} Invalido. Nenhuma OS encontrada</p>;
           }
         })()}
       </Main>

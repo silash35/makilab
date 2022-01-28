@@ -19,19 +19,16 @@ export default function apiFactory(methods, auth) {
         await requestedMethod(req, res);
       } else {
         res.statusCode = 405;
-        res.end("Method Not Allowed");
       }
     } catch (err) {
       if (err.name === "JsonWebTokenError") {
         res.statusCode = 401;
-        res.end("Unauthorized");
       } else if (err.name === "Not Found") {
         res.statusCode = 404;
-        res.end("Not Found");
       } else {
         res.statusCode = 500;
-        res.end("Internal Server Error \n" + JSON.stringify({ err }));
       }
+      res.end(JSON.stringify({ err }));
     }
   };
 }
