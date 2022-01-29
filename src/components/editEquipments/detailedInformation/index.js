@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Link from "next/link";
 
 import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
@@ -97,6 +99,11 @@ export default function DetailedInformation({ equipment, reload }) {
           title="Editar Equipamento"
           reload={reload}
         />
+        <Link as={`/admin/OS?id=${equipment.id}`} href={`/admin/OS?id=${equipment.id}`}>
+          <Button variant="outlined" component="a">
+            Gerar PDF
+          </Button>
+        </Link>
         <UpdateStatusDialog equipment={equipment} reload={reload} />
       </div>
     </Box>
