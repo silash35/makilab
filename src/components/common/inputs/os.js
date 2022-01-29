@@ -14,7 +14,7 @@ export default function OSInputs() {
   const [clientSelectorValue, setClientSelectorValue] = useState(clients[0]);
 
   const load = async () => {
-    const data = await request("/api/admin/clients", "GET");
+    const data = await request("/api/clients", "GET");
 
     if (Array.isArray(data)) {
       const options = [novoCliente].concat(data);

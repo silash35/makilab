@@ -44,9 +44,7 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
     data.repairedAt = repairedAt;
     data.deliveredToCustomerAt = deliveredToCustomerAt;
 
-    if (
-      (await request("/api/admin/equipments", "PUT", { id: equipment.id, data: data })) != "ERROR"
-    ) {
+    if ((await request("/api/equipments", "PUT", { id: equipment.id, data: data })) != "ERROR") {
       await reload();
       setOpen(false);
     }

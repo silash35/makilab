@@ -3,32 +3,30 @@ import Head from "next/head";
 
 import Form from "@/components/common/form";
 import Header from "@/components/common/header";
-import OSInputs from "@/components/common/inputs/os";
+import ClientInputs from "@/components/common/inputs/client";
 
-function NewEquipment() {
+function NewClient() {
   return (
     <>
       <Head>
-        <title>Cadastrar novo equipamento</title>
+        <title>Cadastrar novo Cliente</title>
       </Head>
 
       <Header />
 
       <main>
         <Form
-          Inputs={OSInputs}
-          URL="/api/admin/clients"
-          title="Cadastrar Nova Ordem de Serviço"
-          next={(res) => {
-            return `/admin/OS?id=${res.equipment[res.equipment.length - 1].id}`;
-          }}
+          Inputs={ClientInputs}
+          URL="/api/clients"
+          title="Cadastrar novo Cliente"
+          next={() => "/"}
         />
       </main>
     </>
   );
 }
 
-export default withPasswordProtect(NewEquipment, {
+export default withPasswordProtect(NewClient, {
   loginComponentProps: {
     backUrl: "/",
     logo: "/logo.png",

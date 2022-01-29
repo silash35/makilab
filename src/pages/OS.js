@@ -21,7 +21,7 @@ function Equipment() {
     if (id != undefined) {
       setEquipment("loading");
 
-      const data = await request(`/api/admin/equipments?id=${id}`, "GET");
+      const data = await request(`/api/equipments?id=${id}`, "GET");
 
       if (data != "ERROR") {
         setEquipment(processEquipment(data));

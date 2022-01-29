@@ -85,7 +85,7 @@ export default function DetailedInformation({ equipment, reload }) {
       <div className={styles.flex}>
         <DeleteDialog
           id={equipment.id}
-          URL={"/api/admin/equipments"}
+          URL={"/api/equipments"}
           title={`Deletar ${equipment.id}`}
           text={`Tem certeza que deseja excluir a OS ${equipment.id}?`}
           reload={reload}
@@ -93,7 +93,7 @@ export default function DetailedInformation({ equipment, reload }) {
         {owner.email && <SendMailDialog client={equipment.owner} />}
         <EditDialog
           Inputs={<EquipmentInputs equipment={equipment} />}
-          URL={"/api/admin/equipments"}
+          URL={"/api/equipments"}
           title="Editar Equipamento"
           reload={reload}
         />

@@ -15,9 +15,7 @@ export default function SendMailDialog({ client, email = null }) {
   const [text, setText] = useState(email === null ? client.defaultEmail : email);
 
   const sendData = async () => {
-    if (
-      (await request("/api/admin/sendMail", "POST", { to: client.email, text: text })) != "ERROR"
-    ) {
+    if ((await request("/api/sendMail", "POST", { to: client.email, text: text })) != "ERROR") {
       setOpenDialog(false);
     }
   };

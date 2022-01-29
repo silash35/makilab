@@ -26,7 +26,7 @@ export default function DetailedInformation({ client, reload }) {
       <div className={styles.flex}>
         <DeleteDialog
           id={client.id}
-          URL={"/api/admin/clients"}
+          URL={"/api/clients"}
           title={`Deletar ${client.name}`}
           text={`Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`}
           reload={reload}
@@ -34,7 +34,7 @@ export default function DetailedInformation({ client, reload }) {
         {client.email && <SendMailDialog client={client} />}
         <EditDialog
           Inputs={<ClientInputs client={client} />}
-          URL={"/api/admin/clients"}
+          URL={"/api/clients"}
           title="Editar Cliente"
           reload={reload}
         />

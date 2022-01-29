@@ -5,18 +5,23 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import Header from "@/components/common/header";
-import ClientsTable from "@/components/editClients/table";
+import EquipmentsTable from "@/components/editEquipments/table";
+import processEquipment from "@/utils/processEquipment";
 import request from "@/utils/request";
 
-function EditClients() {
-  const [clients, setClients] = useState(null);
+function EditEquipments() {
+  const [equipments, setEquipments] = useState(null);
 
   const load = async () => {
-    setClients(null);
+    setEquipments(null);
 
-    const data = await request("/api/admin/clients", "GET");
+    const data = await request("/api/equipments", "GET");
+
     if (Array.isArray(data)) {
-      setClients(data);
+      const processedEquipments = data.map((equipment) => {
+        return processEquipment(equipment);
+      });
+      setEquipments(processedEquipments);
     } else {
       return null;
     }
@@ -29,14 +34,14 @@ function EditClients() {
   return (
     <>
       <Head>
-        <title>Gerenciar Clientes</title>
+        <title>Gerenciar Ordens de Serviço</title>
       </Head>
 
       <Header />
 
       <main style={{ padding: "10vh 5vw" }}>
-        {clients ? (
-          <ClientsTable clients={clients} reload={load} />
+        {equipments ? (
+          <EquipmentsTable equipments={equipments} reload={load} />
         ) : (
           <Stack alignItems="center">
             <CircularProgress />
@@ -47,7 +52,7 @@ function EditClients() {
   );
 }
 
-export default withPasswordProtect(EditClients, {
+export default withPasswordProtect(EditEquipments, {
   loginComponentProps: {
     backUrl: "/",
     logo: "/logo.png",

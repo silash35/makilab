@@ -1,20 +1,30 @@
+import { withPasswordProtect } from "@storyofams/next-password-protect";
 import Head from "next/head";
 
+import AdminMenu from "@/components/adminMenu";
 import Header from "@/components/common/header";
-import Track from "@/components/index/track";
 
-export default function TrackPage() {
+function AdminMenuPage() {
   return (
     <>
       <Head>
-        <title>Verifique o status do seu produto</title>
+        <title>Painel de Administração</title>
       </Head>
 
       <Header />
 
       <main style={{ display: "contents" }}>
-        <Track />
+        <AdminMenu />
       </main>
     </>
   );
 }
+
+export default withPasswordProtect(AdminMenuPage, {
+  loginComponentProps: {
+    backUrl: "/",
+    logo: "/logo.png",
+    buttonColor: "#fff",
+    buttonBackgroundColor: "#c00000",
+  },
+});

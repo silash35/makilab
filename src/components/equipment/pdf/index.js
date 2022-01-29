@@ -2,7 +2,6 @@ import add from "date-fns/add";
 import format from "date-fns/format";
 
 import styles from "./pdf.module.scss";
-import QrCode from "./qrCode";
 
 export default function Pdf({ equipment }) {
   const owner = equipment.owner;
@@ -82,7 +81,6 @@ export default function Pdf({ equipment }) {
           técnica. Nosso orçamento é válido por 5 dias. Após 90 dias sem aprovação nem retirada do
           equipamento o mesmo será descartado ou vendido para custear despesas de armazenamento.
         </p>
-        <QrCode id={equipment.id} />
       </div>
 
       <hr />

@@ -24,13 +24,13 @@ export default function Options({ equipment, setIsPrinting, reload }) {
       </Button>
       <EditDialog
         Inputs={<EquipmentInputs equipment={equipment} />}
-        URL={"/api/admin/equipments"}
+        URL={"/api/equipments"}
         title="Editar Equipamento"
         reload={reload}
       />
       <EditDialog
         Inputs={<ClientInputs client={equipment.owner} />}
-        URL={"/api/admin/clients"}
+        URL={"/api/clients"}
         title="Editar Cliente"
         reload={reload}
       />
