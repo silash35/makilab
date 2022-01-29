@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import Header from "@/components/common/header";
-import Main from "@/components/equipment/main";
-import Options from "@/components/equipment/options";
-import Pdf from "@/components/equipment/pdf";
+import Main from "@/components/OS/main";
+import Options from "@/components/OS/options";
+import Pdf from "@/components/OS/pdf";
 import processEquipment from "@/utils/processEquipment";
 import request from "@/utils/request";
 
