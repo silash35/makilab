@@ -1,17 +1,6 @@
 # Makilab
 
-Makilab was a multi-brand authorized technical assistance. And this software was created to help the company manage its work orders. In addition, it provides an interface for the customer to check the status of his equipment.
+This is the offline version of the Makilab software. Now it is a program that runs locally without the need for internet. It is recommended for companies that are not interested in maintaining a Web server.
+Some features, such as the client interface, have been removed, as they only make sense on a remote server
 
 All code is in the public domain. So feel free to customize it to your company's needs and use freely
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
