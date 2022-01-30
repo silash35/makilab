@@ -1,3 +1,4 @@
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -49,6 +50,7 @@ export default function DetailedInformation({ client, reload }) {
             <Card variant="outlined" key={equipment.id}>
               <CardContent>
                 <h3>{equipment.id && "OS " + equipment.id}</h3>
+                {equipment.deleted && <Alert severity="error">Esse equipamento foi deletado</Alert>}
                 <p>
                   Equipamento:
                   {equipment.name && " " + equipment.name}
