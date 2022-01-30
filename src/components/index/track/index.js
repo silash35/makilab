@@ -18,7 +18,7 @@ export default function Track() {
   const { id } = router.query;
 
   const load = async (id) => {
-    const data = await request(`/api/product/?id=${id}`, "GET");
+    const data = await request(`/api/product/?id=${id}`, "GET", undefined, true);
 
     if (data != "ERROR") {
       setProduct(processProduct(data));
