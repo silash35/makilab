@@ -2,6 +2,7 @@
 
 .env
 /APP-linux-x64
+/Webapp-linux-x64
 
 # dependencies
 node_modules

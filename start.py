@@ -9,7 +9,7 @@ chdir(path.join("server"))
 server = subprocess.Popen(["yarn", "start"])
 
 print("Starting Program")
-system((path.join(oldPath, "APP-linux-x64", "APP")))
+system((path.join(oldPath, "Webapp-linux-x64", "Webapp")))
 
 print("Closing Server")
 server.terminate()
