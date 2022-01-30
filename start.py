@@ -1,18 +1,16 @@
 from os import path, system, getcwd, chdir
-from threading import Thread
-
-
-def server():
-    system("yarn start")
+import subprocess
+import sys
 
 
 print("Starting server")
 oldPath = getcwd()
 chdir(path.join("server"))
-serverThread = Thread(target=server)
-serverThread.daemon = True
-serverThread.start()
+server = subprocess.Popen(["yarn", "start"])
 
-
-print("Start Program")
+print("Starting Program")
 system((path.join(oldPath, "APP-linux-x64", "APP")))
+
+print("Closing Server")
+server.terminate()
+sys.exit()
