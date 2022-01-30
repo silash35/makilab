@@ -1,0 +1,16 @@
+@use "@/styles/media" as m;
+@use "@/styles/variables.module" as v;
+
+.header {
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+  }
+}
+
+.image {
+  line-height: 0;
+}

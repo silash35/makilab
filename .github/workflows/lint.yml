@@ -16,5 +16,7 @@ jobs:
         run: npm install -g yarn
       - name: Install Packages
         run: yarn install
+        working-directory: ./server
       - name: Run linter
         run: yarn lint
+        working-directory: ./server

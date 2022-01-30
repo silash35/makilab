@@ -12,9 +12,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
       - name: Install Yarn
         run: npm install -g yarn
-      - name: Install Packages
-        run: yarn install
-      - name: Run Build
-        run: yarn build
+      - name: Run update.py
+        run: python update.py
