@@ -99,7 +99,7 @@ export default function DetailedInformation({ equipment, reload }) {
           title="Editar Equipamento"
           reload={reload}
         />
-        <Link as={`/admin/OS?id=${equipment.id}`} href={`/admin/OS?id=${equipment.id}`}>
+        <Link href={`/admin/OS?id=${equipment.id}`} passHref>
           <Button variant="outlined" component="a">
             Gerar PDF
           </Button>

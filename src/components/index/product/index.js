@@ -62,10 +62,7 @@ export default function Product({ product }) {
           <Dates product={product} />
         </div>
 
-        <Link
-          as="https://api.whatsapp.com/send?phone=5571985447786"
-          href="https://api.whatsapp.com/send?phone=5571985447786"
-        >
+        <Link href="https://api.whatsapp.com/send?phone=5571985447786">
           <a>
             <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/WhatsApp.png" height="100" />
           </a>
