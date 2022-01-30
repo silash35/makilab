@@ -10,13 +10,13 @@ const methods = {
       secure: false,
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
     // send mail with defined transport object
     await transporter.sendMail({
-      from: `"Makilab Serviços" <${process.env.EMAIL_USER}`,
+      from: `"Makilab Serviços" <${process.env.EMAIL_USER}>`,
       to: `${process.env.EMAIL_USER}, ${req.body.to}`,
       subject: "Atualizações sobre o seu equipamento",
       text: req.body.text,

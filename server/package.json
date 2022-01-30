@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "prisma": {
     "schema": "src/database/schema.prisma"
@@ -27,6 +28,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^12.0.9",
     "@prisma/client": "^3.8.1",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",

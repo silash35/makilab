@@ -25,7 +25,7 @@ export default function AdminMenu() {
 
 function BigButton({ children, color, link }) {
   return (
-    <Link as={link} href={link}>
+    <Link href={link} passHref>
       <Button variant="contained" component="a" className={`${styles.bigButton} ${color}`}>
         {children}
       </Button>

@@ -50,13 +50,11 @@ const methods = {
   },
 
   async DELETE(req, res) {
-    console.log("chegou aqui");
     await prisma.equipment.deleteMany({
       where: {
         ownerId: req.body.id,
       },
     });
-
     await prisma.client.delete({
       where: {
         id: req.body.id,
