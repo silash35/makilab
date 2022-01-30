@@ -1,8 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 .env
-/APP-linux-x64
-/Webapp-linux-x64
+/*-linux-x64
 
 # dependencies
 node_modules

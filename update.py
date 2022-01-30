@@ -14,7 +14,7 @@ dirpath = path.join("server", ".node_modules")
 if path.exists(dirpath) and path.isdir(dirpath):
     shutil.rmtree(dirpath)
 
-dirpath = path.join("Webapp-linux-x64")
+dirpath = path.join("Makilab-linux-x64")
 if path.exists(dirpath) and path.isdir(dirpath):
     shutil.rmtree(dirpath)
 
@@ -35,7 +35,7 @@ server = subprocess.Popen(["yarn", "start"])
 
 
 print("Generanting new executables")
-system("yarn nativefier --portable http://127.0.0.1:3000 " + oldPath)
+system("yarn nativefier --name Makilab --portable http://127.0.0.1:3000 " + oldPath)
 
 
 print("Closing Server")
