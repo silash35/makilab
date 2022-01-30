@@ -4,8 +4,15 @@ export default async function request(URL, method, body) {
     headers: { "Content-Type": "application/json" },
     body: body ? JSON.stringify(body) : undefined,
   });
-  const json = await res.json();
-  console.log(res);
+
+  let json;
+
+  try {
+    json = await res.json();
+  } catch (error) {
+    json = "";
+  }
+
   if (res.status === 200) {
     return json;
   } else {
