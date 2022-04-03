@@ -1,9 +1,9 @@
-name: ESLint
+name: TypeScript
 
 on: [push, pull_request]
 
 jobs:
-  ESLint:
+  TypeScript:
     runs-on: ubuntu-latest
     steps:
       - name: Setup repo
@@ -17,5 +17,5 @@ jobs:
         with:
           version: latest
           run_install: true
-      - name: Run linter
-        run: pnpm lint
+      - name: Run Type Checking
+        run: pnpm tsc

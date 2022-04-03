@@ -9,13 +9,10 @@ All code is in the public domain. So feel free to customize it to your company's
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
+Then, open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Git Flow
 
