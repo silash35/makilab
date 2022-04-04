@@ -1,16 +1,3 @@
-module.exports = {
-  tabWidth: 2,
-  useTabs: false,
-  printWidth: 100,
-  semi: true,
-  singleQuote: false,
+const prettierConfig = require("@opensom/eslint-config/prettier.config");
 
-  overrides: [
-    {
-      files: ["_document.js"],
-      options: {
-        printWidth: 999,
-      },
-    },
-  ],
-};
+module.exports = prettierConfig;
