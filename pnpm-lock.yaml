@@ -1,56 +1,67 @@
 lockfileVersion: 5.3
 
-specifiers:
-  '@date-io/date-fns': ^2.13.1
-  '@emotion/react': ^11.8.2
-  '@emotion/styled': ^11.8.1
-  '@mui/icons-material': ^5.5.1
-  '@mui/lab': ^5.0.0-alpha.75
-  '@mui/material': ^5.5.3
-  '@next/eslint-plugin-next': ^12.1.4
-  '@prisma/client': ^3.11.1
-  '@storyofams/next-password-protect': ^1.6.0
-  date-fns: ^2.28.0
-  easyqrcodejs: ^4.4.10
-  eslint: ^8.12.0
-  eslint-config-prettier: ^8.5.0
-  eslint-plugin-prettier: ^4.0.0
-  eslint-plugin-react: ^7.29.4
-  eslint-plugin-simple-import-sort: ^7.0.0
-  next: ^12.1.4
-  nodemailer: ^6.7.3
-  prettier: ^2.6.2
-  prisma: ^3.11.1
-  react: ^18.0.0
-  react-dom: ^18.0.0
-  sass: ^1.49.11
+importers:
 
-dependencies:
-  '@date-io/date-fns': 2.13.1_date-fns@2.28.0
-  '@emotion/react': 11.8.2_react@18.0.0
-  '@emotion/styled': 11.8.1_ee84e20a245090bde4b0ee7c2cf17b2c
-  '@mui/icons-material': 5.5.1_@mui+material@5.5.3+react@18.0.0
-  '@mui/lab': 5.0.0-alpha.75_9e3b67cfd1c32c3f8a721521cd9b5a3f
-  '@mui/material': 5.5.3_9c27c630b69ec62c2fede5fefb2caebb
-  '@storyofams/next-password-protect': 1.6.0_c0abbb53577d424fe320649841fdc7d4
-  date-fns: 2.28.0
-  easyqrcodejs: 4.4.10
-  next: 12.1.4_ffeb35a77152468a5cd8663529066a5b
-  nodemailer: 6.7.3
-  prisma: 3.11.1
-  react: 18.0.0
-  react-dom: 18.0.0_react@18.0.0
+  .:
+    specifiers:
+      '@opensom/eslint-config': workspace:*
+    devDependencies:
+      '@opensom/eslint-config': link:packages/eslint-config
 
-devDependencies:
-  '@next/eslint-plugin-next': 12.1.4
-  '@prisma/client': 3.11.1_prisma@3.11.1
-  eslint: 8.12.0
-  eslint-config-prettier: 8.5.0_eslint@8.12.0
-  eslint-plugin-prettier: 4.0.0_f2c91d0f54113167d2bd9214a5ab5a36
-  eslint-plugin-react: 7.29.4_eslint@8.12.0
-  eslint-plugin-simple-import-sort: 7.0.0_eslint@8.12.0
-  prettier: 2.6.2
-  sass: 1.49.11
+  packages/eslint-config:
+    specifiers:
+      '@next/eslint-plugin-next': ^12.1.4
+      eslint: ^8.12.0
+      eslint-config-prettier: ^8.5.0
+      eslint-plugin-prettier: ^4.0.0
+      eslint-plugin-react: ^7.29.4
+      eslint-plugin-simple-import-sort: ^7.0.0
+      prettier: ^2.6.2
+    devDependencies:
+      '@next/eslint-plugin-next': 12.1.4
+      eslint: 8.12.0
+      eslint-config-prettier: 8.5.0_eslint@8.12.0
+      eslint-plugin-prettier: 4.0.0_f2c91d0f54113167d2bd9214a5ab5a36
+      eslint-plugin-react: 7.29.4_eslint@8.12.0
+      eslint-plugin-simple-import-sort: 7.0.0_eslint@8.12.0
+      prettier: 2.6.2
+
+  packages/manager:
+    specifiers:
+      '@date-io/date-fns': ^2.13.1
+      '@emotion/react': ^11.8.2
+      '@emotion/styled': ^11.8.1
+      '@mui/icons-material': ^5.5.1
+      '@mui/lab': ^5.0.0-alpha.75
+      '@mui/material': ^5.5.3
+      '@prisma/client': ^3.11.1
+      '@storyofams/next-password-protect': ^1.6.0
+      date-fns: ^2.28.0
+      easyqrcodejs: ^4.4.10
+      next: ^12.1.4
+      nodemailer: ^6.7.3
+      prisma: ^3.11.1
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      sass: ^1.49.11
+    dependencies:
+      '@date-io/date-fns': 2.13.1_date-fns@2.28.0
+      '@emotion/react': 11.8.2_react@18.0.0
+      '@emotion/styled': 11.8.1_ee84e20a245090bde4b0ee7c2cf17b2c
+      '@mui/icons-material': 5.5.1_@mui+material@5.5.3+react@18.0.0
+      '@mui/lab': 5.0.0-alpha.75_9e3b67cfd1c32c3f8a721521cd9b5a3f
+      '@mui/material': 5.5.3_9c27c630b69ec62c2fede5fefb2caebb
+      '@storyofams/next-password-protect': 1.6.0_c0abbb53577d424fe320649841fdc7d4
+      date-fns: 2.28.0
+      easyqrcodejs: 4.4.10
+      next: 12.1.4_ffeb35a77152468a5cd8663529066a5b
+      nodemailer: 6.7.3
+      prisma: 3.11.1
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+    devDependencies:
+      '@prisma/client': 3.11.1_prisma@3.11.1
+      sass: 1.49.11
 
 packages:
 
