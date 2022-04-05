@@ -25,10 +25,10 @@
     "nodemailer": "^6.7.3",
     "prisma": "^3.11.1",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "@prisma/client": "^3.11.1"
   },
   "devDependencies": {
-    "@prisma/client": "^3.11.1",
     "sass": "^1.49.11"
   }
 }

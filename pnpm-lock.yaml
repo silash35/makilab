@@ -51,6 +51,7 @@ importers:
       '@mui/icons-material': 5.5.1_@mui+material@5.5.3+react@18.0.0
       '@mui/lab': 5.0.0-alpha.75_9e3b67cfd1c32c3f8a721521cd9b5a3f
       '@mui/material': 5.5.3_9c27c630b69ec62c2fede5fefb2caebb
+      '@prisma/client': 3.11.1_prisma@3.11.1
       '@storyofams/next-password-protect': 1.6.0_c0abbb53577d424fe320649841fdc7d4
       date-fns: 2.28.0
       easyqrcodejs: 4.4.10
@@ -60,7 +61,6 @@ importers:
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
     devDependencies:
-      '@prisma/client': 3.11.1_prisma@3.11.1
       sass: 1.49.11
 
 packages:
@@ -659,11 +659,11 @@ packages:
     dependencies:
       '@prisma/engines-version': 3.11.1-1.1a2506facaf1a4727b7c26850735e88ec779dee9
       prisma: 3.11.1
-    dev: true
+    dev: false
 
   /@prisma/engines-version/3.11.1-1.1a2506facaf1a4727b7c26850735e88ec779dee9:
     resolution: {integrity: sha512-HkcsDniA4iNb/gi0iuyOJNAM7nD/LwQ0uJm15v360O5dee3TM4lWdSQiTYBMK6FF68ACUItmzSur7oYuUZ2zkQ==}
-    dev: true
+    dev: false
 
   /@prisma/engines/3.11.1-1.1a2506facaf1a4727b7c26850735e88ec779dee9:
     resolution: {integrity: sha512-MILbsGnvmnhCbFGa2/iSnsyGyazU3afzD7ldjCIeLIGKkNBMSZgA2IvpYsAXl+6qFHKGrS3B2otKfV31dwMSQw==}
