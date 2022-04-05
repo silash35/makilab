@@ -31,8 +31,8 @@ function NewEquipment() {
 export default withPasswordProtect(NewEquipment, {
   loginComponentProps: {
     backUrl: "/",
-    logo: "/logo.png",
+    logo: "/icon.svg",
     buttonColor: "#fff",
-    buttonBackgroundColor: "#c00000",
+    buttonBackgroundColor: "#2ec27e",
   },
 });

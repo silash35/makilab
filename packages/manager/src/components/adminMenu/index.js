@@ -6,17 +6,19 @@ import styles from "./adminMenu.module.scss";
 export default function AdminMenu() {
   return (
     <div className={styles.adminMenu}>
-      <BigButton link="admin/newOS">Criar nova Ordem de Serviço</BigButton>
+      <BigButton link="admin/newOS" color={styles.green}>
+        Criar nova Ordem de Serviço
+      </BigButton>
 
-      <BigButton link="admin/editOSs" color={styles.orange}>
+      <BigButton link="admin/editOSs" color={styles.yellow}>
         Gerenciar Ordens de Serviço
       </BigButton>
 
-      <BigButton link="admin/newClient" color={styles.cyan}>
+      <BigButton link="admin/newClient" color={styles.blue}>
         Adicionar Cliente
       </BigButton>
 
-      <BigButton link="admin/editClients" color={styles.green}>
+      <BigButton link="admin/editClients" color={styles.red}>
         Gerenciar Clientes
       </BigButton>
     </div>

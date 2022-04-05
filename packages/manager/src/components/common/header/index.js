@@ -8,19 +8,19 @@ export default function Header() {
       <nav>
         <Link href="/">
           <a className={styles.image}>
-            <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/text.png" height="40"></img>
+            <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40"></img>
           </a>
         </Link>
 
         <div>
-          <Link href="https://makilab.com.br/">
+          <Link href="/">
             <a className={styles.headerButton}>Home</a>
           </Link>
           <Link href="https://www.instagram.com/makilabservicos/">
-            <a className={styles.headerButton}>Instagram</a>
+            <a className={styles.headerButton}>Help</a>
           </Link>
           <Link href="https://api.whatsapp.com/send?phone=5571985447786">
-            <a className={`${styles.headerButton} ${styles.contact}`}>WhatsApp</a>
+            <a className={`${styles.headerButton} ${styles.contact}`}>GitHub</a>
           </Link>
         </div>
       </nav>

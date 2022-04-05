@@ -74,8 +74,8 @@ function Equipment() {
 export default withPasswordProtect(Equipment, {
   loginComponentProps: {
     backUrl: "/",
-    logo: "/logo.png",
+    logo: "/icon.svg",
     buttonColor: "#fff",
-    buttonBackgroundColor: "#c00000",
+    buttonBackgroundColor: "#2ec27e",
   },
 });

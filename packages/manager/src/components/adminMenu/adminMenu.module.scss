@@ -19,32 +19,42 @@ a.bigButton {
   text-transform: none;
 }
 
-a.orange {
-  background-color: #ff9926;
-  &:focus {
-    background-color: #ffca5a;
-  }
-  &:hover {
-    background-color: #c66a00;
-  }
-}
-
-a.cyan {
-  background-color: #0277bd;
-  &:focus {
-    background-color: #58a5f0;
-  }
-  &:hover {
-    background-color: #004c8c;
-  }
-}
-
 a.green {
-  background-color: #2e7d32;
+  background-color: #26a269;
   &:focus {
-    background-color: #60ad5e;
+    background-color: #61d497;
   }
   &:hover {
-    background-color: #005005;
+    background-color: #00723e;
+  }
+}
+
+a.yellow {
+  background-color: #e5a50a;
+  &:focus {
+    background-color: #ffd64c;
+  }
+  &:hover {
+    background-color: #ae7600;
+  }
+}
+
+a.blue {
+  background-color: #1a5fb4;
+  &:focus {
+    background-color: #1a5fb4;
+  }
+  &:hover {
+    background-color: #003684;
+  }
+}
+
+a.red {
+  background-color: #a51d2d;
+  &:focus {
+    background-color: #dc5356;
+  }
+  &:hover {
+    background-color: #6f0004;
   }
 }

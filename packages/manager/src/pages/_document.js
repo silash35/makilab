@@ -12,20 +12,20 @@ class MyDocument extends Document {
 
           {/* SEO Meta Tags */}
           <meta name="author" content="Silas Henrique Alves Araújo" />
-          <meta name="description" content="Assistência Técnica Autorizada Multimarcas" />
+          <meta name="description" content="The Open source Service Order Manager" />
 
           {/* Open Graph / Facebook */}
           <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://makilab.vercel.app/" />
-          <meta property="og:locale" content="pt_BR" />
-          <meta property="og:image" content="https://makilab.vercel.app/card.png" />
-          <meta property="og:image:alt" content="Logotipo do MakiLab. Uma coruja com o nome MakiLab ao lado com a frase 'Automação, refrigeração e maquinas' em baixo" />
+          <meta property="og:url" content={process.env.SITE_URL} />
+          <meta property="og:locale" content="en_US" />
+          <meta property="og:image" content={`${process.env.SITE_URL}/card.png`} />
+          <meta property="og:image:alt" content="The OpenSOM logo. A green desk bell, with OpenSOM written on the side" />
 
           {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:url" content="https://makilab.vercel.app/" />
+          <meta name="twitter:url" content={process.env.SITE_URL} />
           <meta name="twitter:creator" content="@silash35" />
-          <meta name="twitter:image" content="https://makilab.vercel.app/card.png" />
+          <meta name="twitter:image" content={`${process.env.SITE_URL}/card.png`} />
 
           {/* Icons */}
           <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
@@ -34,8 +34,8 @@ class MyDocument extends Document {
           <link rel="manifest" href="/icons/site.webmanifest" />
           <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#0070f3" />
           <link rel="shortcut icon" href="/icons/favicon.ico" />
-          <meta name="apple-mobile-web-app-title" content="MakiLab" />
-          <meta name="application-name" content="MakiLab" />
+          <meta name="apple-mobile-web-app-title" content="OpenSOM" />
+          <meta name="application-name" content="OpenSOM" />
           <meta name="msapplication-TileColor" content="#2d89ef" />
           <meta name="msapplication-config" content="/icons/browserconfig.xml" />
           <meta name="theme-color" content="#ffffff" />
