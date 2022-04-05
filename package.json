@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "manager:dev": "cd packages/manager && pnpm dev",
-    "manager:build": "cd packages/manager && pnpm build",
     "manager:start": "cd packages/manager && pnpm start",
+    "build": "pnpm -r build",
     "lint": "pnpm -r lint"
   },
   "devDependencies": {
