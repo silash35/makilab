@@ -1,0 +1,1 @@
+web: pnpm manager:start
