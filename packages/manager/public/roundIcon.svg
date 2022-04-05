@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="512"
+   height="512"
+   version="1.1"
+   viewBox="0 0 384 384"
+   id="svg10"
+   sodipodi:docname="roundIcon.svg"
+   inkscape:version="1.2-alpha1 (b6a15bb, 2022-02-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     showguides="false"
+     inkscape:zoom="1.84375"
+     inkscape:cx="275.79661"
+     inkscape:cy="245.9661"
+     inkscape:window-width="1440"
+     inkscape:window-height="835"
+     inkscape:window-x="0"
+     inkscape:window-y="36"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10" />
+  <circle
+     style="fill:#ffffff;fill-rule:evenodd;stroke-width:5.85354;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+     id="path243"
+     cx="192"
+     cy="192"
+     r="192" />
+  <g
+     fill-rule="evenodd"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="g8431"
+     transform="matrix(0.61273333,0,0,0.61273333,74.3558,74.366538)">
+    <g
+       id="g10240"
+       transform="translate(7.7563924e-7,-15.9995)">
+      <path
+         d="M 192,90.646 A 170.67,170.67 0 0 0 21.33,261.316 H 362.66 A 170.67,170.67 0 0 0 191.99,90.646 Z"
+         fill="#2ec27e"
+         stroke-width="13.612"
+         style="paint-order:stroke fill markers"
+         id="path8425" />
+      <rect
+         x="-0.00097894995"
+         y="282.64999"
+         width="384"
+         height="42.666"
+         ry="21.333"
+         fill="#5e5c64"
+         stroke-width="9.9162"
+         style="paint-order:stroke fill markers"
+         id="rect8427" />
+    </g>
+  </g>
+  <g
+     fill-rule="evenodd"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="g8431-6"
+     transform="matrix(0.61273333,0,0,0.61273333,74.3558,64.563111)">
+    <rect
+       x="170.66"
+       y="58.646999"
+       width="42.666"
+       height="21.333"
+       ry="10.667"
+       fill="#2ec27e"
+       stroke-width="5.2967"
+       style="paint-order:stroke fill markers"
+       id="rect8429-3" />
+  </g>
+</svg>

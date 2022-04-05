@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="960"
+   height="158.29303"
+   viewBox="0 0 254 41.881699"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     id="layer1"
+     transform="translate(-127,-122.06617)">
+    <g
+       id="g103972"
+       transform="matrix(1.4313145,0,0,1.4313145,-97.007684,-87.165478)">
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:53.7453px;line-height:1;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:center;text-anchor:middle;white-space:pre;inline-size:272.14;fill:#2ec27e;fill-opacity:1;stroke-width:3.35908"
+         x="313.79288"
+         y="156.95627"
+         id="text890"
+         transform="matrix(0.49316946,0,0,0.49316946,116.71103,93.132902)"><tspan
+           x="313.79288"
+           y="156.95627"
+           id="tspan392"><tspan
+   style="fill:#5e5c64"
+   id="tspan390">Open</tspan>SOM</tspan></text>
+    </g>
+    <path
+       d="m 156.88261,127.04643 c -14.67018,0 -26.5627,11.89252 -26.5627,26.5627 h 53.12384 c 0,-14.67018 -11.89253,-26.5627 -26.5627,-26.5627 z"
+       fill="#2ec27e"
+       stroke-width="2.11855"
+       style="fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="path152-5-1" />
+    <rect
+       x="127"
+       y="156.9295"
+       width="59.764893"
+       height="6.64044"
+       ry="3.32022"
+       fill="#5e5c64"
+       stroke-width="1.54333"
+       style="fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect154-6-9" />
+    <rect
+       x="153.56131"
+       y="122.06618"
+       width="6.64044"
+       height="3.32022"
+       ry="1.6601877"
+       fill="#2ec27e"
+       stroke-width="0.824367"
+       style="fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect156-2-4" />
+  </g>
+</svg>
