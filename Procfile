@@ -1,3 +1,3 @@
 web: pnpm manager:start
 
-release: pnpm dlx prisma db push
+release: cd packages/manager && pnpm dlx prisma db push
