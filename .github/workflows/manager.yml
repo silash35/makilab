@@ -7,7 +7,7 @@ on:
       - "packages/eslint-config/**"
 
 jobs:
-  setup:
+  ESLint:
     runs-on: ubuntu-latest
     steps:
       - name: Setup repo
@@ -23,16 +23,24 @@ jobs:
           run_install: true
       - name: Go to Manager Folder
         run: cd packages/manager
-  ESLint:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
       - name: Run linter
         run: pnpm lint
 
   TypeScript:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Setup Node.js 14
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: true
+      - name: Go to Manager Folder
+        run: cd packages/manager
       - name: Run Type Checking
         run: pnpm tsc
