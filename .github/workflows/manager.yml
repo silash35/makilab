@@ -1,9 +1,13 @@
-name: ESLint
+name: OpenSOM Manager
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "packages/manager/**"
+      - "packages/eslint-config/**"
 
 jobs:
-  ESLint:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Setup repo
@@ -17,5 +21,18 @@ jobs:
         with:
           version: latest
           run_install: true
+      - name: Go to Manager Folder
+        run: cd packages/manager
+  ESLint:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
       - name: Run linter
         run: pnpm lint
+
+  TypeScript:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Type Checking
+        run: pnpm tsc

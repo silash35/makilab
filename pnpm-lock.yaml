@@ -36,6 +36,7 @@ importers:
       '@mui/material': ^5.6.0
       '@prisma/client': ^3.12.0
       '@storyofams/next-password-protect': ^1.6.0
+      '@types/node': ^17.0.23
       date-fns: ^2.28.0
       easyqrcodejs: ^4.4.10
       next: ^12.1.4
@@ -44,6 +45,7 @@ importers:
       react: ^18.0.0
       react-dom: ^18.0.0
       sass: ^1.49.11
+      typescript: ^4.6.3
     dependencies:
       '@date-io/date-fns': 2.13.1_date-fns@2.28.0
       '@emotion/react': 11.9.0_react@18.0.0
@@ -53,6 +55,7 @@ importers:
       '@mui/material': 5.6.0_6c8dcdda718e1b53eddefc29a789ee34
       '@prisma/client': 3.12.0_prisma@3.12.0
       '@storyofams/next-password-protect': 1.6.0_c0abbb53577d424fe320649841fdc7d4
+      '@types/node': 17.0.23
       date-fns: 2.28.0
       easyqrcodejs: 4.4.10
       next: 12.1.4_ffeb35a77152468a5cd8663529066a5b
@@ -61,6 +64,7 @@ importers:
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       sass: 1.49.11
+      typescript: 4.6.3
 
 packages:
 
@@ -717,6 +721,10 @@ packages:
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       safe-compare: 1.1.4
+    dev: false
+
+  /@types/node/17.0.23:
+    resolution: {integrity: sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==}
     dev: false
 
   /@types/parse-json/4.0.0:
@@ -2194,6 +2202,12 @@ packages:
     resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
     engines: {node: '>=10'}
     dev: true
+
+  /typescript/4.6.3:
+    resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: false
 
   /unbox-primitive/1.0.1:
     resolution: {integrity: sha512-tZU/3NqK3dA5gpE1KtyiJUrEB0lxnGkMFHptJ7q6ewdZ8s12QrODwNbhIJStmJkd1QDXa1NRA8aF2A1zk/Ypyw==}

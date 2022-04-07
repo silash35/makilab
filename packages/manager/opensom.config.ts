@@ -1,5 +1,5 @@
 export default {
-  SITE_URL: process.env.SITE_URL | "https://opensom.herokuapp.com",
+  SITE_URL: process.env.SITE_URL ? process.env.SITE_URL : "https://opensom.herokuapp.com",
   COMPANY: {
     name: "OpenSOM",
     email: "example@example.com",
