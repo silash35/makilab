@@ -16,10 +16,10 @@ export default function Header() {
           <Link href="/">
             <a className={styles.headerButton}>Home</a>
           </Link>
-          <Link href="https://www.instagram.com/makilabservicos/">
+          <Link href="/help">
             <a className={styles.headerButton}>Help</a>
           </Link>
-          <Link href="https://api.whatsapp.com/send?phone=5571985447786">
+          <Link href="https://github.com/silash35/opensom">
             <a className={`${styles.headerButton} ${styles.contact}`}>GitHub</a>
           </Link>
         </div>

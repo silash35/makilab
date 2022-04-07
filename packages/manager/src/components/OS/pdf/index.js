@@ -1,11 +1,14 @@
 import add from "date-fns/add";
 import format from "date-fns/format";
 
+import config from "/opensom.config";
+
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";
 
 export default function Pdf({ equipment }) {
   const owner = equipment.owner;
+  const PDF = config.PDF;
 
   return (
     <section className={styles.page}>
@@ -43,7 +46,7 @@ export default function Pdf({ equipment }) {
           <td colSpan="4" className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
             Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
             <br />
-            Salvador {format(new Date(), "dd/MM/yyyy")}
+            {PDF.location} {format(new Date(), "dd/MM/yyyy")}
           </td>
         </tr>
         <tr>

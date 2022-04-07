@@ -1,8 +1,11 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
+import config from "/opensom.config";
+
 class MyDocument extends Document {
   render() {
+    const SITE_URL = config.SITE_URL;
     return (
       <Html lang="pt-br">
         <Head>
@@ -16,16 +19,16 @@ class MyDocument extends Document {
 
           {/* Open Graph / Facebook */}
           <meta property="og:type" content="website" />
-          <meta property="og:url" content={process.env.SITE_URL} />
+          <meta property="og:url" content={SITE_URL} />
           <meta property="og:locale" content="en_US" />
-          <meta property="og:image" content={`${process.env.SITE_URL}/card.png`} />
+          <meta property="og:image" content={`${SITE_URL}/card.png`} />
           <meta property="og:image:alt" content="The OpenSOM logo. A green desk bell, with OpenSOM written on the side" />
 
           {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:url" content={process.env.SITE_URL} />
+          <meta name="twitter:url" content={SITE_URL} />
           <meta name="twitter:creator" content="@silash35" />
-          <meta name="twitter:image" content={`${process.env.SITE_URL}/card.png`} />
+          <meta name="twitter:image" content={`${SITE_URL}/card.png`} />
 
           {/* Icons */}
           <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
