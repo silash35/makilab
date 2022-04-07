@@ -1,6 +1,9 @@
 import nodemailer from "nodemailer";
 
+import config from "/opensom.config";
 import apiFactory from "@/utils/apiFactory";
+
+const { SITE_URL, COMPANY } = config;
 
 const methods = {
   async POST(req, res) {
@@ -16,7 +19,7 @@ const methods = {
 
     // send mail with defined transport object
     await transporter.sendMail({
-      from: `"Makilab Serviços" <${process.env.EMAIL_USER}>`,
+      from: `"${COMPANY.name}" <${process.env.EMAIL_USER}>`,
       to: `${process.env.EMAIL_USER}, ${req.body.to}`,
       subject: "Atualizações sobre o seu equipamento",
       text: req.body.text,
@@ -31,8 +34,8 @@ const methods = {
         class="flex"
       >
         <img
-          src="https://track.makilab.com.br/logo.png"
-          alt="Logo da Makilab Serviços"
+          src="${SITE_URL}/YOUR_COMPANY_LOGO.svg"
+          alt="Logo da ${COMPANY.name}"
           style="width: 40vw"
         />
 
@@ -44,10 +47,10 @@ const methods = {
           </p>
         </div>
 
-        <a href="https://api.whatsapp.com/send?phone=5571985447786">
+        <a href="https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}">
           <img
-            src="https://track.makilab.com.br/whatsapp.png"
-            alt="Whatsapp da Makilab Serviços"
+            src="${SITE_URL}/resources/whatsapp.png"
+            alt="Whatsapp da ${COMPANY.name}"
             style="width: 30vw; margin: 8vw"
         /></a>
 

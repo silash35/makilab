@@ -8,10 +8,11 @@ import TextField from "@mui/material/TextField";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
+import config from "/opensom.config";
+
 import styles from "./inputs.module.scss";
 
-const attendants = ["Rodrigo Ícaro", "Silas Henrique", "Amanda Pimenta", "Rai Neto"];
-const servicePlace = ["Balcão", "Telefone"];
+const { ATTENDANTS, SERVICE_PLACES } = config;
 
 export default function EquipmentInputs({ equipment = {} }) {
   const [dateValue, setDateValue] = useState(
@@ -69,7 +70,7 @@ export default function EquipmentInputs({ equipment = {} }) {
       <div className={styles.flex}>
         <Autocomplete
           freeSolo
-          options={attendants}
+          options={ATTENDANTS}
           defaultValue={equipment.attendedBy}
           renderInput={(params) => (
             <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
@@ -79,8 +80,8 @@ export default function EquipmentInputs({ equipment = {} }) {
 
         <Autocomplete
           freeSolo
-          options={servicePlace}
-          defaultValue={equipment.attendedOn ? equipment.attendedOn : servicePlace[0]}
+          options={SERVICE_PLACES}
+          defaultValue={equipment.attendedOn ? equipment.attendedOn : SERVICE_PLACES[0]}
           renderInput={(params) => (
             <TextField
               {...params}

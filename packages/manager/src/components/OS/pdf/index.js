@@ -6,9 +6,10 @@ import config from "/opensom.config";
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";
 
+const { COMPANY, PDF } = config;
+
 export default function Pdf({ equipment }) {
   const owner = equipment.owner;
-  const PDF = config.PDF;
 
   return (
     <section className={styles.page}>
@@ -46,7 +47,7 @@ export default function Pdf({ equipment }) {
           <td colSpan="4" className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
             Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
             <br />
-            {PDF.location} {format(new Date(), "dd/MM/yyyy")}
+            {COMPANY.city} {format(new Date(), "dd/MM/yyyy")}
           </td>
         </tr>
         <tr>
@@ -85,7 +86,7 @@ export default function Pdf({ equipment }) {
           técnica. Nosso orçamento é válido por 5 dias. Após 90 dias sem aprovação nem retirada do
           equipamento o mesmo será descartado ou vendido para custear despesas de armazenamento.
         </p>
-        <QrCode id={equipment.id} />
+        {PDF.hasQrCode && <QrCode id={equipment.id} />}
       </div>
 
       <hr />
@@ -124,12 +125,12 @@ export default function Pdf({ equipment }) {
 function Header() {
   return (
     <div className={styles.header}>
-      <img src="/logo2.png" alt="Logo da Makilab Serviços" width={100} />
+      <img src="/YOUR_COMPANY_LOGO.svg" alt={`Logo da ${COMPANY.name}`} width={100} />
       <h2>Ordem de Serviço de Entrada</h2>
       <ul>
-        <li>Makilab Serviços</li>
-        <li>71 2132-0220 | 71 98544-7786</li>
-        <li>contato@makilab.com</li>
+        <li>{COMPANY.name}</li>
+        <li>{COMPANY.phones.join(" | ")}</li>
+        <li>{COMPANY.email}</li>
       </ul>
     </div>
   );
