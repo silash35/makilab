@@ -1,0 +1,54 @@
+@use "@/styles/media" as m;
+@use "@/styles/variables.module" as v;
+
+.header {
+  display: flex;
+  justify-content: center;
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 80%;
+    padding: 20px;
+
+    @include m.forMedium() {
+      justify-content: center;
+
+      div {
+        display: none;
+      }
+    }
+  }
+}
+
+.image {
+  line-height: 0;
+}
+
+.headerButton {
+  margin-left: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-decoration: none;
+  font-family: "Noto Sans", sans-serif;
+  text-transform: uppercase;
+  color: black;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-bottom: black 2px solid;
+  }
+}
+
+.contact {
+  color: v.$primaryMain;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-bottom: v.$primaryMain 2px solid;
+  }
+}
