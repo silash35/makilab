@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "license": "Unlicense",
+  "engines": {
+    "node": "17.x"
+  },
   "scripts": {
     "start": "python start.py",
     "update": "python update.py"
