@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "manager:dev": "cd packages/manager && pnpm dev",
-    "manager:start": "cd packages/manager && pnpm start",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint"
   },
