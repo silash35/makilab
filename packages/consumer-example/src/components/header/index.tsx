@@ -3,10 +3,15 @@ import Link from "next/link";
 import config from "@config";
 
 import styles from "./header.module.scss";
-
+import { useRouter } from "next/router";
+import pt from "./locales/pt";
+import en from "./locales/en";
 const { COMPANY } = config;
 
 export default function Header() {
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === "en" ? en : pt;
   return (
     <header className={styles.header}>
       <nav>
@@ -21,7 +26,7 @@ export default function Header() {
             <a className={styles.headerButton}>E-mail</a>
           </Link>
           <Link href={`tel:${COMPANY.phone.replace(/[^0-9]/g, "")}`}>
-            <a className={styles.headerButton}>Telefone</a>
+            <a className={styles.headerButton}>{t.phone}</a>
           </Link>
           <Link href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}>
             <a className={`${styles.headerButton} ${styles.contact}`}>WhatsApp</a>

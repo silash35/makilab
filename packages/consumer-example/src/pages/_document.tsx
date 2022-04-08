@@ -8,7 +8,7 @@ const { SITE_URL, COMPANY } = config;
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="pt-br">
+      <Html>
         <Head>
           {/* Primary Meta Tags */}
           <meta charSet="utf-8" />
@@ -21,7 +21,6 @@ class MyDocument extends Document {
           {/* Open Graph / Facebook */}
           <meta property="og:type" content="website" />
           <meta property="og:url" content={SITE_URL} />
-          <meta property="og:locale" content="en_US" />
           <meta property="og:image" content={`${SITE_URL}/card.png`} />
           <meta property="og:image:alt" content={`${COMPANY.name} logo`} />
 

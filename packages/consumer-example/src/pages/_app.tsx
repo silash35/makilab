@@ -6,10 +6,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 import config from "@config";
 import variables from "@/styles/variables.module.scss";
+import { useRouter } from "next/router";
 
 const { COMPANY } = config;
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const { locale } = router;
+  const ogLocale = locale === "en" ? "en_US" : "pt_BR";
   return (
     <>
       <Head>
@@ -21,6 +25,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:title" content={COMPANY.name} key="twitterTitle" />
         <meta property="og:description" content={COMPANY.description} key="ogDescription" />
         <meta name="twitter:description" content={COMPANY.description} key="twitterDescription" />
+
+        {/* Locale Meta Tags */}
+        <meta property="og:locale" content={ogLocale} />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

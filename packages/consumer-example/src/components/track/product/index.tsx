@@ -62,12 +62,6 @@ export default function Product({ product }: Props) {
           <p>{product.stepText}</p>
           <Dates product={product} />
         </div>
-
-        <Link href="https://api.whatsapp.com/send?phone=5571985447786">
-          <a>
-            <img alt="Ícone do MakiLab; O desenho de uma Coruja" src="/WhatsApp.png" height="100" />
-          </a>
-        </Link>
       </div>
     </Paper>
   );
