@@ -1,7 +1,7 @@
 import Head from "next/head";
-
-import Header from "@/components/common/header";
-import Track from "@/components/index/track";
+import Header from "@/components/header";
+import Track from "@/components/track";
+import Info from "@/components/info";
 
 export default function TrackPage() {
   return (
@@ -14,6 +14,7 @@ export default function TrackPage() {
 
       <main style={{ display: "contents" }}>
         <Track />
+        <Info />
       </main>
     </>
   );

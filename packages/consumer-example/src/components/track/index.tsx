@@ -6,7 +6,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import processProduct from "@/utils/processProduct";
 import request from "@/utils/request";
 
-import Product from "../product";
+import Product from "./product";
 import styles from "./track.module.scss";
 import config from "@config";
 import ProcessedProduct from "@/types/processedProduct";
