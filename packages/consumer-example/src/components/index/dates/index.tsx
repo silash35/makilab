@@ -3,14 +3,20 @@ import ptBR from "date-fns/locale/pt-BR";
 
 import styles from "./dates.module.scss";
 
-export default function Dates({ product }) {
+import Product from "@/types/product";
+
+interface Props {
+  product: Product;
+}
+
+export default function Dates({ product }: Props) {
   const dates = [];
 
   if (product.createdAt != null) {
     dates.push(<DateItem text="Produto chegou na Makilab" date={product.createdAt} key={1} />);
   }
-  if (product.avalietedAt != null) {
-    dates.push(<DateItem text="Produto foi avaliado" date={product.avalietedAt} key={2} />);
+  if (product.evaluatedAt != null) {
+    dates.push(<DateItem text="Produto foi avaliado" date={product.evaluatedAt} key={2} />);
   }
   if (product.budgetAnsweredAt != null) {
     dates.push(<DateItem text="Orçamento respondido" date={product.budgetAnsweredAt} key={3} />);
@@ -31,7 +37,12 @@ export default function Dates({ product }) {
   return <ul className={styles.list}>{dates}</ul>;
 }
 
-function DateItem({ text, date }) {
+interface DateItemProps {
+  text: string;
+  date: string;
+}
+
+function DateItem({ text, date }: DateItemProps) {
   return (
     <li className={styles.item}>
       <p className={styles.date}>

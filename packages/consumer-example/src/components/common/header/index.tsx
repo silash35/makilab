@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import config from "/opensom.config";
+import config from "@config";
 
 import styles from "./header.module.scss";
 

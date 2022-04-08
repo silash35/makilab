@@ -7,14 +7,19 @@ import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
+import ProcessedProduct from "@/types/processedProduct";
 
 import Dates from "../dates";
 import styles from "./product.module.scss";
 
-export default function Product({ product }) {
+interface Props {
+  product: ProcessedProduct | "loading" | "empty" | "notFound";
+}
+
+export default function Product({ product }: Props) {
   const isMobile = useMediaQuery("(max-width: 1100px)");
 
-  if (product === false) {
+  if (product === "empty") {
     return null;
   }
 
@@ -26,7 +31,7 @@ export default function Product({ product }) {
     );
   }
 
-  if (!product.name) {
+  if (product === "notFound") {
     return <p>Nenhum produto encontrado, você digitou a OS corretamente?</p>;
   }
 
@@ -43,13 +48,9 @@ export default function Product({ product }) {
       <ThemeProvider theme={theme}>
         <Stepper activeStep={product.activeStep} orientation={isMobile ? "vertical" : "horizontal"}>
           {product.steps.map((step) => {
-            const labelProps = {};
-
-            labelProps.error = step.error;
-
             return (
               <Step key={step.label}>
-                <StepLabel {...labelProps}>{step.label}</StepLabel>
+                <StepLabel error={step.error}>{step.label}</StepLabel>
               </Step>
             );
           })}

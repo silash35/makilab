@@ -1,7 +1,7 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
-import config from "/opensom.config";
+import config from "@config";
 
 const { SITE_URL, COMPANY } = config;
 
@@ -45,8 +45,12 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
 
           {/* Fonts */}
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Serif&display=swap" rel="stylesheet" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

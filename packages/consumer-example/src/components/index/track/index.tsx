@@ -1,33 +1,41 @@
 import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import processProduct from "@/utils/processProduct";
 import request from "@/utils/request";
 
 import Product from "../product";
 import styles from "./track.module.scss";
+import config from "@config";
+import ProcessedProduct from "@/types/processedProduct";
+
+type ProductState = "loading" | "empty" | "notFound" | ProcessedProduct;
 
 export default function Track() {
-  const [product, setProduct] = useState(false);
+  const [product, setProduct] = useState<ProductState>("empty");
   const [paperElevation, setPaperElevation] = useState(4);
-  const searchInputRef = useRef();
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
   const { id } = router.query;
 
-  const load = async (id) => {
-    const data = await request(`/api/product/?id=${id}`, "GET", undefined, true);
+  const load = async (id?: string | null) => {
+    if (!id) {
+      setProduct("notFound");
+      return;
+    }
+    const data = await request(config.API_URL, "POST", { search: id }, true);
 
-    if (data != "ERROR") {
-      setProduct(processProduct(data));
+    if (data === "ERROR") {
+      setProduct("notFound");
     } else {
-      setProduct({});
+      setProduct(processProduct(data));
     }
   };
 
-  const handleSearch = async (event) => {
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setProduct("loading");
     load(searchInputRef.current?.value);
@@ -35,7 +43,7 @@ export default function Track() {
 
   useEffect(() => {
     if (id != undefined) {
-      load(id);
+      load(Array.isArray(id) ? id[0] : id);
     }
   }, [id]);
 
