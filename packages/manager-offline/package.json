@@ -1,0 +1,14 @@
+{
+  "name": "@opensom/manager-offline",
+  "version": "1.0.0",
+  "private": true,
+  "license": "Unlicense",
+  "scripts": {
+    "start": "python start.py",
+    "update": "python update.py"
+  },
+  "dependencies": {
+    "@opensom/manager": "workspace:*",
+    "nativefier": "^46.2.0"
+  }
+}
