@@ -2,6 +2,9 @@
   "name": "opensom",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "17.x"
+  },
   "scripts": {
     "build": "pnpm -r build",
     "lint": "pnpm -r lint"
