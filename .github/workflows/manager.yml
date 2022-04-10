@@ -5,6 +5,7 @@ on:
     paths:
       - "packages/manager/**"
       - "packages/eslint-config/**"
+      - ".github/workflows/manager.yml"
 
 jobs:
   ESLint:
