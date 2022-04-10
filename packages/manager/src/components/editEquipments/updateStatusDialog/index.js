@@ -23,7 +23,7 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
   const [registeredInManufacturerAt, setRegisteredInManufacturerAt] = useState(
     equipment.registeredInManufacturerAt
   );
-  const [avalietedAt, setAvalietedAt] = useState(equipment.avalietedAt);
+  const [evaluatedAt, setEvaluatedAt] = useState(equipment.evaluatedAt);
   const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(equipment.budgetAnsweredAt);
   const [isBudgetApproved, setIsBudgetApproved] = useState(equipment.isBudgetApproved);
   const [partsArrivedAt, setPartsArrivedAt] = useState(equipment.partsArrivedAt);
@@ -37,7 +37,7 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
 
     data.createdAt = createdAt;
     data.registeredInManufacturerAt = registeredInManufacturerAt;
-    data.avalietedAt = avalietedAt;
+    data.evaluatedAt = evaluatedAt;
     data.budgetAnsweredAt = budgetAnsweredAt;
     data.isBudgetApproved = isBudgetApproved;
     data.partsArrivedAt = partsArrivedAt;
@@ -75,8 +75,8 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
 
             <DateTimeWithSwitch
               label="Data da Avaliação do produto"
-              input={avalietedAt}
-              setInput={setAvalietedAt}
+              input={evaluatedAt}
+              setInput={setEvaluatedAt}
             />
 
             {!equipment.isUnderWarranty && (

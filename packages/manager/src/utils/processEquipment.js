@@ -33,7 +33,7 @@ export default function processEquipment(equipment) {
         return 40;
       }
 
-      if (equipment.avalietedAt != null) {
+      if (equipment.evaluatedAt != null) {
         if (equipment.isUnderWarranty) {
           return 30;
         } else {

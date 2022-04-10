@@ -26,7 +26,7 @@ export default function processProduct(product) {
         product.activeStep = 1;
         product.stepText = "O orçamento reprovado, aguarde contato para retirada do produto";
       }
-    } else if (product.avalietedAt) {
+    } else if (product.evaluatedAt) {
       product.activeStep = 1;
 
       if (product.isUnderWarranty) {
