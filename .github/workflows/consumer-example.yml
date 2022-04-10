@@ -1,0 +1,51 @@
+name: OpenSOM consumer-example
+
+on:
+  push:
+    paths:
+      - "packages/consumer-example/**"
+      - "packages/eslint-config/**"
+      - ".github/workflows/consumer-example.yml"
+
+jobs:
+  ESLint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/consumer-example
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Setup Node.js 17
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.x
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: true
+      - name: Run linter
+        run: pnpm lint
+
+  TypeScript:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/consumer-example
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Setup Node.js 17
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.x
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: true
+      - name: Run prisma generate
+        run: pnpm prisma generate
+      - name: Run Type Checking
+        run: pnpm tsc
