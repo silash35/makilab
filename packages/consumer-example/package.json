@@ -2,9 +2,6 @@
   "name": "@opensom/consumer-example",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "17.x"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

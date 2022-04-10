@@ -2,9 +2,6 @@
   "name": "@opensom/manager",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "17.x"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",

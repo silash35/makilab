@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm -r build",
-    "lint": "pnpm -r lint",
+    "build": "./build.sh",
     "manager:build": "cd packages/manager && pnpm build",
     "manager:start": "cd packages/manager && pnpm start",
     "consumer:build": "cd packages/consumer-example && pnpm build",
