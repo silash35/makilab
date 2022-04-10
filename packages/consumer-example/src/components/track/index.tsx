@@ -1,15 +1,15 @@
+import config from "@config";
 import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useRef, useState } from "react";
 
+import ProcessedProduct from "@/types/processedProduct";
 import processProduct from "@/utils/processProduct";
 import request from "@/utils/request";
 
 import Product from "./product";
 import styles from "./track.module.scss";
-import config from "@config";
-import ProcessedProduct from "@/types/processedProduct";
 
 type ProductState = "loading" | "empty" | "notFound" | ProcessedProduct;
 

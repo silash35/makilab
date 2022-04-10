@@ -1,8 +1,9 @@
+import { Equipment } from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "@/database/prisma";
 import apiFactory from "@/utils/apiFactory";
 import removeNull from "@/utils/removeNull";
-import { Equipment } from "@prisma/client";
-import type { NextApiRequest, NextApiResponse } from "next";
 
 const methods = {
   async GET(req: NextApiRequest, res: NextApiResponse) {

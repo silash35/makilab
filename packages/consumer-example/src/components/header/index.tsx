@@ -1,11 +1,10 @@
-import Link from "next/link";
-
 import config from "@config";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import styles from "./header.module.scss";
-import { useRouter } from "next/router";
-import pt from "./locales/pt";
 import en from "./locales/en";
+import pt from "./locales/pt";
 const { COMPANY } = config;
 
 export default function Header() {

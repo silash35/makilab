@@ -1,9 +1,9 @@
 import format from "date-fns/format";
 import ptBR from "date-fns/locale/pt-BR";
 
-import styles from "./dates.module.scss";
-
 import Product from "@/types/product";
+
+import styles from "./dates.module.scss";
 
 interface Props {
   product: Product;

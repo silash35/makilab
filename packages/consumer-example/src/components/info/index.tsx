@@ -1,9 +1,10 @@
 import config from "@config";
 import Alert from "@mui/material/Alert";
-import styles from "./info.module.scss";
 import { useRouter } from "next/router";
-import pt from "./locales/pt";
+
+import styles from "./info.module.scss";
 import en from "./locales/en";
+import pt from "./locales/pt";
 
 export default function Info() {
   const router = useRouter();

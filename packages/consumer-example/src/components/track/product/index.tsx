@@ -6,7 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Link from "next/link";
+
 import ProcessedProduct from "@/types/processedProduct";
 
 import Dates from "../dates";

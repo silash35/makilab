@@ -1,7 +1,6 @@
+import config from "@config";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-
-import config from "@config";
 
 const { SITE_URL, COMPANY } = config;
 

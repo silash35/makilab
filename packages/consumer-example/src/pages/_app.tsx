@@ -1,12 +1,13 @@
 import "@/styles/globals.scss";
-import type { AppProps } from "next/app";
 
+import config from "@config";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import type { AppProps } from "next/app";
 import Head from "next/head";
-import config from "@config";
-import variables from "@/styles/variables.module.scss";
 import { useRouter } from "next/router";
+
+import variables from "@/styles/variables.module.scss";
 
 const { COMPANY } = config;
 
