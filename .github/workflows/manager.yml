@@ -9,6 +9,9 @@ on:
 jobs:
   ESLint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/manager
     steps:
       - name: Setup repo
         uses: actions/checkout@v3
@@ -16,8 +19,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 17.x
-      - name: Go to Manager Folder
-        run: cd packages/manager
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
@@ -28,6 +29,9 @@ jobs:
 
   TypeScript:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/manager
     steps:
       - name: Setup repo
         uses: actions/checkout@v3
@@ -35,8 +39,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 17.x
-      - name: Go to Manager Folder
-        run: cd packages/manager
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
