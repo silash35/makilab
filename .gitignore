@@ -3,15 +3,18 @@
 .env
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
+
+# TypeScript
+tsconfig.tsbuildinfo
 
 # testing
 /coverage
 
 # next.js
-/.next/
+.next
 /out/
 
 # production

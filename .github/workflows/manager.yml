@@ -1,0 +1,46 @@
+name: OpenSOM Manager
+
+on:
+  push:
+    paths:
+      - "packages/manager/**"
+      - "packages/eslint-config/**"
+
+jobs:
+  ESLint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Setup Node.js 17
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.x
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: true
+      - name: Go to Manager Folder
+        run: cd packages/manager
+      - name: Run linter
+        run: pnpm lint
+
+  TypeScript:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Setup Node.js 17
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.x
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: true
+      - name: Go to Manager Folder
+        run: cd packages/manager
+      - name: Run Type Checking
+        run: pnpm tsc

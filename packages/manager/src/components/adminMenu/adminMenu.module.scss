@@ -1,0 +1,60 @@
+@use "@/styles/variables.module" as v;
+
+.adminMenu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+  height: 100%;
+}
+
+a.bigButton {
+  width: 250px;
+  height: 180px;
+  padding: 16px;
+  margin: 40px;
+  text-align: center;
+  font-size: larger;
+  text-transform: none;
+}
+
+a.green {
+  background-color: #26a269;
+  &:focus {
+    background-color: #61d497;
+  }
+  &:hover {
+    background-color: #00723e;
+  }
+}
+
+a.yellow {
+  background-color: #e5a50a;
+  &:focus {
+    background-color: #ffd64c;
+  }
+  &:hover {
+    background-color: #ae7600;
+  }
+}
+
+a.blue {
+  background-color: #1a5fb4;
+  &:focus {
+    background-color: #1a5fb4;
+  }
+  &:hover {
+    background-color: #003684;
+  }
+}
+
+a.red {
+  background-color: #a51d2d;
+  &:focus {
+    background-color: #dc5356;
+  }
+  &:hover {
+    background-color: #6f0004;
+  }
+}

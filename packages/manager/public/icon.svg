@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" version="1.1" viewBox="0 0 384 384" xmlns="http://www.w3.org/2000/svg">
+ <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m192 90.646a170.67 170.67 0 0 0-170.67 170.67h341.33a170.67 170.67 0 0 0-170.67-170.67z" fill="#2ec27e" stroke-width="13.612" style="paint-order:stroke fill markers"/>
+  <rect x="-.00097895" y="282.65" width="384" height="42.666" ry="21.333" fill="#5e5c64" stroke-width="9.9162" style="paint-order:stroke fill markers"/>
+  <rect x="170.66" y="58.647" width="42.666" height="21.333" ry="10.667" fill="#2ec27e" stroke-width="5.2967" style="paint-order:stroke fill markers"/>
+ </g>
+</svg>

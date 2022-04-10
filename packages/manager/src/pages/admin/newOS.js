@@ -1,0 +1,38 @@
+import { withPasswordProtect } from "@storyofams/next-password-protect";
+import Head from "next/head";
+
+import Form from "@/components/common/form";
+import Header from "@/components/common/header";
+import OSInputs from "@/components/common/inputs/os";
+
+function NewEquipment() {
+  return (
+    <>
+      <Head>
+        <title>Cadastrar novo equipamento</title>
+      </Head>
+
+      <Header />
+
+      <main>
+        <Form
+          Inputs={OSInputs}
+          URL="/api/admin/clients"
+          title="Cadastrar Nova Ordem de Serviço"
+          next={(res) => {
+            return `/admin/OS?id=${res.equipment[res.equipment.length - 1].id}`;
+          }}
+        />
+      </main>
+    </>
+  );
+}
+
+export default withPasswordProtect(NewEquipment, {
+  loginComponentProps: {
+    backUrl: "/",
+    logo: "/icon.svg",
+    buttonColor: "#fff",
+    buttonBackgroundColor: "#2ec27e",
+  },
+});
