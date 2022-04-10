@@ -1,3 +1,2 @@
-web: npm start
-
-release: npx prisma db push
+web: pnpm manager:start
+release: cd packages/manager && npx prisma db push

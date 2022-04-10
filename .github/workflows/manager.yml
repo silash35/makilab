@@ -16,13 +16,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 17.x
+      - name: Go to Manager Folder
+        run: cd packages/manager
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
           version: latest
           run_install: true
-      - name: Go to Manager Folder
-        run: cd packages/manager
       - name: Run linter
         run: pnpm lint
 
@@ -35,12 +35,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 17.x
+      - name: Go to Manager Folder
+        run: cd packages/manager
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
           version: latest
           run_install: true
-      - name: Go to Manager Folder
-        run: cd packages/manager
       - name: Run Type Checking
         run: pnpm tsc
