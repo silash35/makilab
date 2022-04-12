@@ -1,8 +1,13 @@
 import cookie from "cookie";
+import Cors from "cors";
 import jwt from "jsonwebtoken";
 
-export default function apiFactory(methods, auth) {
+export default function apiFactory(methods, auth, enableCors) {
   return async function API(req, res) {
+    if (enableCors === true) {
+      await cors(req, res);
+    }
+
     try {
       if (auth === true) {
         // Verify if user is authenticated
@@ -32,3 +37,21 @@ export default function apiFactory(methods, auth) {
     }
   };
 }
+
+function initMiddleware(middleware) {
+  return (req, res) =>
+    new Promise((resolve, reject) => {
+      middleware(req, res, (result) => {
+        if (result instanceof Error) {
+          return reject(result);
+        }
+        return resolve(result);
+      });
+    });
+}
+
+const cors = initMiddleware(
+  Cors({
+    methods: ["POST"],
+  })
+);
