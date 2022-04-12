@@ -9,8 +9,8 @@ const { COMPANY } = config;
 
 export default function Header() {
   const router = useRouter();
-  const { locale } = router;
-  const t = locale === "en" ? en : pt;
+  const t = router.locale === "en" ? en : pt;
+
   return (
     <header className={styles.header}>
       <nav>

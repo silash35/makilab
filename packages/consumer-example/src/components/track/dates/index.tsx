@@ -1,36 +1,37 @@
 import format from "date-fns/format";
-import ptBR from "date-fns/locale/pt-BR";
+import { useRouter } from "next/router";
 
 import Product from "@/types/product";
 
 import styles from "./dates.module.scss";
+import en from "./locales/en";
+import pt from "./locales/pt";
 
 interface Props {
   product: Product;
 }
 
 export default function Dates({ product }: Props) {
+  const router = useRouter();
+  const t = router.locale === "en" ? en : pt;
+
   const dates = [];
 
   if (product.createdAt != null) {
-    dates.push(<DateItem text="Produto chegou na Makilab" date={product.createdAt} key={1} />);
+    dates.push(<DateItem text={t.arrived} date={product.createdAt} key={1} />);
   }
   if (product.evaluatedAt != null) {
-    dates.push(<DateItem text="Produto foi avaliado" date={product.evaluatedAt} key={2} />);
+    dates.push(<DateItem text={t.evaluated} date={product.evaluatedAt} key={2} />);
   }
   if (product.budgetAnsweredAt != null) {
-    dates.push(<DateItem text="Orçamento respondido" date={product.budgetAnsweredAt} key={3} />);
+    dates.push(<DateItem text={t.budgetAnswered} date={product.budgetAnsweredAt} key={3} />);
   }
   if (product.repairedAt != null) {
-    dates.push(<DateItem text="Reparo concluído com sucesso" date={product.repairedAt} key={4} />);
+    dates.push(<DateItem text={t.repaired} date={product.repairedAt} key={4} />);
   }
   if (product.deliveredToCustomerAt != null) {
     dates.push(
-      <DateItem
-        text="Produto foi entregue ao cliente"
-        date={product.deliveredToCustomerAt}
-        key={5}
-      />
+      <DateItem text={t.deliveredToCustomer} date={product.deliveredToCustomerAt} key={5} />
     );
   }
 
@@ -43,18 +44,15 @@ interface DateItemProps {
 }
 
 function DateItem({ text, date }: DateItemProps) {
+  const router = useRouter();
+  const t = router.locale === "en" ? en : pt;
+
   return (
     <li className={styles.item}>
-      <p className={styles.date}>
-        {format(new Date(date), "EEEE, d ", { locale: ptBR })}
-        <span>de</span>
-        {format(new Date(date), " MMMM ", { locale: ptBR })}
-        <span>de</span>
-        {format(new Date(date), " yyyy", { locale: ptBR })}
-      </p>
+      <p>{format(new Date(date), t.dateFormat, { locale: t.dateLocale })}</p>
 
       <div className={styles.flex}>
-        <p className={styles.time}>{format(new Date(date), "hh:mm a", { locale: ptBR })}</p>
+        <p className={styles.time}>{format(new Date(date), "hh:mm a", { locale: t.dateLocale })}</p>
         <p className={styles.text}>{text}</p>
       </div>
     </li>

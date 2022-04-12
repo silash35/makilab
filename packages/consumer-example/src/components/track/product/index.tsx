@@ -6,17 +6,29 @@ import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useRouter } from "next/router";
 
 import ProcessedProduct from "@/types/processedProduct";
 
 import Dates from "../dates";
 import styles from "./product.module.scss";
 
+const en = {
+  notFound: "No products found, did you type the Service Order correctly?",
+};
+
+const pt = {
+  notFound: "Nenhum produto encontrado, você digitou a OS corretamente?",
+};
+
 interface Props {
   product: ProcessedProduct | "loading" | "empty" | "notFound";
 }
 
 export default function Product({ product }: Props) {
+  const router = useRouter();
+  const t = router.locale === "en" ? en : pt;
+
   const isMobile = useMediaQuery("(max-width: 1100px)");
 
   if (product === "empty") {
@@ -32,7 +44,7 @@ export default function Product({ product }: Props) {
   }
 
   if (product === "notFound") {
-    return <p>Nenhum produto encontrado, você digitou a OS corretamente?</p>;
+    return <p>{t.notFound}</p>;
   }
 
   const theme = createTheme({

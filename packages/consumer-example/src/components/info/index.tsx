@@ -8,8 +8,7 @@ import pt from "./locales/pt";
 
 export default function Info() {
   const router = useRouter();
-  const { locale } = router;
-  const t = locale === "en" ? en : pt;
+  const t = router.locale === "en" ? en : pt;
 
   const url = new URL(config.API_URL);
   const link = url.origin;
