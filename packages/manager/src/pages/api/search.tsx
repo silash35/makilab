@@ -6,7 +6,7 @@ import apiFactory from "@/utils/apiFactory";
 import removeNull from "@/utils/removeNull";
 
 const methods = {
-  async GET(req: NextApiRequest, res: NextApiResponse) {
+  async POST(req: NextApiRequest, res: NextApiResponse) {
     const search = req.body.search as string;
     const searchID = search.replace(/[^0-9]/g, "");
 
