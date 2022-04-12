@@ -6,24 +6,11 @@ import { FormEvent, useEffect, useState } from "react";
 
 import ProcessedProduct from "@/types/processedProduct";
 import processProduct from "@/utils/processProduct";
-import request from "@/utils/request";
 
-import Product from "./product";
+import Product from "../product";
+import en from "./locales/en";
+import pt from "./locales/pt";
 import styles from "./track.module.scss";
-
-const en = {
-  title: "Check your product",
-  titleSpan: "status",
-  placeholder: "Enter your Service Order number",
-  button: "Search",
-};
-
-const pt = {
-  title: "Verifique o status do seu",
-  titleSpan: "produto",
-  placeholder: "Digite o número da sua Ordem de serviço",
-  button: "Pesquisar",
-};
 
 type ProductState = "loading" | "empty" | "notFound" | ProcessedProduct;
 
@@ -48,11 +35,28 @@ export default function Track() {
       return;
     }
 
-    const data = await request(config.API_URL, "POST", { search }, true);
-    if (data === "ERROR") {
-      setProduct("notFound");
+    let data;
+
+    try {
+      const res = await fetch(config.API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ search }),
+      });
+
+      if (res.status === 200) {
+        data = await res.json();
+      } else {
+        data = "ERROR";
+      }
+    } catch (error) {
+      data = "ERROR";
+    }
+
+    if (typeof data === "object" && data != null) {
+      setProduct(processProduct(data, t));
     } else {
-      setProduct(processProduct(data));
+      setProduct("notFound");
     }
   };
 

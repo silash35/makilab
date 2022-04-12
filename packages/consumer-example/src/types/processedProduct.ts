@@ -1,4 +1,4 @@
-import Product from "@/types/product";
+import type Product from "@/types/product";
 
 interface Step {
   label: string;
@@ -13,4 +13,5 @@ interface ProcessedProduct extends Product {
   steps: Step[];
 }
 
+export type { Step };
 export default ProcessedProduct;

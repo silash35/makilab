@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import Header from "@/components/header";
 import Info from "@/components/info";
-import Track from "@/components/track";
+import Track from "@/components/track/track";
 
 const en = {
   title: "Check your product status",
