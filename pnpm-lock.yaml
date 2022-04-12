@@ -66,11 +66,15 @@ importers:
       '@mui/material': ^5.6.0
       '@prisma/client': ^3.12.0
       '@storyofams/next-password-protect': ^1.6.0
+      '@types/cookie': ^0.4.1
+      '@types/jsonwebtoken': ^8.5.8
       '@types/node': ^17.0.23
-      cors: ^2.8.5
+      cookie: ^0.5.0
       date-fns: ^2.28.0
       easyqrcodejs: ^4.4.10
+      jsonwebtoken: ^8.5.1
       next: ^12.1.4
+      nextjs-cors: ^2.1.1
       nodemailer: ^6.7.3
       prisma: ^3.12.0
       react: ^18.0.0
@@ -86,11 +90,15 @@ importers:
       '@mui/material': 5.6.0_6c8dcdda718e1b53eddefc29a789ee34
       '@prisma/client': 3.12.0_prisma@3.12.0
       '@storyofams/next-password-protect': 1.6.0_c0abbb53577d424fe320649841fdc7d4
+      '@types/cookie': 0.4.1
+      '@types/jsonwebtoken': 8.5.8
       '@types/node': 17.0.23
-      cors: 2.8.5
+      cookie: 0.5.0
       date-fns: 2.28.0
       easyqrcodejs: 4.4.10
+      jsonwebtoken: 8.5.1
       next: 12.1.4_ffeb35a77152468a5cd8663529066a5b
+      nextjs-cors: 2.1.1_next@12.1.4
       nodemailer: 6.7.3
       prisma: 3.12.0
       react: 18.0.0
@@ -825,6 +833,10 @@ packages:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: false
 
+  /@types/cookie/0.4.1:
+    resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
+    dev: false
+
   /@types/glob/7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     requiresBuild: true
@@ -837,6 +849,12 @@ packages:
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
+
+  /@types/jsonwebtoken/8.5.8:
+    resolution: {integrity: sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==}
+    dependencies:
+      '@types/node': 17.0.23
+    dev: false
 
   /@types/minimatch/3.0.5:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
@@ -1355,6 +1373,11 @@ packages:
 
   /cookie/0.4.2:
     resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
+    engines: {node: '>= 0.6'}
+    dev: false
+
+  /cookie/0.5.0:
+    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
     dev: false
 
@@ -2770,6 +2793,15 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nextjs-cors/2.1.1_next@12.1.4:
+    resolution: {integrity: sha512-HxE4w4Wng5VdTtnn0DWPphuWKwd1Ty+lpyTZ/sQGgaNnd5demYMchKf+W1LtI8YFYxu2HnRb3MrxERRV0QKLKA==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || ^9.0.0 || ^10.0.0-0 || ^11.0.0 || ^12.0.0
+    dependencies:
+      cors: 2.8.5
+      next: 12.1.4_ffeb35a77152468a5cd8663529066a5b
     dev: false
 
   /nodemailer/6.7.3:

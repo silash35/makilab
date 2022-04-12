@@ -1,24 +1,14 @@
 import "@/styles/globals.scss";
 
-import createCache from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 
 import variables from "@/styles/variables.module.scss";
 
-function createEmotionCache() {
-  return createCache({ key: "css" });
-}
-
-const clientSideEmotionCache = createEmotionCache();
-
-function MyApp(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+function MyApp({ Component, pageProps }) {
   return (
-    <CacheProvider value={emotionCache}>
+    <>
       <Head>
         {/* Viewport meta tag should not be used in _document.tsx. That's why it's in this file */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,7 +32,7 @@ function MyApp(props) {
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
-    </CacheProvider>
+    </>
   );
 }
 
