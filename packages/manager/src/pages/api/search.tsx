@@ -29,7 +29,7 @@ const methods = {
   },
 };
 
-export default apiFactory(methods, false);
+export default apiFactory(methods, false, true);
 
 const filterEquipment = (equipment: Equipment) => {
   const filteredEquipment = {
