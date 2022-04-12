@@ -6,7 +6,7 @@ interface Product {
   isBudgetApproved: boolean;
 
   createdAt: string;
-  evaluatedAt: string;
+  budgetedAt: string;
   budgetAnsweredAt: string;
   repairedAt: string;
   deliveredToCustomerAt: string;

@@ -2,11 +2,12 @@ import "@/styles/globals.scss";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AppProps } from "next/app";
 import Head from "next/head";
 
 import variables from "@/styles/variables.module.scss";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>

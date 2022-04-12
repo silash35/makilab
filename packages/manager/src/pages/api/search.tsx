@@ -39,7 +39,7 @@ const filterEquipment = (equipment: Equipment) => {
     isBudgetApproved: equipment.isBudgetApproved,
 
     createdAt: equipment.createdAt,
-    evaluatedAt: equipment.evaluatedAt,
+    budgetedAt: equipment.budgetedAt,
     budgetAnsweredAt: equipment.budgetAnsweredAt,
     repairedAt: equipment.repairedAt,
     deliveredToCustomerAt: equipment.deliveredToCustomerAt,

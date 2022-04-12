@@ -20,8 +20,8 @@ export default function Dates({ product }: Props) {
   if (product.createdAt != null) {
     dates.push(<DateItem text={t.arrived} date={product.createdAt} key={1} />);
   }
-  if (product.evaluatedAt != null) {
-    dates.push(<DateItem text={t.evaluated} date={product.evaluatedAt} key={2} />);
+  if (product.budgetedAt != null) {
+    dates.push(<DateItem text={t.budgeted} date={product.budgetedAt} key={2} />);
   }
   if (product.budgetAnsweredAt != null) {
     dates.push(<DateItem text={t.budgetAnswered} date={product.budgetAnsweredAt} key={3} />);

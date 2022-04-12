@@ -37,7 +37,7 @@ export default function processProduct(product: Product, t: T) {
       activeStep = 1;
       stepText = t.stepText2v2;
     }
-  } else if (product.evaluatedAt) {
+  } else if (product.budgetedAt) {
     activeStep = 1;
 
     if (product.isUnderWarranty) {

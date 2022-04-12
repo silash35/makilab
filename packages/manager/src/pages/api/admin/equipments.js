@@ -86,7 +86,7 @@ const processUpdateEquipment = (data) => {
   const newData = {
     createdAt: filterDate(data.createdAt),
     registeredInManufacturerAt: filterDate(data.registeredInManufacturerAt),
-    evaluatedAt: filterDate(data.evaluatedAt),
+    budgetedAt: filterDate(data.budgetedAt),
     budgetAnsweredAt: filterDate(data.budgetAnsweredAt),
     partsArrivedAt: filterDate(data.partsArrivedAt),
     repairedAt: filterDate(data.repairedAt),

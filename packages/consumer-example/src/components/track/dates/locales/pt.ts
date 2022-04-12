@@ -5,7 +5,7 @@ export default {
   dateFormat: "EEEE, d 'de' MMMM 'de' yyyy",
 
   arrived: "Produto chegou na loja",
-  evaluated: "Produto foi avaliado",
+  budgeted: "Produto foi avaliado",
   budgetAnswered: "Orçamento respondido",
   repaired: "Reparo concluído com sucesso",
   deliveredToCustomer: "Produto foi entregue ao cliente",
