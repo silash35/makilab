@@ -10,7 +10,7 @@ const methods = {
     const search = req.body.search as string;
     const searchID = search.replace(/[^0-9]/g, "");
 
-    if (searchID.length > 0) {
+    if (!(searchID.length > 0)) {
       throw { name: "Not Found" };
     }
 
