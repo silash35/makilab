@@ -1,0 +1,62 @@
+import AddOSIcon from "@mui/icons-material/Add";
+import HomeIcon from "@mui/icons-material/Home";
+import EditClientsIcon from "@mui/icons-material/ManageAccounts";
+import EditOSsIcon from "@mui/icons-material/ManageSearch";
+import AddClientIcon from "@mui/icons-material/PersonAdd";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import styles from "./sidebar.module.scss";
+
+export default function Sidebar() {
+  return (
+    <aside className={styles.aside}>
+      <Drawer className={styles.drawer} variant="permanent" anchor="left">
+        <Link href="/">
+          <a className={styles.image}>
+            <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40" />
+          </a>
+        </Link>
+
+        <Divider />
+
+        <List>
+          <ListLink href="/" text="Página Inicial" Icon={HomeIcon} />
+          <ListLink href="/admin/newOS" text="Criar nova OS" Icon={AddOSIcon} />
+          <ListLink href="/admin/editOSs" text="Gerenciar OSs" Icon={EditOSsIcon} />
+          <ListLink href="/admin/newClient" text="Cadastrar cliente" Icon={AddClientIcon} />
+          <ListLink href="/admin/editClients" text="Gerenciar Clientes" Icon={EditClientsIcon} />
+        </List>
+      </Drawer>
+    </aside>
+  );
+}
+
+interface ListLinkProps {
+  href: string;
+  text: string;
+  Icon: React.FC;
+}
+
+const ListLink = ({ href, text, Icon }: ListLinkProps) => {
+  const router = useRouter();
+
+  return (
+    <ListItem button className={router.pathname === href ? styles.active : undefined}>
+      <Link href={href}>
+        <a>
+          <ListItemIcon>
+            <Icon />
+          </ListItemIcon>
+          <ListItemText primary={text} />
+        </a>
+      </Link>
+    </ListItem>
+  );
+};

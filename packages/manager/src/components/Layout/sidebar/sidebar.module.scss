@@ -1,0 +1,28 @@
+@use "@/styles/media" as m;
+@use "@/styles/variables.module" as v;
+
+.aside {
+  width: 300px;
+  margin-right: 16px;
+
+  ul a {
+    display: contents;
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.drawer > div {
+  width: 300px;
+}
+
+.image {
+  line-height: 0;
+
+  text-align: center;
+  padding: 16px;
+}
+
+.active {
+  background-color: #f5f5f5;
+}

@@ -1,0 +1,12 @@
+@use "@/styles/media" as m;
+@use "@/styles/variables.module" as v;
+
+.layout {
+  display: flex;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  padding: 1vw;
+}

@@ -25,7 +25,13 @@ export default function AdminMenu() {
   );
 }
 
-function BigButton({ children, color, link }) {
+interface BigButtonProps {
+  children: React.ReactNode;
+  color: string;
+  link: string;
+}
+
+function BigButton({ children, color, link }: BigButtonProps) {
   return (
     <Link href={link} passHref>
       <Button variant="contained" component="a" className={`${styles.bigButton} ${color}`}>
