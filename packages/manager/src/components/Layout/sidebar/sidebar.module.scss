@@ -1,19 +1,34 @@
-@use "@/styles/media" as m;
 @use "@/styles/variables.module" as v;
 
 .aside {
   width: 300px;
   margin-right: 16px;
 
+  @media screen and (max-width: 1023px) {
+    display: contents;
+  }
+}
+
+.menuButton {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+
+.drawer > div {
+  width: 300px;
+
+  @media screen and (max-width: 1023px) {
+    &:first-child {
+      width: auto;
+    }
+  }
+
   ul a {
     display: contents;
     text-decoration: none;
     color: inherit;
   }
-}
-
-.drawer > div {
-  width: 300px;
 }
 
 .image {
