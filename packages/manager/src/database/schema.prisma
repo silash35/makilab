@@ -23,7 +23,7 @@ model Client {
   cpfOrCnpj String?
 
 
-  serviceOrder ServiceOrder[]
+  serviceOrders ServiceOrder[]
 }
 
 model ServiceOrder {

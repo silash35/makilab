@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import AdminMenu from "@/components/adminMenu";
-import protect from "@/utils/protect";
+import protect from "@/utils/frontend/protect";
 
 function Home() {
   return (

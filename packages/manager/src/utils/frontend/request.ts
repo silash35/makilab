@@ -1,4 +1,11 @@
-export default async function request(URL, method, body, noAlert = false) {
+type Method = "GET" | "POST" | "PUT" | "DELETE";
+
+export default async function request(
+  URL: string,
+  method: Method,
+  body?: unknown,
+  noAlert = false
+) {
   const res = await fetch(URL, {
     method,
     headers: { "Content-Type": "application/json" },
