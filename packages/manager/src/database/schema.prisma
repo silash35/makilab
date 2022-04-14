@@ -23,13 +23,13 @@ model Client {
   cpfOrCnpj String?
 
 
-  equipment Equipment[]
+  serviceOrder ServiceOrder[]
 }
 
-model Equipment {
+model ServiceOrder {
   id Int @id @unique @default(autoincrement())
 
-  name               String
+  equipment          String
   brand              String?
   model              String?
   productNumber      String?

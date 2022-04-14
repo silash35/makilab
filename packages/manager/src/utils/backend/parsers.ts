@@ -1,37 +1,23 @@
 import type { Prisma } from "@prisma/client";
 
+import { isCreateClient, isCreateSO, isUpdateClient, isUpdateSO } from "./checkers";
 import { filterCpfOrCnpj, filterDate, filterPhoneNumber, filterString, filterZip } from "./filters";
 
-// Equipment
+// Service Order
 
-const isCreateEquipment = (variable: unknown): variable is Prisma.EquipmentCreateInput => {
-  return (
-    typeof variable === "object" &&
-    variable !== null &&
-    "name" in variable &&
-    "isUnderWarranty" in variable &&
-    "attendedBy" in variable &&
-    "attendedOn" in variable
-  );
-};
-
-const parseCreateEquipment = (data: unknown) => {
-  // The name field was renamed to equipment in frontend to not confuse the with the client name
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  data.name = data.equipment;
+export const parseCreateSO = (data: unknown) => {
   // The frontend may send the isUnderWarranty as a string, but the backend expects an boolean. This fixes that.
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   data.isUnderWarranty = data.isUnderWarranty === "on" || data.isUnderWarranty === true;
 
-  if (!isCreateEquipment(data)) {
+  if (!isCreateSO(data)) {
     throw new Error("Invalid data");
   }
 
-  const name = filterString(data.name);
-  if (name === null) {
-    throw new Error("Name is required for creating a new equipment");
+  const equipment = filterString(data.equipment);
+  if (equipment === null) {
+    throw new Error("equipment name is required for creating a new equipment");
   }
 
   let createdAt: Date | undefined | null = filterDate(data.createdAt);
@@ -49,8 +35,8 @@ const parseCreateEquipment = (data: unknown) => {
     throw new Error("Service location is required for creating a new equipment");
   }
 
-  const parsedData: Prisma.EquipmentCreateManyOwnerInput = {
-    name: name,
+  const parsedData: Prisma.ServiceOrderCreateManyOwnerInput = {
+    equipment: equipment,
     brand: filterString(data.brand),
     model: filterString(data.model),
     productNumber: filterString(data.productNumber),
@@ -67,22 +53,13 @@ const parseCreateEquipment = (data: unknown) => {
   return parsedData;
 };
 
-const isUpdateEquipment = (variable: unknown): variable is Prisma.EquipmentUpdateInput => {
-  return typeof variable === "object" && variable !== null;
-};
-
-const parseEditEquipment = (data: unknown) => {
-  // The name field was renamed to equipment in frontend to not confuse the with the client name
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  data.name = data.equipment;
-
-  if (!isUpdateEquipment(data)) {
+export const parseEditSO = (data: unknown) => {
+  if (!isUpdateSO(data)) {
     throw new Error("Invalid data");
   }
 
-  const parsedData: Prisma.EquipmentUpdateInput = {
-    name: filterString(data.name) === null ? data.name : undefined,
+  const parsedData: Prisma.ServiceOrderUpdateInput = {
+    equipment: filterString(data.equipment) === null ? data.equipment : undefined,
     brand: filterString(data.brand),
     model: filterString(data.model),
     productNumber: filterString(data.productNumber),
@@ -100,12 +77,12 @@ const parseEditEquipment = (data: unknown) => {
   return parsedData;
 };
 
-const parseUpdateEquipment = (data: unknown) => {
-  if (!isUpdateEquipment(data)) {
+export const parseUpdateSO = (data: unknown) => {
+  if (!isUpdateSO(data)) {
     throw new Error("Invalid data");
   }
 
-  const parsedData: Prisma.EquipmentUpdateInput = {
+  const parsedData: Prisma.ServiceOrderUpdateInput = {
     createdAt:
       filterDate(data.createdAt) === null ? (filterDate(data.createdAt) as Date) : undefined,
     registeredInManufacturerAt: filterDate(data.registeredInManufacturerAt),
@@ -128,11 +105,7 @@ const parseUpdateEquipment = (data: unknown) => {
 
 // Client
 
-const isCreateClient = (variable: unknown): variable is Prisma.ClientCreateInput => {
-  return typeof variable === "object" && variable !== null && "name" in variable;
-};
-
-const parseCreateClient = (data: unknown) => {
+export const parseCreateClient = (data: unknown) => {
   if (!isCreateClient(data)) {
     throw new Error("Invalid data");
   }
@@ -152,20 +125,16 @@ const parseCreateClient = (data: unknown) => {
     tel: filterPhoneNumber(data.tel),
   };
 
-  if (data.equipment != undefined) {
-    parsedData.equipment = {
-      create: parseCreateEquipment(data),
+  if (data.serviceOrder != undefined) {
+    parsedData.serviceOrder = {
+      create: parseCreateSO(data),
     };
   }
 
   return parsedData;
 };
 
-const isUpdateClient = (variable: unknown): variable is Prisma.ClientUpdateInput => {
-  return typeof variable === "object" && variable !== null;
-};
-
-const parseUpdateClient = (data: unknown) => {
+export const parseUpdateClient = (data: unknown) => {
   if (!isUpdateClient(data)) {
     throw new Error("Invalid data");
   }
@@ -180,13 +149,11 @@ const parseUpdateClient = (data: unknown) => {
     tel: filterPhoneNumber(data.tel),
   };
 
-  if (data.equipment != undefined) {
-    parsedData.equipment = {
-      create: parseCreateEquipment(data),
+  if (data.serviceOrder != undefined) {
+    parsedData.serviceOrder = {
+      create: parseCreateSO(data),
     };
   }
 
   return parsedData;
 };
-
-export { parseCreateClient, parseEditEquipment, parseUpdateClient, parseUpdateEquipment };

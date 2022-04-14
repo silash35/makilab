@@ -5,19 +5,17 @@ import apiFactory from "@/utils/backend/apiFactory";
 import { parseCreateClient, parseUpdateClient } from "@/utils/backend/parsers";
 
 const methods = {
-  async GET(req: NextApiRequest, res: NextApiResponse) {
+  async GET() {
     const allClients = await prisma.client.findMany({
       include: {
-        equipment: true,
+        serviceOrder: true,
       },
     });
 
-    res.setHeader("Content-Type", "application/json");
-    res.statusCode = 200;
-    res.json(allClients);
+    return allClients;
   },
 
-  async POST(req: NextApiRequest, res: NextApiResponse) {
+  async POST(req: NextApiRequest) {
     const body = req.body;
 
     let client;
@@ -25,7 +23,7 @@ const methods = {
       client = await prisma.client.create({
         data: parseCreateClient(body),
         include: {
-          equipment: true,
+          serviceOrder: true,
         },
       });
     } else {
@@ -35,18 +33,16 @@ const methods = {
         },
         data: parseUpdateClient(body),
         include: {
-          equipment: true,
+          serviceOrder: true,
         },
       });
     }
 
-    res.statusCode = 200;
-    res.json(client);
-    res.end();
+    return client;
   },
 
   async DELETE(req: NextApiRequest, res: NextApiResponse) {
-    await prisma.equipment.deleteMany({
+    await prisma.serviceOrder.deleteMany({
       where: {
         ownerId: req.body.id,
       },
@@ -62,4 +58,4 @@ const methods = {
   },
 };
 
-export default apiFactory(methods, true);
+export default apiFactory(methods);

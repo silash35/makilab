@@ -2,15 +2,15 @@ const isString = (variable: unknown): variable is string => {
   return typeof variable === "string" && variable.length > 0;
 };
 
-const filterString = (variable: unknown) => {
+export const filterString = (variable: unknown) => {
   return isString(variable) ? variable : null;
 };
 
-const filterDate = (variable: unknown) => {
+export const filterDate = (variable: unknown) => {
   return isString(variable) ? new Date(variable) : null;
 };
 
-const filterCpfOrCnpj = (variable: unknown) => {
+export const filterCpfOrCnpj = (variable: unknown) => {
   let string = filterString(variable);
   if (string === null) {
     return null;
@@ -28,7 +28,7 @@ const filterCpfOrCnpj = (variable: unknown) => {
   return string;
 };
 
-const filterPhoneNumber = (variable: unknown) => {
+export const filterPhoneNumber = (variable: unknown) => {
   let string = filterString(variable);
   if (string === null) {
     return null;
@@ -53,7 +53,7 @@ const filterPhoneNumber = (variable: unknown) => {
   return string;
 };
 
-const filterZip = (variable: unknown) => {
+export const filterZip = (variable: unknown) => {
   let string = filterString(variable);
   if (string === null) {
     return null;
@@ -68,5 +68,3 @@ const filterZip = (variable: unknown) => {
 
   return string;
 };
-
-export { filterCpfOrCnpj, filterDate, filterPhoneNumber, filterString, filterZip };

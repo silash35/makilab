@@ -6,10 +6,10 @@ import NextCors from "nextjs-cors";
 type TMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 interface Methods {
-  GET?(req: NextApiRequest, res: NextApiResponse): Promise<void>;
-  POST?(req: NextApiRequest, res: NextApiResponse): Promise<void>;
-  PUT?(req: NextApiRequest, res: NextApiResponse): Promise<void>;
-  DELETE?(req: NextApiRequest, res: NextApiResponse): Promise<void>;
+  GET?(req: NextApiRequest, res: NextApiResponse): Promise<void | unknown>;
+  POST?(req: NextApiRequest, res: NextApiResponse): Promise<void | unknown>;
+  PUT?(req: NextApiRequest, res: NextApiResponse): Promise<void | unknown>;
+  DELETE?(req: NextApiRequest, res: NextApiResponse): Promise<void | unknown>;
 }
 
 export default function apiFactory(methods: Methods, auth = true, enableCors = false) {
@@ -38,7 +38,15 @@ export default function apiFactory(methods: Methods, auth = true, enableCors = f
       // Run requestedMethod
       const requestedMethod = methods[req.method as TMethod];
       if (requestedMethod != undefined) {
-        await requestedMethod(req, res);
+        const response = await requestedMethod(req, res);
+        if (response) {
+          res.setHeader("Content-Type", "application/json");
+          res.statusCode = 200;
+          res.json(response);
+        } else {
+          res.statusCode = 200;
+          res.end("ok");
+        }
       } else {
         throw Error("Method Not Allowed");
       }

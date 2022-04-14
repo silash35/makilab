@@ -1,5 +1,5 @@
 import config from "@config";
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest } from "next";
 import nodemailer from "nodemailer";
 
 import apiFactory from "@/utils/backend/apiFactory";
@@ -7,7 +7,7 @@ import apiFactory from "@/utils/backend/apiFactory";
 const { SITE_URL, COMPANY } = config;
 
 const methods = {
-  async POST(req: NextApiRequest, res: NextApiResponse) {
+  async POST(req: NextApiRequest) {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: 587,
@@ -61,10 +61,7 @@ const methods = {
         </p>
       </div>`,
     });
-
-    res.statusCode = 200;
-    res.end("ok");
   },
 };
 
-export default apiFactory(methods, true);
+export default apiFactory(methods);
