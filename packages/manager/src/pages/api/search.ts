@@ -2,7 +2,7 @@ import { Equipment } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "@/database/prisma";
-import apiFactory from "@/utils/apiFactory";
+import apiFactory from "@/utils/backend/apiFactory";
 import removeNull from "@/utils/removeNull";
 
 const methods = {

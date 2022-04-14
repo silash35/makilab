@@ -2,7 +2,7 @@ import config from "@config";
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
-import apiFactory from "@/utils/apiFactory";
+import apiFactory from "@/utils/backend/apiFactory";
 
 const { SITE_URL, COMPANY } = config;
 
