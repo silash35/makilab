@@ -1,38 +1,45 @@
-import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
+import TextField, { TextFieldProps } from "@mui/material/TextField";
+import type { Client } from "@prisma/client";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import styles from "./inputs.module.scss";
 
-export default function ClientInputs({ client }) {
+interface Props {
+  client?: Client;
+}
+
+type vent = React.ChangeEvent<HTMLInputElement>;
+
+export default function ClientInputs({ client }: Props) {
   const [name, setName] = useState("");
-  const handleChangeName = (event) => setName(event.target.value);
+  const handleChangeName = (e: vent) => setName(e.target.value);
 
   const [email, setEmail] = useState("");
-  const handleChangeEmail = (event) => setEmail(event.target.value);
+  const handleChangeEmail = (e: vent) => setEmail(e.target.value);
 
   const [cpfOrCnpj, setCpfOrCnpj] = useState("");
-  const handleChangeCpfOrCnpj = (event) => setCpfOrCnpj(event.target.value);
+  const handleChangeCpfOrCnpj = (e: vent) => setCpfOrCnpj(e.target.value);
 
   const [address, setAddress] = useState("");
-  const handleChangeAddress = (event) => setAddress(event.target.value);
+  const handleChangeAddress = (e: vent) => setAddress(e.target.value);
 
   const [zip, setZip] = useState("");
-  const handleChangeZip = (event) => setZip(event.target.value);
+  const handleChangeZip = (e: vent) => setZip(e.target.value);
 
   const [whatsapp, setWhatsapp] = useState("");
-  const handleChangeWhatsapp = (event) => setWhatsapp(event.target.value);
+  const handleChangeWhatsapp = (e: vent) => setWhatsapp(e.target.value);
 
   const [tel, setTel] = useState("");
-  const handleChangeTel = (event) => setTel(event.target.value);
+  const handleChangeTel = (e: vent) => setTel(e.target.value);
 
   const [id, setId] = useState("");
-  const handleChangeId = (event) => setId(event.target.value);
+  const handleChangeId = (e: vent) => setId(e.target.value);
 
-  const setWithFilter = (set, value) => {
+  const setWithFilter = (set: Dispatch<SetStateAction<string>>, value?: number | string | null) => {
     if (value == undefined) {
       set("");
     } else {
-      set(value);
+      set(String(value));
     }
   };
 
@@ -47,7 +54,7 @@ export default function ClientInputs({ client }) {
     setWithFilter(setId, client?.id);
   }, [client]);
 
-  const common = { variant: "outlined", margin: "normal", fullWidth: true };
+  const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
 
   return (
     <>

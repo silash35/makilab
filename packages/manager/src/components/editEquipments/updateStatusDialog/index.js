@@ -12,7 +12,7 @@ import FormGroup from "@mui/material/FormGroup";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
-import request from "@/utils/request";
+import request from "@/utils/frontend/request";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";
 

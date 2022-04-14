@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import ClientInputs from "@/components/common/inputs/client";
 import EquipmentInputs from "@/components/common/inputs/equipment";
-import request from "@/utils/request";
+import request from "@/utils/frontend/request";
 
 const novoCliente = { label: "Novo Cliente", id: 0 };
 

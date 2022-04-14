@@ -6,9 +6,16 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 
-import request from "@/utils/request";
+import request from "@/utils/frontend/request";
 
-export default function DeleteDialog({ id, title, text, URL, reload }) {
+interface Props {
+  id: string;
+  title: string;
+  text: string;
+  url: string;
+}
+
+export default function DeleteDialog({ id, title, text, URL }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const sendData = async () => {

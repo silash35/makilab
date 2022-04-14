@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-import request from "@/utils/request";
+import request from "@/utils/frontend/request";
 
 export default function SendMailDialog({ client, email = null }) {
   const [openDialog, setOpenDialog] = useState(false);

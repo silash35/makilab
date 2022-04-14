@@ -1,4 +1,3 @@
-import type { ServiceOrder } from "@prisma/client";
 import Head from "next/head";
 
 import Form from "@/components/common/form";
@@ -16,8 +15,11 @@ function NewServiceOrder() {
         Inputs={OSInputs}
         URL="/api/admin/clients"
         title="Cadastrar Nova Ordem de Serviço"
-        next={(res: { serviceOrders: ServiceOrder[] }) => {
-          return `/admin/SO?id=${res.serviceOrders[res.serviceOrders.length - 1].id}`;
+        next={(serviceOrders) => {
+          if (!serviceOrders) {
+            return "/";
+          }
+          return `/admin/SO?id=${serviceOrders[serviceOrders.length - 1].id}`;
         }}
       />
     </>

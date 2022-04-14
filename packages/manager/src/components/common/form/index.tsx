@@ -1,0 +1,43 @@
+import Button from "@mui/material/Button";
+import type { ServiceOrder } from "@prisma/client";
+import { useRouter } from "next/router";
+import type { FormEvent } from "react";
+
+import request from "@/utils/frontend/request";
+
+import styles from "./Form.module.scss";
+
+interface Props {
+  Inputs: React.FC;
+  URL: string;
+  title: string;
+  next: (serviceOrders: ServiceOrder[] | undefined) => string;
+}
+
+export default function Form({ Inputs, URL, title, next }: Props) {
+  const router = useRouter();
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    const json = await request(URL, "POST", data);
+    if (json != "ERROR") {
+      router.push(next(json.serviceOrders));
+    }
+  };
+
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h1>{title}</h1>
+
+      <Inputs />
+
+      <p>*Campo Obrigatório</p>
+      <Button variant="contained" fullWidth size="large" type="submit">
+        Cadastrar
+      </Button>
+    </form>
+  );
+}

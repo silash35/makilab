@@ -5,7 +5,8 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import TextField from "@mui/material/TextField";
+import TextField, { TextFieldProps } from "@mui/material/TextField";
+import type { ServiceOrder } from "@prisma/client";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
@@ -13,56 +14,62 @@ import styles from "./inputs.module.scss";
 
 const { ATTENDANTS, SERVICE_PLACES } = config;
 
-export default function EquipmentInputs({ equipment = {} }) {
-  const [dateValue, setDateValue] = useState(
-    equipment.createdAt ? new Date(equipment.createdAt) : new Date()
+interface Props {
+  serviceOrder?: ServiceOrder;
+}
+
+export default function ServiceOrderInputs({ serviceOrder }: Props) {
+  const [dateValue, setDateValue] = useState<Date | null>(
+    serviceOrder?.createdAt ? new Date(serviceOrder?.createdAt) : new Date()
   );
 
-  const common = { variant: "outlined", margin: "normal", fullWidth: true };
+  const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
   return (
     <>
-      <input type="hidden" name="id" value={equipment.id} />
+      <input type="hidden" name="id" value={serviceOrder?.id} />
       <TextField
         name="equipment"
         label="Equipamento"
         required
-        defaultValue={equipment.name}
+        defaultValue={serviceOrder?.equipment}
         {...common}
       />
       <div className={styles.flex}>
-        <TextField name="brand" label="Marca" defaultValue={equipment.brand} {...common} />
-        <TextField name="model" label="Modelo" defaultValue={equipment.model} {...common} />
+        <TextField name="brand" label="Marca" defaultValue={serviceOrder?.brand} {...common} />
+        <TextField name="model" label="Modelo" defaultValue={serviceOrder?.model} {...common} />
       </div>
       <div className={styles.flex}>
         <TextField
           name="productNumber"
           label="Product Number"
-          defaultValue={equipment.productNumber}
+          defaultValue={serviceOrder?.productNumber}
           {...common}
         />
         <TextField
           name="batchOrImei"
           label="N° de Serie ou IMEI"
-          defaultValue={equipment.batchOrImei}
+          defaultValue={serviceOrder?.batchOrImei}
           {...common}
         />
       </div>
       <TextField
         name="accessories"
         label="Acessórios"
-        defaultValue={equipment.accessories}
+        defaultValue={serviceOrder?.accessories}
         {...common}
       />
       <TextField
         name="productCondition"
         label="Estado do equipamento"
-        defaultValue={equipment.productCondition}
+        defaultValue={serviceOrder?.productCondition}
         {...common}
       />
       <TextField
         name="listOfServices"
         label="Lista de serviços"
-        defaultValue={equipment.listOfServices ? equipment.listOfServices : "Avaliação Técnica"}
+        defaultValue={
+          serviceOrder?.listOfServices ? serviceOrder?.listOfServices : "Avaliação Técnica"
+        }
         {...common}
       />
 
@@ -70,7 +77,7 @@ export default function EquipmentInputs({ equipment = {} }) {
         <Autocomplete
           freeSolo
           options={ATTENDANTS}
-          defaultValue={equipment.attendedBy}
+          defaultValue={serviceOrder?.attendedBy}
           renderInput={(params) => (
             <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
           )}
@@ -80,7 +87,7 @@ export default function EquipmentInputs({ equipment = {} }) {
         <Autocomplete
           freeSolo
           options={SERVICE_PLACES}
-          defaultValue={equipment.attendedOn ? equipment.attendedOn : SERVICE_PLACES[0]}
+          defaultValue={serviceOrder?.attendedOn ? serviceOrder?.attendedOn : SERVICE_PLACES[0]}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -104,11 +111,17 @@ export default function EquipmentInputs({ equipment = {} }) {
             }}
           />
 
-          <input type="hidden" name="createdAt" value={dateValue} />
+          <input
+            type="hidden"
+            name="createdAt"
+            value={String(dateValue ? dateValue : new Date())}
+          />
         </LocalizationProvider>
 
         <FormControlLabel
-          control={<Checkbox name="isUnderWarranty" defaultChecked={equipment.isUnderWarranty} />}
+          control={
+            <Checkbox name="isUnderWarranty" defaultChecked={serviceOrder?.isUnderWarranty} />
+          }
           label="Garantia"
         />
       </div>
@@ -116,7 +129,7 @@ export default function EquipmentInputs({ equipment = {} }) {
       <TextField
         name="notes"
         label="Observações extras"
-        defaultValue={equipment.notes}
+        defaultValue={serviceOrder?.notes}
         multiline
         {...common}
       />

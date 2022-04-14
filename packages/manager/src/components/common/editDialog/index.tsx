@@ -3,19 +3,22 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useState } from "react";
-import { useRef } from "react";
+import { FormEvent, useState } from "react";
 
-import request from "@/utils/request";
+import request from "@/utils/frontend/request";
 
-export default function EditDialog({ Inputs, URL, title, reload }) {
+interface Props {
+  Inputs: React.ReactChild;
+  URL: string;
+  title: string;
+}
+
+export default function EditDialog({ Inputs, URL, title }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
-  const form = useRef(null);
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    var formData = new FormData(form.current);
+    const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
 
     if ((await request(URL, "POST", data)) != "ERROR") {
@@ -36,7 +39,7 @@ export default function EditDialog({ Inputs, URL, title, reload }) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-        <form ref={form} onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <DialogContent>{Inputs}</DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
