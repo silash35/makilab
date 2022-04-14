@@ -1,6 +1,6 @@
 import type { NextApiRequest } from "next";
 
-import prisma from "@/database/prisma";
+import serviceOrdersManager from "@/database/serviceOrdersManager";
 import apiFactory from "@/utils/backend/apiFactory";
 import { parseEditSO, parseUpdateSO } from "@/utils/backend/parsers";
 
@@ -8,57 +8,29 @@ const methods = {
   async GET(req: NextApiRequest) {
     let answer;
     if (req.query.id === undefined) {
-      answer = await prisma.serviceOrder.findMany({
-        include: {
-          owner: true,
-        },
-      });
+      answer = await serviceOrdersManager.readAll();
     } else {
-      answer = await prisma.serviceOrder.findUnique({
-        where: {
-          id: Number(req.query.id),
-        },
-        include: {
-          owner: true,
-        },
-      });
+      answer = await serviceOrdersManager.readOne(
+        Array.isArray(req.query.id) ? Number(req.query.id[0]) : Number(req.query.id)
+      );
     }
 
     if (!answer) {
       throw new Error("Not Found");
     }
-
     return answer;
   },
 
   async POST(req: NextApiRequest) {
-    const body = req.body;
-
-    const serviceOrder = await prisma.serviceOrder.update({
-      where: {
-        id: Number(body.id),
-      },
-      data: parseEditSO(body),
-    });
-
-    return serviceOrder;
+    return await serviceOrdersManager.update(Number(req.body.id), parseEditSO(req.body));
   },
 
   async PUT(req: NextApiRequest) {
-    await prisma.serviceOrder.update({
-      where: {
-        id: req.body.id,
-      },
-      data: parseUpdateSO(req.body.data),
-    });
+    return await serviceOrdersManager.update(Number(req.body.id), parseUpdateSO(req.body));
   },
 
   async DELETE(req: NextApiRequest) {
-    await prisma.serviceOrder.delete({
-      where: {
-        id: req.body.id,
-      },
-    });
+    await serviceOrdersManager.delete(Number(req.body.id));
   },
 };
 

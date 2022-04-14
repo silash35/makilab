@@ -5,7 +5,7 @@ import { useState } from "react";
 import Main from "@/components/OS/main";
 import Options from "@/components/OS/options";
 import Pdf from "@/components/OS/pdf";
-import prisma from "@/database/prisma";
+import serviceOrdersManager from "@/database/serviceOrdersManager";
 import protect from "@/utils/frontend/protect";
 
 function ServiceOrderPage({
@@ -32,14 +32,7 @@ function ServiceOrderPage({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Array.isArray(context.query.id) ? context.query.id[0] : context.query.id;
 
-  const serviceOrder = await prisma.serviceOrder.findUnique({
-    where: {
-      id: Number(id),
-    },
-    include: {
-      owner: true,
-    },
-  });
+  const serviceOrder = serviceOrdersManager.readOne(Number(id));
 
   return {
     props: {
