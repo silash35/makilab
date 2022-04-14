@@ -1,24 +1,22 @@
-const filterString = (string) => {
-  if (typeof string === "string" && string.length > 1) {
-    return string;
-  } else {
-    return null;
-  }
+const isString = (variable: unknown): variable is string => {
+  return typeof variable === "string" && variable.length > 0;
 };
 
-const filterDate = (string) => {
-  if (filterString(string) === null) {
-    return null;
-  } else {
-    return new Date(string);
-  }
+const filterString = (variable: unknown) => {
+  return isString(variable) ? variable : null;
 };
 
-const filterCpfOrCnpj = (string) => {
-  string = filterString(string);
+const filterDate = (variable: unknown) => {
+  return isString(variable) ? new Date(variable) : null;
+};
+
+const filterCpfOrCnpj = (variable: unknown) => {
+  let string = filterString(variable);
   if (string === null) {
     return null;
   }
+
+  // Remove all non-numeric characters
   string = string.replace(/\D/g, "");
 
   if (string.length === 11) {
@@ -30,11 +28,13 @@ const filterCpfOrCnpj = (string) => {
   return string;
 };
 
-const filterPhoneNumber = (string) => {
-  string = filterString(string);
+const filterPhoneNumber = (variable: unknown) => {
+  let string = filterString(variable);
   if (string === null) {
     return null;
   }
+
+  // Remove all non-numeric characters
   string = string.replace(/\D/g, "");
 
   if (string.length === 8) {
@@ -53,16 +53,19 @@ const filterPhoneNumber = (string) => {
   return string;
 };
 
-const filterZip = (string) => {
-  string = filterString(string);
+const filterZip = (variable: unknown) => {
+  let string = filterString(variable);
   if (string === null) {
     return null;
   }
 
+  // Remove all non-numeric characters
   string = string.replace(/\D/g, "");
+
   if (string.length === 8) {
     string = string.replace(/^(\d{5})(\d{3}).*/, "$1-$2");
   }
+
   return string;
 };
 

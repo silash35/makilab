@@ -1,7 +1,6 @@
+import config from "@config";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-
-import config from "/opensom.config";
 
 class MyDocument extends Document {
   render() {
@@ -22,7 +21,10 @@ class MyDocument extends Document {
           <meta property="og:url" content={SITE_URL} />
           <meta property="og:locale" content="en_US" />
           <meta property="og:image" content={`${SITE_URL}/card.png`} />
-          <meta property="og:image:alt" content="The OpenSOM logo. A green desk bell, with OpenSOM written on the side" />
+          <meta
+            property="og:image:alt"
+            content="The OpenSOM logo. A green desk bell, with OpenSOM written on the side"
+          />
 
           {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
@@ -44,8 +46,12 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
 
           {/* Fonts */}
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Serif&display=swap" rel="stylesheet" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

@@ -1,7 +1,6 @@
+import config from "@config";
 import add from "date-fns/add";
 import format from "date-fns/format";
-
-import config from "/opensom.config";
 
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";

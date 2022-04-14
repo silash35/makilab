@@ -1,7 +1,6 @@
+import config from "@config";
 import QRCode from "easyqrcodejs";
 import { useEffect, useRef } from "react";
-
-import config from "/opensom.config";
 
 const { PDF } = config;
 

@@ -1,13 +1,14 @@
+import config from "@config";
+import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
-import config from "/opensom.config";
 import apiFactory from "@/utils/apiFactory";
 
 const { SITE_URL, COMPANY } = config;
 
 const methods = {
-  async POST(req, res) {
-    let transporter = nodemailer.createTransport({
+  async POST(req: NextApiRequest, res: NextApiResponse) {
+    const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: 587,
       secure: false,

@@ -1,3 +1,4 @@
+import config from "@config";
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -7,8 +8,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
-
-import config from "/opensom.config";
 
 import styles from "./inputs.module.scss";
 
