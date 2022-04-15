@@ -12,40 +12,46 @@ import FormGroup from "@mui/material/FormGroup";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
+import type { ProcessedSO } from "@/types/serviceOrder";
 import request from "@/utils/frontend/request";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";
 
-const UpdateStatusDialog = ({ equipment, reload }) => {
+interface Props {
+  serviceOrder: ProcessedSO;
+}
+
+const UpdateStatusDialog = ({ serviceOrder }: Props) => {
   const [open, setOpen] = useState(false);
 
-  const [createdAt, setCreatedAt] = useState(equipment.createdAt);
+  const [createdAt, setCreatedAt] = useState<Date | null>(serviceOrder.createdAt);
   const [registeredInManufacturerAt, setRegisteredInManufacturerAt] = useState(
-    equipment.registeredInManufacturerAt
+    serviceOrder.registeredInManufacturerAt
   );
-  const [budgetedAt, setBudgetedAt] = useState(equipment.budgetedAt);
-  const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(equipment.budgetAnsweredAt);
-  const [isBudgetApproved, setIsBudgetApproved] = useState(equipment.isBudgetApproved);
-  const [partsArrivedAt, setPartsArrivedAt] = useState(equipment.partsArrivedAt);
-  const [repairedAt, setRepairedAt] = useState(equipment.repairedAt);
+  const [budgetedAt, setBudgetedAt] = useState(serviceOrder.budgetedAt);
+  const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(serviceOrder.budgetAnsweredAt);
+  const [isBudgetApproved, setIsBudgetApproved] = useState(serviceOrder.isBudgetApproved);
+  const [partsArrivedAt, setPartsArrivedAt] = useState(serviceOrder.partsArrivedAt);
+  const [repairedAt, setRepairedAt] = useState(serviceOrder.repairedAt);
   const [deliveredToCustomerAt, setDeliveredToCustomerAt] = useState(
-    equipment.deliveredToCustomerAt
+    serviceOrder.deliveredToCustomerAt
   );
 
   const sendData = async () => {
-    const data = {};
-
-    data.createdAt = createdAt;
-    data.registeredInManufacturerAt = registeredInManufacturerAt;
-    data.budgetedAt = budgetedAt;
-    data.budgetAnsweredAt = budgetAnsweredAt;
-    data.isBudgetApproved = isBudgetApproved;
-    data.partsArrivedAt = partsArrivedAt;
-    data.repairedAt = repairedAt;
-    data.deliveredToCustomerAt = deliveredToCustomerAt;
+    const data = {
+      createdAt: createdAt,
+      registeredInManufacturerAt: registeredInManufacturerAt,
+      budgetedAt: budgetedAt,
+      budgetAnsweredAt: budgetAnsweredAt,
+      isBudgetApproved: isBudgetApproved,
+      partsArrivedAt: partsArrivedAt,
+      repairedAt: repairedAt,
+      deliveredToCustomerAt: deliveredToCustomerAt,
+    };
 
     if (
-      (await request("/api/admin/equipments", "PUT", { id: equipment.id, data: data })) != "ERROR"
+      (await request("/api/admin/equipments", "PUT", { id: serviceOrder.id, data: data })) !=
+      "ERROR"
     ) {
       await reload();
       setOpen(false);
@@ -65,7 +71,7 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
           <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
             <DateTime label="Data de criação da OS" value={createdAt} setValue={setCreatedAt} />
 
-            {equipment.isUnderWarranty && (
+            {serviceOrder.isUnderWarranty && (
               <DateTimeWithSwitch
                 label="Data de criação da OSF"
                 input={registeredInManufacturerAt}
@@ -79,7 +85,7 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
               setInput={setBudgetedAt}
             />
 
-            {!equipment.isUnderWarranty && (
+            {!serviceOrder.isUnderWarranty && (
               <>
                 <DateTimeWithSwitch
                   label="Data da Resposta do Orçamento"
@@ -90,7 +96,7 @@ const UpdateStatusDialog = ({ equipment, reload }) => {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={isBudgetApproved}
+                          checked={isBudgetApproved ? isBudgetApproved : false}
                           onChange={(e) => {
                             setIsBudgetApproved(e.target.checked);
                           }}

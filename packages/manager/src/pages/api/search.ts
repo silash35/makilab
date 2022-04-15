@@ -3,7 +3,6 @@ import type { NextApiRequest } from "next";
 
 import prisma from "@/database/prisma";
 import apiFactory from "@/utils/backend/apiFactory";
-import removeNull from "@/utils/removeNull";
 
 const methods = {
   async POST(req: NextApiRequest) {
@@ -31,6 +30,14 @@ const methods = {
 };
 
 export default apiFactory(methods, false, true);
+
+function removeNull(string: string | undefined | null): string {
+  if (string != null) {
+    return string;
+  } else {
+    return "";
+  }
+}
 
 const parseServiceOrder = (serviceOrder: ServiceOrder) => {
   const parsedServiceOrder = {

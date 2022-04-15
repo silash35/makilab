@@ -2,9 +2,9 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { useState } from "react";
 
-import Main from "@/components/OS/main";
-import Options from "@/components/OS/options";
-import Pdf from "@/components/OS/pdf";
+import Main from "@/components/SO/container";
+import Options from "@/components/SO/options";
+import Pdf from "@/components/SO/pdf";
 import serviceOrdersManager from "@/database/serviceOrdersManager";
 import protect from "@/utils/frontend/protect";
 

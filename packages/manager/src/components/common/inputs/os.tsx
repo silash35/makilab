@@ -1,12 +1,17 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import type { Client } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 import ClientInputs from "@/components/common/inputs/client";
-import EquipmentInputs from "@/components/common/inputs/equipment";
+import EquipmentInputs from "@/components/common/inputs/serviceOrder";
 import request from "@/utils/frontend/request";
 
-const novoCliente = { label: "Novo Cliente", id: 0 };
+interface ClientWithLabel extends Client {
+  label: string;
+}
+
+const novoCliente: ClientWithLabel = { label: "Novo Cliente", id: 0 } as ClientWithLabel;
 
 export default function OSInputs() {
   const [clients, setClients] = useState([novoCliente]);
@@ -20,7 +25,7 @@ export default function OSInputs() {
       const options = [novoCliente].concat(data);
 
       const processedOptions = options.map((client) => {
-        return { label: client.name, ...client };
+        return { ...client, label: client.name };
       });
       setClients(processedOptions);
     } else {
@@ -28,9 +33,9 @@ export default function OSInputs() {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     setClientSelectorValue(novoCliente);
-    await load();
+    load();
   }, []);
 
   return (
@@ -40,7 +45,7 @@ export default function OSInputs() {
         options={clients}
         value={clientSelectorValue}
         onChange={(e, newValue) => {
-          setClientSelectorValue(newValue);
+          if (newValue) setClientSelectorValue(newValue);
         }}
         inputValue={selectorInputValue}
         onInputChange={(e, newInputValue) => {

@@ -2,58 +2,67 @@ import config from "@config";
 import add from "date-fns/add";
 import format from "date-fns/format";
 
+import { ProcessedSO } from "@/types/serviceOrder";
+
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";
 
 const { COMPANY, PDF } = config;
 
-export default function Pdf({ equipment }) {
-  const owner = equipment.owner;
+interface Props {
+  serviceOrder: ProcessedSO;
+}
+
+export default function Pdf({ serviceOrder }: Props) {
+  const owner = serviceOrder.owner;
+  if (!owner) {
+    throw new Error("Owner not found");
+  }
 
   return (
     <section className={styles.page}>
       <Header />
       <table className={styles.table}>
-        <Data equipment={equipment} />
+        <Data serviceOrder={serviceOrder} />
         <tr>
-          <td colSpan="2" className={styles.disableBorder}>
+          <td colSpan={2} className={styles.disableBorder}>
             <span>Estado: </span>
-            {filter(equipment.productCondition)}
+            {filter(serviceOrder.productCondition)}
           </td>
 
-          <td colSpan="2" className={styles.disableBorder}>
+          <td colSpan={2} className={styles.disableBorder}>
             <span>Garantia: </span>
-            {equipment.isUnderWarranty ? "Sim" : "Não"}
+            {serviceOrder.isUnderWarranty ? "Sim" : "Não"}
           </td>
         </tr>
         <tr>
-          <th colSpan="4" className={styles.alignCenter}>
+          <th colSpan={4} className={styles.alignCenter}>
             Descrição do problema (Defeito(s) Reclamado(s))
           </th>
         </tr>
         <tr>
-          <td colSpan="4" className={styles.disableBorder}>
-            {filter(equipment.problemDescription)}
+          <td colSpan={4} className={styles.disableBorder}>
+            {filter(serviceOrder.problemDescription)}
           </td>
         </tr>
         <tr>
-          <td colSpan="4" className={styles.disableBorder}>
+          <td colSpan={4} className={styles.disableBorder}>
             <span>Acessórios: </span>
-            {filter(equipment.accessories, "Sem acessórios")}
+            {filter(serviceOrder.accessories, "Sem acessórios")}
           </td>
         </tr>
         <tr>
-          <td colSpan="4" className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
+          <td colSpan={4} className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
             Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
             <br />
             {COMPANY.city} {format(new Date(), "dd/MM/yyyy")}
           </td>
         </tr>
         <tr>
-          <td colSpan="2" className={styles.disableBorder}>
-            <div className={styles.signature}>{equipment.attendedBy}</div>
+          <td colSpan={2} className={styles.disableBorder}>
+            <div className={styles.signature}>{serviceOrder.attendedBy}</div>
           </td>
-          <td colSpan="2" className={styles.disableBorder}>
+          <td colSpan={2} className={styles.disableBorder}>
             <div className={styles.signature}> {owner.name}</div>
           </td>
         </tr>
@@ -63,15 +72,15 @@ export default function Pdf({ equipment }) {
 
       <Header />
       <table className={styles.table}>
-        <Data equipment={equipment} variant />
+        <Data serviceOrder={serviceOrder} variant />
         <tr>
-          <th colSpan="4" className={styles.alignCenter}>
+          <th colSpan={4} className={styles.alignCenter}>
             Descrição do problema
           </th>
         </tr>
         <tr>
-          <td colSpan="4" className={styles.disableBorder}>
-            {filter(equipment.problemDescription)}
+          <td colSpan={4} className={styles.disableBorder}>
+            {filter(serviceOrder.problemDescription)}
           </td>
         </tr>
       </table>
@@ -85,7 +94,7 @@ export default function Pdf({ equipment }) {
           técnica. Nosso orçamento é válido por 5 dias. Após 90 dias sem aprovação nem retirada do
           equipamento o mesmo será descartado ou vendido para custear despesas de armazenamento.
         </p>
-        {PDF.hasQrCode && <QrCode id={equipment.id} />}
+        {PDF.hasQrCode && <QrCode id={String(serviceOrder.id)} />}
       </div>
 
       <hr />
@@ -93,24 +102,24 @@ export default function Pdf({ equipment }) {
       <table className={styles.table}>
         <tr>
           <td className={styles.disableBorder}>{filter(owner.name)}</td>
-          <td rowSpan="2" className={styles.disableBorder}>
+          <td rowSpan={2} className={styles.disableBorder}>
             <strong>
-              {equipment.name} {equipment.brand} {equipment.model} {equipment.batchOrImei}
-              {equipment.productNumber}
+              {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
+              {serviceOrder.batchOrImei} {serviceOrder.productNumber}
             </strong>
           </td>
         </tr>
         <tr>
           <td className={styles.disableBorder}>
-            <strong>NÚMERO DA OS: {filter(equipment.id)}</strong>
+            <strong>NÚMERO DA OS: {filter(String(serviceOrder.id))}</strong>
           </td>
         </tr>
         <tr>
           <td className={styles.disableBorder}>
-            DATA DA ENTRADA: {format(new Date(equipment.createdAt), "dd/MM/yyyy")}
+            DATA DA ENTRADA: {format(new Date(serviceOrder.createdAt), "dd/MM/yyyy")}
           </td>
-          <td rowSpan="2" className={styles.disableBorder}>
-            <strong> {filter(equipment.problemDescription)}</strong>
+          <td rowSpan={2} className={styles.disableBorder}>
+            <strong> {filter(serviceOrder.problemDescription)}</strong>
           </td>
         </tr>
         <tr>
@@ -135,8 +144,16 @@ function Header() {
   );
 }
 
-function Data({ equipment, variant }) {
-  const owner = equipment.owner;
+interface DataProps {
+  serviceOrder: ProcessedSO;
+  variant?: boolean;
+}
+
+function Data({ serviceOrder, variant }: DataProps) {
+  const owner = serviceOrder.owner;
+  if (!owner) {
+    throw new Error("Owner not found");
+  }
 
   return (
     <>
@@ -144,7 +161,7 @@ function Data({ equipment, variant }) {
         <th>Cliente</th>
         <td>{owner.name}</td>
         <th>OS N°</th>
-        <td>{equipment.id}</td>
+        <td>{serviceOrder.id}</td>
       </tr>
       <tr>
         <th>E-mail</th>
@@ -166,42 +183,42 @@ function Data({ equipment, variant }) {
       </tr>
       <tr>
         <th>Atendido por</th>
-        <td>{filter(equipment.attendedBy)}</td>
+        <td>{filter(serviceOrder.attendedBy)}</td>
         <th>Data de entrada</th>
-        <td>{format(new Date(equipment.createdAt), "dd/MM/yyyy")}</td>
+        <td>{format(new Date(serviceOrder.createdAt), "dd/MM/yyyy")}</td>
       </tr>
       <tr>
         <th>Atendimento</th>
-        <td>{filter(equipment.attendedOn)}</td>
+        <td>{filter(serviceOrder.attendedOn)}</td>
         {variant ? (
           <>
             <th>Previsão</th>
-            <td>{format(add(new Date(equipment.createdAt), { months: 1 }), "dd/MM/yyyy")}</td>
+            <td>{format(add(new Date(serviceOrder.createdAt), { months: 1 }), "dd/MM/yyyy")}</td>
           </>
         ) : (
           <>
             <th>Hora de entrada</th>
-            <td>{format(new Date(equipment.createdAt), "HH:mm")}</td>
+            <td>{format(new Date(serviceOrder.createdAt), "HH:mm")}</td>
           </>
         )}
       </tr>
       <tr>
-        <th colSpan="4" className={styles.alignCenter}>
+        <th colSpan={4} className={styles.alignCenter}>
           Equipamento/Marca/Modelo/N° de Serie/PN
         </th>
       </tr>
       <tr>
-        <td colSpan="4" className={styles.disableBorder}>
-          {equipment.name} {equipment.brand} {equipment.model} {equipment.batchOrImei}
-          {equipment.productNumber}
+        <td colSpan={4} className={styles.disableBorder}>
+          {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
+          {serviceOrder.batchOrImei} {serviceOrder.productNumber}
         </td>
       </tr>
     </>
   );
 }
 
-const filter = (string, altText = "Não informado") => {
-  if (string == undefined || string == "") {
+const filter = (string: string | null, altText = "Não informado") => {
+  if (string === null || string == "") {
     return altText;
   } else {
     return string;

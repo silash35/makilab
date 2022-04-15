@@ -6,14 +6,22 @@ import Link from "next/link";
 
 import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
-import EquipmentInputs from "@/components/common/inputs/equipment";
+import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
+import { ProcessedSO } from "@/types/serviceOrder";
 
 import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./detailedInformation.module.scss";
 
-export default function DetailedInformation({ equipment, reload }) {
-  const owner = equipment.owner;
+interface Props {
+  serviceOrder: ProcessedSO;
+}
+
+export default function DetailedInformation({ serviceOrder }: Props) {
+  const owner = serviceOrder.owner;
+  if (!owner) {
+    throw new Error("Owner is not defined");
+  }
 
   return (
     <Box className={styles.detailedInformation}>
@@ -23,39 +31,39 @@ export default function DetailedInformation({ equipment, reload }) {
         <Card variant="outlined">
           <CardContent>
             <h3>Sobre o Equipamento</h3>
-            <p>{equipment.batchOrImei && `N° de Serie ou IMEI: ${equipment.batchOrImei}`}</p>
-            <p>{equipment.productNumber && `Product Number: ${equipment.productNumber}`}</p>
+            <p>{serviceOrder.batchOrImei && `N° de Serie ou IMEI: ${serviceOrder.batchOrImei}`}</p>
+            <p>{serviceOrder.productNumber && `Product Number: ${serviceOrder.productNumber}`}</p>
             <p>
-              {equipment.isUnderWarranty
+              {serviceOrder.isUnderWarranty
                 ? "Equipamento em Garantia"
                 : "Equipamento Fora de Garantia"}
             </p>
             <p>
               {(() => {
-                if (equipment.isUnderWarranty === false) {
-                  if (equipment.isBudgetApproved === null) {
+                if (serviceOrder.isUnderWarranty === false) {
+                  if (serviceOrder.isBudgetApproved === null) {
                     return "Orçamento ainda não aprovado";
-                  } else if (equipment.isBudgetApproved === false) {
+                  } else if (serviceOrder.isBudgetApproved === false) {
                     return "Orçamento Negado";
-                  } else if (equipment.isBudgetApproved === true) {
+                  } else if (serviceOrder.isBudgetApproved === true) {
                     return "Orçamento Aprovado";
                   }
                 }
               })()}
             </p>
-            <p>{equipment.accessories && `Acessórios: ${equipment.accessories}`}</p>
+            <p>{serviceOrder.accessories && `Acessórios: ${serviceOrder.accessories}`}</p>
             <p>
-              {equipment.equipmentCondition &&
-                `Condição do equipamento: ${equipment.equipmentCondition}`}
+              {serviceOrder.productCondition &&
+                `Condição do equipamento: ${serviceOrder.productCondition}`}
             </p>
             <p>
-              {equipment.problemDescription &&
-                `Descrição do problema: ${equipment.problemDescription}`}
+              {serviceOrder.problemDescription &&
+                `Descrição do problema: ${serviceOrder.problemDescription}`}
             </p>
 
-            {equipment.notes && (
+            {serviceOrder.notes && (
               <>
-                <p>Obervações Extras:</p> <p className={styles.bigText}>{equipment.notes}</p>
+                <p>Obervações Extras:</p> <p className={styles.bigText}>{serviceOrder.notes}</p>
               </>
             )}
           </CardContent>
@@ -77,34 +85,34 @@ export default function DetailedInformation({ equipment, reload }) {
         <Card variant="outlined">
           <CardContent>
             <h3>Sobre o Atendimento</h3>
-            <p>{equipment.attendedBy && `Atendido Por: ${equipment.attendedBy}`}</p>
-            <p>{equipment.attendedOn && `Local de Atendimento: ${equipment.attendedOn}`}</p>
-            <p>{equipment.listOfServices && `Lista de serviços: ${equipment.listOfServices}`}</p>
+            <p>{serviceOrder.attendedBy && `Atendido Por: ${serviceOrder.attendedBy}`}</p>
+            <p>{serviceOrder.attendedOn && `Local de Atendimento: ${serviceOrder.attendedOn}`}</p>
+            <p>
+              {serviceOrder.listOfServices && `Lista de serviços: ${serviceOrder.listOfServices}`}
+            </p>
           </CardContent>
         </Card>
       </Box>
 
       <div className={styles.flex}>
         <DeleteDialog
-          id={equipment.id}
-          URL={"/api/admin/equipments"}
-          title={`Deletar ${equipment.id}`}
-          text={`Tem certeza que deseja excluir a OS ${equipment.id}?`}
-          reload={reload}
+          id={String(serviceOrder.id)}
+          url={"/api/admin/equipments"}
+          title={`Deletar ${serviceOrder.id}`}
+          text={`Tem certeza que deseja excluir a OS ${serviceOrder.id}?`}
         />
-        {owner.email && <SendMailDialog client={equipment.owner} />}
+        {owner.email && <SendMailDialog client={owner} />}
         <EditDialog
-          Inputs={<EquipmentInputs equipment={equipment} />}
-          URL={"/api/admin/equipments"}
+          Inputs={<ServiceOrderInputs serviceOrder={serviceOrder} />}
+          url={"/api/admin/equipments"}
           title="Editar Equipamento"
-          reload={reload}
         />
-        <Link href={`/admin/OS?id=${equipment.id}`} passHref>
+        <Link href={`/admin/OS?id=${serviceOrder.id}`} passHref>
           <Button variant="outlined" component="a">
             Gerar PDF
           </Button>
         </Link>
-        <UpdateStatusDialog equipment={equipment} reload={reload} />
+        <UpdateStatusDialog serviceOrder={serviceOrder} />
       </div>
     </Box>
   );

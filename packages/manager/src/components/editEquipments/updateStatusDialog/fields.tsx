@@ -5,7 +5,14 @@ import { useState } from "react";
 
 import styles from "./updateStatusDialog.module.scss";
 
-const DateTime = ({ label, value, setValue, disabled }) => {
+interface DateTimeProps {
+  label: string;
+  value: Date | null;
+  setValue: (newValue: Date | null) => void;
+  disabled?: boolean;
+}
+
+const DateTime = ({ label, value, setValue, disabled }: DateTimeProps) => {
   return (
     <DateTimePicker
       label={label}
@@ -19,7 +26,14 @@ const DateTime = ({ label, value, setValue, disabled }) => {
   );
 };
 
-const DateTimeWithSwitch = ({ label, input, setInput, children }) => {
+interface DateTimeWithSwitchProps {
+  label: string;
+  input: Date | null;
+  setInput: (newValue: Date | null) => void;
+  children?: React.ReactNode;
+}
+
+const DateTimeWithSwitch = ({ label, input, setInput, children }: DateTimeWithSwitchProps) => {
   const [switchState, setSwitch] = useState(input != null);
 
   return (

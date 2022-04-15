@@ -6,10 +6,17 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
+import { ProcessedSO } from "@/types/serviceOrder";
+
 import DetailedInformation from "../detailedInformation";
+import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./row.module.scss";
 
-export default function Equipment({ client, reload }) {
+interface Props {
+  serviceOrder: ProcessedSO;
+}
+
+export default function Equipment({ serviceOrder }: Props) {
   const [openRow, setOpenRow] = useState(false);
 
   return (
@@ -21,17 +28,28 @@ export default function Equipment({ client, reload }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {client.name}
+          {serviceOrder.id}
         </TableCell>
-        <TableCell align="right">{client.email}</TableCell>
-        <TableCell align="right">{client.whatsapp}</TableCell>
-        <TableCell align="right">{client.tel}</TableCell>
-        <TableCell align="center">{client.cpfOrCnpj}</TableCell>
+        <TableCell align="right">{serviceOrder.equipment}</TableCell>
+        <TableCell align="right">{serviceOrder.brand}</TableCell>
+        <TableCell align="right">{serviceOrder.model}</TableCell>
+        <TableCell className={serviceOrder.isUrgent ? styles.urgent : undefined} align="right">
+          {serviceOrder.statusName}
+          {serviceOrder.isUrgent && (
+            <>
+              <br />
+              ATRASADO
+            </>
+          )}
+        </TableCell>
+        <TableCell align="right">
+          <UpdateStatusDialog serviceOrder={serviceOrder} />
+        </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
-            <DetailedInformation client={client} reload={reload} />
+            <DetailedInformation serviceOrder={serviceOrder} />
           </Collapse>
         </TableCell>
       </TableRow>

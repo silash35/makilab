@@ -1,11 +1,11 @@
 import { Client, ServiceOrder } from "@prisma/client";
 
 interface SO extends ServiceOrder {
-  owner: Client;
+  owner?: Client;
 }
 
 interface ProcessedOwner extends Client {
-  defaultEmail: string | null;
+  defaultEmail?: string;
 }
 
 interface ProcessedSO extends ServiceOrder {
@@ -13,7 +13,7 @@ interface ProcessedSO extends ServiceOrder {
   statusName: string;
   isUrgent: boolean;
 
-  owner: ProcessedOwner;
+  owner?: ProcessedOwner;
 }
 
-export type { ProcessedSO, SO as ServiceOrder };
+export type { ProcessedOwner, ProcessedSO, SO as ServiceOrder };

@@ -12,26 +12,52 @@ import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
 
-import Client from "../row";
+import { Client } from "@/types/Client";
+
+import ClientRow from "../row";
 import styles from "./table.module.scss";
 
-export default function CollapsibleTable({ clients, reload }) {
-  const [sortDirection, setSortDirection] = useState("asc");
-  const [sortProperty, setSortProperty] = useState("id");
+interface TableProps {
+  clients: Client[];
+}
 
-  function compare(a, b) {
+type SortableProperty = "id" | "name" | "email";
+type Direction = "asc" | "desc";
+
+export default function CollapsibleTable({ clients }: TableProps) {
+  const [sortDirection, setSortDirection] = useState<Direction>("asc");
+  const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
+
+  function compare(a: Client, b: Client) {
+    const aValue = a[sortProperty];
+    const bValue = b[sortProperty];
+
     if (sortDirection == "asc") {
-      if (a[sortProperty] < b[sortProperty]) {
+      if (aValue === null) {
         return -1;
       }
-      if (a[sortProperty] > b[sortProperty]) {
+      if (bValue === null) {
+        return 1;
+      }
+
+      if (aValue < bValue) {
+        return -1;
+      }
+      if (aValue > bValue) {
         return 1;
       }
     } else {
-      if (a[sortProperty] < b[sortProperty]) {
+      if (aValue === null) {
         return 1;
       }
-      if (a[sortProperty] > b[sortProperty]) {
+      if (bValue === null) {
+        return -1;
+      }
+
+      if (aValue < bValue) {
+        return 1;
+      }
+      if (aValue > bValue) {
         return -1;
       }
     }
@@ -83,7 +109,7 @@ export default function CollapsibleTable({ clients, reload }) {
         </TableHead>
         <TableBody>
           {clients.map((client) => (
-            <Client key={client.id} client={client} reload={reload} />
+            <ClientRow key={client.id} client={client} />
           ))}
         </TableBody>
       </Table>
@@ -91,8 +117,22 @@ export default function CollapsibleTable({ clients, reload }) {
   );
 }
 
-function TableCellWithSort({ children, property, setSortDirection, setSortProperty, align }) {
-  const [sortDirection, setThisSortDirection] = useState("asc");
+interface CellProps {
+  children: React.ReactNode;
+  property: SortableProperty;
+  setSortDirection: (direction: Direction) => void;
+  setSortProperty: (property: SortableProperty) => void;
+  align?: "inherit" | "left" | "center" | "right" | "justify";
+}
+
+function TableCellWithSort({
+  children,
+  property,
+  setSortDirection,
+  setSortProperty,
+  align,
+}: CellProps) {
+  const [sortDirection, setThisSortDirection] = useState<Direction>("asc");
 
   return (
     <TableCell align={align}>

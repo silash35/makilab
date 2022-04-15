@@ -4,12 +4,15 @@ import { useEffect, useRef } from "react";
 
 const { PDF } = config;
 
-export default function QrCode({ id }) {
+interface Props {
+  id: string;
+}
+
+export default function QrCode({ id }: Props) {
   const qrcode = useRef(null);
   const qrCodeLink = PDF.qrCodeLink.replace("%ID%", id);
 
   useEffect(() => {
-    qrcode.current.innerHTML = "";
     const options = {
       text: qrCodeLink,
       width: 150,

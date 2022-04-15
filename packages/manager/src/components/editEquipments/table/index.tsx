@@ -13,16 +13,25 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
+import { ProcessedSO } from "@/types/serviceOrder";
+
 import Equipment from "../row";
 import styles from "./table.module.scss";
 
-export default function CollapsibleTable({ equipments, reload }) {
-  const [sortDirection, setSortDirection] = useState("asc");
-  const [sortProperty, setSortProperty] = useState("id");
+interface Props {
+  serviceOrders: ProcessedSO[];
+}
+
+type SortableProperty = "id" | "equipment" | "brand" | "model" | "statusName";
+type Direction = "asc" | "desc";
+
+export default function CollapsibleTable({ serviceOrders }: Props) {
+  const [sortDirection, setSortDirection] = useState<Direction>("asc");
+  const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
   const [search, setSearch] = useState("");
   const [showEnded, setShowEnded] = useState(false);
 
-  function compare(a, b) {
+  function compare(a: ProcessedSO, b: ProcessedSO) {
     // Put urgent equipments at the top
     if (a.isUrgent && !b.isUrgent) {
       return -1;
@@ -31,33 +40,50 @@ export default function CollapsibleTable({ equipments, reload }) {
       return 1;
     }
 
+    const aValue = a[sortProperty];
+    const bValue = b[sortProperty];
+
     if (sortDirection == "asc") {
-      if (a[sortProperty] < b[sortProperty]) {
+      if (aValue === null) {
         return -1;
       }
-      if (a[sortProperty] > b[sortProperty]) {
+      if (bValue === null) {
+        return 1;
+      }
+
+      if (aValue < bValue) {
+        return -1;
+      }
+      if (aValue > bValue) {
         return 1;
       }
     } else {
-      if (a[sortProperty] < b[sortProperty]) {
+      if (aValue === null) {
         return 1;
       }
-      if (a[sortProperty] > b[sortProperty]) {
+      if (bValue === null) {
+        return -1;
+      }
+
+      if (aValue < bValue) {
+        return 1;
+      }
+      if (aValue > bValue) {
         return -1;
       }
     }
     return 0;
   }
 
-  equipments = equipments.filter(({ name, id, brand, model, owner, statusName }) => {
-    const searchText = name + id + brand + model + owner.name + statusName;
+  serviceOrders = serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
+    const searchText = equipment + id + brand + model + owner.name + statusName;
 
     return (
       (showEnded || statusName !== "Finalizado") &&
       searchText.toLowerCase().includes(search.toLowerCase())
     );
   });
-  equipments.sort(compare);
+  serviceOrders.sort(compare);
 
   const common = { setSortDirection: setSortDirection, setSortProperty: setSortProperty };
 
@@ -93,13 +119,13 @@ export default function CollapsibleTable({ equipments, reload }) {
             <TableCellWithSort property="id" {...common}>
               OS
             </TableCellWithSort>
-            <TableCellWithSort align="right" property="name" {...common}>
+            <TableCellWithSort align="right" property="equipment" {...common}>
               Equipamento
             </TableCellWithSort>
             <TableCellWithSort align="right" property="brand" {...common}>
               Marca
             </TableCellWithSort>
-            <TableCellWithSort align="right" property="Model" {...common}>
+            <TableCellWithSort align="right" property="model" {...common}>
               Modelo
             </TableCellWithSort>
             <TableCellWithSort align="right" property="statusName" {...common}>
@@ -110,8 +136,8 @@ export default function CollapsibleTable({ equipments, reload }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {equipments.map((equipment) => (
-            <Equipment key={equipment.id} equipment={equipment} reload={reload} />
+          {serviceOrders.map((serviceOrder) => (
+            <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} />
           ))}
         </TableBody>
       </Table>
@@ -119,8 +145,22 @@ export default function CollapsibleTable({ equipments, reload }) {
   );
 }
 
-function TableCellWithSort({ children, property, setSortDirection, setSortProperty, align }) {
-  const [sortDirection, setThisSortDirection] = useState("asc");
+interface CellProps {
+  children: React.ReactNode;
+  property: SortableProperty;
+  setSortDirection: (direction: Direction) => void;
+  setSortProperty: (property: SortableProperty) => void;
+  align?: "inherit" | "left" | "center" | "right" | "justify";
+}
+
+function TableCellWithSort({
+  children,
+  property,
+  setSortDirection,
+  setSortProperty,
+  align,
+}: CellProps) {
+  const [sortDirection, setThisSortDirection] = useState<Direction>("asc");
 
   return (
     <TableCell align={align}>

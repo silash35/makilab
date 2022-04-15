@@ -8,11 +8,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
+import type { ProcessedOwner } from "@/types/serviceOrder";
 import request from "@/utils/frontend/request";
 
-export default function SendMailDialog({ client, email = null }) {
+interface Props {
+  client: ProcessedOwner;
+  email?: string;
+}
+
+export default function SendMailDialog({ client, email }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
-  const [text, setText] = useState(email === null ? client.defaultEmail : email);
+  const [text, setText] = useState(email ? client.defaultEmail : email);
 
   const sendData = async () => {
     if (
@@ -37,7 +43,7 @@ export default function SendMailDialog({ client, email = null }) {
           Confirmar Envio do Email para {client.email}
         </DialogTitle>
         <DialogContent>
-          {text === null && (
+          {text && (
             <Alert severity="warning">
               O status atual do equipamento não requer envio de email. Você realmente deseja enviar
               uma mensagem ao cliente?

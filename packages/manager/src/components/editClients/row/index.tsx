@@ -6,11 +6,16 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
+import { Client } from "@/types/Client";
+
 import DetailedInformation from "../detailedInformation";
-import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./row.module.scss";
 
-export default function Equipment({ equipment, reload }) {
+interface Props {
+  client: Client;
+}
+
+export default function ClientRow({ client }: Props) {
   const [openRow, setOpenRow] = useState(false);
 
   return (
@@ -22,28 +27,17 @@ export default function Equipment({ equipment, reload }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {equipment.id}
+          {client.name}
         </TableCell>
-        <TableCell align="right">{equipment.name}</TableCell>
-        <TableCell align="right">{equipment.brand}</TableCell>
-        <TableCell align="right">{equipment.model}</TableCell>
-        <TableCell className={equipment.isUrgent && styles.urgent} align="right">
-          {equipment.statusName}
-          {equipment.isUrgent && (
-            <>
-              <br />
-              ATRASADO
-            </>
-          )}
-        </TableCell>
-        <TableCell align="right">
-          <UpdateStatusDialog reload={reload} equipment={equipment} />
-        </TableCell>
+        <TableCell align="right">{client.email}</TableCell>
+        <TableCell align="right">{client.whatsapp}</TableCell>
+        <TableCell align="right">{client.tel}</TableCell>
+        <TableCell align="center">{client.cpfOrCnpj}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
-            <DetailedInformation equipment={equipment} reload={reload} />
+            <DetailedInformation client={client} />
           </Collapse>
         </TableCell>
       </TableRow>

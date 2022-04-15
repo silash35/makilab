@@ -55,8 +55,8 @@ export default function processSO(serviceOrder: ServiceOrder) {
   const isUrgent =
     statusNumber <= 10 && isAfter(new Date(), add(new Date(serviceOrder.createdAt), { days: 5 }));
   const defaultEmailStart = `Prezado(a) ${serviceOrder.owner?.name}, seu produto (${serviceOrder.equipment} ${serviceOrder.brand}) de OS ${serviceOrder.id}`;
-  let statusName: string | null = null;
-  let defaultEmail: string | null = null;
+  let statusName: string | undefined = undefined;
+  let defaultEmail: string | undefined = undefined;
 
   switch (statusNumber) {
     case 0:
@@ -87,15 +87,19 @@ export default function processSO(serviceOrder: ServiceOrder) {
       break;
   }
 
+  const owner = serviceOrder.owner
+    ? {
+        ...serviceOrder.owner,
+        defaultEmail: defaultEmail,
+      }
+    : undefined;
+
   const processedSO: ProcessedSO = {
     ...serviceOrder,
     statusNumber,
     isUrgent,
     statusName,
-    owner: {
-      ...serviceOrder.owner,
-      defaultEmail: defaultEmail,
-    },
+    owner,
   };
 
   return processedSO;

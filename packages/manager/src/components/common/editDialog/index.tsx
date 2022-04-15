@@ -9,11 +9,11 @@ import request from "@/utils/frontend/request";
 
 interface Props {
   Inputs: React.ReactChild;
-  URL: string;
+  url: string;
   title: string;
 }
 
-export default function EditDialog({ Inputs, URL, title }: Props) {
+export default function EditDialog({ Inputs, url, title }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -21,7 +21,7 @@ export default function EditDialog({ Inputs, URL, title }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
 
-    if ((await request(URL, "POST", data)) != "ERROR") {
+    if ((await request(url, "POST", data)) != "ERROR") {
       setOpenDialog(false);
       reload();
     }

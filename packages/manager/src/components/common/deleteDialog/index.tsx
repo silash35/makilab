@@ -15,11 +15,11 @@ interface Props {
   url: string;
 }
 
-export default function DeleteDialog({ id, title, text, URL }: Props) {
+export default function DeleteDialog({ id, title, text, url }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const sendData = async () => {
-    if ((await request(URL, "DELETE", { id })) != "ERROR") {
+    if ((await request(url, "DELETE", { id })) != "ERROR") {
       setOpenDialog(false);
       reload();
     }
