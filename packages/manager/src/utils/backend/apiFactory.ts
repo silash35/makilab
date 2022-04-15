@@ -1,6 +1,5 @@
-import cookie from "cookie";
-import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getSession } from "next-auth/react";
 import NextCors from "nextjs-cors";
 
 type TMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -24,15 +23,11 @@ export default function apiFactory(methods: Methods, auth = true, enableCors = f
 
       if (auth === true) {
         // Verify if user is authenticated
-        if (!req.headers.cookie) {
-          throw Error("Unauthorized");
+        const session = await getSession({ req });
+
+        if (!session) {
+          throw new Error("Unauthorized");
         }
-        const cookies = cookie.parse(req.headers.cookie);
-        if (!process.env.COOKIE_NAME || !process.env.PASSWORD) {
-          console.error("COOKIE_NAME or PASSWORD not set");
-          throw Error("Unauthorized");
-        }
-        jwt.verify(cookies[process.env.COOKIE_NAME], process.env.PASSWORD);
       }
 
       // Run requestedMethod

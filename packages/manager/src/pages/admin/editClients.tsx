@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 import ClientsTable from "@/components/editClients/table";
 import { Client } from "@/types/Client";
-import protect from "@/utils/frontend/protect";
 import request from "@/utils/frontend/request";
 
 function EditClients() {
@@ -43,4 +42,4 @@ function EditClients() {
   );
 }
 
-export default protect(EditClients);
+export default EditClients;

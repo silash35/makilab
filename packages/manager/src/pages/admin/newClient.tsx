@@ -2,7 +2,6 @@ import Head from "next/head";
 
 import Form from "@/components/common/form";
 import ClientInputs from "@/components/common/inputs/client";
-import protect from "@/utils/frontend/protect";
 
 function NewClient() {
   return (
@@ -21,4 +20,4 @@ function NewClient() {
   );
 }
 
-export default protect(NewClient);
+export default NewClient;

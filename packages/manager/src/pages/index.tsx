@@ -1,7 +1,6 @@
 import Head from "next/head";
 
 import AdminMenu from "@/components/adminMenu";
-import protect from "@/utils/frontend/protect";
 
 function Home() {
   return (
@@ -15,4 +14,4 @@ function Home() {
   );
 }
 
-export default protect(Home);
+export default Home;

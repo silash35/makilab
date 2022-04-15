@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import EquipmentsTable from "@/components/editEquipments/table";
 import { ProcessedSO } from "@/types/serviceOrder";
 import processSO from "@/utils/frontend/processSO";
-import protect from "@/utils/frontend/protect";
 import request from "@/utils/frontend/request";
 
 function EditSOs() {
@@ -48,4 +47,4 @@ function EditSOs() {
   );
 }
 
-export default protect(EditSOs);
+export default EditSOs;

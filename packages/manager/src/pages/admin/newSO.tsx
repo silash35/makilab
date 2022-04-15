@@ -2,7 +2,6 @@ import Head from "next/head";
 
 import Form from "@/components/common/form";
 import OSInputs from "@/components/common/inputs/os";
-import protect from "@/utils/frontend/protect";
 
 function NewServiceOrder() {
   return (
@@ -26,4 +25,4 @@ function NewServiceOrder() {
   );
 }
 
-export default protect(NewServiceOrder);
+export default NewServiceOrder;

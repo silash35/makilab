@@ -2,13 +2,25 @@ import "@/styles/globals.scss";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import type { NextPage } from "next";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { SessionProvider } from "next-auth/react";
 
-import Layout from "@/components/Layout";
+import DefaultLayout from "@/components/Layout";
 import variables from "@/styles/variables.module.scss";
 
-function MyApp({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+  Layout?: ({ children }: { children: React.ReactChild }) => JSX.Element | null;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
+  const Layout = Component.Layout ? Component.Layout : DefaultLayout;
+
   return (
     <>
       <Head>
@@ -29,13 +41,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           key="twitterDescription"
         />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <SessionProvider session={session}>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </SessionProvider>
     </>
   );
 }

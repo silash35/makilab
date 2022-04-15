@@ -6,7 +6,6 @@ import Main from "@/components/SO/container";
 import Options from "@/components/SO/options";
 import Pdf from "@/components/SO/pdf";
 import serviceOrdersManager from "@/database/serviceOrdersManager";
-import protect from "@/utils/frontend/protect";
 
 function ServiceOrderPage({
   serviceOrder,
@@ -42,4 +41,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default protect(ServiceOrderPage);
+export default ServiceOrderPage;
