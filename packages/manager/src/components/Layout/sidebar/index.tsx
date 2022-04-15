@@ -47,8 +47,8 @@ export default function Sidebar() {
 
         <List>
           <ListLink href="/" text="Página Inicial" Icon={HomeIcon} />
-          <ListLink href="/admin/newOS" text="Criar nova OS" Icon={AddOSIcon} />
-          <ListLink href="/admin/editOSs" text="Gerenciar OSs" Icon={EditOSsIcon} />
+          <ListLink href="/admin/newSO" text="Criar nova OS" Icon={AddOSIcon} />
+          <ListLink href="/admin/editSOs" text="Gerenciar OSs" Icon={EditOSsIcon} />
           <ListLink href="/admin/newClient" text="Cadastrar cliente" Icon={AddClientIcon} />
           <ListLink href="/admin/editClients" text="Gerenciar Clientes" Icon={EditClientsIcon} />
         </List>

@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <Head>
-        <title>Admin Panel</title>
+        <title>Painel de Administração</title>
       </Head>
 
       <AdminMenu />
