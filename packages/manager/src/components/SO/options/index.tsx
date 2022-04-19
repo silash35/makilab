@@ -10,31 +10,25 @@ import styles from "./options.module.scss";
 
 interface Props {
   serviceOrder: ProcessedSO;
-  setIsPrinting: (isPrinting: boolean) => void;
 }
 
-export default function Options({ serviceOrder, setIsPrinting }: Props) {
+export default function Options({ serviceOrder }: Props) {
   const owner = serviceOrder.owner;
   if (!owner) throw new Error("Owner not found");
 
-  const print = () => {
-    setIsPrinting(true);
-
-    setTimeout(() => {
-      window.print();
-      setIsPrinting(false);
-    }, 100);
+  const reload = () => {
+    window.location.reload();
   };
 
   return (
     <div className={styles.options}>
-      <Button variant="contained" onClick={print}>
-        Imprimir PDF
+      <Button variant="contained" onClick={window.print}>
+        Imprimir
       </Button>
       <EditDialog
         Inputs={<ServiceOrderInputs serviceOrder={serviceOrder} />}
         url={"/api/admin/equipments"}
-        title="Editar Equipamento"
+        title="Editar OS"
         reload={reload}
       />
       <EditDialog

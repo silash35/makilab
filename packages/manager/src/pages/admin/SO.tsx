@@ -1,31 +1,22 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
-import { useState } from "react";
 
-import Main from "@/components/SO/container";
-import Options from "@/components/SO/options";
-import Pdf from "@/components/SO/pdf";
+import SO from "@/components/SO";
 import serviceOrdersManager from "@/database/serviceOrdersManager";
+import processSO from "@/utils/frontend/processSO";
 
 function ServiceOrderPage({
   ServiceOrderJSON,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const [isPrinting, setIsPrinting] = useState(false);
-
   const serviceOrder = JSON.parse(ServiceOrderJSON);
 
-  return isPrinting ? (
-    <Pdf serviceOrder={serviceOrder} />
-  ) : (
+  return (
     <>
       <Head>
-        <title>Gerenciar Ordens de Serviço</title>
+        <title>Gerenciar Ordem de Serviço</title>
       </Head>
 
-      <Main>
-        <Pdf serviceOrder={serviceOrder} />
-        <Options serviceOrder={serviceOrder} setIsPrinting={setIsPrinting} />
-      </Main>
+      <SO serviceOrder={serviceOrder} />
     </>
   );
 }
@@ -35,9 +26,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const serviceOrder = await serviceOrdersManager.readOne(Number(id));
 
+  const processedOS = serviceOrder ? processSO(serviceOrder) : {};
+
   return {
     props: {
-      ServiceOrderJSON: JSON.stringify(serviceOrder),
+      ServiceOrderJSON: JSON.stringify(processedOS),
     },
     notFound: id === undefined || serviceOrder === null,
   };

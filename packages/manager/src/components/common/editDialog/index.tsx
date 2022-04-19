@@ -11,9 +11,10 @@ interface Props {
   Inputs: React.ReactChild;
   url: string;
   title: string;
+  reload: () => void;
 }
 
-export default function EditDialog({ Inputs, url, title }: Props) {
+export default function EditDialog({ Inputs, url, title, reload }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

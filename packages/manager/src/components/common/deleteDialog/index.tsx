@@ -13,9 +13,11 @@ interface Props {
   title: string;
   text: string;
   url: string;
+
+  reload: () => void;
 }
 
-export default function DeleteDialog({ id, title, text, url }: Props) {
+export default function DeleteDialog({ id, title, text, url, reload }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const sendData = async () => {
