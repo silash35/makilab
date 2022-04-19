@@ -4,20 +4,28 @@ import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
-import { ProcessedSO } from "@/types/serviceOrder";
+import useServiceOrder from "@/hooks/useServiceOrder";
 
 import styles from "./options.module.scss";
 
 interface Props {
-  serviceOrder: ProcessedSO;
+  id: string;
 }
 
-export default function Options({ serviceOrder }: Props) {
+export default function Options({ id }: Props) {
+  const { serviceOrder, mutate } = useServiceOrder(id);
+
+  if (!serviceOrder) {
+    throw new Error("Service order not found");
+  }
+
   const owner = serviceOrder.owner;
-  if (!owner) throw new Error("Owner not found");
+  if (!owner) {
+    throw new Error("Owner not found");
+  }
 
   const reload = () => {
-    window.location.reload();
+    mutate();
   };
 
   return (

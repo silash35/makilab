@@ -1,19 +1,17 @@
-import { ProcessedSO } from "@/types/serviceOrder";
-
 import Options from "./options";
 import Pdf from "./pdf";
 import styles from "./so.module.scss";
 
 interface Props {
-  serviceOrder: ProcessedSO;
+  id: string;
 }
 
-export default function Container({ serviceOrder }: Props) {
+export default function Container({ id }: Props) {
   return (
     <>
-      <Options serviceOrder={serviceOrder} />
+      <Options id={id} />
       <div className={styles.pdfContainer}>
-        <Pdf serviceOrder={serviceOrder} />
+        <Pdf id={id} />
       </div>
     </>
   );

@@ -2,7 +2,8 @@ import config from "@config";
 import add from "date-fns/add";
 import format from "date-fns/format";
 
-import { ProcessedSO } from "@/types/serviceOrder";
+import useServiceOrder from "@/hooks/useServiceOrder";
+import ServiceOrder from "@/types/serviceOrder";
 
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";
@@ -10,10 +11,16 @@ import QrCode from "./qrCode";
 const { COMPANY, PDF } = config;
 
 interface Props {
-  serviceOrder: ProcessedSO;
+  id: string;
 }
 
-export default function Pdf({ serviceOrder }: Props) {
+export default function Pdf({ id }: Props) {
+  const { serviceOrder } = useServiceOrder(id);
+
+  if (!serviceOrder) {
+    throw new Error("Service order not found");
+  }
+
   const owner = serviceOrder.owner;
   if (!owner) {
     throw new Error("Owner not found");
@@ -145,7 +152,7 @@ function Header() {
 }
 
 interface DataProps {
-  serviceOrder: ProcessedSO;
+  serviceOrder: ServiceOrder;
   variant?: boolean;
 }
 

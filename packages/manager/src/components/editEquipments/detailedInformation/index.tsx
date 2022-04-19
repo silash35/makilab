@@ -8,13 +8,13 @@ import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
-import { ProcessedSO } from "@/types/serviceOrder";
+import ServiceOrder from "@/types/serviceOrder";
 
 import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./detailedInformation.module.scss";
 
 interface Props {
-  serviceOrder: ProcessedSO;
+  serviceOrder: ServiceOrder;
 }
 
 export default function DetailedInformation({ serviceOrder }: Props) {
@@ -107,7 +107,7 @@ export default function DetailedInformation({ serviceOrder }: Props) {
           url={"/api/admin/equipments"}
           title="Editar Equipamento"
         />
-        <Link href={`/admin/OS?id=${serviceOrder.id}`} passHref>
+        <Link href={`/admin/SO?id=${serviceOrder.id}`} passHref>
           <Button variant="outlined" component="a">
             Gerar PDF
           </Button>

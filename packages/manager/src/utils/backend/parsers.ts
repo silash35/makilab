@@ -105,13 +105,9 @@ export const parseUpdateSO = (data: unknown) => {
 
 // Client
 
-export const parseCreateClient = (dataClient: unknown, dataOS?: unknown) => {
+export const parseCreateClient = (dataClient: unknown, dataSO?: unknown) => {
   if (!isCreateClient(dataClient)) {
-    throw new Error("Invalid data");
-  }
-
-  if (!isUpdateSO(dataOS)) {
-    throw new Error("Invalid Service Order Data");
+    throw new Error("Invalid client data");
   }
 
   const name = filterString(dataClient.name);
@@ -129,22 +125,18 @@ export const parseCreateClient = (dataClient: unknown, dataOS?: unknown) => {
     tel: filterPhoneNumber(dataClient.tel),
   };
 
-  if (dataOS != undefined) {
+  if (isCreateSO(dataSO)) {
     parsedData.serviceOrders = {
-      create: parseCreateSO(dataOS),
+      create: parseCreateSO(dataSO),
     };
   }
 
   return parsedData;
 };
 
-export const parseUpdateClient = (dataClient: unknown, dataOS?: unknown) => {
+export const parseUpdateClient = (dataClient: unknown, dataSO?: unknown) => {
   if (!isUpdateClient(dataClient)) {
     throw new Error("Invalid Client Data");
-  }
-
-  if (!isUpdateSO(dataOS)) {
-    throw new Error("Invalid Service Order Data");
   }
 
   const parsedData: Prisma.ClientUpdateInput = {
@@ -157,9 +149,9 @@ export const parseUpdateClient = (dataClient: unknown, dataOS?: unknown) => {
     tel: filterPhoneNumber(dataClient.tel),
   };
 
-  if (dataOS != undefined) {
+  if (isCreateSO(dataSO)) {
     parsedData.serviceOrders = {
-      create: parseCreateSO(dataOS),
+      create: parseCreateSO(dataSO),
     };
   }
 
