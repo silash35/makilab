@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import Form from "@/components/common/form";
 import OSInputs from "@/components/common/inputs/os";
+import { Client } from "@/types/Client";
 
 function NewServiceOrder() {
   return (
@@ -14,11 +15,18 @@ function NewServiceOrder() {
         Inputs={OSInputs}
         URL="/api/admin/clients"
         title="Cadastrar Nova Ordem de Serviço"
-        next={(serviceOrders) => {
-          if (!serviceOrders) {
-            return "/";
+        next={(response) => {
+          const serviceOrders = (response as Client).serviceOrders;
+          if (serviceOrders.length <= 0) {
+            throw new Error("Service Order was not created");
           }
-          return `/admin/SO?id=${serviceOrders[serviceOrders.length - 1].id}`;
+
+          const createdSO = serviceOrders[serviceOrders.length - 1];
+          if (createdSO.id !== null || createdSO.id !== undefined) {
+            return `/admin/SO?id=${String(createdSO.id)}`;
+          } else {
+            return "";
+          }
         }}
       />
     </>

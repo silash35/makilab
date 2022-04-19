@@ -6,25 +6,26 @@ export default async function request(
   body?: unknown,
   noAlert = false
 ) {
-  const res = await fetch(URL, {
-    method,
-    headers: { "Content-Type": "application/json" },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-
+  let res: Response | undefined = undefined;
   let json;
 
   try {
-    json = await res.json();
-  } catch (error) {
-    json = "";
-  }
+    res = await fetch(URL, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: body ? JSON.stringify(body) : undefined,
+    });
 
-  if (res.status === 200) {
-    return json;
-  } else {
+    json = await res.json();
+
+    if (res.ok) {
+      return json;
+    } else {
+      throw new Error("Request failed");
+    }
+  } catch (error) {
     if (!noAlert) {
-      alert(`ERRO: ${res.status} ${res.statusText}\n${json.error}`);
+      alert(`ERRO: ${JSON.stringify(res)}\n${JSON.stringify(json)}\n${JSON.stringify(error)}`);
     }
     return "ERROR";
   }

@@ -13,10 +13,10 @@ const methods = {
     const body = req.body;
     let client;
 
-    if (Number(body.clientID) == 0) {
-      client = await clientsManager.create(parseCreateClient(body));
+    if (Number(body.clientID) === 0) {
+      client = await clientsManager.create(parseCreateClient(body, body));
     } else {
-      client = await clientsManager.update(Number(body.clientID), parseUpdateClient(body));
+      client = await clientsManager.update(Number(body.clientID), parseUpdateClient(body, body));
     }
 
     return client;

@@ -1,5 +1,4 @@
 import Button from "@mui/material/Button";
-import type { ServiceOrder } from "@prisma/client";
 import { useRouter } from "next/router";
 import type { FormEvent } from "react";
 
@@ -11,7 +10,7 @@ interface Props {
   Inputs: React.FC;
   URL: string;
   title: string;
-  next: (serviceOrders: ServiceOrder[] | undefined) => string;
+  next: (response: unknown) => string;
 }
 
 export default function Form({ Inputs, URL, title, next }: Props) {
@@ -24,7 +23,7 @@ export default function Form({ Inputs, URL, title, next }: Props) {
 
     const json = await request(URL, "POST", data);
     if (json != "ERROR") {
-      router.push(next(json.serviceOrders));
+      router.push(next(json));
     }
   };
 

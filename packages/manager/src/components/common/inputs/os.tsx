@@ -5,52 +5,48 @@ import { useEffect, useState } from "react";
 
 import ClientInputs from "@/components/common/inputs/client";
 import EquipmentInputs from "@/components/common/inputs/serviceOrder";
-import request from "@/utils/frontend/request";
+import useClients from "@/hooks/useClients";
 
 interface ClientWithLabel extends Client {
   label: string;
 }
 
-const novoCliente: ClientWithLabel = { label: "Novo Cliente", id: 0 } as ClientWithLabel;
+const newClient: ClientWithLabel = { label: "Novo Cliente", id: 0 } as ClientWithLabel;
 
 export default function OSInputs() {
-  const [clients, setClients] = useState([novoCliente]);
-  const [selectorInputValue, setSelectorInputValue] = useState(clients[0].label);
-  const [clientSelectorValue, setClientSelectorValue] = useState(clients[0]);
+  const { clients } = useClients();
+  const [options, setOptions] = useState([newClient]);
 
-  const load = async () => {
-    const data = await request("/api/admin/clients", "GET");
-
-    if (Array.isArray(data)) {
-      const options = [novoCliente].concat(data);
-
-      const processedOptions = options.map((client) => {
-        return { ...client, label: client.name };
-      });
-      setClients(processedOptions);
-    } else {
-      return null;
-    }
-  };
+  // const [selectorInputValue, setSelectorInputValue] = useState(options[0].label);
+  const [clientSelectorValue, setClientSelectorValue] = useState(options[0]);
 
   useEffect(() => {
-    setClientSelectorValue(novoCliente);
-    load();
-  }, []);
+    if (Array.isArray(clients)) {
+      const clientsWithLabel = clients.map((client) => {
+        return { ...client, label: client.name };
+      });
+
+      const processedOptions = [newClient].concat(clientsWithLabel);
+
+      setOptions(processedOptions);
+    }
+  }, [clients]);
 
   return (
     <>
       <h2>Dados do Cliente</h2>
       <Autocomplete
-        options={clients}
+        options={options}
         value={clientSelectorValue}
         onChange={(e, newValue) => {
           if (newValue) setClientSelectorValue(newValue);
         }}
+        /*
         inputValue={selectorInputValue}
         onInputChange={(e, newInputValue) => {
           setSelectorInputValue(newInputValue);
         }}
+        */
         renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
       <ClientInputs client={clientSelectorValue} />

@@ -105,53 +105,61 @@ export const parseUpdateSO = (data: unknown) => {
 
 // Client
 
-export const parseCreateClient = (data: unknown) => {
-  if (!isCreateClient(data)) {
+export const parseCreateClient = (dataClient: unknown, dataOS?: unknown) => {
+  if (!isCreateClient(dataClient)) {
     throw new Error("Invalid data");
   }
 
-  const name = filterString(data.name);
+  if (!isUpdateSO(dataOS)) {
+    throw new Error("Invalid Service Order Data");
+  }
+
+  const name = filterString(dataClient.name);
   if (name === null) {
     throw new Error("Name is required for creating a client");
   }
 
   const parsedData: Prisma.ClientCreateInput = {
     name: name,
-    email: filterString(data.email),
-    cpfOrCnpj: filterCpfOrCnpj(data.cpfOrCnpj),
-    address: filterString(data.address),
-    zip: filterZip(data.zip),
-    whatsapp: filterPhoneNumber(data.whatsapp),
-    tel: filterPhoneNumber(data.tel),
+    email: filterString(dataClient.email),
+    cpfOrCnpj: filterCpfOrCnpj(dataClient.cpfOrCnpj),
+    address: filterString(dataClient.address),
+    zip: filterZip(dataClient.zip),
+    whatsapp: filterPhoneNumber(dataClient.whatsapp),
+    tel: filterPhoneNumber(dataClient.tel),
   };
 
-  if (data.serviceOrder != undefined) {
-    parsedData.serviceOrder = {
-      create: parseCreateSO(data),
+  if (dataOS != undefined) {
+    parsedData.serviceOrders = {
+      create: parseCreateSO(dataOS),
     };
   }
 
   return parsedData;
 };
 
-export const parseUpdateClient = (data: unknown) => {
-  if (!isUpdateClient(data)) {
-    throw new Error("Invalid data");
+export const parseUpdateClient = (dataClient: unknown, dataOS?: unknown) => {
+  if (!isUpdateClient(dataClient)) {
+    throw new Error("Invalid Client Data");
+  }
+
+  if (!isUpdateSO(dataOS)) {
+    throw new Error("Invalid Service Order Data");
   }
 
   const parsedData: Prisma.ClientUpdateInput = {
-    name: filterString(data.name) === null ? data.name : undefined,
-    email: filterString(data.email),
-    cpfOrCnpj: filterCpfOrCnpj(data.cpfOrCnpj),
-    address: filterString(data.address),
-    zip: filterZip(data.zip),
-    whatsapp: filterPhoneNumber(data.whatsapp),
-    tel: filterPhoneNumber(data.tel),
+    name: filterString(dataClient.name) === null ? dataClient.name : undefined,
+    email: filterString(dataClient.email),
+    cpfOrCnpj: filterCpfOrCnpj(dataClient.cpfOrCnpj),
+    address: filterString(dataClient.address),
+    zip: filterZip(dataClient.zip),
+    whatsapp: filterPhoneNumber(dataClient.whatsapp),
+    tel: filterPhoneNumber(dataClient.tel),
   };
 
-  if (data.serviceOrder != undefined) {
-    parsedData.serviceOrder = {
-      create: parseCreateSO(data),
+  if (dataOS != undefined) {
+    parsedData.serviceOrders = {
+      create: parseCreateSO(dataOS),
     };
   }
 

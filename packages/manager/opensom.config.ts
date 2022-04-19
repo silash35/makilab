@@ -12,7 +12,7 @@ export default (() => {
       whatsapp: "55 71 9999-9999", // dont forget to add the country code
       city: "Salvador",
     },
-    ATTENDANTS: ["Dan	Cordova", "Larissa Brain", "Tom	Coffee"],
+    ATTENDANTS: ["Dan Cordova", "Larissa Brain", "Tom Coffee"],
     SERVICE_PLACES: ["Balcão", "Telefone"],
     PDF: {
       hasQrCode: true,
