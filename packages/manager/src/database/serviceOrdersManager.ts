@@ -1,5 +1,7 @@
 import { Prisma } from "@prisma/client";
 
+import { processSO } from "@/utils/backend/processors";
+
 import prisma from "./prisma";
 
 class ServiceOrdersManager {
@@ -10,7 +12,7 @@ class ServiceOrdersManager {
         owner: true,
       },
     });
-    return allSOs;
+    return processSO(allSOs);
   }
 
   async readOne(id: number) {
@@ -21,7 +23,7 @@ class ServiceOrdersManager {
       },
     });
 
-    return serviceOrder;
+    return processSO(serviceOrder);
   }
 
   // Write functions
@@ -31,7 +33,7 @@ class ServiceOrdersManager {
       data: serviceOrder,
     });
 
-    return editedServiceOrder;
+    return processSO(editedServiceOrder);
   }
 
   async delete(id: number) {

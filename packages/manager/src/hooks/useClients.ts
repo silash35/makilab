@@ -1,6 +1,6 @@
 import useSWR from "swr";
 
-import { Client } from "@/types/Client";
+import Client from "@/types/client";
 
 export default function useClients() {
   const { data, error } = useSWR("/api/admin/clients");

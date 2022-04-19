@@ -1,5 +1,7 @@
 import { Prisma } from "@prisma/client";
 
+import { processClient } from "@/utils/backend/processors";
+
 import prisma from "./prisma";
 
 class ClientsManager {
@@ -11,7 +13,7 @@ class ClientsManager {
       },
     });
 
-    return allClients;
+    return processClient(allClients);
   }
 
   // Write functions
@@ -24,7 +26,7 @@ class ClientsManager {
       },
     });
 
-    return createdClient;
+    return processClient(createdClient);
   }
 
   async update(id: number, client: Prisma.ClientUpdateInput) {
@@ -35,7 +37,7 @@ class ClientsManager {
         serviceOrders: true,
       },
     });
-    return editedClient;
+    return processClient(editedClient);
   }
 
   async delete(id: number) {

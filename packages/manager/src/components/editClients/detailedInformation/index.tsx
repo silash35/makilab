@@ -7,8 +7,7 @@ import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import SendMailDialog from "@/components/common/sendMailDialog";
-import { Client } from "@/types/Client";
-import processSO from "@/utils/frontend/processSO";
+import Client from "@/types/client";
 
 import styles from "./detailedInformation.module.scss";
 
@@ -47,48 +46,53 @@ export default function DetailedInformation({ client }: Props) {
       <h2>Equipamentos</h2>
 
       <Box className={styles.cardsContainer}>
-        {client.serviceOrders.map((serviceOrder) => {
-          const processedSO = processSO(serviceOrder);
-          return (
-            <Card variant="outlined" key={processedSO.id}>
-              <CardContent>
-                <h3>{processedSO.id && "OS " + processedSO.id}</h3>
-                {processedSO.deleted && (
-                  <Alert severity="error">Esse equipamento foi deletado</Alert>
-                )}
-                <p>
-                  Equipamento:
-                  {processedSO.equipment && " " + processedSO.equipment}
-                  {processedSO.brand && " " + processedSO.brand}
-                  {processedSO.model && " " + processedSO.model}
-                </p>
-                <p>{processedSO.statusName && `Situação: ${processedSO.statusName}`}</p>
-                <p>
-                  {processedSO.batchOrImei && `N° de Serie ou IMEI: ${processedSO.batchOrImei}`}
-                </p>
-                <p>{processedSO.productNumber && `Product Number: ${processedSO.productNumber}`}</p>
-                <p>
-                  {processedSO.isUnderWarranty
-                    ? "Equipamento em Garantia"
-                    : "Equipamento Fora de Garantia"}
-                </p>
-                <p>
-                  {(() => {
-                    if (processedSO.isUnderWarranty === false) {
-                      if (processedSO.isBudgetApproved === null) {
-                        return "Orçamento ainda não aprovado";
-                      } else if (processedSO.isBudgetApproved === false) {
-                        return "Orçamento Negado";
-                      } else if (processedSO.isBudgetApproved === true) {
-                        return "Orçamento Aprovado";
-                      }
-                    }
-                  })()}
-                </p>
-              </CardContent>
-            </Card>
-          );
-        })}
+        {client.serviceOrders
+          ? client.serviceOrders.map((serviceOrder) => {
+              return (
+                <Card variant="outlined" key={serviceOrder.id}>
+                  <CardContent>
+                    <h3>{serviceOrder.id && "OS " + serviceOrder.id}</h3>
+                    {serviceOrder.deleted && (
+                      <Alert severity="error">Esse equipamento foi deletado</Alert>
+                    )}
+                    <p>
+                      Equipamento:
+                      {serviceOrder.equipment && " " + serviceOrder.equipment}
+                      {serviceOrder.brand && " " + serviceOrder.brand}
+                      {serviceOrder.model && " " + serviceOrder.model}
+                    </p>
+                    <p>{serviceOrder.statusName && `Situação: ${serviceOrder.statusName}`}</p>
+                    <p>
+                      {serviceOrder.batchOrImei &&
+                        `N° de Serie ou IMEI: ${serviceOrder.batchOrImei}`}
+                    </p>
+                    <p>
+                      {serviceOrder.productNumber &&
+                        `Product Number: ${serviceOrder.productNumber}`}
+                    </p>
+                    <p>
+                      {serviceOrder.isUnderWarranty
+                        ? "Equipamento em Garantia"
+                        : "Equipamento Fora de Garantia"}
+                    </p>
+                    <p>
+                      {(() => {
+                        if (serviceOrder.isUnderWarranty === false) {
+                          if (serviceOrder.isBudgetApproved === null) {
+                            return "Orçamento ainda não aprovado";
+                          } else if (serviceOrder.isBudgetApproved === false) {
+                            return "Orçamento Negado";
+                          } else if (serviceOrder.isBudgetApproved === true) {
+                            return "Orçamento Aprovado";
+                          }
+                        }
+                      })()}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })
+          : undefined}
       </Box>
     </Box>
   );

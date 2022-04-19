@@ -4,12 +4,11 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import EquipmentsTable from "@/components/editEquipments/table";
-import { ProcessedSO } from "@/types/serviceOrder";
-import processSO from "@/utils/frontend/processSO";
+import ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/frontend/request";
 
 function EditSOs() {
-  const [serviceOrders, setServiceOrders] = useState<null | ProcessedSO[]>(null);
+  const [serviceOrders, setServiceOrders] = useState<null | ServiceOrder[]>(null);
 
   const load = async () => {
     setServiceOrders(null);
@@ -17,12 +16,7 @@ function EditSOs() {
     const data = await request("/api/admin/serviceOrders", "GET");
 
     if (Array.isArray(data)) {
-      const processedSOs = data.map((serviceOrder) => {
-        return processSO(serviceOrder);
-      });
-      setServiceOrders(processedSOs);
-    } else {
-      return null;
+      setServiceOrders(data);
     }
   };
 

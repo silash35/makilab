@@ -3,7 +3,6 @@ import Head from "next/head";
 
 import SO from "@/components/SO";
 import serviceOrdersManager from "@/database/serviceOrdersManager";
-import processSO from "@/utils/frontend/processSO";
 
 function ServiceOrderPage({
   ServiceOrderJSON,
@@ -26,11 +25,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const serviceOrder = await serviceOrdersManager.readOne(Number(id));
 
-  const processedOS = serviceOrder ? processSO(serviceOrder) : {};
-
   return {
     props: {
-      ServiceOrderJSON: JSON.stringify(processedOS),
+      ServiceOrderJSON: JSON.stringify(serviceOrder),
     },
     notFound: id === undefined || serviceOrder === null,
   };
