@@ -37,21 +37,23 @@ export default function Sidebar() {
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <Link href="/">
-          <a className={styles.image}>
-            <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40" />
-          </a>
-        </Link>
+        <div onClick={() => setIsOpen(false)} style={{ display: "contents" }}>
+          <Link href="/">
+            <a className={styles.image}>
+              <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40" />
+            </a>
+          </Link>
 
-        <Divider />
+          <Divider />
 
-        <List>
-          <ListLink href="/" text="Página Inicial" Icon={HomeIcon} />
-          <ListLink href="/admin/newSO" text="Criar nova OS" Icon={AddOSIcon} />
-          <ListLink href="/admin/editSOs" text="Gerenciar OSs" Icon={EditOSsIcon} />
-          <ListLink href="/admin/newClient" text="Cadastrar cliente" Icon={AddClientIcon} />
-          <ListLink href="/admin/editClients" text="Gerenciar Clientes" Icon={EditClientsIcon} />
-        </List>
+          <List>
+            <ListLink href="/" text="Página Inicial" Icon={HomeIcon} />
+            <ListLink href="/admin/newSO" text="Criar nova OS" Icon={AddOSIcon} />
+            <ListLink href="/admin/editSOs" text="Gerenciar OSs" Icon={EditOSsIcon} />
+            <ListLink href="/admin/newClient" text="Cadastrar cliente" Icon={AddClientIcon} />
+            <ListLink href="/admin/editClients" text="Gerenciar Clientes" Icon={EditClientsIcon} />
+          </List>
+        </div>
       </Drawer>
     </aside>
   );
