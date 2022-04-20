@@ -15,9 +15,10 @@ import styles from "./detailedInformation.module.scss";
 
 interface Props {
   serviceOrder: ServiceOrder;
+  reload: () => void;
 }
 
-export default function DetailedInformation({ serviceOrder }: Props) {
+export default function DetailedInformation({ serviceOrder, reload }: Props) {
   const owner = serviceOrder.owner;
   if (!owner) {
     throw new Error("Owner is not defined");
@@ -100,12 +101,14 @@ export default function DetailedInformation({ serviceOrder }: Props) {
           url={"/api/admin/equipments"}
           title={`Deletar ${serviceOrder.id}`}
           text={`Tem certeza que deseja excluir a OS ${serviceOrder.id}?`}
+          reload={reload}
         />
         {owner.email && <SendMailDialog client={owner} />}
         <EditDialog
           Inputs={<ServiceOrderInputs serviceOrder={serviceOrder} />}
           url={"/api/admin/equipments"}
           title="Editar Equipamento"
+          reload={reload}
         />
         <Link href={`/admin/SO?id=${serviceOrder.id}`} passHref>
           <Button variant="outlined" component="a">

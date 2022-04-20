@@ -13,25 +13,26 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-import { ProcessedSO } from "@/types/serviceOrder";
+import ServiceOrder from "@/types/serviceOrder";
 
 import Equipment from "../row";
 import styles from "./table.module.scss";
 
 interface Props {
-  serviceOrders: ProcessedSO[];
+  serviceOrders: ServiceOrder[];
+  reload: () => void;
 }
 
 type SortableProperty = "id" | "equipment" | "brand" | "model" | "statusName";
 type Direction = "asc" | "desc";
 
-export default function CollapsibleTable({ serviceOrders }: Props) {
+export default function CollapsibleTable({ serviceOrders, reload }: Props) {
   const [sortDirection, setSortDirection] = useState<Direction>("asc");
   const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
   const [search, setSearch] = useState("");
   const [showEnded, setShowEnded] = useState(false);
 
-  function compare(a: ProcessedSO, b: ProcessedSO) {
+  function compare(a: ServiceOrder, b: ServiceOrder) {
     // Put urgent equipments at the top
     if (a.isUrgent && !b.isUrgent) {
       return -1;
@@ -76,7 +77,7 @@ export default function CollapsibleTable({ serviceOrders }: Props) {
   }
 
   serviceOrders = serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
-    const searchText = equipment + id + brand + model + owner.name + statusName;
+    const searchText = equipment + id + brand + model + owner?.name + statusName;
 
     return (
       (showEnded || statusName !== "Finalizado") &&
@@ -137,7 +138,7 @@ export default function CollapsibleTable({ serviceOrders }: Props) {
         </TableHead>
         <TableBody>
           {serviceOrders.map((serviceOrder) => (
-            <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} />
+            <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} reload={reload} />
           ))}
         </TableBody>
       </Table>

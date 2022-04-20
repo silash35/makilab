@@ -6,17 +6,18 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
-import { ProcessedSO } from "@/types/serviceOrder";
+import ServiceOrder from "@/types/serviceOrder";
 
 import DetailedInformation from "../detailedInformation";
 import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./row.module.scss";
 
 interface Props {
-  serviceOrder: ProcessedSO;
+  serviceOrder: ServiceOrder;
+  reload: () => void;
 }
 
-export default function Equipment({ serviceOrder }: Props) {
+export default function Equipment({ serviceOrder, reload }: Props) {
   const [openRow, setOpenRow] = useState(false);
 
   return (
@@ -49,7 +50,7 @@ export default function Equipment({ serviceOrder }: Props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
-            <DetailedInformation serviceOrder={serviceOrder} />
+            <DetailedInformation serviceOrder={serviceOrder} reload={reload} />
           </Collapse>
         </TableCell>
       </TableRow>

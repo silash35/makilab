@@ -1,28 +1,12 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 
 import EquipmentsTable from "@/components/editEquipments/table";
-import ServiceOrder from "@/types/serviceOrder";
-import request from "@/utils/frontend/request";
+import useServiceOrders from "@/hooks/useServiceOrders";
 
 function EditSOs() {
-  const [serviceOrders, setServiceOrders] = useState<null | ServiceOrder[]>(null);
-
-  const load = async () => {
-    setServiceOrders(null);
-
-    const data = await request("/api/admin/serviceOrders", "GET");
-
-    if (Array.isArray(data)) {
-      setServiceOrders(data);
-    }
-  };
-
-  useEffect(() => {
-    load();
-  }, []);
+  const { serviceOrders, mutate } = useServiceOrders();
 
   return (
     <>
@@ -31,9 +15,9 @@ function EditSOs() {
       </Head>
 
       {serviceOrders ? (
-        <EquipmentsTable serviceOrders={serviceOrders} reload={load} />
+        <EquipmentsTable serviceOrders={serviceOrders} reload={mutate} />
       ) : (
-        <Stack alignItems="center">
+        <Stack height="100%" justifyContent="center" alignItems="center">
           <CircularProgress />
         </Stack>
       )}
