@@ -7,7 +7,7 @@ import request from "@/utils/frontend/request";
 import styles from "./Form.module.scss";
 
 interface Props {
-  Inputs: React.FC;
+  Inputs: React.ReactChild;
   URL: string;
   title: string;
   next: (response: unknown) => string;
@@ -31,7 +31,7 @@ export default function Form({ Inputs, URL, title, next }: Props) {
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1>{title}</h1>
 
-      <Inputs />
+      {Inputs}
 
       <p>*Campo Obrigatório</p>
       <Button variant="contained" fullWidth size="large" type="submit">

@@ -44,7 +44,7 @@ export default function Equipment({ serviceOrder, reload }: Props) {
           )}
         </TableCell>
         <TableCell align="right">
-          <UpdateStatusDialog serviceOrder={serviceOrder} />
+          <UpdateStatusDialog serviceOrder={serviceOrder} reload={reload} />
         </TableCell>
       </TableRow>
       <TableRow>

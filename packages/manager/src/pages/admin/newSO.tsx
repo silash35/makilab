@@ -12,7 +12,7 @@ function NewServiceOrder() {
       </Head>
 
       <Form
-        Inputs={OSInputs}
+        Inputs={<OSInputs />}
         URL="/api/admin/clients"
         title="Cadastrar Nova Ordem de Serviço"
         next={(response) => {

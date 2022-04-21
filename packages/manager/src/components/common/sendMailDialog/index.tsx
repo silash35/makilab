@@ -8,17 +8,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-import type { ProcessedOwner } from "@/types/serviceOrder";
+import type Client from "@/types/client";
 import request from "@/utils/frontend/request";
 
 interface Props {
-  client: ProcessedOwner;
+  client: Client;
   email?: string;
 }
 
 export default function SendMailDialog({ client, email }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
-  const [text, setText] = useState(email ? client.defaultEmail : email);
+  const [text, setText] = useState(email);
 
   const sendData = async () => {
     if (

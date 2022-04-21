@@ -12,19 +12,20 @@ import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
 
-import { Client } from "@/types/Client";
+import Client from "@/types/client";
 
 import ClientRow from "../row";
 import styles from "./table.module.scss";
 
 interface TableProps {
   clients: Client[];
+  reload: () => void;
 }
 
 type SortableProperty = "id" | "name" | "email";
 type Direction = "asc" | "desc";
 
-export default function CollapsibleTable({ clients }: TableProps) {
+export default function CollapsibleTable({ clients, reload }: TableProps) {
   const [sortDirection, setSortDirection] = useState<Direction>("asc");
   const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
 
@@ -109,7 +110,7 @@ export default function CollapsibleTable({ clients }: TableProps) {
         </TableHead>
         <TableBody>
           {clients.map((client) => (
-            <ClientRow key={client.id} client={client} />
+            <ClientRow key={client.id} client={client} reload={reload} />
           ))}
         </TableBody>
       </Table>

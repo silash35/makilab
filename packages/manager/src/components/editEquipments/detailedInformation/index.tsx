@@ -103,7 +103,7 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
           text={`Tem certeza que deseja excluir a OS ${serviceOrder.id}?`}
           reload={reload}
         />
-        {owner.email && <SendMailDialog client={owner} />}
+        {owner.email && <SendMailDialog client={owner} email={serviceOrder.defaultEmail} />}
         <EditDialog
           Inputs={<ServiceOrderInputs serviceOrder={serviceOrder} />}
           url={"/api/admin/equipments"}
@@ -115,7 +115,7 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
             Gerar PDF
           </Button>
         </Link>
-        <UpdateStatusDialog serviceOrder={serviceOrder} />
+        <UpdateStatusDialog serviceOrder={serviceOrder} reload={reload} />
       </div>
     </Box>
   );

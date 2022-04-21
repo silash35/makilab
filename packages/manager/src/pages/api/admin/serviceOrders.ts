@@ -2,7 +2,7 @@ import type { NextApiRequest } from "next";
 
 import serviceOrdersManager from "@/database/serviceOrdersManager";
 import apiFactory from "@/utils/backend/apiFactory";
-import { parseEditSO, parseUpdateSO } from "@/utils/backend/parsers";
+import { parseUpdateSO, parseUpdateStatusSO } from "@/utils/backend/parsers";
 
 const methods = {
   async GET(req: NextApiRequest) {
@@ -22,11 +22,11 @@ const methods = {
   },
 
   async POST(req: NextApiRequest) {
-    return await serviceOrdersManager.update(Number(req.body.id), parseEditSO(req.body));
+    return await serviceOrdersManager.update(Number(req.body.id), parseUpdateSO(req.body));
   },
 
   async PUT(req: NextApiRequest) {
-    return await serviceOrdersManager.update(Number(req.body.id), parseUpdateSO(req.body));
+    return await serviceOrdersManager.update(Number(req.body.id), parseUpdateStatusSO(req.body));
   },
 
   async DELETE(req: NextApiRequest) {

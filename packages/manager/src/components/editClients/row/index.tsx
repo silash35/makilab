@@ -6,16 +6,17 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
-import { Client } from "@/types/Client";
+import Client from "@/types/client";
 
 import DetailedInformation from "../detailedInformation";
 import styles from "./row.module.scss";
 
 interface Props {
   client: Client;
+  reload: () => void;
 }
 
-export default function ClientRow({ client }: Props) {
+export default function ClientRow({ client, reload }: Props) {
   const [openRow, setOpenRow] = useState(false);
 
   return (
@@ -37,7 +38,7 @@ export default function ClientRow({ client }: Props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
-            <DetailedInformation client={client} />
+            <DetailedInformation client={client} reload={reload} />
           </Collapse>
         </TableCell>
       </TableRow>

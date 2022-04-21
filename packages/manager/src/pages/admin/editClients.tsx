@@ -1,29 +1,12 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 
 import ClientsTable from "@/components/editClients/table";
-import { Client } from "@/types/Client";
-import request from "@/utils/frontend/request";
+import useClients from "@/hooks/useClients";
 
 function EditClients() {
-  const [clients, setClients] = useState<null | Client[]>(null);
-
-  const load = async () => {
-    setClients(null);
-
-    const data = await request("/api/admin/clients", "GET");
-    if (Array.isArray(data)) {
-      setClients(data);
-    } else {
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    load();
-  }, []);
+  const { clients, mutate } = useClients();
 
   return (
     <>
@@ -32,9 +15,9 @@ function EditClients() {
       </Head>
 
       {clients ? (
-        <ClientsTable clients={clients} reload={load} />
+        <ClientsTable clients={clients} reload={mutate} />
       ) : (
-        <Stack alignItems="center">
+        <Stack height="100%" justifyContent="center" alignItems="center">
           <CircularProgress />
         </Stack>
       )}

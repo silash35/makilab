@@ -53,7 +53,7 @@ export const parseCreateSO = (data: unknown) => {
   return parsedData;
 };
 
-export const parseEditSO = (data: unknown) => {
+export const parseUpdateSO = (data: unknown) => {
   if (!isUpdateSO(data)) {
     throw new Error("Invalid data");
   }
@@ -77,14 +77,14 @@ export const parseEditSO = (data: unknown) => {
   return parsedData;
 };
 
-export const parseUpdateSO = (data: unknown) => {
+export const parseUpdateStatusSO = (data: unknown) => {
   if (!isUpdateSO(data)) {
     throw new Error("Invalid data");
   }
 
   const parsedData: Prisma.ServiceOrderUpdateInput = {
     createdAt:
-      filterDate(data.createdAt) === null ? (filterDate(data.createdAt) as Date) : undefined,
+      filterDate(data.createdAt) === null ? undefined : (filterDate(data.createdAt) as Date),
     registeredInManufacturerAt: filterDate(data.registeredInManufacturerAt),
     budgetedAt: filterDate(data.budgetedAt),
     budgetAnsweredAt: filterDate(data.budgetAnsweredAt),
@@ -95,7 +95,7 @@ export const parseUpdateSO = (data: unknown) => {
       if (filterDate(data.budgetAnsweredAt) === null) {
         return null;
       } else {
-        return data.isBudgetApproved === "on";
+        return data.isBudgetApproved === "on" || data.isBudgetApproved === true;
       }
     })(),
   };

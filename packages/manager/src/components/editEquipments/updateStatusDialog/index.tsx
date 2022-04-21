@@ -10,18 +10,19 @@ import DialogTitle from "@mui/material/DialogTitle";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import ptBR from "date-fns/locale/pt-BR";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import type { ProcessedSO } from "@/types/serviceOrder";
+import type ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/frontend/request";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";
 
 interface Props {
-  serviceOrder: ProcessedSO;
+  serviceOrder: ServiceOrder;
+  reload: () => void;
 }
 
-const UpdateStatusDialog = ({ serviceOrder }: Props) => {
+const UpdateStatusDialog = ({ serviceOrder, reload }: Props) => {
   const [open, setOpen] = useState(false);
 
   const [createdAt, setCreatedAt] = useState<Date | null>(serviceOrder.createdAt);
@@ -30,12 +31,25 @@ const UpdateStatusDialog = ({ serviceOrder }: Props) => {
   );
   const [budgetedAt, setBudgetedAt] = useState(serviceOrder.budgetedAt);
   const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(serviceOrder.budgetAnsweredAt);
-  const [isBudgetApproved, setIsBudgetApproved] = useState(serviceOrder.isBudgetApproved);
+  const [isBudgetApproved, setIsBudgetApproved] = useState<boolean>(
+    serviceOrder.isBudgetApproved ? true : false
+  );
   const [partsArrivedAt, setPartsArrivedAt] = useState(serviceOrder.partsArrivedAt);
   const [repairedAt, setRepairedAt] = useState(serviceOrder.repairedAt);
   const [deliveredToCustomerAt, setDeliveredToCustomerAt] = useState(
     serviceOrder.deliveredToCustomerAt
   );
+
+  useEffect(() => {
+    setCreatedAt(serviceOrder.createdAt);
+    setRegisteredInManufacturerAt(serviceOrder.registeredInManufacturerAt);
+    setBudgetedAt(serviceOrder.budgetedAt);
+    setBudgetAnsweredAt(serviceOrder.budgetAnsweredAt);
+    setIsBudgetApproved(serviceOrder.isBudgetApproved ? true : false);
+    setPartsArrivedAt(serviceOrder.partsArrivedAt);
+    setRepairedAt(serviceOrder.repairedAt);
+    setDeliveredToCustomerAt(serviceOrder.deliveredToCustomerAt);
+  }, [serviceOrder]);
 
   const sendData = async () => {
     const data = {
@@ -50,10 +64,10 @@ const UpdateStatusDialog = ({ serviceOrder }: Props) => {
     };
 
     if (
-      (await request("/api/admin/equipments", "PUT", { id: serviceOrder.id, data: data })) !=
+      (await request("/api/admin/serviceOrders", "PUT", { id: serviceOrder.id, ...data })) !=
       "ERROR"
     ) {
-      await reload();
+      reload();
       setOpen(false);
     }
   };
@@ -96,7 +110,7 @@ const UpdateStatusDialog = ({ serviceOrder }: Props) => {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={isBudgetApproved ? isBudgetApproved : false}
+                          checked={isBudgetApproved}
                           onChange={(e) => {
                             setIsBudgetApproved(e.target.checked);
                           }}

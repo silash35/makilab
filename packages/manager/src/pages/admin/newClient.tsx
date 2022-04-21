@@ -11,10 +11,10 @@ function NewClient() {
       </Head>
 
       <Form
-        Inputs={ClientInputs}
+        Inputs={<ClientInputs />}
         URL="/api/admin/clients"
         title="Cadastrar novo Cliente"
-        next={() => "/admin"}
+        next={() => "/"}
       />
     </>
   );

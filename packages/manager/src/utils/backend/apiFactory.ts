@@ -68,6 +68,7 @@ export default function apiFactory(methods: Methods, auth = true, enableCors = f
         res.statusCode = 500;
       }
       res.end(JSON.stringify({ error }));
+      console.log(error);
     }
   };
 }

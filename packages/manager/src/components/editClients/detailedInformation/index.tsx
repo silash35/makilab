@@ -13,9 +13,10 @@ import styles from "./detailedInformation.module.scss";
 
 interface Props {
   client: Client;
+  reload: () => void;
 }
 
-export default function DetailedInformation({ client }: Props) {
+export default function DetailedInformation({ client, reload }: Props) {
   return (
     <Box className={styles.detailedInformation}>
       <h2>Informações Detalhadas</h2>
@@ -34,12 +35,14 @@ export default function DetailedInformation({ client }: Props) {
           url={"/api/admin/clients"}
           title={`Deletar ${client.name}`}
           text={`Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`}
+          reload={reload}
         />
         {client.email && <SendMailDialog client={client} />}
         <EditDialog
           Inputs={<ClientInputs client={client} />}
           url={"/api/admin/clients"}
           title="Editar Cliente"
+          reload={reload}
         />
       </div>
 
