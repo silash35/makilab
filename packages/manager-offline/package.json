@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "@opensom/manager": "workspace:*",
-    "nativefier": "^46.2.0"
+    "nativefier": "^47.0.0"
   }
 }
