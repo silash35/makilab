@@ -74,6 +74,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           install: false
-          build: cd ./packages/manager && pnpm build
-          start: cd ./packages/manager pnpm start
+          build: pnpm build
+          start: pnpm start
           wait-on: "http://localhost:3000"
+          project: ./packages/manager
