@@ -10,8 +10,11 @@ node_modules
 # TypeScript
 tsconfig.tsbuildinfo
 
-# testing
-/coverage
+# cypress
+**/cypress/plugins
+**/cypress/screenshots
+**/cypress/downloads
+**/cypress/videos
 
 # next.js
 .next

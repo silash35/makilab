@@ -61,6 +61,7 @@ export default function SignInForm() {
           placeholder="Digite sua senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          data-testid="password-input"
           required
         />
       </label>
