@@ -1,0 +1,27 @@
+{
+  "serviceOrders": [
+    {
+      "equipment": "Ventilador",
+      "brand": "Mallory",
+      "model": "Air Timer Style TS+",
+      "productNumber": "B07B9YL48X",
+      "batchOrImei": "653547344353553667",
+      "problemDescription": "Quebrou a hélice",
+      "productCondition": "Com marcas de uso",
+      "accessories": "Caixa",
+      "listOfServices": "Avaliação técnica",
+      "notes": "Lorem ipsum",
+
+      "isUnderWarranty": false,
+      "attendedBy": "Susannah McKee",
+      "attendedOn": "Balcão"
+    },
+    {
+      "equipment": "Soprador Térmico",
+
+      "isUnderWarranty": true,
+      "attendedBy": "Giovanni Tortoise",
+      "attendedOn": "Celular"
+    }
+  ]
+}

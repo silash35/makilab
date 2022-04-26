@@ -1,0 +1,16 @@
+{
+  "clients": [
+    {
+      "name": "Francesco Lombardo",
+      "email": "dlombardos@pcworld.com",
+      "address": "9 Burning Wood Crossing",
+      "zip": "40435-205",
+      "whatsapp": "+55 71 93822-1576",
+      "tel": "(54) 93822-1576",
+      "cpfOrCnpj": "25.825.768/0001-25"
+    },
+    {
+      "name": "Bobby Brick"
+    }
+  ]
+}

@@ -5,12 +5,6 @@ declare global {
   namespace Cypress {
     interface Chainable {
       /**
-       * Custom command to create a place using passed place
-       * @example cy.createPlace(place)
-       */
-      createPlace(place: ServiceOrder): void;
-
-      /**
        * Custom command to get the ID of passed place
        * @example cy.getPlaceId(place)
        */
@@ -30,12 +24,6 @@ declare global {
     }
   }
 }
-
-Cypress.Commands.add("createPlace", (place) => {
-  cy.request("POST", "/api/protected/places", place).then((response) => {
-    expect(response.status).equal(200);
-  });
-});
 
 Cypress.Commands.add("getPlaceId", (place) => {
   cy.request("/api/public/places").then((response) => {
