@@ -12,11 +12,16 @@ const methods = {
   async POST(req: NextApiRequest) {
     const body = req.body;
     let client;
+    const id = Number(body.clientID);
 
-    if (Number(body.clientID) === 0) {
-      client = await clientsManager.create(parseCreateClient(body, body));
+    if (isNaN(id)) {
+      throw new Error("Invalid data: clientID");
     } else {
-      client = await clientsManager.update(Number(body.clientID), parseUpdateClient(body, body));
+      if (id === 0) {
+        client = await clientsManager.create(parseCreateClient(body, body));
+      } else {
+        client = await clientsManager.update(Number(body.clientID), parseUpdateClient(body, body));
+      }
     }
 
     return client;

@@ -61,13 +61,18 @@ export default function apiFactory(methods: Methods, auth = true, enableCors = f
             break;
 
           default:
-            res.statusCode = 500;
+            if (error.message.includes("Invalid data")) {
+              res.statusCode = 400;
+            } else {
+              res.statusCode = 500;
+            }
             break;
         }
+        res.json(error.message);
       } else {
         res.statusCode = 500;
       }
-      res.end(JSON.stringify({ error }));
+      res.end();
       console.log(error);
     }
   };

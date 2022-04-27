@@ -12,12 +12,12 @@ export const parseCreateSO = (data: unknown) => {
   data.isUnderWarranty = data.isUnderWarranty === "on" || data.isUnderWarranty === true;
 
   if (!isCreateSO(data)) {
-    throw new Error("Invalid data");
+    throw new Error("Invalid data: Service Order");
   }
 
   const equipment = filterString(data.equipment);
   if (equipment === null) {
-    throw new Error("equipment name is required for creating a new equipment");
+    throw new Error("Invalid data: Equipment name");
   }
 
   let createdAt: Date | undefined | null = filterDate(data.createdAt);
@@ -27,12 +27,12 @@ export const parseCreateSO = (data: unknown) => {
 
   const attendedBy = filterString(data.attendedBy);
   if (attendedBy === null) {
-    throw new Error("Attendant name is required for creating a new equipment");
+    throw new Error("Invalid data: Attendant name");
   }
 
   const attendedOn = filterString(data.attendedOn);
   if (attendedOn === null) {
-    throw new Error("Service location is required for creating a new equipment");
+    throw new Error("Invalid data: Service location");
   }
 
   const parsedData: Prisma.ServiceOrderCreateManyOwnerInput = {
@@ -55,7 +55,7 @@ export const parseCreateSO = (data: unknown) => {
 
 export const parseUpdateSO = (data: unknown) => {
   if (!isUpdateSO(data)) {
-    throw new Error("Invalid data");
+    throw new Error("Invalid data: Service Order");
   }
 
   const parsedData: Prisma.ServiceOrderUpdateInput = {
@@ -79,7 +79,7 @@ export const parseUpdateSO = (data: unknown) => {
 
 export const parseUpdateStatusSO = (data: unknown) => {
   if (!isUpdateSO(data)) {
-    throw new Error("Invalid data");
+    throw new Error("Invalid data: Service Order Status");
   }
 
   const parsedData: Prisma.ServiceOrderUpdateInput = {
@@ -107,12 +107,12 @@ export const parseUpdateStatusSO = (data: unknown) => {
 
 export const parseCreateClient = (dataClient: unknown, dataSO?: unknown) => {
   if (!isCreateClient(dataClient)) {
-    throw new Error("Invalid client data");
+    throw new Error("Invalid data: Client");
   }
 
   const name = filterString(dataClient.name);
   if (name === null) {
-    throw new Error("Name is required for creating a client");
+    throw new Error("Invalid data: Client Name");
   }
 
   const parsedData: Prisma.ClientCreateInput = {
@@ -136,7 +136,7 @@ export const parseCreateClient = (dataClient: unknown, dataSO?: unknown) => {
 
 export const parseUpdateClient = (dataClient: unknown, dataSO?: unknown) => {
   if (!isUpdateClient(dataClient)) {
-    throw new Error("Invalid Client Data");
+    throw new Error("Invalid data: Client");
   }
 
   const parsedData: Prisma.ClientUpdateInput = {

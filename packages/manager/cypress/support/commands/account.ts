@@ -35,6 +35,7 @@ Cypress.Commands.add("signIn", () => {
 Cypress.Commands.add("signOut", () => {
   cy.visit("/");
   cy.clearCookies();
+  cy.getCookies().should("be.empty");
   cy.reload();
 });
 

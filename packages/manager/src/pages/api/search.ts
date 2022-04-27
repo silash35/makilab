@@ -6,13 +6,13 @@ import apiFactory from "@/utils/backend/apiFactory";
 
 const methods = {
   async POST(req: NextApiRequest) {
-    const search = req.body.search as string;
+    const search = String(req.body.search);
 
     // Remove all non-numeric characters
     const searchID = search.replace(/\D/g, "");
 
     if (!(searchID.length > 0)) {
-      throw new Error("Not Found");
+      throw new Error("Invalid data: search ID must be a number");
     }
 
     const equipment = await prisma.serviceOrder.findUnique({
