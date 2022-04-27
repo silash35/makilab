@@ -1,6 +1,5 @@
-import { ServiceOrder } from "../types";
-import { Client } from "../types";
 import ResponseClient from "@/types/client";
+import { generateClient, generateServiceOrder } from "../../support/generators";
 
 declare global {
   namespace Cypress {
@@ -9,7 +8,10 @@ declare global {
        * Custom command to create a Client using passed client and, optionally, a serviceOrder
        * @example cy.createPlace(place)
        */
-      createClient(client: Client, serviceOrder?: ServiceOrder): void;
+      createClient(
+        client: ReturnType<typeof generateClient>,
+        serviceOrder?: ReturnType<typeof generateServiceOrder>
+      ): void;
     }
   }
 }

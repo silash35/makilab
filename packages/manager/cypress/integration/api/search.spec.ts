@@ -1,5 +1,4 @@
-import { clients } from "../../fixtures/clients.json";
-import { serviceOrders } from "../../fixtures/serviceOrders.json";
+import { generateClient, generateServiceOrder } from "../../support/generators";
 
 interface ServiceOrder {
   id: number;
@@ -15,8 +14,11 @@ interface ServiceOrder {
 
 describe("Search API - POST", () => {
   it("should search by ID", () => {
+    const client = generateClient();
+    const serviceOrder = generateServiceOrder();
+
     cy.signIn();
-    cy.createClient(clients[0], serviceOrders[0]);
+    cy.createClient(client, serviceOrder);
     cy.signOut();
 
     cy.get("@serviceOrderId").then((serviceOrderId) => {
@@ -25,7 +27,7 @@ describe("Search API - POST", () => {
         const serviceOrder = response.body as ServiceOrder;
 
         expect(serviceOrder.id).equal(serviceOrderId);
-        expect(serviceOrder.isUnderWarranty).equal(serviceOrders[0].isUnderWarranty);
+        expect(serviceOrder.isUnderWarranty).equal(serviceOrder.isUnderWarranty);
       });
     });
   });

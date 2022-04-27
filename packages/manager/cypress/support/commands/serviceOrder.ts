@@ -1,5 +1,5 @@
-import { ServiceOrder } from "../types";
 import { ServiceOrder as PlaceWithId } from "@prisma/client";
+import { generateServiceOrder } from "../../support/generators";
 
 declare global {
   namespace Cypress {
@@ -8,13 +8,13 @@ declare global {
        * Custom command to get the ID of passed place
        * @example cy.getPlaceId(place)
        */
-      getPlaceId(place: ServiceOrder): void;
+      getPlaceId(place: ReturnType<typeof generateServiceOrder>): void;
 
       /**
        * Custom command to update a place using passed place
        * @example cy.createPlace(place)
        */
-      deletePlace(place: ServiceOrder): void;
+      deletePlace(place: ReturnType<typeof generateServiceOrder>): void;
 
       /**
        * Custom command to delete every test place of the database

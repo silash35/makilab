@@ -11,7 +11,6 @@ describe("Admin Panel Page", () => {
     cy.location("pathname").should("equal", "/");
 
     cy.get("main").find("a").should("have.length", 4);
-    // cy.contains("Admin Panel");
   });
 });
 
