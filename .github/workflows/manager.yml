@@ -64,7 +64,7 @@ jobs:
         with:
           node-version: 17.x
       - name: Copy .env file
-        run: cp .env.example .env
+        run: cp .env.test .env
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
