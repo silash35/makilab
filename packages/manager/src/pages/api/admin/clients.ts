@@ -11,20 +11,20 @@ const methods = {
 
   async POST(req: NextApiRequest) {
     const body = req.body;
-    let client;
+    const client = await clientsManager.create(parseCreateClient(body, body));
+
+    return client;
+  },
+
+  async PUT(req: NextApiRequest) {
+    const body = req.body;
     const id = Number(body.clientID);
 
     if (isNaN(id)) {
       throw new Error("Invalid data: clientID");
     } else {
-      if (id === 0) {
-        client = await clientsManager.create(parseCreateClient(body, body));
-      } else {
-        client = await clientsManager.update(Number(body.clientID), parseUpdateClient(body, body));
-      }
+      return await clientsManager.update(id, parseUpdateClient(body, body));
     }
-
-    return client;
   },
 
   async DELETE(req: NextApiRequest) {

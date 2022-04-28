@@ -1,10 +1,13 @@
 import Head from "next/head";
+import { useState } from "react";
 
 import Form from "@/components/common/form";
 import OSInputs from "@/components/common/inputs/os";
 import Client from "@/types/client";
 
 function NewServiceOrder() {
+  const [isNewClient, setIsNewClient] = useState(true);
+
   return (
     <>
       <Head>
@@ -12,8 +15,9 @@ function NewServiceOrder() {
       </Head>
 
       <Form
-        Inputs={<OSInputs />}
+        Inputs={<OSInputs setIsNewClient={setIsNewClient} />}
         URL="/api/admin/clients"
+        method={isNewClient ? "POST" : "PUT"}
         title="Cadastrar Nova Ordem de Serviço"
         next={(response) => {
           const serviceOrders = (response as Client).serviceOrders;

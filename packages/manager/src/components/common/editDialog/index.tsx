@@ -10,11 +10,12 @@ import request from "@/utils/frontend/request";
 interface Props {
   Inputs: React.ReactChild;
   url: string;
+  method?: "POST" | "PUT";
   title: string;
   reload: () => void;
 }
 
-export default function EditDialog({ Inputs, url, title, reload }: Props) {
+export default function EditDialog({ Inputs, url, method = "POST", title, reload }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -22,7 +23,7 @@ export default function EditDialog({ Inputs, url, title, reload }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
 
-    if ((await request(url, "POST", data)) != "ERROR") {
+    if ((await request(url, method, data)) != "ERROR") {
       setOpenDialog(false);
       reload();
     }

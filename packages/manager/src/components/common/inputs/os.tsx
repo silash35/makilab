@@ -11,14 +11,27 @@ interface ClientWithLabel extends Client {
   label: string;
 }
 
+interface Props {
+  setIsNewClient?: (isNewClient: boolean) => void;
+}
+
 const newClient: ClientWithLabel = { label: "Novo Cliente", id: 0 } as ClientWithLabel;
 
-export default function OSInputs() {
+export default function OSInputs({ setIsNewClient }: Props) {
   const { clients } = useClients();
   const [options, setOptions] = useState([newClient]);
 
-  // const [selectorInputValue, setSelectorInputValue] = useState(options[0].label);
   const [clientSelectorValue, setClientSelectorValue] = useState(options[0]);
+
+  if (setIsNewClient) {
+    useEffect(() => {
+      if (clientSelectorValue.id === 0 && clientSelectorValue.label === "Novo Cliente") {
+        setIsNewClient(true);
+      } else {
+        setIsNewClient(false);
+      }
+    }, [clientSelectorValue]);
+  }
 
   useEffect(() => {
     if (Array.isArray(clients)) {
@@ -41,12 +54,6 @@ export default function OSInputs() {
         onChange={(e, newValue) => {
           if (newValue) setClientSelectorValue(newValue);
         }}
-        /*
-        inputValue={selectorInputValue}
-        onInputChange={(e, newInputValue) => {
-          setSelectorInputValue(newInputValue);
-        }}
-        */
         renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
       <ClientInputs client={clientSelectorValue} />

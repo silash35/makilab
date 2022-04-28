@@ -12,6 +12,7 @@ tsconfig.tsbuildinfo
 
 # cypress
 **/cypress/plugins
+**/cypress/fixtures
 **/cypress/screenshots
 **/cypress/downloads
 **/cypress/videos

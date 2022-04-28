@@ -9,11 +9,12 @@ import styles from "./Form.module.scss";
 interface Props {
   Inputs: React.ReactChild;
   URL: string;
+  method?: "POST" | "PUT";
   title: string;
   next: (response: unknown) => string;
 }
 
-export default function Form({ Inputs, URL, title, next }: Props) {
+export default function Form({ Inputs, URL, method = "POST", title, next }: Props) {
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -21,7 +22,7 @@ export default function Form({ Inputs, URL, title, next }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
 
-    const json = await request(URL, "POST", data);
+    const json = await request(URL, method, data);
     if (json != "ERROR") {
       router.push(next(json));
     }

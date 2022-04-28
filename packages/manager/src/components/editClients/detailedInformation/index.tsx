@@ -41,6 +41,7 @@ export default function DetailedInformation({ client, reload }: Props) {
         <EditDialog
           Inputs={<ClientInputs client={client} />}
           url={"/api/admin/clients"}
+          method={"PUT"}
           title="Editar Cliente"
           reload={reload}
         />
