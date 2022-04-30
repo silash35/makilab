@@ -6,8 +6,20 @@ export const filterString = (variable: unknown) => {
   return isString(variable) ? variable : null;
 };
 
-export const filterDate = (variable: unknown) => {
-  return isString(variable) ? new Date(variable) : null;
+export const filterDate = (variable: unknown, fail = false) => {
+  if (variable === null || variable === undefined || variable === "") {
+    return null;
+  }
+
+  // Check if the date is valid
+  if (!isNaN(Date.parse(variable as string))) {
+    return new Date(variable as string);
+  } else {
+    if (fail) {
+      throw new Error("Invalid data: Date");
+    }
+    return null;
+  }
 };
 
 export const filterCpfOrCnpj = (variable: unknown) => {

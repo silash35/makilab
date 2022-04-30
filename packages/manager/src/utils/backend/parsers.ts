@@ -20,7 +20,7 @@ export const parseCreateSO = (data: unknown) => {
     throw new Error("Invalid data: Equipment name");
   }
 
-  let createdAt: Date | undefined | null = filterDate(data.createdAt);
+  let createdAt: Date | undefined | null = filterDate(data.createdAt, true);
   if (createdAt === null) {
     createdAt = undefined;
   }
@@ -84,7 +84,7 @@ export const parseUpdateStatusSO = (data: unknown) => {
 
   const parsedData: Prisma.ServiceOrderUpdateInput = {
     createdAt:
-      filterDate(data.createdAt) === null ? undefined : (filterDate(data.createdAt) as Date),
+      filterDate(data.createdAt) === null ? undefined : (filterDate(data.createdAt, true) as Date),
     registeredInManufacturerAt: filterDate(data.registeredInManufacturerAt),
     budgetedAt: filterDate(data.budgetedAt),
     budgetAnsweredAt: filterDate(data.budgetAnsweredAt),
