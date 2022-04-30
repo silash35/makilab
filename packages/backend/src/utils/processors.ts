@@ -166,3 +166,25 @@ export function processSO(serviceOrder?: ServiceOrder | ServiceOrder[] | null) {
 
   return process(serviceOrder);
 }
+
+export function processPublicSO(serviceOrder: ServiceOrder | null) {
+  if (!serviceOrder) {
+    return undefined;
+  }
+
+  const parsedServiceOrder = {
+    id: serviceOrder.id,
+    name: `${serviceOrder.equipment}${serviceOrder.brand ? " " + serviceOrder.brand : ""}${
+      serviceOrder.model ? " " + serviceOrder.model : ""
+    }`,
+    isUnderWarranty: serviceOrder.isUnderWarranty,
+    isBudgetApproved: serviceOrder.isBudgetApproved,
+
+    createdAt: serviceOrder.createdAt,
+    budgetedAt: serviceOrder.budgetedAt,
+    budgetAnsweredAt: serviceOrder.budgetAnsweredAt,
+    repairedAt: serviceOrder.repairedAt,
+    deliveredToCustomerAt: serviceOrder.deliveredToCustomerAt,
+  };
+  return parsedServiceOrder;
+}

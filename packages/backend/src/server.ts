@@ -1,12 +1,13 @@
 import express from "express";
 
-import BaseRouter from "./routes/api";
+import errorHandler from "@/middlewares/errorHandler";
+import BaseRouter from "@/routes/api";
 
-// Constants
 const app = express();
 
-// Add some basic middleware
+// Middlewares
 app.use(express.json());
+app.use(errorHandler);
 
 // Add APIs
 app.use("/api", BaseRouter);

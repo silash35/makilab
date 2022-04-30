@@ -1,2 +1,2 @@
-import type { ProcessedClient as Client } from "../utils/processors";
+import type { ProcessedClient as Client } from "@/utils/processors";
 export default Client;

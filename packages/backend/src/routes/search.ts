@@ -1,10 +1,26 @@
 import { Request, Response, Router } from "express";
 
-// Constants
+import { getOnePublic } from "@/services/serviceOrder";
+
 const router = Router();
 
-router.get("", async (req: Request, res: Response) => {
-  return res.status(200).json({ oi: "Hello Word" });
+router.post("", async (req: Request, res: Response) => {
+  const search = String(req.body.search);
+
+  // Remove all non-numeric characters
+  const searchID = search.replace(/\D/g, "");
+
+  if (!(searchID.length > 0)) {
+    throw new Error("Invalid data: search ID must be a number");
+  }
+
+  const equipment = getOnePublic(Number(searchID));
+
+  if (equipment === null) {
+    throw new Error("Not Found");
+  }
+
+  return res.status(200).json(equipment);
 });
 
 export default router;
