@@ -1,0 +1,2 @@
+web: pnpm manager:start
+release: cd packages/backend && npx prisma db push
