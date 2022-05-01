@@ -19,12 +19,12 @@ importers:
       cypress: ^9.5.4
       dotenv: ^16.0.0
       express: ^4.18.1
+      express-async-errors: ^3.1.1
       jsonwebtoken: ^8.5.1
       nodemailer: ^6.7.3
       prisma: ^3.12.0
       start-server-and-test: ^1.14.0
       ts-node-dev: ^1.1.8
-      tsconfig-paths: ^3.14.1
       typescript: ^4.6.3
     dependencies:
       '@prisma/client': 3.12.0_prisma@3.12.0
@@ -34,10 +34,10 @@ importers:
       '@types/nodemailer': 6.4.4
       dotenv: 16.0.0
       express: 4.18.1
+      express-async-errors: 3.1.1_express@4.18.1
       jsonwebtoken: 8.5.1
       nodemailer: 6.7.3
       prisma: 3.12.0
-      tsconfig-paths: 3.14.1
       typescript: 4.6.3
     devDependencies:
       '@faker-js/faker': 6.2.0
@@ -986,10 +986,6 @@ packages:
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
-
-  /@types/json5/0.0.29:
-    resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
-    dev: false
 
   /@types/jsonwebtoken/8.5.8:
     resolution: {integrity: sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==}
@@ -2482,6 +2478,14 @@ packages:
       pify: 2.3.0
     dev: true
 
+  /express-async-errors/3.1.1_express@4.18.1:
+    resolution: {integrity: sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==}
+    peerDependencies:
+      express: ^4.16.2
+    dependencies:
+      express: 4.18.1
+    dev: false
+
   /express/4.18.1:
     resolution: {integrity: sha512-zZBcOX9TfehHQhtupq57OF8lFZ3UZi08Y97dwFCkD8p9d/d2Y3M+ykKcwaMDEL+4qyUolgBDX6AblpR3fL212Q==}
     engines: {node: '>= 0.10.0'}
@@ -3376,13 +3380,6 @@ packages:
 
   /json-stringify-safe/5.0.1:
     resolution: {integrity: sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=}
-
-  /json5/1.0.1:
-    resolution: {integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==}
-    hasBin: true
-    dependencies:
-      minimist: 1.2.6
-    dev: false
 
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
@@ -4974,15 +4971,6 @@ packages:
       typescript: 4.6.3
       yn: 3.1.1
     dev: true
-
-  /tsconfig-paths/3.14.1:
-    resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==}
-    dependencies:
-      '@types/json5': 0.0.29
-      json5: 1.0.1
-      minimist: 1.2.6
-      strip-bom: 3.0.0
-    dev: false
 
   /tsconfig/7.0.0:
     resolution: {integrity: sha512-vZXmzPrL+EmC4T/4rVlT2jNVMWCi/O4DIiSj3UHg1OE5kCKbk4mfrXc6dZksLgRM/TZlKnousKH9bbTazUWRRw==}

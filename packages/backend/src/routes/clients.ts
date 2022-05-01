@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 
-import authMiddleware from "@/middlewares/auth";
-import { create, deleteOne, getAll, update } from "@/services/client";
-import { parseCreateClient, parseUpdateClient } from "@/utils/parsers";
+import authMiddleware from "../middlewares/auth";
+import { create, deleteOne, getAll, update } from "../services/client";
+import { parseCreateClient, parseUpdateClient } from "../utils/parsers";
 
 const router = Router();
 router.use(authMiddleware);

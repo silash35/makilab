@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 
-import prisma from "@/database/prisma";
-import { processClient } from "@/utils/processors";
+import prisma from "../database/prisma";
+import { processClient } from "../utils/processors";
 
 // Read functions
 export const getAll = async () => {

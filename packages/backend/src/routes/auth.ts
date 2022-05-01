@@ -26,7 +26,7 @@ authRouter.post("/signin", async (req, res) => {
     }
   );
 
-  return res.json({ token });
+  return res.status(200).json({ token });
 });
 
 export default authRouter;

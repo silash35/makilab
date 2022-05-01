@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { getOnePublic } from "@/services/serviceOrder";
+import { getOnePublic } from "../services/serviceOrder";
 
 const router = Router();
 
