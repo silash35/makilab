@@ -10,6 +10,7 @@ export const getAll = async () => {
       owner: true,
     },
   });
+
   return processSO(allSOs);
 };
 
@@ -21,6 +22,10 @@ export const getOne = async (id: number) => {
     },
   });
 
+  if (serviceOrder === null) {
+    throw new Error("Not Found");
+  }
+
   return processSO(serviceOrder);
 };
 
@@ -31,6 +36,10 @@ export const getOnePublic = async (id: number) => {
       owner: true,
     },
   });
+
+  if (serviceOrder === null) {
+    throw new Error("Not Found");
+  }
 
   return processPublicSO(serviceOrder);
 };

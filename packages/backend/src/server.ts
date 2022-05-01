@@ -10,13 +10,13 @@ const app = express();
 // Middlewares
 app.use(express.json());
 
-// Add APIs
+// Routes
 app.use("/api", BaseRouter);
-
 app.get("/", (req, res) => {
   return res.status(200).send("This is a backend of OpenSOM. The APIs are available at /api");
 });
 
+// Error handler middleware
 app.use(errorHandler);
 
 // Export default

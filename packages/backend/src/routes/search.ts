@@ -14,7 +14,7 @@ router.post("", async (req: Request, res: Response) => {
     throw new Error("Invalid data: search ID must be a number");
   }
 
-  const equipment = getOnePublic(Number(searchID));
+  const equipment = await getOnePublic(Number(searchID));
 
   if (equipment === null) {
     throw new Error("Not Found");
