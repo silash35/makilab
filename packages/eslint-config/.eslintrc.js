@@ -4,7 +4,7 @@ module.exports = {
     node: true,
     es2021: true,
   },
-  ignorePatterns: ["node_modules", ".next"],
+  ignorePatterns: ["node_modules", ".next", ".dist"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

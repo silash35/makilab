@@ -2,12 +2,15 @@
   "name": "@opensom/manager",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --ignore-watch node_modules src/index.ts",
     "build": "prisma generate && tsc",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node dist/src/index.ts",
+    "lint": "eslint .",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run",
+    "e2e": "pnpm build && start-test 'pnpm start' http://0.0.0.0:3000/ 'pnpm cypress'",
+    "e2e:headless": "pnpm build && start-test 'pnpm start' http://0.0.0.0:3000/ 'pnpm cypress:headless'"
   },
   "prisma": {
     "schema": "src/database/schema.prisma"
@@ -26,9 +29,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^6.2.0",
-    "@types/jest": "^27.4.1",
-    "jest": "^28.0.3",
-    "node-fetch": "^3.2.4",
+    "cypress": "^9.5.4",
     "start-server-and-test": "^1.14.0",
     "ts-node-dev": "^1.1.8"
   }
