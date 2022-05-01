@@ -19,7 +19,7 @@ declare global {
 Cypress.Commands.add("createClient", (client, serviceOrder) => {
   cy.authFetch({
     method: "POST",
-    url: "/api/clients",
+    url: "/api/private/clients",
     body: { ...client, ...serviceOrder },
   }).then((response) => {
     const newClient = response.body as ResponseClient;

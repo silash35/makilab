@@ -12,10 +12,8 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err instanceof Error) {
     if (err.message === "Not Found") {
       statusCode = 404;
-    } else if (err.message === "Unauthorized") {
+    } else if (err.message.includes("Unauthorized")) {
       statusCode = 401;
-    } else if (err.message === "Method Not Allowed") {
-      statusCode = 405;
     } else if (err.message.includes("Invalid data")) {
       statusCode = 400;
     }

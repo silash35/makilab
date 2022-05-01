@@ -1,11 +1,9 @@
 import { Request, Response, Router } from "express";
 
-import authMiddleware from "../middlewares/auth";
-import { create, deleteOne, getAll, update } from "../services/client";
-import { parseCreateClient, parseUpdateClient } from "../utils/parsers";
+import { create, deleteOne, getAll, update } from "../../services/client";
+import { parseCreateClient, parseUpdateClient } from "../../utils/parsers";
 
 const router = Router();
-router.use(authMiddleware);
 
 router.get("", async (req: Request, res: Response) => {
   return res.status(200).json(await getAll());

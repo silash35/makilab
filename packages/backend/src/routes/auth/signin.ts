@@ -1,9 +1,9 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 
-const authRouter = Router();
+const router = Router();
 
-authRouter.post("/signin", async (req, res) => {
+router.post("", async (req, res) => {
   const { password } = req.body;
 
   if (process.env.PASSWORD == undefined) {
@@ -29,4 +29,4 @@ authRouter.post("/signin", async (req, res) => {
   return res.status(200).json({ token });
 });
 
-export default authRouter;
+export default router;

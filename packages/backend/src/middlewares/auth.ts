@@ -9,14 +9,16 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   if (!token) {
-    throw new Error("No token provided");
+    throw new Error("Unauthorized: No token provided");
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-  req.user = (decoded as { user: { name: string; accessTypes: string[] } }).user;
-
-  return next();
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = (decoded as { user: { name: string; accessTypes: string[] } }).user;
+    return next();
+  } catch (error) {
+    throw new Error("Unauthorized: Invalid token");
+  }
 };
 
 export default auth;

@@ -3,18 +3,22 @@ import "express-async-errors";
 import express from "express";
 
 import errorHandler from "./middlewares/errorHandler";
-import BaseRouter from "./routes/api";
+import AuthRoutes from "./routes/auth";
+import PrivateRoutes from "./routes/private";
+import PublicRoutes from "./routes/public";
 
 const app = express();
 
 // Middlewares
 app.use(express.json());
 
+// Static files
+app.use(express.static("public"));
+
 // Routes
-app.use("/api", BaseRouter);
-app.get("/", (req, res) => {
-  return res.status(200).send("This is a backend of OpenSOM. The APIs are available at /api");
-});
+app.use("", AuthRoutes);
+app.use("", PublicRoutes);
+app.use("", PrivateRoutes); // Private should be the last route. If not, other routes will be protected
 
 // Error handler middleware
 app.use(errorHandler);

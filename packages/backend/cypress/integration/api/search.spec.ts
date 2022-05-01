@@ -20,7 +20,7 @@ describe("Search API - POST", () => {
     cy.signIn();
     cy.createClient(client, serviceOrder);
     cy.get("@serviceOrderId").then((serviceOrderId) => {
-      cy.request("POST", "/api/search", { search: serviceOrderId }).then((response) => {
+      cy.request("POST", "/api/public/search", { search: serviceOrderId }).then((response) => {
         expect(response.status).equal(200);
         const createdServiceOrder = response.body as ServiceOrder;
 
@@ -35,7 +35,7 @@ describe("Search API - POST", () => {
     testValues.forEach((testValue) => {
       cy.request({
         method: "POST",
-        url: "/api/search",
+        url: "/api/public/search",
         body: { search: testValue },
         failOnStatusCode: false,
       }).then((response) => {
@@ -50,7 +50,7 @@ describe("Search API - POST", () => {
     testValues.forEach((testValue) => {
       cy.request({
         method: "POST",
-        url: "/api/search",
+        url: "/api/public/search",
         body: { search: testValue },
         failOnStatusCode: false,
       }).then((response) => {
