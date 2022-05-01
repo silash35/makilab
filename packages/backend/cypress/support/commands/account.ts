@@ -20,7 +20,11 @@ declare global {
 const password = "password";
 
 Cypress.Commands.add("signIn", () => {
-  cy.session(password, () => {});
+  cy.session(password, () => {
+    cy.request("POST", "/api/auth/signin", { password }).then((response) => {
+      cy.setCookie("token", response.body.token);
+    });
+  });
 });
 
 Cypress.Commands.add("signOut", () => {

@@ -17,7 +17,7 @@ declare global {
 }
 
 Cypress.Commands.add("createClient", (client, serviceOrder) => {
-  cy.request("POST", "/api/admin/clients", { ...client, ...serviceOrder }).then((response) => {
+  cy.request("POST", "/api/clients", { ...client, ...serviceOrder }).then((response) => {
     const newClient = response.body as ResponseClient;
     cy.wrap(newClient.id).as("clientId");
 
