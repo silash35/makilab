@@ -17,26 +17,23 @@ declare global {
 }
 
 Cypress.Commands.add("createClient", (client, serviceOrder) => {
-  cy.authFetch(
-    {
-      method: "POST",
-      url: "/api/clients",
-      body: { ...client, ...serviceOrder },
-    },
-    (response) => {
-      const newClient = response.body as ResponseClient;
-      cy.wrap(newClient.id).as("clientId");
+  cy.authFetch({
+    method: "POST",
+    url: "/api/clients",
+    body: { ...client, ...serviceOrder },
+  }).then((response) => {
+    const newClient = response.body as ResponseClient;
+    cy.wrap(newClient.id).as("clientId");
 
-      if (serviceOrder) {
-        if (newClient.serviceOrders && newClient.serviceOrders?.length > 0) {
-          const newServiceOrder = newClient.serviceOrders[newClient.serviceOrders.length - 1];
-          cy.wrap(newServiceOrder.id).as("serviceOrderId");
-        } else {
-          throw new Error("Service Order not created");
-        }
+    if (serviceOrder) {
+      if (newClient.serviceOrders && newClient.serviceOrders?.length > 0) {
+        const newServiceOrder = newClient.serviceOrders[newClient.serviceOrders.length - 1];
+        cy.wrap(newServiceOrder.id).as("serviceOrderId");
+      } else {
+        throw new Error("Service Order not created");
       }
     }
-  );
+  });
 });
 
 export {};
