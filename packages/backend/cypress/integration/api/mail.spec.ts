@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import testSafety from "../../support/testSafety";
 
 describe("Mail API - POST", () => {
   const email = {
@@ -7,15 +8,7 @@ describe("Mail API - POST", () => {
   };
 
   it("should not send Email when unauthenticated", () => {
-    cy.request({
-      method: "POST",
-      url: "/api/private/mail",
-      body: email,
-      failOnStatusCode: false,
-    }).then((response) => {
-      expect(response.status).equal(401);
-      expect(response.body).contains("Unauthorized");
-    });
+    testSafety("POST", "/api/private/mail", email);
   });
 
   it("should send Email when authenticated", () => {

@@ -140,7 +140,7 @@ export const parseUpdateClient = (dataClient: unknown, dataSO?: unknown) => {
   }
 
   const parsedData: Prisma.ClientUpdateInput = {
-    name: filterString(dataClient.name) === null ? dataClient.name : undefined,
+    name: filterString(dataClient.name) === null ? undefined : dataClient.name,
     email: filterString(dataClient.email),
     cpfOrCnpj: filterCpfOrCnpj(dataClient.cpfOrCnpj),
     address: filterString(dataClient.address),

@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 
 import { create, deleteOne, getAll, update } from "../../services/client";
+import { filterNumber } from "../../utils/filters";
 import { parseCreateClient, parseUpdateClient } from "../../utils/parsers";
 
 const router = Router();
@@ -18,9 +19,9 @@ router.post("", async (req: Request, res: Response) => {
 
 router.put("", async (req: Request, res: Response) => {
   const body = req.body;
-  const id = Number(body.clientID);
+  const id = filterNumber(body.clientID);
 
-  if (isNaN(id)) {
+  if (id === null) {
     throw new Error("Invalid data: clientID");
   }
 
@@ -28,8 +29,12 @@ router.put("", async (req: Request, res: Response) => {
 });
 
 router.delete("", async (req: Request, res: Response) => {
-  await deleteOne(Number(req.body.id));
+  const id = filterNumber(req.body.id);
+  if (id === null) {
+    throw new Error("Invalid data: id");
+  }
 
+  await deleteOne(id);
   return res.status(200).send({ ok: true });
 });
 

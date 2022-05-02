@@ -15,7 +15,7 @@ router.post("", async (req, res) => {
   }
 
   if (password !== process.env.PASSWORD) {
-    throw new Error("Invalid password");
+    throw new Error("Unauthorized: Invalid password");
   }
 
   const token = jwt.sign(

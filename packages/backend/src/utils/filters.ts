@@ -2,6 +2,15 @@ const isString = (variable: unknown): variable is string => {
   return typeof variable === "string" && variable.length > 0;
 };
 
+export const filterNumber = (variable: unknown) => {
+  if (variable !== undefined && variable !== null && variable !== "") {
+    const number = Number(variable);
+    return isNaN(number) ? null : number;
+  } else {
+    return null;
+  }
+};
+
 export const filterString = (variable: unknown) => {
   return isString(variable) ? variable : null;
 };

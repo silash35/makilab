@@ -23,7 +23,7 @@ Cypress.Commands.add("createClient", (client, serviceOrder) => {
     body: { ...client, ...serviceOrder },
   }).then((response) => {
     const newClient = response.body as ResponseClient;
-    cy.wrap(newClient.id).as("clientId");
+    cy.wrap(newClient.id).as("clientID");
 
     if (serviceOrder) {
       if (newClient.serviceOrders && newClient.serviceOrders?.length > 0) {
