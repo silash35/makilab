@@ -8,7 +8,8 @@
     "update": "python update.py"
   },
   "dependencies": {
-    "@opensom/manager": "workspace:*",
+    "@opensom/backend": "workspace:*",
+    "@opensom/frontend": "workspace:*",
     "nativefier": "^47.0.0"
   }
 }

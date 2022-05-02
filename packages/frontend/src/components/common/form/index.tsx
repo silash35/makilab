@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import type { FormEvent } from "react";
 
-import request from "@/utils/frontend/request";
+import request from "@/utils/request";
 
 import styles from "./Form.module.scss";
 

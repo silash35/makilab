@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { FormEvent, useState } from "react";
 
-import request from "@/utils/frontend/request";
+import request from "@/utils/request";
 
 interface Props {
   Inputs: React.ReactChild;

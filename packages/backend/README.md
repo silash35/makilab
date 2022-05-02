@@ -14,4 +14,4 @@ After install all dependencies, run the development server:
 pnpm dev
 ```
 
-Then, open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, open [http://localhost:1234](http://localhost:1234) with your browser to see the result.

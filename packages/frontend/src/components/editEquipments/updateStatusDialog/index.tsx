@@ -13,7 +13,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import { useEffect, useState } from "react";
 
 import type ServiceOrder from "@/types/serviceOrder";
-import request from "@/utils/frontend/request";
+import request from "@/utils/request";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";
 

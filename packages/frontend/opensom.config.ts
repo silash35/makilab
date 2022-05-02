@@ -3,8 +3,13 @@ export default (() => {
     throw new Error("SITE_URL is not defined");
   }
 
+  if (!process.env.BACKEND_URL) {
+    throw new Error("BACKEND_URL is not defined");
+  }
+
   return {
     SITE_URL: process.env.SITE_URL,
+    BACKEND_URL: process.env.BACKEND_URL,
     COMPANY: {
       name: "OpenSOM",
       color: "#2ec27e",
@@ -15,9 +20,5 @@ export default (() => {
     },
     ATTENDANTS: ["Dan Cordova", "Larissa Brain", "Tom Coffee"],
     SERVICE_PLACES: ["Balcão", "Telefone"],
-    PDF: {
-      hasQrCode: true,
-      qrCodeLink: "https://opensom.herokuapp.com/%ID%", // %ID% will be replaced by the equipment id
-    },
   };
 })();

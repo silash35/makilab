@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
 import type Client from "@/types/client";
-import request from "@/utils/frontend/request";
+import request from "@/utils/request";
 
 interface Props {
   client: Client;

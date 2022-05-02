@@ -6,6 +6,7 @@ export default () => {
   let nextConfig = {
     env: {
       SITE_URL: process.env.SITE_URL,
+      BACKEND_URL: process.env.BACKEND_URL,
     },
     sassOptions: {
       includePaths: ["/src/styles"],
