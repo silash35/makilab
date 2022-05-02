@@ -35,7 +35,7 @@ router.delete("", async (req: Request, res: Response) => {
   }
 
   await deleteOne(id);
-  return res.status(200).send({ ok: true });
+  return res.status(200).json({ deletedID: id });
 });
 
 export default router;

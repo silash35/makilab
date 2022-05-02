@@ -5,6 +5,10 @@ const prisma = new PrismaClient();
 // SOFT DELETE MIDDLEWARE
 
 prisma.$use(async (params, next) => {
+  if (process.env.DISABLE_SOFT_DELETE === "true") {
+    return next(params);
+  }
+
   if (params.action == "findUnique") {
     // Change to findFirst - you cannot filter
     // by anything except ID / unique with findUnique
