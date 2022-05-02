@@ -10,6 +10,6 @@
     "types": ["cypress"],
     "outDir": "./dist"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["./src/*.ts", "**/*.d.ts"],
   "exclude": ["node_modules"]
 }

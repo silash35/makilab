@@ -17,8 +17,8 @@ app.use(express.static("public"));
 
 // Routes
 app.use("", AuthRoutes);
+app.use("", PrivateRoutes);
 app.use("", PublicRoutes);
-app.use("", PrivateRoutes); // Private should be the last route. If not, other routes will be protected
 
 // Error handler middleware
 app.use(errorHandler);
