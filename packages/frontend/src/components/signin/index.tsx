@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-
 import SignInForm from "@/components/signin/Form";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 import styles from "./signin.module.scss";
 
 export default function SignIn() {
-  const data = useSession();
+  const { session } = useContext(AuthContext);
   const router = useRouter();
 
-  if (data.status === "authenticated") {
+  if (session.status === "authenticated") {
     router.push("/");
   }
 

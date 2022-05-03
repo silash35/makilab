@@ -1,21 +1,23 @@
-import { signIn, useSession } from "next-auth/react";
-
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 import styles from "./layout.module.scss";
 import Sidebar from "./sidebar";
+import { useRouter } from "next/router";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: Props) {
-  const data = useSession();
+  const router = useRouter();
+  const { session } = useContext(AuthContext);
 
-  if (data.status === "loading") {
+  if (session.status === "loading") {
     return null;
   }
 
-  if (data.status === "unauthenticated") {
-    signIn();
+  if (session.status === "unauthenticated") {
+    router.push("/auth/signin");
     return null;
   }
 

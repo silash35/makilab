@@ -1,20 +1,17 @@
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
+import { useContext } from "react";
+
+import { AuthContext } from "@/contexts/AuthContext";
 
 import styles from "./form.module.scss";
-
-interface signInResponse {
-  error: string | undefined;
-  status: number;
-  ok: boolean;
-  url: string | null;
-}
 
 export default function SignInForm() {
   const [password, setPassword] = useState("");
   const [isBusy, setBusy] = useState(false);
   const [error, setError] = useState("");
+
+  const { signIn } = useContext(AuthContext);
 
   const router = useRouter();
 
@@ -26,26 +23,17 @@ export default function SignInForm() {
     setBusy(true);
     setError("");
 
-    const res = (await signIn("credentials", {
-      redirect: false,
-      password,
-      callbackUrl: `${window.location.origin}`,
-    })) as signInResponse | undefined;
+    const status = await signIn({ password });
 
-    if (res) {
-      if (res.url && res.ok) {
-        router.push(res.url);
-        setError("");
-      } else {
-        if (res.status === 401) {
-          setError("Senha incorreta. Tente novamente.");
-        } else {
-          setError("Erro desconhecido. Tente novamente.");
-        }
-        console.log(res.error);
-      }
+    if (status === 200) {
+      router.push("/");
+      setError("");
     } else {
-      setError("Erro desconhecido. Tente novamente.");
+      if (status === 401) {
+        setError("Senha incorreta. Tente novamente.");
+      } else {
+        setError("Erro desconhecido. Tente novamente.");
+      }
     }
 
     setBusy(false);

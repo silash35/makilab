@@ -1,10 +1,9 @@
-interface user {
-  name: string;
-  accessTypes: string[];
-}
+import User from "./src/types/user";
 
-declare namespace Express {
-  export interface Request {
-    user?: user;
+declare global {
+  declare namespace Express {
+    export interface Request {
+      user?: User;
+    }
   }
 }

@@ -9,6 +9,6 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist"
   },
-  "include": ["./src/*.ts", "**/*.d.ts"],
+  "include": ["custom.d.ts","./src/*.ts", "**/*.d.ts"],
   "exclude": ["node_modules"]
 }

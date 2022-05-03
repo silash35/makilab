@@ -5,10 +5,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import type { NextPage } from "next";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 
 import DefaultLayout from "@/components/Layout";
+import { AuthProvider } from "@/contexts/AuthContext";
 import variables from "@/styles/variables.module.scss";
 
 type NextPageWithLayout = NextPage & {
@@ -19,7 +19,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
   const Layout = Component.Layout ? Component.Layout : DefaultLayout;
 
   return (
@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
           key="twitterDescription"
         />
       </Head>
-      <SessionProvider session={session}>
+      <AuthProvider>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
@@ -56,7 +56,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
             </Layout>
           </SWRConfig>
         </ThemeProvider>
-      </SessionProvider>
+      </AuthProvider>
     </>
   );
 }
