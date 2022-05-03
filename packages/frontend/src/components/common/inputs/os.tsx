@@ -1,13 +1,13 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import type { Client } from "@prisma/client";
 import { useEffect, useState } from "react";
-
+import type Client from "@/types/client";
 import ClientInputs from "@/components/common/inputs/client";
 import EquipmentInputs from "@/components/common/inputs/serviceOrder";
 import useClients from "@/hooks/useClients";
 
 interface ClientWithLabel extends Client {
+  id: number;
   label: string;
 }
 

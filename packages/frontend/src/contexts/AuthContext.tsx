@@ -1,3 +1,4 @@
+import request from "@/utils/request";
 import config from "@config";
 import { parseCookies, setCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
@@ -17,7 +18,7 @@ interface SignInData {
 
 interface AuthContextType {
   session: Session;
-  signIn: (data: SignInData) => Promise<number>;
+  signIn: (data: SignInData) => Promise<number | undefined>;
 }
 
 const loadingSession: Session = { user: null, status: "loading" };
@@ -34,33 +35,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function loadUser() {
-    const { token: token } = parseCookies();
+    const { response, status } = await request({
+      method: "GET",
+      URL: "/api/auth/user",
+    });
 
-    if (token) {
-      const res = await fetch(`${config.BACKEND_URL}/api/auth/user`, {
-        method: "GET",
-        headers: { authorization: token, "Content-Type": "application/json" },
-      });
-
-      if (res.status === 200) {
-        setSession({ user: await res.json(), status: "authenticated" });
-      } else {
-        setSession(unauthenticatedSession);
-      }
+    if (status === 200) {
+      setSession({ user: response, status: "authenticated" });
     } else {
       setSession(unauthenticatedSession);
     }
   }
 
   async function signIn({ password }: SignInData) {
-    const res = await fetch(`${config.BACKEND_URL}/api/auth/signin`, {
+    const { response, status } = await request({
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
+      URL: "/api/auth/signin",
+      body: { password },
     });
 
-    if (res.status === 200) {
-      const { token, user } = await res.json();
+    if (status === 200) {
+      const { token, user } = response;
 
       setCookie(undefined, "token", token, {
         maxAge: 86400 * 7, // expires in 7 days
@@ -69,7 +64,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession({ user, status: "authenticated" });
     }
 
-    return res.status;
+    return status;
   }
 
   return <AuthContext.Provider value={{ session, signIn }}>{children}</AuthContext.Provider>;

@@ -22,9 +22,9 @@ export default function Form({ Inputs, URL, method = "POST", title, next }: Prop
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
 
-    const json = await request(URL, method, data);
-    if (json != "ERROR") {
-      router.push(next(json));
+    const { response, status } = await request({ URL, method, body: data });
+    if (status === 200) {
+      router.push(next(response));
     }
   };
 

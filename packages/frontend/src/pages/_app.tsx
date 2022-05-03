@@ -6,7 +6,7 @@ import type { NextPage } from "next";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { SWRConfig } from "swr";
-
+import { fetcher } from "@/utils/request";
 import DefaultLayout from "@/components/Layout";
 import { AuthProvider } from "@/contexts/AuthContext";
 import variables from "@/styles/variables.module.scss";
@@ -46,11 +46,7 @@ function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <SWRConfig
-            value={{
-              fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
-            }}
-          >
+          <SWRConfig value={{ fetcher }}>
             <Layout>
               <Component {...pageProps} />
             </Layout>

@@ -16,7 +16,7 @@ function NewServiceOrder() {
 
       <Form
         Inputs={<OSInputs setIsNewClient={setIsNewClient} />}
-        URL="/api/admin/clients"
+        URL="/api/private/clients"
         method={isNewClient ? "POST" : "PUT"}
         title="Cadastrar Nova Ordem de Serviço"
         next={(response) => {

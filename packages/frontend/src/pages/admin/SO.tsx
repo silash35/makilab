@@ -1,11 +1,10 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
-import { getSession } from "next-auth/react";
 import { SWRConfig } from "swr";
 
 import SO from "@/components/SO";
-import serviceOrdersManager from "@/database/serviceOrdersManager";
 import ServiceOrder from "@/types/serviceOrder";
+import request from "@/utils/request";
 
 function ServiceOrderPage({
   id,
@@ -30,10 +29,12 @@ function ServiceOrderPage({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Array.isArray(context.query.id) ? context.query.id[0] : context.query.id;
 
-  const session = await getSession(context);
-
-  const serviceOrder =
-    session?.user?.name === "admin" ? await serviceOrdersManager.readOne(Number(id)) : null;
+  const serviceOrder = await request(
+    { URL: `/api/private/serviceOrders?id=${id}`, method: "GET" },
+    false,
+    true,
+    context
+  );
 
   return {
     props: {

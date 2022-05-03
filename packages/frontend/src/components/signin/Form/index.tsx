@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import { useContext } from "react";
-
-import { AuthContext } from "@/contexts/AuthContext";
+import useSession from "@/hooks/useSession";
 
 import styles from "./form.module.scss";
 
@@ -11,7 +9,7 @@ export default function SignInForm() {
   const [isBusy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useSession();
 
   const router = useRouter();
 

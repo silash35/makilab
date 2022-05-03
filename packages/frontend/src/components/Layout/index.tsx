@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { AuthContext } from "@/contexts/AuthContext";
+import useSession from "@/hooks/useSession";
 import styles from "./layout.module.scss";
 import Sidebar from "./sidebar";
 import { useRouter } from "next/router";
@@ -10,7 +9,7 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const router = useRouter();
-  const { session } = useContext(AuthContext);
+  const { session } = useSession();
 
   if (session.status === "loading") {
     return null;
