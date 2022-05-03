@@ -12,7 +12,7 @@ function NewClient() {
 
       <Form
         Inputs={<ClientInputs />}
-        URL="/api/admin/clients"
+        URL="/api/private/clients"
         title="Cadastrar novo Cliente"
         next={() => "/"}
       />

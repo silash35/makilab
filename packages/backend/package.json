@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
-    "e2e": "pnpm build && start-test 'pnpm start' http://0.0.0.0:3000/ 'pnpm cypress'",
-    "e2e:headless": "pnpm build && start-test 'pnpm start' http://0.0.0.0:3000/ 'pnpm cypress:headless'"
+    "e2e": "pnpm build && start-test 'pnpm start' http://0.0.0.0:1234/ 'pnpm cypress'",
+    "e2e:headless": "pnpm build && start-test 'pnpm start' http://0.0.0.0:1234/ 'pnpm cypress:headless'"
   },
   "prisma": {
     "schema": "src/database/schema.prisma"
