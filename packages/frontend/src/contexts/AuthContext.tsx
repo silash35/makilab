@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 
 interface Session {
   user: {
+    id: number;
     name: string;
     accessTypes: string[];
   } | null;
