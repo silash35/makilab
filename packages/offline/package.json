@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "license": "Unlicense",
+  "type": "module",
   "scripts": {
-    "start": "python start.py",
-    "update": "python update.py"
+    "start": "node start.js",
+    "update": "node update.js"
   },
   "dependencies": {
     "@opensom/backend": "workspace:*",
     "@opensom/frontend": "workspace:*",
+    "concurrently": "^7.1.0",
     "nativefier": "^47.0.0"
   }
 }

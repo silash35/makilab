@@ -21,7 +21,7 @@ export default function DeleteDialog({ id, title, text, url, reload }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const sendData = async () => {
-    if ((await request(url, "DELETE", { id })) != "ERROR") {
+    if ((await request({ URL: url, method: "DELETE", body: { id } })).status !== 200) {
       setOpenDialog(false);
       reload();
     }

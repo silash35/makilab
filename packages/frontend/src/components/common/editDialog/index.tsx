@@ -23,7 +23,7 @@ export default function EditDialog({ Inputs, url, method = "POST", title, reload
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
 
-    if ((await request(url, method, data)) != "ERROR") {
+    if ((await request({ URL: url, method, body: data })).status !== 200) {
       setOpenDialog(false);
       reload();
     }
