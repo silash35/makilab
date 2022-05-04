@@ -3,14 +3,14 @@ import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 
-import getProduct, { ProcessedProduct } from "@/utils/getProduct";
+import getProduct, { Product as ProductType } from "@/utils/getProduct";
 
 import Product from "../product";
 import en from "./locales/en";
 import pt from "./locales/pt";
 import styles from "./track.module.scss";
 
-type ProductState = "loading" | "empty" | "notFound" | ProcessedProduct;
+type ProductState = "loading" | "empty" | "notFound" | ProductType;
 
 export default function Track() {
   const router = useRouter();

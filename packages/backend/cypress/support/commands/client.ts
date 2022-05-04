@@ -1,5 +1,5 @@
-import ResponseClient from "./../../../src/types/client";
 import { generateClient, generateServiceOrder } from "../../support/generators";
+import ResponseClient from "./../../../src/types/client";
 
 declare global {
   namespace Cypress {

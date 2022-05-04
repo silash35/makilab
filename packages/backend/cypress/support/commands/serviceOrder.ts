@@ -1,4 +1,5 @@
 import { ServiceOrder as PlaceWithId } from "@prisma/client";
+
 import { generateServiceOrder } from "../../support/generators";
 
 declare global {

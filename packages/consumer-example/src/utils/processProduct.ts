@@ -1,18 +1,5 @@
-import config from "@config";
-
-interface Product {
-  id: number;
-
-  name: string;
-  isUnderWarranty: boolean;
-  isBudgetApproved: boolean;
-
-  createdAt: string;
-  budgetedAt: string;
-  budgetAnsweredAt: string;
-  repairedAt: string;
-  deliveredToCustomerAt: string;
-}
+import ProcessedProduct, { Step } from "@/types/processedProduct";
+import Product from "@/types/product";
 
 interface T {
   stepText0: string;
@@ -30,20 +17,7 @@ interface T {
   stepLabel4: string;
 }
 
-interface Step {
-  label: string;
-  error?: boolean;
-}
-
-interface ProcessedProduct extends Product {
-  isFinished: boolean;
-  stepText: string;
-  activeStep: number;
-
-  steps: Step[];
-}
-
-function processProduct(product: Product, t: T) {
+export default function processProduct(product: Product, t: T) {
   let isFinished = false;
   let activeStep = 0;
   let stepText = t.stepText0;
@@ -110,21 +84,3 @@ function processProduct(product: Product, t: T) {
 
   return processedProduct;
 }
-
-async function getProduct(search: string, t: T) {
-  const res = await fetch(config.API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ search }),
-  });
-
-  if (res.status !== 200) {
-    return "ERROR";
-  }
-
-  const product: Product = await res.json();
-  return processProduct(product, t);
-}
-
-export type { ProcessedProduct as Product };
-export default getProduct;

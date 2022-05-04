@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import testSafety from "../../support/testSafety";
 
 describe("Mail API - POST", () => {

@@ -1,6 +1,6 @@
-import { generateClient, generateServiceOrder } from "../../support/generators";
 import ResponseClient from "../../../src/types/client";
 import ServiceOrder from "../../../src/types/serviceOrder";
+import { generateClient, generateServiceOrder } from "../../support/generators";
 import testSafety from "../../support/testSafety";
 
 describe("Clients API - GET", () => {
@@ -78,8 +78,6 @@ describe("Clients API - POST", () => {
     }).then((response) => {
       expect(response.status).equal(200);
       const newClient = response.body as ResponseClient;
-      // its a new client so the first service order should be the one created
-      const newServiceOrder = (newClient.serviceOrders as ServiceOrder[])[0];
 
       expect(newClient.serviceOrders).to.be.an("array");
       expect(newClient.serviceOrders?.length).to.be.equal(0);
@@ -343,7 +341,7 @@ describe("Clients API - PUT", () => {
         cy.authFetch({
           method: "PUT",
           url: "/api/private/clients",
-          body: { name: testValue },
+          body: { clientID, name: testValue },
           failOnStatusCode: false,
         }).then((response) => {
           expect(response.status).equal(400);
