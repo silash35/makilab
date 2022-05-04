@@ -1,1 +1,1 @@
-web: pnpm fontend:start
+web: pnpm frontend:start

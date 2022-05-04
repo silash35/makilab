@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "build": "./build.sh",
-    "manager:build": "cd packages/manager && pnpm build",
-    "manager:start": "cd packages/manager && pnpm start",
+    "backend:build": "cd packages/backend && pnpm build",
+    "backend:start": "cd packages/backend && pnpm start",
+    "frontend:build": "cd packages/frontend && pnpm build",
+    "frontend:start": "cd packages/frontend && pnpm start",
     "consumer:build": "cd packages/consumer-example && pnpm build",
     "consumer:start": "cd packages/consumer-example && pnpm start"
   },
