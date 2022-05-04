@@ -12,6 +12,6 @@
     "@opensom/backend": "workspace:*",
     "@opensom/frontend": "workspace:*",
     "concurrently": "^7.1.0",
-    "nativefier": "^47.0.0"
+    "nativefier": "^47.1.3"
   }
 }
