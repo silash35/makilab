@@ -1,0 +1,17 @@
+{
+  "name": "@opensom/manager-offline",
+  "version": "1.0.0",
+  "private": true,
+  "license": "Unlicense",
+  "type": "module",
+  "scripts": {
+    "start": "node start.js",
+    "update": "node update.js"
+  },
+  "dependencies": {
+    "@opensom/backend": "workspace:*",
+    "@opensom/frontend": "workspace:*",
+    "concurrently": "^7.1.0",
+    "nativefier": "^47.0.0"
+  }
+}

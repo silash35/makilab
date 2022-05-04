@@ -8,7 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useRouter } from "next/router";
 
-import ProcessedProduct from "@/types/processedProduct";
+import type { Product } from "@/utils/getProduct";
 
 import Dates from "../dates";
 import styles from "./product.module.scss";
@@ -22,7 +22,7 @@ const pt = {
 };
 
 interface Props {
-  product: ProcessedProduct | "loading" | "empty" | "notFound";
+  product: Product | "loading" | "empty" | "notFound";
 }
 
 export default function Product({ product }: Props) {

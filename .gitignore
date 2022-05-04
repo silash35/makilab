@@ -19,10 +19,11 @@ tsconfig.tsbuildinfo
 
 # next.js
 .next
-/out/
+out
 
 # production
-/build
+build
+dist
 
 # misc
 .DS_Store

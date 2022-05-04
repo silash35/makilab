@@ -1,18 +1,16 @@
-import config from "@config";
 import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 
-import ProcessedProduct from "@/types/processedProduct";
-import processProduct from "@/utils/processProduct";
+import getProduct, { Product as ProductType } from "@/utils/getProduct";
 
 import Product from "../product";
 import en from "./locales/en";
 import pt from "./locales/pt";
 import styles from "./track.module.scss";
 
-type ProductState = "loading" | "empty" | "notFound" | ProcessedProduct;
+type ProductState = "loading" | "empty" | "notFound" | ProductType;
 
 export default function Track() {
   const router = useRouter();
@@ -35,28 +33,12 @@ export default function Track() {
       return;
     }
 
-    let data;
+    const newProduct = await getProduct(search, t);
 
-    try {
-      const res = await fetch(config.API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ search }),
-      });
-
-      if (res.status === 200) {
-        data = await res.json();
-      } else {
-        data = "ERROR";
-      }
-    } catch (error) {
-      data = "ERROR";
-    }
-
-    if (typeof data === "object" && data != null) {
-      setProduct(processProduct(data, t));
-    } else {
+    if (newProduct === "ERROR") {
       setProduct("notFound");
+    } else {
+      setProduct(newProduct);
     }
   };
 

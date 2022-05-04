@@ -1,7 +1,7 @@
 import format from "date-fns/format";
 import { useRouter } from "next/router";
 
-import Product from "@/types/product";
+import type { Product } from "@/utils/getProduct";
 
 import styles from "./dates.module.scss";
 import en from "./locales/en";
