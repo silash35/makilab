@@ -23,5 +23,5 @@ interface TClientInput {
   cpfOrCnpj?: string;
 }
 
-export type { TClientInput };
+export type { TClient, TClientInput };
 export default TClient;

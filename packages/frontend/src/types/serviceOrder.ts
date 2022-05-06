@@ -65,5 +65,5 @@ interface TServiceOrderUpdateStatusInput {
   isBudgetApproved?: boolean;
 }
 
-export type { TServiceOrderInput, TServiceOrderUpdateStatusInput };
+export type { TServiceOrder, TServiceOrderInput, TServiceOrderUpdateStatusInput };
 export default TServiceOrder;

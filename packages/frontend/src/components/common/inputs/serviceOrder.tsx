@@ -5,7 +5,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import Text from "./fields/text";
 import type TServiceOrder from "@/types/serviceOrder";
-import { useState } from "react";
 import DateTime from "./fields/dateTime";
 import styles from "./inputs.module.scss";
 
@@ -16,10 +15,6 @@ interface Props {
 }
 
 export default function ServiceOrderInputs({ serviceOrder }: Props) {
-  const [dateValue, setDateValue] = useState<Date | null>(
-    serviceOrder?.createdAt ? new Date(serviceOrder?.createdAt) : new Date()
-  );
-
   const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
   return (
     <>

@@ -4,6 +4,14 @@
   @extend %flex;
 }
 
+.flexNoWrap {
+  display: flex;
+  align-items: center;
+
+  min-width: 400px;
+  gap: 8px;
+}
+
 .width {
   width: 100%;
 }

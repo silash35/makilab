@@ -1,111 +1,70 @@
-import config from "@config";
-import DateAdapter from "@mui/lab/AdapterDateFns";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import Autocomplete from "@mui/material/Autocomplete";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
-import Input from "./fields/text";
+import Checkbox from "./fields/checkbox";
 import type TServiceOrder from "@/types/serviceOrder";
-import ptBR from "date-fns/locale/pt-BR";
-import { useState } from "react";
 
-import styles from "./inputs.module.scss";
-
-const { ATTENDANTS, SERVICE_PLACES } = config;
+import DateTime from "./fields/dateTime";
+import DateTimeWithSwitch from "./fields/dateTimeWithSwitch";
 
 interface Props {
   serviceOrder?: TServiceOrder;
 }
 
 export default function ServiceOrderStatusInputs({ serviceOrder }: Props) {
-  const [createdAt, setCreatedAt] = useState<Date | null>(serviceOrder.createdAt);
-  const [registeredInManufacturerAt, setRegisteredInManufacturerAt] = useState(
-    serviceOrder.registeredInManufacturerAt
-  );
-  const [budgetedAt, setBudgetedAt] = useState(serviceOrder.budgetedAt);
-  const [budgetAnsweredAt, setBudgetAnsweredAt] = useState(serviceOrder.budgetAnsweredAt);
-  const [isBudgetApproved, setIsBudgetApproved] = useState<boolean>(
-    serviceOrder.isBudgetApproved ? true : false
-  );
-  const [partsArrivedAt, setPartsArrivedAt] = useState(serviceOrder.partsArrivedAt);
-  const [repairedAt, setRepairedAt] = useState(serviceOrder.repairedAt);
-  const [deliveredToCustomerAt, setDeliveredToCustomerAt] = useState(
-    serviceOrder.deliveredToCustomerAt
-  );
-
-  useEffect(() => {
-    setCreatedAt(serviceOrder.createdAt);
-    setRegisteredInManufacturerAt(serviceOrder.registeredInManufacturerAt);
-    setBudgetedAt(serviceOrder.budgetedAt);
-    setBudgetAnsweredAt(serviceOrder.budgetAnsweredAt);
-    setIsBudgetApproved(serviceOrder.isBudgetApproved ? true : false);
-    setPartsArrivedAt(serviceOrder.partsArrivedAt);
-    setRepairedAt(serviceOrder.repairedAt);
-    setDeliveredToCustomerAt(serviceOrder.deliveredToCustomerAt);
-  }, [serviceOrder]);
-
-  const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
   return (
-    <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
-      <DateTime label="Data de criação da OS" value={createdAt} setValue={setCreatedAt} />
+    <>
+      <DateTime
+        name="createdAt"
+        label="Data de criação da OS"
+        defaultValue={serviceOrder?.createdAt}
+        textFieldProps={{ required: true }}
+      />
 
-      {serviceOrder.isUnderWarranty && (
+      {serviceOrder?.isUnderWarranty && (
         <DateTimeWithSwitch
+          name="registeredInManufacturerAt"
           label="Data de criação da OSF"
-          input={registeredInManufacturerAt}
-          setInput={setRegisteredInManufacturerAt}
+          defaultValue={serviceOrder?.registeredInManufacturerAt}
         />
       )}
 
       <DateTimeWithSwitch
+        name="budgetedAt"
         label="Data da Avaliação do produto"
-        input={budgetedAt}
-        setInput={setBudgetedAt}
+        defaultValue={serviceOrder?.budgetedAt}
       />
 
-      {!serviceOrder.isUnderWarranty && (
+      {!serviceOrder?.isUnderWarranty && (
         <>
           <DateTimeWithSwitch
+            name="budgetAnsweredAt"
             label="Data da Resposta do Orçamento"
-            input={budgetAnsweredAt}
-            setInput={setBudgetAnsweredAt}
+            defaultValue={serviceOrder?.budgetAnsweredAt}
           >
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={isBudgetApproved}
-                    onChange={(e) => {
-                      setIsBudgetApproved(e.target.checked);
-                    }}
-                  />
-                }
-                label="Orçamento Aprovado"
-              />
-            </FormGroup>
+            <Checkbox
+              name="isBudgetApproved"
+              label="Orçamento Aprovado"
+              defaultValue={serviceOrder?.isBudgetApproved ? true : false}
+            />
           </DateTimeWithSwitch>
         </>
       )}
 
       <DateTimeWithSwitch
+        name="partsArrivedAt"
         label="Data da chegada das peças"
-        input={partsArrivedAt}
-        setInput={setPartsArrivedAt}
+        defaultValue={serviceOrder?.partsArrivedAt}
       />
 
       <DateTimeWithSwitch
+        name="repairedAt"
         label="Data do reparo do produto"
-        input={repairedAt}
-        setInput={setRepairedAt}
+        defaultValue={serviceOrder?.repairedAt}
       />
 
       <DateTimeWithSwitch
+        name="deliveredToCustomerAt"
         label="Data da retirada do produto"
-        input={deliveredToCustomerAt}
-        setInput={setDeliveredToCustomerAt}
+        defaultValue={serviceOrder?.deliveredToCustomerAt}
       />
-    </LocalizationProvider>
+    </>
   );
 }
