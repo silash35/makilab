@@ -5,13 +5,13 @@ import type { NextPageContext } from "next";
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
 interface Req {
-  URL: string;
+  url: string;
   method: Method;
   body?: unknown;
 }
 
-export const fetcher = (URL: string) => {
-  return fetch(`${config.BACKEND_URL}${URL}`, {
+export const fetcher = (url: string) => {
+  return fetch(`${config.BACKEND_URL}${url}`, {
     method: "GET",
     headers: { authorization: parseCookies().token },
   }).then((r) => r.json());
@@ -23,7 +23,7 @@ export default async function request(
   sendToken = true,
   ctx?: Pick<NextPageContext, "req">
 ) {
-  const { URL, method, body } = req;
+  const { url, method, body } = req;
   let res: undefined | Response;
   let json;
 
@@ -43,7 +43,7 @@ export default async function request(
     }
 
     // Make request
-    res = await fetch(`${config.BACKEND_URL}${URL}`, {
+    res = await fetch(`${config.BACKEND_URL}${url}`, {
       method,
       headers,
       body: body ? JSON.stringify(body) : undefined,

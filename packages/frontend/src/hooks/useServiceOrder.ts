@@ -1,6 +1,7 @@
 import useSWR from "swr";
 
-import ServiceOrder from "@/types/serviceOrder";
+import TClient from "@/types/client";
+import TServiceOrder from "@/types/serviceOrder";
 
 export default function useServiceOrder(id: string) {
   const { data, error, mutate } = useSWR(`/api/private/serviceOrders?id=${id}`);
@@ -12,3 +13,9 @@ export default function useServiceOrder(id: string) {
     mutate,
   };
 }
+
+interface ServiceOrder extends TServiceOrder {
+  owner: TClient;
+}
+
+export type { ServiceOrder };

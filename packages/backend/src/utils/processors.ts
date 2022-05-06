@@ -57,7 +57,7 @@ export function processSO(serviceOrder?: ServiceOrder | ServiceOrder[] | null) {
     const statusNumber = (() => {
       /*
         Status Possíveis e seus números:
-  
+
         0: Esperando criar OSF (Somente em equipamentos em garantia)
         10: Esperando Avaliação
         20: Aguardando Aprovação do Orçamento (Somente em equipamentos fora de garantia)

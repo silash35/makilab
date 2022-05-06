@@ -11,10 +11,10 @@ router.get("", async (req: Request, res: Response) => {
 });
 
 router.post("", async (req: Request, res: Response) => {
-  const body = req.body;
-  const client = await create(parseCreateClient(body, body));
+  const { client, serviceOrder } = req.body;
+  const newClient = await create(parseCreateClient(client, serviceOrder));
 
-  return res.status(200).json(client);
+  return res.status(200).json(newClient);
 });
 
 router.put("", async (req: Request, res: Response) => {

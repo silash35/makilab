@@ -1,5 +1,4 @@
 import ResponseClient from "../../../../src/types/client";
-import ServiceOrder from "../../../../src/types/serviceOrder";
 import { generateClient, generateServiceOrder } from "../../../support/generators";
 import testSafety from "../../../support/testSafety";
 

@@ -1,14 +1,21 @@
 import useSWR from "swr";
-
-import Client from "@/types/client";
+import TClient from "@/types/client";
+import TServiceOrder from "@/types/serviceOrder";
 
 export default function useClients() {
   const { data, error, mutate } = useSWR("/api/private/clients");
 
   return {
-    clients: data as Client[] | undefined,
+    clients: data as Clients | undefined,
     isLoading: !error && !data,
     isError: error,
     mutate,
   };
 }
+
+interface Client extends TClient {
+  ServiceOrders: TServiceOrder[];
+}
+
+type Clients = Client[];
+export type { Clients };

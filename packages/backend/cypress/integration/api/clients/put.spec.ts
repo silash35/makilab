@@ -4,7 +4,6 @@ import { generateClient, generateServiceOrder } from "../../../support/generator
 import testSafety from "../../../support/testSafety";
 
 describe("Clients API - PUT", () => {
-  /*
   it("should return 401 when unauthenticated", () => {
     testSafety("PUT", "/api/private/clients", generateClient());
   });
@@ -119,7 +118,7 @@ describe("Clients API - PUT", () => {
       });
     });
   });
-*/
+
   it("should not update the client when invalid data", () => {
     cy.signIn();
     const client = generateClient();
