@@ -6,24 +6,18 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 
-import request from "@/utils/request";
-
 interface Props {
-  id: string;
   title: string;
   text: string;
-  url: string;
-
-  reload: () => void;
+  submit: () => Promise<boolean>;
 }
 
-export default function DeleteDialog({ id, title, text, url, reload }: Props) {
+export default function DeleteDialog({ title, text, submit }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
-  const sendData = async () => {
-    if ((await request({ URL: url, method: "DELETE", body: { id } })).status !== 200) {
+  const handleSubmit = async () => {
+    if (await submit()) {
       setOpenDialog(false);
-      reload();
     }
   };
 
@@ -44,7 +38,7 @@ export default function DeleteDialog({ id, title, text, url, reload }: Props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
-          <Button variant="outlined" onClick={sendData}>
+          <Button variant="outlined" onClick={handleSubmit}>
             Excluir
           </Button>
         </DialogActions>

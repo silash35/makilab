@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-
+import { filterNumber } from "../../utils/filters";
 import { deleteOne, getAll, getOne, update } from "../../services/serviceOrder";
 import { parseUpdateSO, parseUpdateStatusSO } from "../../utils/parsers";
 
@@ -33,8 +33,13 @@ router.put("", async (req: Request, res: Response) => {
 });
 
 router.delete("", async (req: Request, res: Response) => {
-  await deleteOne(Number(req.body.id));
-  return res.status(200).send(req.body.id + " deleted");
+  const id = filterNumber(req.body.id);
+  if (id === null) {
+    throw new Error("Invalid data: id");
+  }
+
+  await deleteOne(id);
+  return res.status(200).json({ deletedID: id });
 });
 
 export default router;

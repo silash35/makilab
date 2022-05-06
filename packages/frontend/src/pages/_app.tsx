@@ -12,7 +12,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import variables from "@/styles/variables.module.scss";
 
 type NextPageWithLayout = NextPage & {
-  Layout?: ({ children }: { children: React.ReactChild }) => JSX.Element | null;
+  Layout?: ({ children }: { children: React.ReactNode }) => JSX.Element | null;
 };
 
 type AppPropsWithLayout = AppProps & {

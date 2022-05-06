@@ -1,21 +1,18 @@
 import config from "@config";
-import DateAdapter from "@mui/lab/AdapterDateFns";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
-import type { ServiceOrder } from "@prisma/client";
-import ptBR from "date-fns/locale/pt-BR";
+import Text from "./fields/text";
+import type TServiceOrder from "@/types/serviceOrder";
 import { useState } from "react";
-
+import DateTime from "./fields/dateTime";
 import styles from "./inputs.module.scss";
 
 const { ATTENDANTS, SERVICE_PLACES } = config;
 
 interface Props {
-  serviceOrder?: ServiceOrder;
+  serviceOrder?: TServiceOrder;
 }
 
 export default function ServiceOrderInputs({ serviceOrder }: Props) {
@@ -26,51 +23,53 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
   const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
   return (
     <>
-      <input type="hidden" name="id" value={serviceOrder?.id} />
-      <TextField
-        name="equipment"
-        label="Equipamento"
-        required
+      <Text
         defaultValue={serviceOrder?.equipment}
-        {...common}
+        textFieldProps={{
+          name: "equipment",
+          label: "Equipamento",
+          required: true,
+          ...common,
+        }}
       />
+
       <div className={styles.flex}>
-        <TextField name="brand" label="Marca" defaultValue={serviceOrder?.brand} {...common} />
-        <TextField name="model" label="Modelo" defaultValue={serviceOrder?.model} {...common} />
+        <Text
+          defaultValue={serviceOrder?.brand}
+          textFieldProps={{ name: "brand", label: "Marca", ...common }}
+        />
+        <Text
+          defaultValue={serviceOrder?.model}
+          textFieldProps={{ name: "model", label: "Modelo", ...common }}
+        />
       </div>
+
       <div className={styles.flex}>
-        <TextField
-          name="productNumber"
-          label="Product Number"
+        <Text
           defaultValue={serviceOrder?.productNumber}
-          {...common}
+          textFieldProps={{ name: "productNumber", label: "Product Number", ...common }}
         />
-        <TextField
-          name="batchOrImei"
-          label="N° de Serie ou IMEI"
+        <Text
           defaultValue={serviceOrder?.batchOrImei}
-          {...common}
+          textFieldProps={{ name: "batchOrImei", label: "N° de Serie ou IMEI", ...common }}
         />
       </div>
-      <TextField
-        name="accessories"
-        label="Acessórios"
+
+      <Text
         defaultValue={serviceOrder?.accessories}
-        {...common}
+        textFieldProps={{ name: "accessories", label: "Acessórios", ...common }}
       />
-      <TextField
-        name="productCondition"
-        label="Estado do equipamento"
+
+      <Text
         defaultValue={serviceOrder?.productCondition}
-        {...common}
+        textFieldProps={{ name: "productCondition", label: "Estado do equipamento", ...common }}
       />
-      <TextField
-        name="listOfServices"
-        label="Lista de serviços"
+
+      <Text
         defaultValue={
           serviceOrder?.listOfServices ? serviceOrder?.listOfServices : "Avaliação Técnica"
         }
-        {...common}
+        textFieldProps={{ name: "listOfServices", label: "Lista de serviços", ...common }}
       />
 
       <div className={styles.flex}>
@@ -101,22 +100,12 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
         />
       </div>
       <div className={styles.flex}>
-        <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
-          <DateTimePicker
-            label="Data de criação da OS"
-            renderInput={(params) => <TextField required {...common} {...params} />}
-            value={dateValue}
-            onChange={(newValue) => {
-              setDateValue(newValue);
-            }}
-          />
-
-          <input
-            type="hidden"
-            name="createdAt"
-            value={String(dateValue ? dateValue : new Date())}
-          />
-        </LocalizationProvider>
+        <DateTime
+          name="createdAt"
+          label="Data de criação da OS"
+          defaultValue={serviceOrder?.createdAt}
+          textFieldProps={{ required: true, ...common }}
+        />
 
         <FormControlLabel
           control={
@@ -126,12 +115,9 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
         />
       </div>
 
-      <TextField
-        name="notes"
-        label="Observações extras"
+      <Text
         defaultValue={serviceOrder?.notes}
-        multiline
-        {...common}
+        textFieldProps={{ name: "notes", label: "Observações extras", multiline: true, ...common }}
       />
     </>
   );

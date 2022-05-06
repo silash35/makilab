@@ -13,6 +13,6 @@ export default function SignInPage() {
   );
 }
 
-SignInPage.Layout = function Layout({ children }: { children: React.ReactChild }) {
+SignInPage.Layout = function Layout({ children }: { children: React.ReactNode }) {
   return children;
 };

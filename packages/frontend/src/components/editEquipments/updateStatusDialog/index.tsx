@@ -12,13 +12,13 @@ import FormGroup from "@mui/material/FormGroup";
 import ptBR from "date-fns/locale/pt-BR";
 import { useEffect, useState } from "react";
 
-import type ServiceOrder from "@/types/serviceOrder";
+import type { TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
 import request from "@/utils/request";
 
 import { DateTime, DateTimeWithSwitch } from "./fields";
 
 interface Props {
-  serviceOrder: ServiceOrder;
+  serviceOrder: TServiceOrderUpdateStatusInput;
   reload: () => void;
 }
 

@@ -5,27 +5,24 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { FormEvent, useState } from "react";
 
-import request from "@/utils/request";
-
 interface Props {
-  Inputs: React.ReactChild;
-  url: string;
-  method?: "POST" | "PUT";
   title: string;
-  reload: () => void;
+  children: React.ReactNode;
+  submit: (event: FormEvent<HTMLFormElement>) => Promise<boolean>;
 }
 
-export default function EditDialog({ Inputs, url, method = "POST", title, reload }: Props) {
+export default function EditDialog({ children, title, submit }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    /*
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
+   */
 
-    if ((await request({ URL: url, method, body: data })).status !== 200) {
+    if (await submit(event)) {
       setOpenDialog(false);
-      reload();
     }
   };
 
@@ -42,7 +39,7 @@ export default function EditDialog({ Inputs, url, method = "POST", title, reload
       >
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <form onSubmit={handleSubmit}>
-          <DialogContent>{Inputs}</DialogContent>
+          <DialogContent>{children}</DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
             <Button variant="outlined" type="submit">
