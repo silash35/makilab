@@ -1,6 +1,6 @@
-import Checkbox from "./fields/checkbox";
 import type TServiceOrder from "@/types/serviceOrder";
 
+import Checkbox from "./fields/checkbox";
 import DateTime from "./fields/dateTime";
 import DateTimeWithSwitch from "./fields/dateTimeWithSwitch";
 

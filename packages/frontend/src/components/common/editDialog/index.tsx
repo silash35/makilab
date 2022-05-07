@@ -15,12 +15,6 @@ export default function EditDialog({ children, title, submit }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    /*
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData);
-   */
-
     if (await submit(event)) {
       setOpenDialog(false);
     }

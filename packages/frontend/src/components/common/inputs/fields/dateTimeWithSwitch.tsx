@@ -1,10 +1,10 @@
-import { TextFieldProps } from "@mui/material/TextField";
-import { useEffect, useState } from "react";
 import Switch from "@mui/material/Switch";
-import { DateTimePickerProps } from "@mui/lab/DateTimePicker";
-import DateTime from "./dateTime";
+import { TextFieldProps } from "@mui/material/TextField";
+import { DateTimePickerProps } from "@mui/x-date-pickers/DateTimePicker";
+import { useEffect, useState } from "react";
 
 import styles from "../inputs.module.scss";
+import DateTime from "./dateTime";
 
 interface Props {
   name: string;

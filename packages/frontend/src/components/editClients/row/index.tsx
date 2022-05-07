@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
-import Client from "@/types/client";
+import { TClientWithSOs as Client } from "@/types/client";
 
 import DetailedInformation from "../detailedInformation";
 import styles from "./row.module.scss";

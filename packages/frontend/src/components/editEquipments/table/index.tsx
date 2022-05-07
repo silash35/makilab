@@ -13,7 +13,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-import ServiceOrder from "@/types/serviceOrder";
+import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 
 import Equipment from "../row";
 import styles from "./table.module.scss";

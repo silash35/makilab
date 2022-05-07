@@ -1,9 +1,9 @@
 import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { useEffect, useState } from "react";
-import DateAdapter from "@mui/lab/AdapterDateFns";
-import DateTimePicker, { DateTimePickerProps } from "@mui/lab/DateTimePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DateTimePicker, DateTimePickerProps } from "@mui/x-date-pickers/DateTimePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ptBR from "date-fns/locale/pt-BR";
+import { useEffect, useState } from "react";
 
 interface Props {
   name: string;
@@ -30,7 +30,7 @@ export default function DateTime({
   }, [defaultValue]);
 
   return (
-    <LocalizationProvider dateAdapter={DateAdapter} locale={ptBR}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
       <DateTimePicker
         label={label}
         renderInput={(params) => <TextField {...textFieldProps} {...params} />}

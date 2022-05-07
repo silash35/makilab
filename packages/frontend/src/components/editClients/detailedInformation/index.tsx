@@ -2,12 +2,15 @@ import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import type { FormEvent } from "react";
 
 import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import SendMailDialog from "@/components/common/sendMailDialog";
-import Client from "@/types/client";
+import type { TClientInput, TClientWithSOs as Client } from "@/types/client";
+import deleteClient from "@/utils/mutations/deleteClient";
+import updateClient from "@/utils/mutations/updateClient";
 
 import styles from "./detailedInformation.module.scss";
 
@@ -17,6 +20,21 @@ interface Props {
 }
 
 export default function DetailedInformation({ client, reload }: Props) {
+  const handleDeleteClient = async () => {
+    const { status } = await deleteClient(client.id);
+    return status === 200;
+  };
+
+  const handleEditClient = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData) as unknown as TClientInput;
+
+    const { status } = await updateClient(client.id, data);
+    reload();
+    return status === 200;
+  };
+
   return (
     <Box className={styles.detailedInformation}>
       <h2>Informações Detalhadas</h2>
@@ -31,20 +49,14 @@ export default function DetailedInformation({ client, reload }: Props) {
 
       <div className={styles.flex}>
         <DeleteDialog
-          id={String(client.id)}
-          url={"/api/admin/clients"}
           title={`Deletar ${client.name}`}
           text={`Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`}
-          reload={reload}
+          submit={handleDeleteClient}
         />
         {client.email && <SendMailDialog client={client} />}
-        <EditDialog
-          Inputs={<ClientInputs client={client} />}
-          url={"/api/admin/clients"}
-          method={"PUT"}
-          title="Editar Cliente"
-          reload={reload}
-        />
+        <EditDialog title="Editar Cliente" submit={handleEditClient}>
+          <ClientInputs client={client} />
+        </EditDialog>
       </div>
 
       <h2>Equipamentos</h2>

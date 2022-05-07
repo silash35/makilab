@@ -1,5 +1,6 @@
-import TServiceOrder, { TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
 import TClient from "@/types/client";
+import TServiceOrder, { TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
+
 import request from "../request";
 
 export default async (id: number, serviceOrder: TServiceOrderUpdateStatusInput) => {

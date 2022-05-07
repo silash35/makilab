@@ -1,7 +1,9 @@
+import TClient from "@/types/client";
+
 interface TServiceOrder {
   id: number;
 
-  equipment: string | null;
+  equipment: string;
   brand: string | null;
   model: string | null;
   productNumber: string | null;
@@ -36,6 +38,10 @@ interface TServiceOrder {
   isUrgent: boolean;
 }
 
+interface TServiceOrderWithClient extends TServiceOrder {
+  owner: TClient;
+}
+
 interface TServiceOrderInput {
   equipment: string;
   brand?: string;
@@ -65,5 +71,10 @@ interface TServiceOrderUpdateStatusInput {
   isBudgetApproved?: boolean;
 }
 
-export type { TServiceOrder, TServiceOrderInput, TServiceOrderUpdateStatusInput };
+export type {
+  TServiceOrder,
+  TServiceOrderInput,
+  TServiceOrderUpdateStatusInput,
+  TServiceOrderWithClient,
+};
 export default TServiceOrder;

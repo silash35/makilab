@@ -1,10 +1,11 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
-import type Client from "@/types/client";
+
 import ClientInputs from "@/components/common/inputs/client";
 import EquipmentInputs from "@/components/common/inputs/serviceOrder";
 import useClients from "@/hooks/useClients";
+import type Client from "@/types/client";
 
 interface ClientWithLabel extends Client {
   id: number;

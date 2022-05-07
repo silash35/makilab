@@ -1,6 +1,6 @@
-import { parseCookies } from "nookies";
 import config from "@config";
 import type { NextPageContext } from "next";
+import { parseCookies } from "nookies";
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 

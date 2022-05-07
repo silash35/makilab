@@ -28,7 +28,7 @@ export default function Checkbox({ name, label, defaultValue }: Props) {
               }}
             />
           }
-          label="Orçamento Aprovado"
+          label={label}
         />
       </FormGroup>
       <input type="hidden" name={name} value={Number(value)} />

@@ -1,7 +1,8 @@
-import Text from "./fields/text";
 import { TextFieldProps } from "@mui/material/TextField";
+
 import type TClient from "@/types/client";
 
+import Text from "./fields/text";
 import styles from "./inputs.module.scss";
 
 interface Props {

@@ -111,8 +111,8 @@ importers:
       '@emotion/react': ^11.9.0
       '@emotion/styled': ^11.8.1
       '@mui/icons-material': ^5.6.2
-      '@mui/lab': 5.0.0-alpha.80
       '@mui/material': ^5.6.4
+      '@mui/x-date-pickers': 5.0.0-alpha.2
       '@types/node': ^17.0.31
       '@types/react': ^18.0.8
       concurrently: ^7.1.0
@@ -130,8 +130,8 @@ importers:
       '@emotion/react': 11.9.0_ci6b7qrbzfuzg4ahcdqxg6om2y
       '@emotion/styled': 11.8.1_yumnlca233vgbjtftw4czkklqa
       '@mui/icons-material': 5.6.2_77wjrm7beomleml3laabivwr54
-      '@mui/lab': 5.0.0-alpha.80_vnuxi46sjtmrjrz3cmd2awrqbe
       '@mui/material': 5.6.4_jeuaqv6awanfmmqq4rub4k656u
+      '@mui/x-date-pickers': 5.0.0-alpha.2_k3uih2soozbvdsbmrs6gf4oweq
       '@types/node': 17.0.31
       '@types/react': 18.0.8
       date-fns: 2.28.0
@@ -559,50 +559,6 @@ packages:
       react: 18.1.0
     dev: false
 
-  /@mui/lab/5.0.0-alpha.80_vnuxi46sjtmrjrz3cmd2awrqbe:
-    resolution: {integrity: sha512-td5Ak0Hx+EzVN9MJqBlZJ6BKFGjTrHyNjXncjSHTvp8Z9p157AlOA/Sf7r+RyqyVzOzBfv4S37i9ShFTzSK61Q==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      '@mui/material': ^5.0.0
-      '@types/react': ^17.0.0 || ^18.0.0
-      date-fns: ^2.25.0
-      dayjs: ^1.10.7
-      luxon: ^1.28.0 || ^2.0.0
-      moment: ^2.29.1
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      date-fns:
-        optional: true
-      dayjs:
-        optional: true
-      luxon:
-        optional: true
-      moment:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.17.9
-      '@mui/base': 5.0.0-alpha.79_i6xcbgvvylvakhe2evaee3dlf4
-      '@mui/material': 5.6.4_jeuaqv6awanfmmqq4rub4k656u
-      '@mui/system': 5.6.4_wjko47wvjskiomszagfca35zvy
-      '@mui/utils': 5.6.1_react@18.1.0
-      '@mui/x-date-pickers': 5.0.0-alpha.0_luskyajukmsvdhyqywm5jjbf6q
-      '@types/react': 18.0.8
-      clsx: 1.1.1
-      date-fns: 2.28.0
-      prop-types: 15.8.1
-      react: 18.1.0
-      react-dom: 18.1.0_react@18.1.0
-      react-is: 17.0.2
-      react-transition-group: 4.4.2_ef5jwxihqo6n7gxfmzogljlgcm
-      rifm: 0.12.1_react@18.1.0
-    transitivePeerDependencies:
-      - '@emotion/react'
-      - '@emotion/styled'
-    dev: false
-
   /@mui/material/5.6.4_jeuaqv6awanfmmqq4rub4k656u:
     resolution: {integrity: sha512-7TD+u/SExZK2a55w6reX56oPk37gKr/M/XGt156X+m0d9LhzOsW864nkErIX/H8oSkX/6kCimxu1FDsO+gjiVw==}
     engines: {node: '>=12.0.0'}
@@ -732,8 +688,8 @@ packages:
       react-is: 17.0.2
     dev: false
 
-  /@mui/x-date-pickers/5.0.0-alpha.0_luskyajukmsvdhyqywm5jjbf6q:
-    resolution: {integrity: sha512-JTzTaNSWbxNi8KDUJjHCH6im0YlIEv88gPoKhGm7s6xCGT1q6FtMp/oQ40nhfwrJ73nkM5G1JXRIzI/yfsHXQQ==}
+  /@mui/x-date-pickers/5.0.0-alpha.2_k3uih2soozbvdsbmrs6gf4oweq:
+    resolution: {integrity: sha512-K2Pl4q0kxkcKOjJ/BAfbM5Dko9Ojogii363Fjlpth3ETTB7vwQaQBPW+SyYjCyf0TPqbwyRV7uaQ8q9twnWwHA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       '@mui/material': ^5.2.3
@@ -742,7 +698,8 @@ packages:
       dayjs: ^1.10.7
       luxon: ^1.28.0 || ^2.0.0
       moment: ^2.29.1
-      react: ^17.0.2
+      react: ^17.0.2 || ^18.0.0
+      react-dom: ^17.0.2 || ^18.0.0
     peerDependenciesMeta:
       date-fns:
         optional: true
@@ -758,16 +715,14 @@ packages:
       '@date-io/luxon': 2.13.1
       '@date-io/moment': 2.13.1
       '@mui/material': 5.6.4_jeuaqv6awanfmmqq4rub4k656u
-      '@mui/system': 5.6.4_wjko47wvjskiomszagfca35zvy
       '@mui/utils': 5.6.1_react@18.1.0
       clsx: 1.1.1
       date-fns: 2.28.0
       prop-types: 15.8.1
       react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
       react-transition-group: 4.4.2_ef5jwxihqo6n7gxfmzogljlgcm
       rifm: 0.12.1_react@18.1.0
-    transitivePeerDependencies:
-      - react-dom
     dev: false
 
   /@next/env/12.1.6:

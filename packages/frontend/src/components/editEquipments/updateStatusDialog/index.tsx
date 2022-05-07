@@ -5,8 +5,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { FormEvent, useState } from "react";
-import type { TServiceOrder, TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
+
 import ServiceOrderStatusInputs from "@/components/common/inputs/serviceOrderStatus";
+import type { TServiceOrder, TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
 import updateStatusSO from "@/utils/mutations/updateStatusSO";
 
 interface Props {

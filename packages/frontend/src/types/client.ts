@@ -1,3 +1,5 @@
+import TServiceOrder from "./serviceOrder";
+
 interface TClient {
   id: number;
   deleted: boolean;
@@ -13,6 +15,10 @@ interface TClient {
   cpfOrCnpj: string | null;
 }
 
+interface TClientWithSOs extends TClient {
+  serviceOrders: TServiceOrder[];
+}
+
 interface TClientInput {
   name: string;
   email?: string;
@@ -23,5 +29,5 @@ interface TClientInput {
   cpfOrCnpj?: string;
 }
 
-export type { TClient, TClientInput };
+export type { TClient, TClientInput, TClientWithSOs };
 export default TClient;

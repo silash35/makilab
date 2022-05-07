@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
 
-import Client from "@/types/client";
+import { TClientWithSOs as Client } from "@/types/client";
 
 import ClientRow from "../row";
 import styles from "./table.module.scss";

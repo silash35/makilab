@@ -3,9 +3,11 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
-import Text from "./fields/text";
+
 import type TServiceOrder from "@/types/serviceOrder";
+
 import DateTime from "./fields/dateTime";
+import Text from "./fields/text";
 import styles from "./inputs.module.scss";
 
 const { ATTENDANTS, SERVICE_PLACES } = config;

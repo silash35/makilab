@@ -1,5 +1,6 @@
-import TServiceOrder, { TServiceOrderInput } from "@/types/serviceOrder";
 import TClient from "@/types/client";
+import TServiceOrder, { TServiceOrderInput } from "@/types/serviceOrder";
+
 import request from "../request";
 
 export default async (id: number, serviceOrder: TServiceOrderInput) => {
