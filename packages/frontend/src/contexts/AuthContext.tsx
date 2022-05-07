@@ -1,7 +1,7 @@
-import request from "@/utils/request";
-import config from "@config";
-import { parseCookies, setCookie } from "nookies";
+import { setCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
+
+import request from "@/utils/request";
 
 interface Session {
   user: {
@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function loadUser() {
     const { response, status } = await request({
       method: "GET",
-      URL: "/api/auth/user",
+      url: "/api/auth/user",
     });
 
     if (status === 200) {
@@ -50,7 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function signIn({ password }: SignInData) {
     const { response, status } = await request({
       method: "POST",
-      URL: "/api/auth/signin",
+      url: "/api/auth/signin",
       body: { password },
     });
 

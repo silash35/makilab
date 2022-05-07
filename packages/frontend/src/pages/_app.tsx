@@ -6,10 +6,11 @@ import type { NextPage } from "next";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { SWRConfig } from "swr";
-import { fetcher } from "@/utils/request";
+
 import DefaultLayout from "@/components/Layout";
 import { AuthProvider } from "@/contexts/AuthContext";
 import variables from "@/styles/variables.module.scss";
+import { fetcher } from "@/utils/request";
 
 type NextPageWithLayout = NextPage & {
   Layout?: ({ children }: { children: React.ReactNode }) => JSX.Element | null;

@@ -3,7 +3,7 @@ import add from "date-fns/add";
 import format from "date-fns/format";
 
 import useServiceOrder from "@/hooks/useServiceOrder";
-import ServiceOrder from "@/types/serviceOrder";
+import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 
 import styles from "./pdf.module.scss";
 import QrCode from "./qrCode";

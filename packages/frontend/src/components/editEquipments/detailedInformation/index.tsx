@@ -3,12 +3,15 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Link from "next/link";
+import type { FormEvent } from "react";
 
 import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
-import ServiceOrder from "@/types/serviceOrder";
+import { TServiceOrderInput, TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
+import deleteSO from "@/utils/mutations/deleteSO";
+import updateSO from "@/utils/mutations/updateSO";
 
 import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./detailedInformation.module.scss";
@@ -20,9 +23,22 @@ interface Props {
 
 export default function DetailedInformation({ serviceOrder, reload }: Props) {
   const owner = serviceOrder.owner;
-  if (!owner) {
-    throw new Error("Owner is not defined");
-  }
+
+  const handleDeleteSO = async () => {
+    const { status } = await deleteSO(serviceOrder.id);
+    reload();
+    return status === 200;
+  };
+
+  const handleEditSO = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData) as unknown as TServiceOrderInput;
+
+    const { status } = await updateSO(serviceOrder.id, data);
+    reload();
+    return status === 200;
+  };
 
   return (
     <Box className={styles.detailedInformation}>
@@ -97,19 +113,14 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
 
       <div className={styles.flex}>
         <DeleteDialog
-          id={String(serviceOrder.id)}
-          url={"/api/admin/equipments"}
           title={`Deletar ${serviceOrder.id}`}
           text={`Tem certeza que deseja excluir a OS ${serviceOrder.id}?`}
-          reload={reload}
+          submit={handleDeleteSO}
         />
         {owner.email && <SendMailDialog client={owner} email={serviceOrder.defaultEmail} />}
-        <EditDialog
-          Inputs={<ServiceOrderInputs serviceOrder={serviceOrder} />}
-          url={"/api/admin/equipments"}
-          title="Editar Equipamento"
-          reload={reload}
-        />
+        <EditDialog title="Editar Equipamento" submit={handleEditSO}>
+          <ServiceOrderInputs serviceOrder={serviceOrder} />
+        </EditDialog>
         <Link href={`/admin/SO?id=${serviceOrder.id}`} passHref>
           <Button variant="outlined" component="a">
             Gerar PDF

@@ -1,20 +1,16 @@
-import TClient, { TClientInput } from "@/types/client";
-import TServiceOrder, { TServiceOrderInput } from "@/types/serviceOrder";
+import { TClientInput, TClientWithSOs } from "@/types/client";
+import { TServiceOrderInput } from "@/types/serviceOrder";
 
 import request from "../request";
 
-export default async (client: TClientInput, serviceOrder?: TServiceOrderInput) => {
+export default async (newClient: TClientInput, serviceOrder?: TServiceOrderInput) => {
   const { response, status } = await request({
     method: "POST",
     url: "/api/private/clients",
-    body: { ...client, ...serviceOrder },
+    body: { ...newClient, ...serviceOrder },
   });
 
-  const newClient = response as Client;
+  const client = response as TClientWithSOs;
 
-  return { newClient, status };
+  return { client, status };
 };
-
-interface Client extends TClient {
-  ServiceOrders: TServiceOrder[];
-}

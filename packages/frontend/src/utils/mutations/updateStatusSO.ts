@@ -1,5 +1,4 @@
-import TClient from "@/types/client";
-import TServiceOrder, { TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
+import { TServiceOrderUpdateStatusInput, TServiceOrderWithClient } from "@/types/serviceOrder";
 
 import request from "../request";
 
@@ -10,11 +9,7 @@ export default async (id: number, serviceOrder: TServiceOrderUpdateStatusInput) 
     body: { id, ...serviceOrder },
   });
 
-  const updatedServiceOrder = response as ServiceOrder;
+  const updatedServiceOrder = response as TServiceOrderWithClient;
 
   return { updatedServiceOrder, status };
 };
-
-interface ServiceOrder extends TServiceOrder {
-  owner: TClient;
-}

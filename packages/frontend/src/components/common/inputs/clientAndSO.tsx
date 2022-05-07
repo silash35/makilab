@@ -13,26 +13,20 @@ interface ClientWithLabel extends Client {
 }
 
 interface Props {
-  setIsNewClient?: (isNewClient: boolean) => void;
+  setSelectedClientId: (selectedClient: number) => void;
 }
 
 const newClient: ClientWithLabel = { label: "Novo Cliente", id: 0 } as ClientWithLabel;
 
-export default function OSInputs({ setIsNewClient }: Props) {
+export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
   const { clients } = useClients();
   const [options, setOptions] = useState([newClient]);
 
   const [clientSelectorValue, setClientSelectorValue] = useState(options[0]);
 
-  if (setIsNewClient) {
-    useEffect(() => {
-      if (clientSelectorValue.id === 0 && clientSelectorValue.label === "Novo Cliente") {
-        setIsNewClient(true);
-      } else {
-        setIsNewClient(false);
-      }
-    }, [clientSelectorValue]);
-  }
+  useEffect(() => {
+    setSelectedClientId(clientSelectorValue.id);
+  }, [clientSelectorValue]);
 
   useEffect(() => {
     if (Array.isArray(clients)) {

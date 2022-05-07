@@ -6,14 +6,14 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
-import ServiceOrder from "@/types/serviceOrder";
+import { TServiceOrderWithClient } from "@/types/serviceOrder";
 
 import DetailedInformation from "../detailedInformation";
 import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./row.module.scss";
 
 interface Props {
-  serviceOrder: ServiceOrder;
+  serviceOrder: TServiceOrderWithClient;
   reload: () => void;
 }
 

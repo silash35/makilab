@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Array.isArray(context.query.id) ? context.query.id[0] : context.query.id;
 
   const serviceOrder = await request(
-    { URL: `/api/private/serviceOrders?id=${id}`, method: "GET" },
+    { url: `/api/private/serviceOrders?id=${id}`, method: "GET" },
     false,
     true,
     context

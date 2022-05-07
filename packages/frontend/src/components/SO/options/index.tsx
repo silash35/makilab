@@ -1,10 +1,15 @@
 import Button from "@mui/material/Button";
+import { FormEvent } from "react";
 
 import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
 import useServiceOrder from "@/hooks/useServiceOrder";
+import { TClientInput } from "@/types/client";
+import { TServiceOrderInput } from "@/types/serviceOrder";
+import updateClient from "@/utils/mutations/updateClient";
+import updateSO from "@/utils/mutations/updateSO";
 
 import styles from "./options.module.scss";
 
@@ -24,8 +29,24 @@ export default function Options({ id }: Props) {
     throw new Error("Owner not found");
   }
 
-  const reload = () => {
+  const handleEditSO = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData) as unknown as TServiceOrderInput;
+
+    const { status } = await updateSO(serviceOrder.id, data);
     mutate();
+    return status === 200;
+  };
+
+  const handleEditClient = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData) as unknown as TClientInput;
+
+    const { status } = await updateClient(serviceOrder.owner.id, data);
+    mutate();
+    return status === 200;
   };
 
   return (
@@ -33,18 +54,12 @@ export default function Options({ id }: Props) {
       <Button variant="contained" onClick={window.print}>
         Imprimir
       </Button>
-      <EditDialog
-        Inputs={<ServiceOrderInputs serviceOrder={serviceOrder} />}
-        url={"/api/admin/equipments"}
-        title="Editar OS"
-        reload={reload}
-      />
-      <EditDialog
-        Inputs={<ClientInputs client={owner} />}
-        url={"/api/admin/clients"}
-        title="Editar Cliente"
-        reload={reload}
-      />
+      <EditDialog title="Editar OS" submit={handleEditSO}>
+        <ServiceOrderInputs serviceOrder={serviceOrder} />
+      </EditDialog>
+      <EditDialog title="Editar Cliente" submit={handleEditClient}>
+        <ClientInputs client={owner} />
+      </EditDialog>
       {owner.email && (
         <SendMailDialog
           client={owner}
