@@ -18,7 +18,7 @@ describe("Clients API - POST", () => {
     cy.authFetch({
       method: "POST",
       url: "/api/private/clients",
-      body: { ...client, ...serviceOrder },
+      body: { client, serviceOrder },
     }).then((response) => {
       expect(response.status).equal(200);
       const newClient = response.body as ResponseClient;
@@ -46,7 +46,7 @@ describe("Clients API - POST", () => {
     cy.authFetch({
       method: "POST",
       url: "/api/private/clients",
-      body: client,
+      body: { client },
     }).then((response) => {
       expect(response.status).equal(200);
       const newClient = response.body as ResponseClient;
@@ -66,7 +66,10 @@ describe("Clients API - POST", () => {
       cy.authFetch({
         method: "POST",
         url: "/api/private/clients",
-        body: { ...generateClient(false, testValue), ...generateServiceOrder(false, testValue) },
+        body: {
+          client: generateClient(false, testValue),
+          serviceOrder: generateServiceOrder(false, testValue),
+        },
       }).then((response) => {
         expect(response.status).equal(200);
 
@@ -117,7 +120,7 @@ describe("Clients API - POST", () => {
       cy.authFetch({
         method: "POST",
         url: "/api/private/clients",
-        body: { ...client },
+        body: { client },
         failOnStatusCode: false,
       }).then((response) => {
         expect(response.status).equal(200);
@@ -152,7 +155,7 @@ describe("Clients API - POST", () => {
       cy.authFetch({
         method: "POST",
         url: "/api/private/clients",
-        body: { ...client, ...serviceOrder, createdAt: testValue },
+        body: { client, serviceOrder: { ...serviceOrder, createdAt: testValue } },
       }).then((response) => {
         expect(response.status).equal(200);
         const newClient = response.body as ResponseClient;
@@ -178,7 +181,7 @@ describe("Clients API - POST", () => {
     cy.authFetch({
       method: "POST",
       url: "/api/private/clients",
-      body: { ...client, ...serviceOrder, createdAt: "a" },
+      body: { client, serviceOrder: { ...serviceOrder, createdAt: "a" } },
       failOnStatusCode: false,
     }).then((response) => {
       expect(response.status).equal(400);

@@ -20,7 +20,7 @@ Cypress.Commands.add("createClient", (client, serviceOrder) => {
   cy.authFetch({
     method: "POST",
     url: "/api/private/clients",
-    body: { ...client, ...serviceOrder },
+    body: { client, serviceOrder },
   }).then((response) => {
     const newClient = response.body as ResponseClient;
     cy.wrap(newClient.id).as("clientID");

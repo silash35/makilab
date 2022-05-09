@@ -13,7 +13,7 @@ it("should create a new client and service Order", () => {
   cy.authFetch({
     method: "POST",
     url: "/api/private/clients",
-    body: { ...generateClient(), ...generateServiceOrder() },
+    body: { client: generateClient(), serviceOrder: generateServiceOrder() },
   }).then((response) => {
     expect(response.status).equal(200);
     console.log(response.body);
