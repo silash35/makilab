@@ -55,12 +55,16 @@ importers:
       start-server-and-test: 1.14.0
       ts-node: 10.7.0_sm5zkxj4s52nbddwl76qwfh6ya
 
+  packages/config:
+    specifiers: {}
+
   packages/consumer-example:
     specifiers:
       '@emotion/react': ^11.9.0
       '@emotion/styled': ^11.8.1
       '@mui/icons-material': ^5.6.2
       '@mui/material': ^5.7.0
+      '@opensom/config': workspace:*
       '@types/node': ^17.0.32
       '@types/react': ^18.0.9
       date-fns: ^2.28.0
@@ -74,6 +78,7 @@ importers:
       '@emotion/styled': 11.8.1_ycz2ostpb5cpb2s3izz5qyhrbm
       '@mui/icons-material': 5.6.2_gs4txqvbg6wy3z27cqyhc6rvwe
       '@mui/material': 5.7.0_4xriuibr7qayay6mzcpq5f43me
+      '@opensom/config': link:../config
       '@types/node': 17.0.32
       '@types/react': 18.0.9
       date-fns: 2.28.0
