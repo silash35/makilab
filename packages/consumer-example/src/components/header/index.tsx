@@ -24,7 +24,7 @@ export default function Header() {
           <Link href={`mailto:${COMPANY.email}`}>
             <a className={styles.headerButton}>E-mail</a>
           </Link>
-          <Link href={`tel:${COMPANY.phone.replace(/[^0-9]/g, "")}`}>
+          <Link href={`tel:${COMPANY.phones[0].replace(/[^0-9]/g, "")}`}>
             <a className={styles.headerButton}>{t.phone}</a>
           </Link>
           <Link href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}>

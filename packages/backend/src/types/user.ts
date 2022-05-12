@@ -1,5 +1,5 @@
-import users from "../config/users";
+import config from "../config";
 
-type User = Omit<typeof users[0], "password">;
+type User = Omit<typeof config.users[0], "password">;
 
 export default User;

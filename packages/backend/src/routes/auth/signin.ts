@@ -1,9 +1,9 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 
-import users from "../../config/users";
+import config from "../../config";
 
-const user = users[0];
+const user = config.users[0];
 
 const router = Router();
 
