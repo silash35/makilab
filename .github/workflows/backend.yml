@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "packages/backend/**"
+      - "packages/config/**"
       - "packages/eslint-config/**"
       - ".github/workflows/backend.yml"
 
