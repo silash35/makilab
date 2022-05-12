@@ -2,6 +2,5 @@
   "name": "@opensom/config",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "Unlicense",
-  "type": "module"
+  "license": "Unlicense"
 }

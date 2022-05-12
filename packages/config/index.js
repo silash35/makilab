@@ -1,4 +1,4 @@
-export default (() => {
+module.exports = (() => {
   return {
     COMPANY: {
       name: "OpenSOM",
