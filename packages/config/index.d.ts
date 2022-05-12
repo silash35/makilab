@@ -5,9 +5,15 @@ declare namespace config {
     description: string;
     email: string;
     phones: string[];
-    whatsapp: string; // dont forget to add the country code
+    whatsapp: string;
     city: string;
   };
+  const PDF: {
+    hasQrCode: boolean;
+    qrCodeLink: string;
+  };
+  const ATTENDANTS: string[];
+  const SERVICE_PLACES: string[];
 }
 
 export default config;

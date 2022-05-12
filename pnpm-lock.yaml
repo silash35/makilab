@@ -120,6 +120,7 @@ importers:
       '@mui/icons-material': ^5.6.2
       '@mui/material': ^5.7.0
       '@mui/x-date-pickers': 5.0.0-alpha.2
+      '@opensom/config': workspace:*
       '@types/node': ^17.0.32
       '@types/react': ^18.0.9
       concurrently: ^7.1.0
@@ -139,6 +140,7 @@ importers:
       '@mui/icons-material': 5.6.2_gs4txqvbg6wy3z27cqyhc6rvwe
       '@mui/material': 5.7.0_4xriuibr7qayay6mzcpq5f43me
       '@mui/x-date-pickers': 5.0.0-alpha.2_fqjw4u4sdps5nfdonihmd7bzta
+      '@opensom/config': link:../config
       '@types/node': 17.0.32
       '@types/react': 18.0.9
       date-fns: 2.28.0

@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@config": ["./opensom.config"]
+      "@config": ["./config"]
     },
     "incremental": true,
     "isolatedModules": true
