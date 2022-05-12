@@ -15,14 +15,16 @@ import styles from "./product.module.scss";
 
 const en = {
   notFound: "No products found, did you type the Service Order correctly?",
+  unknownError: "Unknown error, please try again later",
 };
 
 const pt = {
   notFound: "Nenhum produto encontrado, você digitou a OS corretamente?",
+  unknownError: "Erro desconhecido, tente novamente mais tarde",
 };
 
 interface Props {
-  product: Product | "loading" | "empty" | "notFound";
+  product: "loading" | "empty" | "Unknown error" | "Not found" | Product;
 }
 
 export default function Product({ product }: Props) {
@@ -30,10 +32,6 @@ export default function Product({ product }: Props) {
   const t = router.locale === "en" ? en : pt;
 
   const isMobile = useMediaQuery("(max-width: 1100px)");
-
-  if (product === "empty") {
-    return null;
-  }
 
   if (product === "loading") {
     return (
@@ -43,7 +41,15 @@ export default function Product({ product }: Props) {
     );
   }
 
-  if (product === "notFound") {
+  if (product === "empty") {
+    return null;
+  }
+
+  if (product === "Unknown error") {
+    return <p>{t.unknownError}</p>;
+  }
+
+  if (product === "Not found") {
     return <p>{t.notFound}</p>;
   }
 

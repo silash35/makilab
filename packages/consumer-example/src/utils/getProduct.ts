@@ -112,14 +112,24 @@ function processProduct(product: Product, t: T) {
 }
 
 async function getProduct(search: string, t: T) {
-  const res = await fetch(config.API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ search }),
-  });
+  let res;
+
+  try {
+    res = await fetch(config.API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ search }),
+    });
+  } catch (e) {
+    return "Unknown error";
+  }
+
+  if (res.status === 404) {
+    return "Not found";
+  }
 
   if (res.status !== 200) {
-    return "ERROR";
+    return "Unknown error";
   }
 
   const product: Product = await res.json();

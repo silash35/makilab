@@ -10,7 +10,7 @@ import en from "./locales/en";
 import pt from "./locales/pt";
 import styles from "./track.module.scss";
 
-type ProductState = "loading" | "empty" | "notFound" | ProductType;
+type ProductState = "loading" | "empty" | "Unknown error" | "Not found" | ProductType;
 
 export default function Track() {
   const router = useRouter();
@@ -29,17 +29,12 @@ export default function Track() {
 
     setProduct("loading");
     if (!search) {
-      setProduct("notFound");
+      setProduct("Not found");
       return;
     }
 
     const newProduct = await getProduct(search, t);
-
-    if (newProduct === "ERROR") {
-      setProduct("notFound");
-    } else {
-      setProduct(newProduct);
-    }
+    setProduct(newProduct);
   };
 
   return (
