@@ -45,8 +45,6 @@ jobs:
         with:
           version: latest
           run_install: true
-      - name: Rename env
-        run: cp .env.example .env
       - name: Run Type Checking
         run: pnpm tsc
 

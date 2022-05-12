@@ -45,8 +45,6 @@ jobs:
         with:
           version: latest
           run_install: true
-      - name: Run prisma generate
-        run: pnpm prisma generate
       - name: Run Type Checking
         run: pnpm tsc
 
