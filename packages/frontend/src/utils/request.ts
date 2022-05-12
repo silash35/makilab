@@ -17,15 +17,12 @@ export const fetcher = (url: string) => {
   }).then((r) => r.json());
 };
 
-export default async function request(
-  req: Req,
-  alert = true,
-  sendToken = true,
-  ctx?: Pick<NextPageContext, "req">
-) {
+export default async function request(req: Req, ctx?: Pick<NextPageContext, "req">) {
   const { url, method, body } = req;
+
   let res: undefined | Response;
   let json;
+  let error;
 
   try {
     // Set headers
@@ -33,14 +30,8 @@ export default async function request(
     if (body) {
       headers["Content-Type"] = "application/json";
     }
-    if (sendToken) {
-      const token = parseCookies(ctx).token;
-      if (token) {
-        headers.authorization = token;
-      } else {
-        throw new Error("No token found");
-      }
-    }
+    const token = parseCookies(ctx).token;
+    headers.authorization = token;
 
     // Make request
     res = await fetch(`${config.BACKEND_URL}${url}`, {
@@ -49,12 +40,10 @@ export default async function request(
       body: body ? JSON.stringify(body) : undefined,
     });
     json = await res.json();
-  } catch (error) {
-    if (alert) {
-      window.alert(
-        `ERRO: ${JSON.stringify(res)}\n${JSON.stringify(json)}\n${JSON.stringify(error)}`
-      );
-    }
+  } catch (e) {
+    console.log(res);
+    console.log(e);
+    error = e;
   }
-  return { response: json, status: res?.status };
+  return { response: json, status: res?.status, error };
 }

@@ -49,6 +49,13 @@ export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
         onChange={(e, newValue) => {
           if (newValue) setClientSelectorValue(newValue);
         }}
+        renderOption={(props, option) => {
+          return (
+            <li {...props} key={option.id}>
+              {option.name}
+            </li>
+          );
+        }}
         renderInput={(params) => <TextField {...params} label="Cliente" required />}
       />
       <ClientInputs client={clientSelectorValue} />
