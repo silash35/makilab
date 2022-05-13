@@ -37,7 +37,7 @@ export default function DateTimeWithSwitch({
       inputValue = defaultValue;
     }
   } else {
-    inputValue = null;
+    inputValue = "none";
   }
 
   return (

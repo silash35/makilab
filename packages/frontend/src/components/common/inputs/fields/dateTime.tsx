@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 interface Props {
   name: string;
   label: string;
-  defaultValue?: string | null;
+  defaultValue?: string | null | "none";
   textFieldProps?: Omit<TextFieldProps, "name" | "label" | "value" | "onChange">;
   dateTimePickerProps?: Omit<
     DateTimePickerProps,
@@ -23,10 +23,22 @@ export default function DateTime({
   textFieldProps,
   dateTimePickerProps,
 }: Props) {
-  const [value, setValue] = useState<string | null>(defaultValue ? defaultValue : "");
+  let initialValue: string | null | "none";
+
+  if (defaultValue) {
+    if (defaultValue === "none") {
+      initialValue = null;
+    } else {
+      initialValue = defaultValue;
+    }
+  } else {
+    initialValue = new Date().toISOString();
+  }
+
+  const [value, setValue] = useState<string | null>(initialValue);
 
   useEffect(() => {
-    setValue(defaultValue ? defaultValue : "");
+    setValue(initialValue);
   }, [defaultValue]);
 
   return (
