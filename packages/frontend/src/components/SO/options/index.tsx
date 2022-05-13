@@ -5,29 +5,21 @@ import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
-import useServiceOrder from "@/hooks/useServiceOrder";
 import { TClientInput } from "@/types/client";
 import { TServiceOrderInput } from "@/types/serviceOrder";
+import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 import updateClient from "@/utils/mutations/updateClient";
 import updateSO from "@/utils/mutations/updateSO";
 
 import styles from "./options.module.scss";
 
 interface Props {
-  id: string;
+  serviceOrder: ServiceOrder;
+  mutate: () => Promise<void>;
 }
 
-export default function Options({ id }: Props) {
-  const { serviceOrder, mutate } = useServiceOrder(id);
-
-  if (!serviceOrder) {
-    throw new Error("Service order not found");
-  }
-
+export default function Options({ serviceOrder, mutate }: Props) {
   const owner = serviceOrder.owner;
-  if (!owner) {
-    throw new Error("Owner not found");
-  }
 
   const handleEditSO = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

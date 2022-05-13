@@ -2,7 +2,6 @@ import config from "@config";
 import add from "date-fns/add";
 import format from "date-fns/format";
 
-import useServiceOrder from "@/hooks/useServiceOrder";
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 
 import styles from "./pdf.module.scss";
@@ -11,20 +10,11 @@ import QrCode from "./qrCode";
 const { COMPANY, PDF } = config;
 
 interface Props {
-  id: string;
+  serviceOrder: ServiceOrder;
 }
 
-export default function Pdf({ id }: Props) {
-  const { serviceOrder } = useServiceOrder(id);
-
-  if (!serviceOrder) {
-    throw new Error("Service order not found");
-  }
-
+export default function Pdf({ serviceOrder }: Props) {
   const owner = serviceOrder.owner;
-  if (!owner) {
-    throw new Error("Owner not found");
-  }
 
   return (
     <section className={styles.page}>
