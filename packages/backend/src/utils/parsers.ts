@@ -1,15 +1,20 @@
 import type { Prisma } from "@prisma/client";
 
 import { isCreateClient, isCreateSO, isUpdateClient, isUpdateSO } from "./checkers";
-import { filterCpfOrCnpj, filterDate, filterPhoneNumber, filterString, filterZip } from "./filters";
+import {
+  filterBoolean,
+  filterCpfOrCnpj,
+  filterDate,
+  filterPhoneNumber,
+  filterString,
+  filterZip,
+} from "./filters";
 
 // Service Order
 
 export const parseCreateSO = (data: unknown) => {
-  // The frontend may send the isUnderWarranty as a string, but the backend expects an boolean. This fixes that.
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  data.isUnderWarranty = data.isUnderWarranty === "on" || data.isUnderWarranty === true;
 
   if (!isCreateSO(data)) {
     throw new Error("Invalid data: Service Order");
@@ -46,7 +51,7 @@ export const parseCreateSO = (data: unknown) => {
     createdAt: createdAt,
     attendedBy: attendedBy,
     attendedOn: attendedOn,
-    isUnderWarranty: data.isUnderWarranty,
+    isUnderWarranty: filterBoolean(data.isUnderWarranty),
     notes: filterString(data.notes),
   };
 
@@ -69,7 +74,7 @@ export const parseUpdateSO = (data: unknown) => {
     listOfServices: filterString(data.listOfServices),
     attendedBy: filterString(data.attendedBy) === null ? data.attendedBy : undefined,
     attendedOn: filterString(data.attendedOn) === null ? data.attendedOn : undefined,
-    isUnderWarranty: data.isUnderWarranty === "on",
+    isUnderWarranty: filterBoolean(data.isUnderWarranty),
     notes: filterString(data.notes),
     wasEdited: true,
   };
@@ -95,7 +100,7 @@ export const parseUpdateStatusSO = (data: unknown) => {
       if (filterDate(data.budgetAnsweredAt) === null) {
         return null;
       } else {
-        return data.isBudgetApproved === "on" || data.isBudgetApproved === true;
+        return filterBoolean(data.isBudgetApproved);
       }
     })(),
   };

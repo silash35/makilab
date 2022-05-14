@@ -2,6 +2,10 @@ const isString = (variable: unknown): variable is string => {
   return typeof variable === "string" && variable.length > 0;
 };
 
+export const filterBoolean = (variable: unknown) => {
+  return variable === "on" || variable === "true" || variable === true || variable === 0;
+};
+
 export const filterNumber = (variable: unknown) => {
   if (variable !== undefined && variable !== null && variable !== "") {
     const number = Number(variable);

@@ -18,14 +18,14 @@ router.post("", async (req: Request, res: Response) => {
 });
 
 router.put("", async (req: Request, res: Response) => {
-  const body = req.body;
-  const id = filterNumber(body.clientID);
+  const { client, serviceOrder } = req.body;
+  const id = filterNumber(req.body.clientID);
 
   if (id === null) {
     throw new Error("Invalid data: clientID");
   }
 
-  return res.status(200).json(await update(id, parseUpdateClient(body, body)));
+  return res.status(200).json(await update(id, parseUpdateClient(client, serviceOrder)));
 });
 
 router.delete("", async (req: Request, res: Response) => {

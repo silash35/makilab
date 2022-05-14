@@ -6,12 +6,12 @@ import request from "../request";
 export default async (
   id: number,
   updateClient: TClientInput,
-  serviceOrder?: TServiceOrderInput
+  newServiceOrder?: TServiceOrderInput
 ) => {
   const { response, status } = await request({
     method: "PUT",
     url: "/api/private/clients",
-    body: { clientID: id, ...updateClient, ...serviceOrder },
+    body: { clientID: id, client: updateClient, serviceOrder: newServiceOrder },
   });
 
   const client = response as TClientWithSOs;

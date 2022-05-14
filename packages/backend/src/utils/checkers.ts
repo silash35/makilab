@@ -7,7 +7,6 @@ export const isCreateSO = (variable: unknown): variable is Prisma.ServiceOrderCr
     typeof variable === "object" &&
     variable !== null &&
     "equipment" in variable &&
-    "isUnderWarranty" in variable &&
     "attendedBy" in variable &&
     "attendedOn" in variable
   );
