@@ -21,7 +21,7 @@ describe("Clients API - PUT", () => {
       cy.authFetch({
         method: "PUT",
         url: "/api/private/clients",
-        body: { clientID, ...newClient },
+        body: { clientID, client: newClient },
       }).then((response) => {
         expect(response.status).equal(200);
 
@@ -58,7 +58,7 @@ describe("Clients API - PUT", () => {
       cy.authFetch({
         method: "PUT",
         url: "/api/private/clients",
-        body: { clientID, ...newClient, ...newServiceOrder },
+        body: { clientID, client: newClient, serviceOrder: newServiceOrder },
       }).then((response) => {
         expect(response.status).equal(200);
 
@@ -99,7 +99,7 @@ describe("Clients API - PUT", () => {
         cy.authFetch({
           method: "PUT",
           url: "/api/private/clients",
-          body: { clientID, ...generateClient(false, testValue) },
+          body: { clientID, client: generateClient(false, testValue) },
         }).then((response) => {
           expect(response.status).equal(200);
 
@@ -130,7 +130,7 @@ describe("Clients API - PUT", () => {
         cy.authFetch({
           method: "PUT",
           url: "/api/private/clients",
-          body: { clientID, name: testValue },
+          body: { clientID, client: { name: testValue } },
           failOnStatusCode: false,
         }).then((response) => {
           expect(response.status).equal(200);

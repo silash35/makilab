@@ -7,17 +7,4 @@ describe("Home Page", () => {
   });
 });
 
-it("should create a new client and service Order", () => {
-  cy.signIn();
-
-  cy.authFetch({
-    method: "POST",
-    url: "/api/private/clients",
-    body: { client: generateClient(), serviceOrder: generateServiceOrder() },
-  }).then((response) => {
-    expect(response.status).equal(200);
-    console.log(response.body);
-  });
-});
-
 export {};
