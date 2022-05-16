@@ -51,7 +51,7 @@ export default function DateTime({
         {...dateTimePickerProps}
       />
 
-      <input type="hidden" name={name} value={String(value ? value : new Date())} />
+      <input type="hidden" name={name} value={value ? new Date(value).toISOString() : ""} />
     </LocalizationProvider>
   );
 }
