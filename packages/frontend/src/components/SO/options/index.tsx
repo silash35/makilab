@@ -54,8 +54,8 @@ export default function Options({ serviceOrder, mutate }: Props) {
       </EditDialog>
       {owner.email && (
         <SendMailDialog
-          client={owner}
-          email={`Prezado(a) ${owner.name}, seu produto (${serviceOrder.equipment} ${serviceOrder.brand}) de OS ${serviceOrder.id} foi recebido e está aguardando avaliação técnica.`}
+          to={owner.email}
+          defaultText={`Prezado(a) ${owner.name}, seu produto (${serviceOrder.equipment} ${serviceOrder.brand}) de OS ${serviceOrder.id} foi recebido e está aguardando avaliação técnica.`}
         />
       )}
     </div>

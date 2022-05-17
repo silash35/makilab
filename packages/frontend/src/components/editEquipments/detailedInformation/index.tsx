@@ -117,7 +117,7 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
           text={`Tem certeza que deseja excluir a OS ${serviceOrder.id}?`}
           submit={handleDeleteSO}
         />
-        {owner.email && <SendMailDialog client={owner} email={serviceOrder.defaultEmail} />}
+        {owner.email && <SendMailDialog to={owner.email} defaultText={serviceOrder.defaultEmail} />}
         <EditDialog title="Editar Equipamento" submit={handleEditSO}>
           <ServiceOrderInputs serviceOrder={serviceOrder} />
         </EditDialog>

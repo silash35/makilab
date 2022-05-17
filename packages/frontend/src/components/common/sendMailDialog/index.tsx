@@ -8,23 +8,22 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
-import type Client from "@/types/client";
 import request from "@/utils/request";
 
 interface Props {
-  client: Client;
-  email?: string;
+  to: string;
+  defaultText?: string;
 }
 
-export default function SendMailDialog({ client, email }: Props) {
+export default function SendMailDialog({ to, defaultText }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
-  const [text, setText] = useState(email);
+  const [text, setText] = useState(defaultText);
 
   const sendData = async () => {
     const { status } = await request({
       method: "POST",
       url: "/api/private/sendMail",
-      body: { to: client.email, text: text },
+      body: { to, text },
     });
     if (status === 200) {
       setOpenDialog(false);
@@ -42,11 +41,9 @@ export default function SendMailDialog({ client, email }: Props) {
         onClose={() => setOpenDialog(false)}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">
-          Confirmar Envio do Email para {client.email}
-        </DialogTitle>
+        <DialogTitle id="form-dialog-title">Confirmar Envio do Email para {to}</DialogTitle>
         <DialogContent>
-          {text && (
+          {!text && (
             <Alert severity="warning">
               O status atual do equipamento não requer envio de email. Você realmente deseja enviar
               uma mensagem ao cliente?

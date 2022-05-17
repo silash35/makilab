@@ -53,7 +53,7 @@ export default function DetailedInformation({ client, reload }: Props) {
           text={`Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`}
           submit={handleDeleteClient}
         />
-        {client.email && <SendMailDialog client={client} />}
+        {client.email && <SendMailDialog to={client.email} />}
         <EditDialog title="Editar Cliente" submit={handleEditClient}>
           <ClientInputs client={client} />
         </EditDialog>
