@@ -13,7 +13,6 @@ function ServiceOrderPage({
   const serviceOrder = JSON.parse(ServiceOrderJSON) as ServiceOrder;
 
   const fallback = { [`/api/admin/serviceOrders?id=${id}`]: serviceOrder };
-  console.log(serviceOrder);
 
   return (
     <>

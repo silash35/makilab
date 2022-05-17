@@ -25,9 +25,6 @@ describe("Clients API - GET", () => {
         const clients = response.body as ResponseClient[];
         const newClient = clients.find((c) => c.id === (clientID as unknown as number));
 
-        console.log(clients);
-        console.log(client);
-
         expect(newClient.name).to.be.equal(client.name);
         expect(newClient.serviceOrders[0].equipment).to.be.equal(serviceOrder.equipment);
       });
