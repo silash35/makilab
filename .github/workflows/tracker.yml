@@ -1,18 +1,18 @@
-name: OpenSOM consumer-example
+name: OpenSOM Tracker
 
 on:
   push:
     paths:
-      - "packages/consumer-example/**"
+      - "packages/tracker/**"
       - "packages/eslint-config/**"
-      - ".github/workflows/consumer-example.yml"
+      - ".github/workflows/tracker.yml"
 
 jobs:
   ESLint:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./packages/consumer-example
+        working-directory: ./packages/tracker
     steps:
       - name: Setup repo
         uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./packages/consumer-example
+        working-directory: ./packages/tracker
     steps:
       - name: Setup repo
         uses: actions/checkout@v3
@@ -58,6 +58,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: opensom-consumer
+          heroku_app_name: tracker
           heroku_email: silash35@gmail.com
           dontautocreate: true
