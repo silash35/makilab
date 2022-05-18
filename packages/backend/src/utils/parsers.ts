@@ -1,4 +1,4 @@
-import type { Prisma } from "@prisma/client";
+import type { Prisma, ServiceOrder } from "@prisma/client";
 
 import { isClient, isSO } from "./checkers";
 import {
@@ -59,24 +59,25 @@ export const parseSO = (data: unknown) => {
 };
 
 export const parseStatusSO = (data: unknown) => {
-  if (!isSO(data)) {
-    throw new Error("Invalid data: Service Order Status");
+  if (data === null || typeof data !== "object") {
+    throw new Error("Invalid data: Service Order");
   }
+  const so = data as ServiceOrder;
 
   const parsedData: Prisma.ServiceOrderUpdateInput = {
     createdAt:
-      filterDate(data.createdAt) === null ? undefined : (filterDate(data.createdAt, true) as Date),
-    registeredInManufacturerAt: filterDate(data.registeredInManufacturerAt),
-    budgetedAt: filterDate(data.budgetedAt),
-    budgetAnsweredAt: filterDate(data.budgetAnsweredAt),
-    partsArrivedAt: filterDate(data.partsArrivedAt),
-    repairedAt: filterDate(data.repairedAt),
-    deliveredToCustomerAt: filterDate(data.deliveredToCustomerAt),
+      filterDate(so.createdAt) === null ? undefined : (filterDate(so.createdAt, true) as Date),
+    registeredInManufacturerAt: filterDate(so.registeredInManufacturerAt),
+    budgetedAt: filterDate(so.budgetedAt),
+    budgetAnsweredAt: filterDate(so.budgetAnsweredAt),
+    partsArrivedAt: filterDate(so.partsArrivedAt),
+    repairedAt: filterDate(so.repairedAt),
+    deliveredToCustomerAt: filterDate(so.deliveredToCustomerAt),
     isBudgetApproved: (() => {
-      if (filterDate(data.budgetAnsweredAt) === null) {
+      if (filterDate(so.budgetAnsweredAt) === null) {
         return null;
       } else {
-        return filterBoolean(data.isBudgetApproved);
+        return filterBoolean(so.isBudgetApproved);
       }
     })(),
   };
