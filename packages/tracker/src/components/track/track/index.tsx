@@ -20,7 +20,7 @@ export default function Track() {
   const [product, setProduct] = useState<ProductState>("empty");
   const [paperElevation, setPaperElevation] = useState(4);
 
-  const load = async (s?: string) => {
+  const load = async (s: string) => {
     setProduct("loading");
     if (!s) {
       setProduct("Not found");
@@ -33,7 +33,7 @@ export default function Track() {
 
   useEffect(() => {
     const id = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id;
-    if (id === undefined) load(id);
+    if (id !== undefined) load(id);
   }, [router.query.id]);
 
   const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
