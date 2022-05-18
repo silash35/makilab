@@ -3,7 +3,13 @@ const isString = (variable: unknown): variable is string => {
 };
 
 export const filterBoolean = (variable: unknown) => {
-  return variable === "on" || variable === "true" || variable === true || variable === 0;
+  return (
+    variable === "on" ||
+    variable === "true" ||
+    variable === true ||
+    variable === 1 ||
+    variable === "1"
+  );
 };
 
 export const filterNumber = (variable: unknown) => {
