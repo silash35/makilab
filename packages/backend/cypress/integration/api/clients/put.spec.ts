@@ -133,8 +133,7 @@ describe("Clients API - PUT", () => {
           body: { clientID, client: { name: testValue } },
           failOnStatusCode: false,
         }).then((response) => {
-          expect(response.status).equal(200);
-          expect(response.body.name).equal(client.name);
+          expect(response.status).equal(400);
         });
       });
     });
