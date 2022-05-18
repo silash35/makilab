@@ -16,25 +16,28 @@ export default function Track() {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
-  const [search, setSearch] = useState<string | undefined>();
+  const [search, setSearch] = useState<string>("");
   const [product, setProduct] = useState<ProductState>("empty");
   const [paperElevation, setPaperElevation] = useState(4);
 
-  useEffect(() => {
-    setSearch(Array.isArray(router.query.id) ? router.query.id[0] : router.query.id);
-  }, [router.query.id]);
-
-  const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const load = async (s?: string) => {
     setProduct("loading");
-    if (!search) {
+    if (!s) {
       setProduct("Not found");
       return;
     }
 
-    const newProduct = await getProduct(search, t);
+    const newProduct = await getProduct(s, t);
     setProduct(newProduct);
+  };
+
+  useEffect(() => {
+    load(Array.isArray(router.query.id) ? router.query.id[0] : router.query.id);
+  }, [router.query.id]);
+
+  const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    load(search);
   };
 
   return (
