@@ -8,8 +8,8 @@
     "backend:start": "cd packages/backend && pnpm start",
     "frontend:build": "cd packages/frontend && pnpm build",
     "frontend:start": "cd packages/frontend && pnpm start",
-    "consumer:build": "cd packages/consumer-example && pnpm build",
-    "consumer:start": "cd packages/consumer-example && pnpm start"
+    "tracker:build": "cd packages/tracker && pnpm build",
+    "tracker:start": "cd packages/tracker && pnpm start"
   },
   "devDependencies": {
     "@opensom/eslint-config": "workspace:*"

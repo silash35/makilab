@@ -11,7 +11,7 @@ module.exports = (() => {
     },
     PDF: {
       hasQrCode: true,
-      qrCodeLink: "https://opensom-consumer.herokuapp.com/%ID%", // %ID% will be replaced by the equipment id
+      qrCodeLink: "https://opensom-tracker.herokuapp.com/%ID%", // %ID% will be replaced by the equipment id
     },
     ATTENDANTS: ["Dan Cordova", "Larissa Brain", "Tom Coffee"],
     SERVICE_PLACES: ["Balcão", "Telefone"],
