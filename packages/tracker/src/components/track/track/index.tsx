@@ -32,7 +32,8 @@ export default function Track() {
   };
 
   useEffect(() => {
-    load(Array.isArray(router.query.id) ? router.query.id[0] : router.query.id);
+    const id = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id;
+    if (id === undefined) load(id);
   }, [router.query.id]);
 
   const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
