@@ -1,5 +1,3 @@
-import { generateClient, generateServiceOrder } from "../support/generators";
-
 describe("Home Page", () => {
   it("should load even if unauthenticated", () => {
     cy.visit("/");
