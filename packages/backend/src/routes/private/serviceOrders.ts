@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 
 import { deleteOne, getAll, getOne, update } from "../../services/serviceOrder";
 import { filterNumber } from "../../utils/filters";
-import { parseUpdateSO, parseUpdateStatusSO } from "../../utils/parsers";
+import { parseSO, parseStatusSO } from "../../utils/parsers";
 
 const router = Router();
 
@@ -24,12 +24,12 @@ router.get("", async (req: Request, res: Response) => {
 });
 
 router.post("", async (req: Request, res: Response) => {
-  const updatedSO = await update(Number(req.body.id), parseUpdateSO(req.body));
+  const updatedSO = await update(Number(req.body.id), parseSO(req.body));
   return res.status(200).json(updatedSO);
 });
 
 router.put("", async (req: Request, res: Response) => {
-  const updatedSO = await update(Number(req.body.id), parseUpdateStatusSO(req.body));
+  const updatedSO = await update(Number(req.body.id), parseStatusSO(req.body));
   return res.status(200).json(updatedSO);
 });
 

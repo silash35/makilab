@@ -1,6 +1,6 @@
 import type { Prisma } from "@prisma/client";
 
-import { isCreateClient, isCreateSO, isUpdateClient, isUpdateSO } from "./checkers";
+import { isClient, isSO } from "./checkers";
 import {
   filterBoolean,
   filterCpfOrCnpj,
@@ -12,11 +12,11 @@ import {
 
 // Service Order
 
-export const parseCreateSO = (data: unknown) => {
+export const parseSO = (data: unknown) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
 
-  if (!isCreateSO(data)) {
+  if (!isSO(data)) {
     throw new Error("Invalid data: Service Order");
   }
 
@@ -58,32 +58,8 @@ export const parseCreateSO = (data: unknown) => {
   return parsedData;
 };
 
-export const parseUpdateSO = (data: unknown) => {
-  if (!isUpdateSO(data)) {
-    throw new Error("Invalid data: Service Order");
-  }
-
-  const parsedData: Prisma.ServiceOrderUpdateInput = {
-    equipment: filterString(data.equipment) === null ? data.equipment : undefined,
-    brand: filterString(data.brand),
-    model: filterString(data.model),
-    productNumber: filterString(data.productNumber),
-    batchOrImei: filterString(data.batchOrImei),
-    accessories: filterString(data.accessories),
-    productCondition: filterString(data.productCondition),
-    listOfServices: filterString(data.listOfServices),
-    attendedBy: filterString(data.attendedBy) === null ? data.attendedBy : undefined,
-    attendedOn: filterString(data.attendedOn) === null ? data.attendedOn : undefined,
-    isUnderWarranty: filterBoolean(data.isUnderWarranty),
-    notes: filterString(data.notes),
-    wasEdited: true,
-  };
-
-  return parsedData;
-};
-
-export const parseUpdateStatusSO = (data: unknown) => {
-  if (!isUpdateSO(data)) {
+export const parseStatusSO = (data: unknown) => {
+  if (!isSO(data)) {
     throw new Error("Invalid data: Service Order Status");
   }
 
@@ -110,8 +86,8 @@ export const parseUpdateStatusSO = (data: unknown) => {
 
 // Client
 
-export const parseCreateClient = (dataClient: unknown, dataSO?: unknown) => {
-  if (!isCreateClient(dataClient)) {
+export const parseClient = (dataClient: unknown, dataSO?: unknown) => {
+  if (!isClient(dataClient)) {
     throw new Error("Invalid data: Client");
   }
 
@@ -130,33 +106,9 @@ export const parseCreateClient = (dataClient: unknown, dataSO?: unknown) => {
     tel: filterPhoneNumber(dataClient.tel),
   };
 
-  if (isCreateSO(dataSO)) {
+  if (isSO(dataSO)) {
     parsedData.serviceOrders = {
-      create: parseCreateSO(dataSO),
-    };
-  }
-
-  return parsedData;
-};
-
-export const parseUpdateClient = (dataClient: unknown, dataSO?: unknown) => {
-  if (!isUpdateClient(dataClient)) {
-    throw new Error("Invalid data: Client");
-  }
-
-  const parsedData: Prisma.ClientUpdateInput = {
-    name: filterString(dataClient.name) === null ? undefined : dataClient.name,
-    email: filterString(dataClient.email),
-    cpfOrCnpj: filterCpfOrCnpj(dataClient.cpfOrCnpj),
-    address: filterString(dataClient.address),
-    zip: filterZip(dataClient.zip),
-    whatsapp: filterPhoneNumber(dataClient.whatsapp),
-    tel: filterPhoneNumber(dataClient.tel),
-  };
-
-  if (isCreateSO(dataSO)) {
-    parsedData.serviceOrders = {
-      create: parseCreateSO(dataSO),
+      create: parseSO(dataSO),
     };
   }
 

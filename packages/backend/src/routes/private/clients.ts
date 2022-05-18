@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 
 import { create, deleteOne, getAll, update } from "../../services/client";
 import { filterNumber } from "../../utils/filters";
-import { parseCreateClient, parseUpdateClient } from "../../utils/parsers";
+import { parseClient } from "../../utils/parsers";
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.get("", async (req: Request, res: Response) => {
 
 router.post("", async (req: Request, res: Response) => {
   const { client, serviceOrder } = req.body;
-  const newClient = await create(parseCreateClient(client, serviceOrder));
+  const newClient = await create(parseClient(client, serviceOrder));
 
   return res.status(200).json(newClient);
 });
@@ -25,7 +25,7 @@ router.put("", async (req: Request, res: Response) => {
     throw new Error("Invalid data: clientID");
   }
 
-  return res.status(200).json(await update(id, parseUpdateClient(client, serviceOrder)));
+  return res.status(200).json(await update(id, parseClient(client, serviceOrder)));
 });
 
 router.delete("", async (req: Request, res: Response) => {

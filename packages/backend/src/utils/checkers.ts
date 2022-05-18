@@ -1,8 +1,6 @@
 import type { Prisma } from "@prisma/client";
 
-// Service Order
-
-export const isCreateSO = (variable: unknown): variable is Prisma.ServiceOrderCreateInput => {
+export const isSO = (variable: unknown): variable is Prisma.ServiceOrderCreateInput => {
   return (
     typeof variable === "object" &&
     variable !== null &&
@@ -12,16 +10,6 @@ export const isCreateSO = (variable: unknown): variable is Prisma.ServiceOrderCr
   );
 };
 
-export const isUpdateSO = (variable: unknown): variable is Prisma.ServiceOrderUpdateInput => {
-  return typeof variable === "object" && variable !== null;
-};
-
-// Client
-
-export const isCreateClient = (variable: unknown): variable is Prisma.ClientCreateInput => {
+export const isClient = (variable: unknown): variable is Prisma.ClientCreateInput => {
   return typeof variable === "object" && variable !== null && "name" in variable;
-};
-
-export const isUpdateClient = (variable: unknown): variable is Prisma.ClientUpdateInput => {
-  return typeof variable === "object" && variable !== null;
 };
