@@ -20,66 +20,70 @@ export default function Pdf({ serviceOrder }: Props) {
     <section className={styles.page}>
       <Header />
       <table className={styles.table}>
-        <Data serviceOrder={serviceOrder} />
-        <tr>
-          <td colSpan={2} className={styles.disableBorder}>
-            <span>Estado: </span>
-            {filter(serviceOrder.productCondition)}
-          </td>
+        <tbody>
+          <Data serviceOrder={serviceOrder} />
+          <tr>
+            <td colSpan={2} className={styles.disableBorder}>
+              <span>Estado: </span>
+              {filter(serviceOrder.productCondition)}
+            </td>
 
-          <td colSpan={2} className={styles.disableBorder}>
-            <span>Garantia: </span>
-            {serviceOrder.isUnderWarranty ? "Sim" : "Não"}
-          </td>
-        </tr>
-        <tr>
-          <th colSpan={4} className={styles.alignCenter}>
-            Descrição do problema (Defeito(s) Reclamado(s))
-          </th>
-        </tr>
-        <tr>
-          <td colSpan={4} className={styles.disableBorder}>
-            {filter(serviceOrder.problemDescription)}
-          </td>
-        </tr>
-        <tr>
-          <td colSpan={4} className={styles.disableBorder}>
-            <span>Acessórios: </span>
-            {filter(serviceOrder.accessories, "Sem acessórios")}
-          </td>
-        </tr>
-        <tr>
-          <td colSpan={4} className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
-            Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
-            <br />
-            {COMPANY.city} {format(new Date(), "dd/MM/yyyy")}
-          </td>
-        </tr>
-        <tr>
-          <td colSpan={2} className={styles.disableBorder}>
-            <div className={styles.signature}>{serviceOrder.attendedBy}</div>
-          </td>
-          <td colSpan={2} className={styles.disableBorder}>
-            <div className={styles.signature}> {owner.name}</div>
-          </td>
-        </tr>
+            <td colSpan={2} className={styles.disableBorder}>
+              <span>Garantia: </span>
+              {serviceOrder.isUnderWarranty ? "Sim" : "Não"}
+            </td>
+          </tr>
+          <tr>
+            <th colSpan={4} className={styles.alignCenter}>
+              Descrição do problema (Defeito(s) Reclamado(s))
+            </th>
+          </tr>
+          <tr>
+            <td colSpan={4} className={styles.disableBorder}>
+              {filter(serviceOrder.problemDescription)}
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={4} className={styles.disableBorder}>
+              <span>Acessórios: </span>
+              {filter(serviceOrder.accessories, "Sem acessórios")}
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={4} className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
+              Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
+              <br />
+              {COMPANY.city} {format(new Date(), "dd/MM/yyyy")}
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={4} className={styles.disableBorder}>
+              <div className={styles.flex}>
+                <div className={styles.signature}>{serviceOrder.attendedBy}</div>
+                <div className={styles.signature}> {owner.name}</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
       </table>
 
       <hr />
 
       <Header />
       <table className={styles.table}>
-        <Data serviceOrder={serviceOrder} variant />
-        <tr>
-          <th colSpan={4} className={styles.alignCenter}>
-            Descrição do problema
-          </th>
-        </tr>
-        <tr>
-          <td colSpan={4} className={styles.disableBorder}>
-            {filter(serviceOrder.problemDescription)}
-          </td>
-        </tr>
+        <tbody>
+          <Data serviceOrder={serviceOrder} variant />
+          <tr>
+            <th colSpan={4} className={styles.alignCenter}>
+              Descrição do problema
+            </th>
+          </tr>
+          <tr>
+            <td colSpan={4} className={styles.disableBorder}>
+              {filter(serviceOrder.problemDescription)}
+            </td>
+          </tr>
+        </tbody>
       </table>
       <div className={styles.info}>
         <p>
@@ -97,31 +101,33 @@ export default function Pdf({ serviceOrder }: Props) {
       <hr />
 
       <table className={styles.table}>
-        <tr>
-          <td className={styles.disableBorder}>{filter(owner.name)}</td>
-          <td rowSpan={2} className={styles.disableBorder}>
-            <strong>
-              {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
-              {serviceOrder.batchOrImei} {serviceOrder.productNumber}
-            </strong>
-          </td>
-        </tr>
-        <tr>
-          <td className={styles.disableBorder}>
-            <strong>NÚMERO DA OS: {filter(String(serviceOrder.id))}</strong>
-          </td>
-        </tr>
-        <tr>
-          <td className={styles.disableBorder}>
-            DATA DA ENTRADA: {format(new Date(serviceOrder.createdAt), "dd/MM/yyyy")}
-          </td>
-          <td rowSpan={2} className={styles.disableBorder}>
-            <strong> {filter(serviceOrder.problemDescription)}</strong>
-          </td>
-        </tr>
-        <tr>
-          <td className={styles.disableBorder}>WhatsApp: {filter(owner.whatsapp)}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td className={styles.disableBorder}>{filter(owner.name)}</td>
+            <td rowSpan={2} className={styles.disableBorder}>
+              <strong>
+                {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
+                {serviceOrder.batchOrImei} {serviceOrder.productNumber}
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.disableBorder}>
+              <strong>NÚMERO DA OS: {filter(String(serviceOrder.id))}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.disableBorder}>
+              DATA DA ENTRADA: {format(new Date(serviceOrder.createdAt), "dd/MM/yyyy")}
+            </td>
+            <td rowSpan={2} className={styles.disableBorder}>
+              <strong> {filter(serviceOrder.problemDescription)}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.disableBorder}>WhatsApp: {filter(owner.whatsapp)}</td>
+          </tr>
+        </tbody>
       </table>
     </section>
   );
