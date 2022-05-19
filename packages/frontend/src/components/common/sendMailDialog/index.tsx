@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import request from "@/utils/request";
 
@@ -18,6 +18,10 @@ interface Props {
 export default function SendMailDialog({ to, defaultText }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
   const [text, setText] = useState(defaultText);
+
+  useEffect(() => {
+    setText(defaultText);
+  }, [defaultText]);
 
   const sendData = async () => {
     const { status } = await request({

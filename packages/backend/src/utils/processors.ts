@@ -131,7 +131,7 @@ export function processSO(serviceOrder?: ServiceOrder | ServiceOrder[] | null) {
         break;
       case 60:
         statusName = "Aguardando Retirada";
-        defaultEmail = `${defaultEmailStart} está pronto para retirada. Necessário trazer comprovante da Ordem de Serviço`;
+        defaultEmail = `${defaultEmailStart} está pronto para retirada. Não se esqueça de trazer o comprovante da Ordem de Serviço`;
         break;
       case 70:
         statusName = "Finalizado";
