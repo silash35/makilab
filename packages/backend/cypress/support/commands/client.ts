@@ -6,7 +6,7 @@ declare global {
     interface Chainable {
       /**
        * Custom command to create a Client using passed client and, optionally, a serviceOrder
-       * @example cy.createPlace(place)
+       * @example cy.createClient(client, serviceOrder)
        */
       createClient(
         client: ReturnType<typeof generateClient>,
