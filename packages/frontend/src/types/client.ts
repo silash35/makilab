@@ -2,7 +2,6 @@ import TServiceOrder from "./serviceOrder";
 
 interface TClient {
   id: number;
-  deleted: boolean;
   createdAt: string;
   updatedAt: string | null;
 

@@ -53,7 +53,7 @@ export default function DetailedInformation({ client, reload }: Props) {
           text={`Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`}
           submit={handleDeleteClient}
         />
-        {client.email && <SendMailDialog to={client.email} />}
+        {client.email && <SendMailDialog to={client.email} defaultText="" />}
         <EditDialog title="Editar Cliente" submit={handleEditClient}>
           <ClientInputs client={client} />
         </EditDialog>
@@ -68,9 +68,6 @@ export default function DetailedInformation({ client, reload }: Props) {
                 <Card variant="outlined" key={serviceOrder.id}>
                   <CardContent>
                     <h3>{serviceOrder.id && "OS " + serviceOrder.id}</h3>
-                    {serviceOrder.deleted && (
-                      <Alert severity="error">Esse equipamento foi deletado</Alert>
-                    )}
                     <p>
                       Equipamento:
                       {serviceOrder.equipment && " " + serviceOrder.equipment}

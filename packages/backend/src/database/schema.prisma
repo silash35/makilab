@@ -9,7 +9,6 @@ generator client {
 
 model Client {
   id        Int       @id @unique @default(autoincrement())
-  deleted   Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
@@ -49,7 +48,6 @@ model ServiceOrder {
   ownerId Int
 
   wasEdited        Boolean  @default(false)
-  deleted          Boolean  @default(false)
   isBudgetApproved Boolean?
 
 
