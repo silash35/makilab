@@ -1,5 +1,4 @@
 @use "@/styles/variables.module" as v;
-@use "@/styles/media" as m;
 
 .product {
   margin: 80px;
@@ -23,7 +22,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
 
-  @include m.forMedium() {
+  @media screen and (max-width: 850px) {
     justify-content: center;
 
     img {
