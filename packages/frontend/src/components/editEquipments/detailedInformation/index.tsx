@@ -111,7 +111,7 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
         </Card>
       </Box>
 
-      <div className={styles.flex}>
+      <div className={styles.buttonsContainer}>
         <DeleteDialog
           title={`Deletar ${serviceOrder.id}`}
           text={`Tem certeza que deseja excluir a OS ${serviceOrder.id}?`}
