@@ -69,15 +69,15 @@ const ListLink = ({ href, text, Icon }: ListLinkProps) => {
   const router = useRouter();
 
   return (
-    <ListItem button className={router.pathname === href ? styles.active : undefined}>
-      <Link href={href}>
-        <a>
+    <Link href={href}>
+      <a>
+        <ListItem button className={router.pathname === href ? styles.active : undefined}>
           <ListItemIcon>
             <Icon />
           </ListItemIcon>
           <ListItemText primary={text} />
-        </a>
-      </Link>
-    </ListItem>
+        </ListItem>
+      </a>
+    </Link>
   );
 };
