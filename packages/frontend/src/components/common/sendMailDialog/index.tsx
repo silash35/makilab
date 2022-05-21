@@ -47,7 +47,7 @@ export default function SendMailDialog({ to, defaultText }: Props) {
       >
         <DialogTitle id="form-dialog-title">Confirmar Envio do Email para {to}</DialogTitle>
         <DialogContent>
-          {!text && (
+          {text === undefined && (
             <Alert severity="warning">
               O status atual do equipamento não requer envio de email. Você realmente deseja enviar
               uma mensagem ao cliente?
