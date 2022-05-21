@@ -1,7 +1,11 @@
-@use "@/styles/utils";
-
 .flex {
-  @extend %flex;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  @media screen and (max-width: 850px) {
+    flex-wrap: wrap;
+  }
 }
 
 .flexNoWrap {
