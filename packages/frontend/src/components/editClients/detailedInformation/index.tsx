@@ -1,12 +1,11 @@
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import type { FormEvent } from "react";
 
 import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import SendMailDialog from "@/components/common/sendMailDialog";
+import ServiceOrderCard from "@/components/editClients/detailedInformation/serviceOrderCard";
 import type { TClientInput, TClientWithSOs as Client } from "@/types/client";
 import deleteClient from "@/utils/mutations/deleteClient";
 import updateClient from "@/utils/mutations/updateClient";
@@ -58,54 +57,17 @@ export default function DetailedInformation({ client, reload }: Props) {
         </EditDialog>
       </div>
 
-      <h2>Equipamentos</h2>
+      {client.serviceOrders.length > 0 && (
+        <>
+          <h2>Equipamentos</h2>
 
-      <Box className={styles.cardsContainer}>
-        {client.serviceOrders
-          ? client.serviceOrders.map((serviceOrder) => {
-              return (
-                <Card variant="outlined" key={serviceOrder.id}>
-                  <CardContent>
-                    <h3>{serviceOrder.id && "OS " + serviceOrder.id}</h3>
-                    <p>
-                      Equipamento:
-                      {serviceOrder.equipment && " " + serviceOrder.equipment}
-                      {serviceOrder.brand && " " + serviceOrder.brand}
-                      {serviceOrder.model && " " + serviceOrder.model}
-                    </p>
-                    <p>{serviceOrder.statusName && `Situação: ${serviceOrder.statusName}`}</p>
-                    <p>
-                      {serviceOrder.batchOrImei &&
-                        `N° de Serie ou IMEI: ${serviceOrder.batchOrImei}`}
-                    </p>
-                    <p>
-                      {serviceOrder.productNumber &&
-                        `Product Number: ${serviceOrder.productNumber}`}
-                    </p>
-                    <p>
-                      {serviceOrder.isUnderWarranty
-                        ? "Equipamento em Garantia"
-                        : "Equipamento Fora de Garantia"}
-                    </p>
-                    <p>
-                      {(() => {
-                        if (serviceOrder.isUnderWarranty === false) {
-                          if (serviceOrder.isBudgetApproved === null) {
-                            return "Orçamento ainda não aprovado";
-                          } else if (serviceOrder.isBudgetApproved === false) {
-                            return "Orçamento Negado";
-                          } else if (serviceOrder.isBudgetApproved === true) {
-                            return "Orçamento Aprovado";
-                          }
-                        }
-                      })()}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })
-          : undefined}
-      </Box>
+          <Box className={styles.cardsContainer}>
+            {client.serviceOrders.map((serviceOrder) => {
+              return <ServiceOrderCard serviceOrder={serviceOrder} key={serviceOrder.id} />;
+            })}
+          </Box>
+        </>
+      )}
     </Box>
   );
 }
