@@ -5,10 +5,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import LinearProgress from "@mui/material/LinearProgress";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
 import request from "@/utils/request";
+
+import styles from "./sendMailDialog.module.scss";
 
 interface Props {
   to: string;
@@ -17,6 +20,7 @@ interface Props {
 
 export default function SendMailDialog({ to, defaultText }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState(defaultText);
 
   useEffect(() => {
@@ -24,14 +28,18 @@ export default function SendMailDialog({ to, defaultText }: Props) {
   }, [defaultText]);
 
   const sendData = async () => {
+    setIsLoading(true);
+
     const { status } = await request({
       method: "POST",
-      url: "/api/private/sendMail",
+      url: "/api/private/mail",
       body: { to, text },
     });
     if (status === 200) {
       setOpenDialog(false);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -74,6 +82,7 @@ export default function SendMailDialog({ to, defaultText }: Props) {
             Enviar
           </Button>
         </DialogActions>
+        {isLoading ? <LinearProgress /> : <div className={styles.space} />}
       </Dialog>
     </>
   );
