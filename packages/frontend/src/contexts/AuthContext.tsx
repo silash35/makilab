@@ -35,12 +35,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function loadUser() {
-    const { response, status } = await request({
+    const { response, error } = await request({
       method: "GET",
       url: "/api/auth/user",
     });
 
-    if (status === 200) {
+    if (!error) {
       setSession({ user: response, status: "authenticated" });
     } else {
       setSession(unauthenticatedSession);
@@ -48,13 +48,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function signIn({ password }: SignInData) {
-    const { response, status } = await request({
+    const { response, status, error } = await request({
       method: "POST",
       url: "/api/auth/signin",
       body: { password },
     });
 
-    if (status === 200) {
+    if (!error) {
       const { token, user } = response;
 
       setCookie(undefined, "token", token, {

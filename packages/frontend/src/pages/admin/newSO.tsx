@@ -4,13 +4,16 @@ import { FormEvent, useState } from "react";
 
 import Form from "@/components/common/form";
 import ClientAndSOInputs from "@/components/common/inputs/clientAndSO";
+import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import { TServiceOrderInput } from "@/types/serviceOrder";
 import addClient from "@/utils/mutations/addClient";
 import updateClient from "@/utils/mutations/updateClient";
 
 function NewServiceOrder() {
+  const { setError } = useError();
   const router = useRouter();
+
   const [selectedClientId, setSelectedClientId] = useState(0);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -18,12 +21,14 @@ function NewServiceOrder() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TServiceOrderInput & TClientInput;
 
-    const { client, status } =
+    const { client, error } =
       selectedClientId === 0
         ? await addClient(data, data)
         : await updateClient(selectedClientId, data, data);
 
-    if (status === 200) {
+    if (error) {
+      setError(error);
+    } else {
       const createdSO = client.serviceOrders[client.serviceOrders.length - 1];
       router.push(`/admin/SO?id=${String(createdSO.id)}`);
     }

@@ -4,10 +4,12 @@ import type { FormEvent } from "react";
 
 import Form from "@/components/common/form";
 import ClientInputs from "@/components/common/inputs/client";
+import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import addClient from "@/utils/mutations/addClient";
 
 function NewClient() {
+  const { setError } = useError();
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -15,9 +17,11 @@ function NewClient() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TClientInput;
 
-    const { status } = await addClient(data);
+    const { error } = await addClient(data);
 
-    if (status === 200) {
+    if (error) {
+      setError(error);
+    } else {
       router.push("/");
     }
   };

@@ -38,9 +38,15 @@ export default function DetailedInformation({ client, reload }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TClientInput;
 
-    const { status } = await updateClient(client.id, data);
-    reload();
-    return status === 200;
+    const { error } = await updateClient(client.id, data);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      reload();
+      return true;
+    }
   };
 
   return (

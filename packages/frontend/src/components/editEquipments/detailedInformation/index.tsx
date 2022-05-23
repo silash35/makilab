@@ -44,9 +44,15 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TServiceOrderInput;
 
-    const { status } = await updateSO(serviceOrder.id, data);
-    reload();
-    return status === 200;
+    const { error } = await updateSO(serviceOrder.id, data);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      reload();
+      return true;
+    }
   };
 
   return (

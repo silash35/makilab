@@ -3,7 +3,7 @@ import { TServiceOrderUpdateStatusInput, TServiceOrderWithClient } from "@/types
 import request from "../request";
 
 export default async (id: number, serviceOrder: TServiceOrderUpdateStatusInput) => {
-  const { response, status } = await request({
+  const { response, status, error } = await request({
     method: "PUT",
     url: "/api/private/serviceOrders",
     body: { id, ...serviceOrder },
@@ -11,5 +11,5 @@ export default async (id: number, serviceOrder: TServiceOrderUpdateStatusInput) 
 
   const updatedServiceOrder = response as TServiceOrderWithClient;
 
-  return { updatedServiceOrder, status };
+  return { updatedServiceOrder, status, error };
 };
