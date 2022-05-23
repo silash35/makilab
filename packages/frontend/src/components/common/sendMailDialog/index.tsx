@@ -9,6 +9,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
+import useError from "@/hooks/useError";
 import request from "@/utils/request";
 
 import styles from "./sendMailDialog.module.scss";
@@ -23,6 +24,8 @@ export default function SendMailDialog({ to, defaultText }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState(defaultText);
 
+  const { setError } = useError();
+
   useEffect(() => {
     setText(defaultText);
   }, [defaultText]);
@@ -30,13 +33,16 @@ export default function SendMailDialog({ to, defaultText }: Props) {
   const sendData = async () => {
     setIsLoading(true);
 
-    const { status } = await request({
+    const { error } = await request({
       method: "POST",
       url: "/api/private/mail",
       body: { to, text },
     });
-    if (status === 200) {
+
+    if (!error) {
       setOpenDialog(false);
+    } else {
+      setError(String(error));
     }
 
     setIsLoading(false);

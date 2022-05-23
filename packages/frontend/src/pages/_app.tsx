@@ -9,6 +9,7 @@ import { SWRConfig } from "swr";
 
 import DefaultLayout from "@/components/Layout";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ErrorProvider } from "@/contexts/ErrorContext";
 import variables from "@/styles/variables.module.scss";
 import { fetcher } from "@/utils/request";
 
@@ -43,17 +44,19 @@ function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
           key="twitterDescription"
         />
       </Head>
-      <AuthProvider>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <SWRConfig value={{ fetcher }}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </SWRConfig>
-        </ThemeProvider>
-      </AuthProvider>
+
+      <ErrorProvider>
+        <AuthProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <SWRConfig value={{ fetcher }}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </SWRConfig>
+          </ThemeProvider>
+        </AuthProvider>
+      </ErrorProvider>
     </>
   );
 }
