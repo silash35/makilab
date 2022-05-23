@@ -8,12 +8,14 @@ const router = Router();
 
 router.get("", async (req: Request, res: Response) => {
   let answer;
+
   if (req.query.id === undefined) {
     answer = await getAll();
   } else {
-    answer = await getOne(
-      Array.isArray(req.query.id) ? Number(req.query.id[0]) : Number(req.query.id)
-    );
+    const id = Array.isArray(req.query.id) ? Number(req.query.id[0]) : Number(req.query.id);
+    if (!isNaN(id)) {
+      answer = await getOne(Number(id));
+    }
   }
 
   if (!answer) {

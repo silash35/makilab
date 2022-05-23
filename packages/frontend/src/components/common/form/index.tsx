@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import type { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 
 import styles from "./Form.module.scss";
 
@@ -11,15 +11,24 @@ interface Props {
 }
 
 export default function Form({ title, children, handleSubmit }: Props) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmitWrapper = async (event: FormEvent<HTMLFormElement>) => {
+    setIsSubmitting(true);
+    await handleSubmit(event);
+    setIsSubmitting(false);
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmitWrapper}>
       <h1>{title}</h1>
 
       {children}
 
       <p>*Campo Obrigatório</p>
-      <Button variant="contained" fullWidth size="large" type="submit">
-        Cadastrar
+
+      <Button variant="contained" fullWidth size="large" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "Cadastrando..." : "Cadastrar"}
       </Button>
     </form>
   );

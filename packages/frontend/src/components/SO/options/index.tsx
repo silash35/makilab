@@ -5,6 +5,7 @@ import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
+import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import { TServiceOrderInput } from "@/types/serviceOrder";
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
@@ -19,6 +20,8 @@ interface Props {
 }
 
 export default function Options({ serviceOrder, mutate }: Props) {
+  const { setError } = useError();
+
   const owner = serviceOrder.owner;
 
   const handleEditSO = async (event: FormEvent<HTMLFormElement>) => {
@@ -26,9 +29,15 @@ export default function Options({ serviceOrder, mutate }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TServiceOrderInput;
 
-    const { status } = await updateSO(serviceOrder.id, data);
-    mutate();
-    return status === 200;
+    const { error } = await updateSO(serviceOrder.id, data);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      mutate();
+      return true;
+    }
   };
 
   const handleEditClient = async (event: FormEvent<HTMLFormElement>) => {
@@ -36,9 +45,15 @@ export default function Options({ serviceOrder, mutate }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TClientInput;
 
-    const { status } = await updateClient(serviceOrder.owner.id, data);
-    mutate();
-    return status === 200;
+    const { error } = await updateClient(serviceOrder.owner.id, data);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      mutate();
+      return true;
+    }
   };
 
   return (

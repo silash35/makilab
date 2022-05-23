@@ -6,6 +6,7 @@ import EditDialog from "@/components/common/editDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import SendMailDialog from "@/components/common/sendMailDialog";
 import ServiceOrderCard from "@/components/editClients/detailedInformation/serviceOrderCard";
+import useError from "@/hooks/useError";
 import type { TClientInput, TClientWithSOs as Client } from "@/types/client";
 import deleteClient from "@/utils/mutations/deleteClient";
 import updateClient from "@/utils/mutations/updateClient";
@@ -18,9 +19,18 @@ interface Props {
 }
 
 export default function DetailedInformation({ client, reload }: Props) {
+  const { setError } = useError();
+
   const handleDeleteClient = async () => {
-    const { status } = await deleteClient(client.id);
-    return status === 200;
+    const { error } = await deleteClient(client.id);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      reload();
+      return true;
+    }
   };
 
   const handleEditClient = async (event: FormEvent<HTMLFormElement>) => {
@@ -28,9 +38,15 @@ export default function DetailedInformation({ client, reload }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TClientInput;
 
-    const { status } = await updateClient(client.id, data);
-    reload();
-    return status === 200;
+    const { error } = await updateClient(client.id, data);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      reload();
+      return true;
+    }
   };
 
   return (

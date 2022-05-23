@@ -1,13 +1,13 @@
 import request from "../request";
 
 export default async (id: number) => {
-  const { response, status } = await request({
+  const { response, status, error } = await request({
     method: "DELETE",
     url: "/api/private/clients",
     body: { id },
   });
 
-  const deletedID = response.deletedID as number;
+  const deletedID = response?.deletedID as number;
 
-  return { deletedID, status };
+  return { deletedID, status, error };
 };

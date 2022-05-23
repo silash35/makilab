@@ -23,8 +23,9 @@ const UpdateStatusDialog = ({ serviceOrder, reload }: Props) => {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TServiceOrderUpdateStatusInput;
 
-    const { status } = await updateStatusSO(serviceOrder.id, data);
-    if (status === 200) {
+    const { error } = await updateStatusSO(serviceOrder.id, data);
+
+    if (!error) {
       reload();
       setOpen(false);
     }

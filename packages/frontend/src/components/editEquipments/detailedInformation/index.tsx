@@ -9,6 +9,7 @@ import DeleteDialog from "@/components/common/deleteDialog";
 import EditDialog from "@/components/common/editDialog";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
+import useError from "@/hooks/useError";
 import { TServiceOrderInput, TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 import deleteSO from "@/utils/mutations/deleteSO";
 import updateSO from "@/utils/mutations/updateSO";
@@ -22,12 +23,20 @@ interface Props {
 }
 
 export default function DetailedInformation({ serviceOrder, reload }: Props) {
+  const { setError } = useError();
+
   const owner = serviceOrder.owner;
 
   const handleDeleteSO = async () => {
-    const { status } = await deleteSO(serviceOrder.id);
-    reload();
-    return status === 200;
+    const { error } = await deleteSO(serviceOrder.id);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      reload();
+      return true;
+    }
   };
 
   const handleEditSO = async (event: FormEvent<HTMLFormElement>) => {
@@ -35,9 +44,15 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TServiceOrderInput;
 
-    const { status } = await updateSO(serviceOrder.id, data);
-    reload();
-    return status === 200;
+    const { error } = await updateSO(serviceOrder.id, data);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      reload();
+      return true;
+    }
   };
 
   return (

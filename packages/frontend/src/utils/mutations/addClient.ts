@@ -4,7 +4,7 @@ import { TServiceOrderInput } from "@/types/serviceOrder";
 import request from "../request";
 
 export default async (newClient: TClientInput, newServiceOrder?: TServiceOrderInput) => {
-  const { response, status } = await request({
+  const { response, status, error } = await request({
     method: "POST",
     url: "/api/private/clients",
     body: { client: newClient, serviceOrder: newServiceOrder },
@@ -12,5 +12,5 @@ export default async (newClient: TClientInput, newServiceOrder?: TServiceOrderIn
 
   const client = response as TClientWithSOs;
 
-  return { client, status };
+  return { client, status, error };
 };
