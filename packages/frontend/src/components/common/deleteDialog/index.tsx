@@ -4,6 +4,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import LinearProgress from "@mui/material/LinearProgress";
 import { useState } from "react";
 
 interface Props {
@@ -14,11 +15,14 @@ interface Props {
 
 export default function DeleteDialog({ title, text, submit }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     if (await submit()) {
       setOpenDialog(false);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -42,6 +46,7 @@ export default function DeleteDialog({ title, text, submit }: Props) {
             Excluir
           </Button>
         </DialogActions>
+        {isLoading ? <LinearProgress /> : <div style={{ height: 4 }} />}
       </Dialog>
     </>
   );

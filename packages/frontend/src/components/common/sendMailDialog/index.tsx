@@ -12,8 +12,6 @@ import { FormEvent, useEffect, useState } from "react";
 import useError from "@/hooks/useError";
 import request from "@/utils/request";
 
-import styles from "./sendMailDialog.module.scss";
-
 interface Props {
   to: string;
   defaultText?: string;
@@ -43,7 +41,7 @@ export default function SendMailDialog({ to, defaultText }: Props) {
     if (!error) {
       setOpenDialog(false);
     } else {
-      setError(String(error));
+      setError(error);
     }
 
     setIsLoading(false);
@@ -93,7 +91,7 @@ export default function SendMailDialog({ to, defaultText }: Props) {
             </Button>
           </DialogActions>
         </form>
-        {isLoading ? <LinearProgress /> : <div className={styles.space} />}
+        {isLoading ? <LinearProgress /> : <div style={{ height: 4 }} />}
       </Dialog>
     </>
   );
