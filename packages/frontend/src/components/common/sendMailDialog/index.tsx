@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import LinearProgress from "@mui/material/LinearProgress";
 import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import useError from "@/hooks/useError";
 import request from "@/utils/request";
@@ -30,7 +30,8 @@ export default function SendMailDialog({ to, defaultText }: Props) {
     setText(defaultText);
   }, [defaultText]);
 
-  const sendData = async () => {
+  const sendData = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsLoading(true);
 
     const { error } = await request({
@@ -57,37 +58,41 @@ export default function SendMailDialog({ to, defaultText }: Props) {
       <Dialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby="mail-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Confirmar Envio do Email para {to}</DialogTitle>
-        <DialogContent>
-          {text === undefined && (
-            <Alert severity="warning">
-              O status atual do equipamento não requer envio de email. Você realmente deseja enviar
-              uma mensagem ao cliente?
-            </Alert>
-          )}
-          <DialogContentText>
-            <TextField
-              label="Texto do Email"
-              variant="outlined"
-              margin="normal"
-              minRows={5}
-              fullWidth
-              multiline
-              value={text}
-              onChange={(event) => {
-                setText(event.target.value);
-              }}
-            />
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
-          <Button variant="outlined" onClick={sendData}>
-            Enviar
-          </Button>
-        </DialogActions>
+        <form style={{ display: "contents" }} onSubmit={sendData}>
+          <DialogTitle id="mail-dialog-title">Confirmar Envio do Email para {to}</DialogTitle>
+
+          <DialogContent>
+            {text === undefined && (
+              <Alert severity="warning">
+                O status atual do equipamento não requer envio de email. Você realmente deseja
+                enviar uma mensagem ao cliente?
+              </Alert>
+            )}
+            <DialogContentText>
+              <TextField
+                label="Texto do Email"
+                variant="outlined"
+                margin="normal"
+                minRows={5}
+                fullWidth
+                multiline
+                required
+                value={text}
+                onChange={(event) => {
+                  setText(event.target.value);
+                }}
+              />
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenDialog(false)}>Cancelar</Button>
+            <Button variant="outlined" type="submit">
+              Enviar
+            </Button>
+          </DialogActions>
+        </form>
         {isLoading ? <LinearProgress /> : <div className={styles.space} />}
       </Dialog>
     </>
