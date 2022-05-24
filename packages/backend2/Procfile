@@ -1,0 +1,2 @@
+web: pnpm backend:start
+release: cd packages/backend && npx prisma db push
