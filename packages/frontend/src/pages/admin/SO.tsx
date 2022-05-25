@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Array.isArray(context.query.id) ? context.query.id[0] : context.query.id;
 
   const { response } = await request(
-    { url: `/api/private/serviceOrders?id=${id}`, method: "GET" },
+    { url: `/api/private/serviceOrders/${id}`, method: "GET" },
     context
   );
 
@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       id,
       ServiceOrderJSON: JSON.stringify(response),
     },
-    notFound: id === undefined || response == null,
+    notFound: !id || !response,
   };
 };
 
