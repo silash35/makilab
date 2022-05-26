@@ -14,8 +14,19 @@ interface ProcessedClient extends C {
   serviceOrders?: ProcessedSO[];
 }
 
+enum Status {
+  WAITING_OSF,
+  WAITING_BUDGET,
+  WAITING_APPROVAL,
+  WAITING_PARTS,
+  BUDGET_REJECTED,
+  WAITING_REPAIR,
+  WAITING_RETRIEVAL,
+  FINALIZED,
+}
+
 interface ProcessedSO extends ServiceOrder {
-  statusNumber: 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70;
+  statusNumber: Status;
   defaultEmail?: string;
   statusName: string;
   isUrgent: boolean;
@@ -55,51 +66,38 @@ export function processClient(client?: Client | Client[] | null) {
 export function processSO(serviceOrder?: ServiceOrder | ServiceOrder[] | null) {
   const process = (s: ServiceOrder): ProcessedSO => {
     const statusNumber = (() => {
-      /*
-        Status Possíveis e seus números:
-
-        0: Esperando criar OSF (Somente em equipamentos em garantia)
-        10: Esperando Avaliação
-        20: Aguardando Aprovação do Orçamento (Somente em equipamentos fora de garantia)
-        30: Aguardando Peças
-        40: Orçamento Negado (Somente em equipamentos fora de garantia)
-        50: Aguardando Reparo
-        60: Aguardando Retirada
-        70: Finalizado
-      */
-
       if (s.deliveredToCustomerAt != null) {
-        return 70;
+        return Status.FINALIZED;
       }
 
       if (s.repairedAt != null) {
-        return 60;
+        return Status.WAITING_RETRIEVAL;
       }
 
       if (s.isBudgetApproved === true || s.partsArrivedAt != null) {
-        return 50;
+        return Status.WAITING_REPAIR;
       }
 
       if (s.isBudgetApproved === false) {
-        return 40;
+        return Status.BUDGET_REJECTED;
       }
 
       if (s.budgetedAt != null) {
         if (s.isUnderWarranty) {
-          return 30;
+          return Status.WAITING_PARTS;
         } else {
-          return 20;
+          return Status.WAITING_APPROVAL;
         }
       }
 
       if (s.registeredInManufacturerAt != null) {
-        return 10;
+        return Status.WAITING_BUDGET;
       }
 
       if (s.isUnderWarranty) {
-        return 0;
+        return Status.WAITING_OSF;
       } else {
-        return 10;
+        return Status.WAITING_BUDGET;
       }
     })();
 
@@ -110,30 +108,30 @@ export function processSO(serviceOrder?: ServiceOrder | ServiceOrder[] | null) {
     let defaultEmail: string | undefined = undefined;
 
     switch (statusNumber) {
-      case 0:
+      case Status.WAITING_OSF:
         statusName = "Esperando criar OSF";
         break;
-      case 10:
+      case Status.WAITING_BUDGET:
         statusName = "Esperando Avaliação";
         break;
-      case 20:
+      case Status.WAITING_APPROVAL:
         statusName = "Aguardando Aprovação";
         defaultEmail = `${defaultEmailStart} foi avaliado e está aguardando a aprovação do orçamento. Confira seu Whatsapp!`;
         break;
-      case 30:
+      case Status.WAITING_PARTS:
         statusName = "Aguardando Peças";
         break;
-      case 40:
+      case Status.BUDGET_REJECTED:
         statusName = "Orçamento Negado";
         break;
-      case 50:
+      case Status.WAITING_REPAIR:
         statusName = "Aguardando Reparo";
         break;
-      case 60:
+      case Status.WAITING_RETRIEVAL:
         statusName = "Aguardando Retirada";
         defaultEmail = `${defaultEmailStart} está pronto para retirada. Não se esqueça de trazer o comprovante da Ordem de Serviço`;
         break;
-      case 70:
+      case Status.FINALIZED:
         statusName = "Finalizado";
         break;
     }
