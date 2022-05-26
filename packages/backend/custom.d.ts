@@ -1,4 +1,6 @@
-import User from "./src/types/user";
+import config from ".src/config";
+
+type User = Omit<typeof config.users[0], "password">;
 
 declare global {
   declare namespace Express {

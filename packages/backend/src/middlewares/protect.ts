@@ -1,8 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-import type User from "../types/user";
-
 const protect = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
 
@@ -16,7 +14,7 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded as User;
+    req.user = decoded as Request["user"];
     return next();
   } catch (error) {
     throw new Error("Unauthorized: Invalid token");

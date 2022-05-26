@@ -1,8 +1,12 @@
 import { Request, Response, Router } from "express";
 
-import { deleteOne, getAll, getOne, update } from "../../services/serviceOrder";
-import { filterNumber } from "../../utils/filters";
-import { parseSO, parseStatusSO } from "../../utils/parsers";
+import {
+  deleteOne,
+  getAll,
+  getOne,
+  update,
+  updateStatus,
+} from "../../modules/serviceOrder/controller";
 
 const router = Router();
 
@@ -11,37 +15,19 @@ router.get("", async (req: Request, res: Response) => {
 });
 
 router.get("/:id", async (req: Request, res: Response) => {
-  const id = filterNumber(req.params.id);
-  if (!id) {
-    throw new Error("Invalid data: id");
-  }
-
-  const answer = await getOne(id);
-  if (!answer) {
-    throw new Error("Not Found");
-  }
-
-  return res.status(200).json(answer);
+  return res.status(200).json(await getOne(req.params.id));
 });
 
 router.post("", async (req: Request, res: Response) => {
-  const updatedSO = await update(Number(req.body.id), parseSO(req.body));
-  return res.status(200).json(updatedSO);
+  return res.status(200).json(await update(req.body.id, req.body));
 });
 
 router.put("", async (req: Request, res: Response) => {
-  const updatedSO = await update(Number(req.body.id), parseStatusSO(req.body));
-  return res.status(200).json(updatedSO);
+  return res.status(200).json(await updateStatus(req.body.id, req.body));
 });
 
 router.delete("", async (req: Request, res: Response) => {
-  const id = filterNumber(req.body.id);
-  if (id === null) {
-    throw new Error("Invalid data: id");
-  }
-
-  await deleteOne(id);
-  return res.status(200).json({ deletedID: id });
+  return res.status(200).json(await deleteOne(req.body.id));
 });
 
 export default router;
