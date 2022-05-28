@@ -107,7 +107,8 @@ export default function Pdf({ serviceOrder }: Props) {
             <td rowSpan={2} className={styles.disableBorder}>
               <strong>
                 {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
-                {serviceOrder.batchOrImei} {serviceOrder.productNumber}
+                {serviceOrder.batchOrImei} {serviceOrder.productNumber}{" "}
+                {isNaN(+serviceOrder.voltage[0]) ? "" : serviceOrder.voltage}
               </strong>
             </td>
           </tr>

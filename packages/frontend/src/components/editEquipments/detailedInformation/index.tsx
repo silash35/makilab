@@ -92,6 +92,7 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
               {serviceOrder.problemDescription &&
                 `Descrição do problema: ${serviceOrder.problemDescription}`}
             </p>
+            <p>Tensão: {serviceOrder.voltage}</p>
 
             {serviceOrder.notes && (
               <>

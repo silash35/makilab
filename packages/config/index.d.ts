@@ -14,6 +14,7 @@ declare namespace config {
   };
   const ATTENDANTS: string[];
   const SERVICE_PLACES: string[];
+  const VOLTAGES_OPTIONS: string[];
 }
 
 export default config;

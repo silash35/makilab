@@ -10,7 +10,7 @@ import DateTime from "./fields/dateTime";
 import Text from "./fields/text";
 import styles from "./inputs.module.scss";
 
-const { ATTENDANTS, SERVICE_PLACES } = config;
+const { ATTENDANTS, SERVICE_PLACES, VOLTAGES_OPTIONS } = config;
 
 interface Props {
   serviceOrder?: TServiceOrder;
@@ -20,15 +20,27 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
   const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
   return (
     <>
-      <Text
-        defaultValue={serviceOrder?.equipment}
-        textFieldProps={{
-          name: "equipment",
-          label: "Equipamento",
-          required: true,
-          ...common,
-        }}
-      />
+      <div className={styles.flex}>
+        <Text
+          defaultValue={serviceOrder?.equipment}
+          textFieldProps={{
+            name: "equipment",
+            label: "Equipamento",
+            required: true,
+            ...common,
+          }}
+        />
+
+        <Autocomplete
+          freeSolo
+          options={VOLTAGES_OPTIONS}
+          defaultValue={serviceOrder?.voltage ? serviceOrder?.voltage : VOLTAGES_OPTIONS[0]}
+          renderInput={(params) => (
+            <TextField {...params} name="voltage" label="Tensão" required {...common} />
+          )}
+          className={styles.minWidth}
+        />
+      </div>
 
       <div className={styles.flex}>
         <Text
@@ -77,7 +89,7 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
           renderInput={(params) => (
             <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
           )}
-          className={styles.width}
+          className={styles.maxWidth}
         />
 
         <Autocomplete
@@ -93,7 +105,7 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
               {...common}
             />
           )}
-          className={styles.width}
+          className={styles.maxWidth}
         />
       </div>
       <div className={styles.flex}>

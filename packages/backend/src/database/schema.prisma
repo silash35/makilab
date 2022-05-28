@@ -40,6 +40,7 @@ model ServiceOrder {
   notes              String?
 
   isUnderWarranty Boolean
+  voltage         String
   attendedBy      String
   attendedOn      String
 

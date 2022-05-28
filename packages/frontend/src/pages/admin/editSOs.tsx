@@ -3,10 +3,13 @@ import Stack from "@mui/material/Stack";
 import Head from "next/head";
 
 import EquipmentsTable from "@/components/editEquipments/table";
+import useError from "@/hooks/useError";
 import useServiceOrders from "@/hooks/useServiceOrders";
 
 function EditSOs() {
-  const { serviceOrders, mutate } = useServiceOrders();
+  const { serviceOrders, isError, mutate } = useServiceOrders();
+  const { setError } = useError();
+  if (isError) setError(String(isError));
 
   return (
     <>

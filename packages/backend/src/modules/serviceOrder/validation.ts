@@ -18,6 +18,11 @@ const validateSO = (data: unknown) => {
     createdAt = undefined;
   }
 
+  const voltage = filterString(so.voltage);
+  if (voltage === null) {
+    throw new Error("Invalid data: Voltage");
+  }
+
   const attendedBy = filterString(so.attendedBy);
   if (attendedBy === null) {
     throw new Error("Invalid data: Attendant name");
@@ -37,6 +42,7 @@ const validateSO = (data: unknown) => {
     accessories: filterString(so.accessories),
     productCondition: filterString(so.productCondition),
     createdAt: createdAt,
+    voltage: voltage,
     attendedBy: attendedBy,
     attendedOn: attendedOn,
     isUnderWarranty: filterBoolean(so.isUnderWarranty),

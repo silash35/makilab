@@ -15,6 +15,7 @@ interface TServiceOrder {
   notes: string | null;
 
   isUnderWarranty: boolean;
+  voltage: string;
   attendedBy: string;
   attendedOn: string;
 

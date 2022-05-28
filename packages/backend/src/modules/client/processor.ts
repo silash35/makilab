@@ -5,7 +5,7 @@ const processClient = (client?: Client | Client[] | null) => {
   const process = (c: Client): ProcessedClient => {
     const serviceOrders = processSO(c.serviceOrders);
 
-    if (!Array.isArray(serviceOrders)) {
+    if (!Array.isArray(serviceOrders) && serviceOrders !== undefined) {
       throw new Error("serviceOrders needs to be an array");
     }
 
