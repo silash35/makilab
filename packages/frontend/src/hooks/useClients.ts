@@ -8,7 +8,7 @@ export default function useClients() {
   return {
     clients: data as TClientWithSOs[] | undefined,
     isLoading: !error && !data,
-    isError: error,
     mutate,
+    error,
   };
 }

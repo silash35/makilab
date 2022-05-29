@@ -8,7 +8,7 @@ export default function useServiceOrders() {
   return {
     serviceOrders: data as TServiceOrderWithClient[] | undefined,
     isLoading: !error && !data,
-    isError: error,
     mutate,
+    error,
   };
 }
