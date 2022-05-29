@@ -36,11 +36,11 @@ export default async function request(req: Req, ctx?: Pick<NextPageContext, "req
     console.log(e);
   }
 
-  if (res?.status === 200) {
-    return { response: json, status: res.status };
-  } else {
+  if (res?.status !== 200) {
     return { error: getHumanReadableError(res), status: res?.status };
   }
+
+  return { response: json, status: res.status };
 }
 
 const getHumanReadableError = (res?: Response) => {
@@ -54,9 +54,15 @@ const getHumanReadableError = (res?: Response) => {
   else return "Erro desconhecido";
 };
 
-export const fetcher = (url: string) => {
-  return fetch(`${config.BACKEND_URL}${url}`, {
+export const fetcher = async (url: string) => {
+  const res = await fetch(`${config.BACKEND_URL}${url}`, {
     method: "GET",
     headers: { authorization: parseCookies().token },
-  }).then((r) => r.json());
+  });
+
+  if (!res.ok || res.status !== 200) {
+    throw getHumanReadableError(res);
+  }
+
+  return res.json();
 };

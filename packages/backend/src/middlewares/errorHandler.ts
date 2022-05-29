@@ -19,7 +19,10 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     }
   }
 
-  return res.status(statusCode).send(err.message);
+  return res.status(statusCode).send({
+    statusCode: statusCode,
+    message: err.message,
+  });
 };
 
 export default errorHandler;
