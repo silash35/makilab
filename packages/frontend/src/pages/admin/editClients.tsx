@@ -2,11 +2,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Head from "next/head";
 
+import ErrorComponent from "@/components/common/ErrorComponent";
 import ClientsTable from "@/components/editClients/table";
 import useClients from "@/hooks/useClients";
+import useError from "@/hooks/useError";
 
 function EditClients() {
-  const { clients, mutate } = useClients();
+  const { clients, mutate, error } = useClients();
+  const { setError } = useError();
+  if (error) setError(String(error));
 
   return (
     <>
@@ -18,7 +22,7 @@ function EditClients() {
         <ClientsTable clients={clients} reload={mutate} />
       ) : (
         <Stack height="100%" justifyContent="center" alignItems="center">
-          <CircularProgress />
+          {error ? <ErrorComponent /> : <CircularProgress />}
         </Stack>
       )}
     </>
