@@ -4,13 +4,10 @@ import Head from "next/head";
 
 import ErrorComponent from "@/components/common/ErrorComponent";
 import EquipmentsTable from "@/components/editEquipments/table";
-import useError from "@/hooks/useError";
 import useServiceOrders from "@/hooks/useServiceOrders";
 
 function EditSOs() {
   const { serviceOrders, mutate, error } = useServiceOrders();
-  const { setError } = useError();
-  if (error) setError(String(error));
 
   return (
     <>

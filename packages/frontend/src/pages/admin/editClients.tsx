@@ -5,12 +5,9 @@ import Head from "next/head";
 import ErrorComponent from "@/components/common/ErrorComponent";
 import ClientsTable from "@/components/editClients/table";
 import useClients from "@/hooks/useClients";
-import useError from "@/hooks/useError";
 
 function EditClients() {
   const { clients, mutate, error } = useClients();
-  const { setError } = useError();
-  if (error) setError(String(error));
 
   return (
     <>
