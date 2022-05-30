@@ -21,7 +21,6 @@ interface TServiceOrder {
 
   ownerId: number;
 
-  wasEdited: boolean;
   isBudgetApproved: boolean | null;
 
   createdAt: string;
