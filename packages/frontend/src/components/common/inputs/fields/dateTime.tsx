@@ -1,17 +1,17 @@
-import TextField, { TextFieldProps } from "@mui/material/TextField";
+import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DateTimePicker, DateTimePickerProps } from "@mui/x-date-pickers/DateTimePicker";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ptBR from "date-fns/locale/pt-BR";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ComponentProps } from "react";
 
 interface Props {
   name: string;
   label: string;
   defaultValue?: string | null | "none";
-  textFieldProps?: Omit<TextFieldProps, "name" | "label" | "value" | "onChange">;
+  textFieldProps?: Omit<ComponentProps<typeof TextField>, "name" | "label" | "value" | "onChange">;
   dateTimePickerProps?: Omit<
-    DateTimePickerProps,
+    ComponentProps<typeof DateTimePicker>,
     "name" | "label" | "value" | "onChange" | "renderInput"
   >;
 }

@@ -1,7 +1,7 @@
 import Switch from "@mui/material/Switch";
-import { TextFieldProps } from "@mui/material/TextField";
-import { DateTimePickerProps } from "@mui/x-date-pickers/DateTimePicker";
-import { useEffect, useState } from "react";
+import type TextField from "@mui/material/TextField";
+import type { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { useEffect, useState, ComponentProps } from "react";
 
 import styles from "../inputs.module.scss";
 import DateTime from "./dateTime";
@@ -11,8 +11,11 @@ interface Props {
   label: string;
   children?: React.ReactNode;
   defaultValue?: string | null;
-  textFieldProps?: Omit<TextFieldProps, "name" | "label" | "value" | "onChange">;
-  dateTimePickerProps?: Omit<DateTimePickerProps, "name" | "label" | "value" | "onChange">;
+  textFieldProps?: Omit<ComponentProps<typeof TextField>, "name" | "label" | "value" | "onChange">;
+  dateTimePickerProps?: Omit<
+    ComponentProps<typeof DateTimePicker>,
+    "name" | "label" | "value" | "onChange"
+  >;
 }
 
 export default function DateTimeWithSwitch({
