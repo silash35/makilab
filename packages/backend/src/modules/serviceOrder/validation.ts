@@ -6,7 +6,7 @@ const validateSO = (data: unknown) => {
   if (!(typeof data === "object" && data !== null)) {
     throw new Error("Invalid data: Service Order");
   }
-  const so = data as Prisma.ServiceOrderCreateInput;
+  const so = data as Prisma.ServiceOrderCreateManyOwnerInput;
 
   const equipment = filterString(so.equipment);
   if (equipment === null) {

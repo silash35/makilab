@@ -48,14 +48,38 @@ model ServiceOrder {
   owner   Client @relation(fields: [ownerId], references: [id])
   ownerId Int
 
+  budget           Budget[]
   isBudgetApproved Boolean?
 
-  createdAt                  DateTime  @default(now())
-  updatedAt                  DateTime? @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   registeredInManufacturerAt DateTime?
   budgetedAt                 DateTime?
   budgetAnsweredAt           DateTime?
   partsArrivedAt             DateTime?
   repairedAt                 DateTime?
   deliveredToCustomerAt      DateTime?
+}
+
+model Budget {
+  id        Int      @id @unique @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id])
+  serviceOrderId Int
+
+  itens BudgetItem[]
+}
+
+model BudgetItem {
+  id        Int      @id @unique @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  budget   Budget @relation(fields: [budgetId], references: [id])
+  budgetId Int
+
+  name     String
+  price    Int
+  quantity Int
 }
