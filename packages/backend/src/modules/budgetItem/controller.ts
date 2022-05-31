@@ -15,4 +15,4 @@ const deleteOne = async (id: unknown) => {
   return { deletedID: id };
 };
 
-export { create, update, deleteOne };
+export { create, deleteOne, update };

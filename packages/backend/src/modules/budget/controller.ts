@@ -15,4 +15,4 @@ const deleteOne = async (id: unknown) => {
   return { deletedID: id };
 };
 
-export { getAll, getOne, deleteOne };
+export { deleteOne, getAll, getOne };

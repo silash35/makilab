@@ -1,5 +1,5 @@
-import { validateID } from "../shared/validation";
 import serviceOrderService from "../serviceOrder/service";
+import { validateID } from "../shared/validation";
 import { validateStatusSO } from "./validation";
 
 const update = async (id: unknown, serviceOrder: unknown) => {

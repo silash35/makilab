@@ -1,7 +1,7 @@
 import Switch from "@mui/material/Switch";
 import type TextField from "@mui/material/TextField";
 import type { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { useEffect, useState, ComponentProps } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 import styles from "../inputs.module.scss";
 import DateTime from "./dateTime";

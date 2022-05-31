@@ -1,4 +1,4 @@
-import type { ProcessedBudget, Budget } from "./types";
+import type { Budget, ProcessedBudget } from "./types";
 
 const processBudget = (budget?: Budget | Budget[] | null) => {
   const process = (b: Budget): ProcessedBudget => {

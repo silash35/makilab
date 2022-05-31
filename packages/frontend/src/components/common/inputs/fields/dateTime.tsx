@@ -3,7 +3,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ptBR from "date-fns/locale/pt-BR";
-import { useEffect, useState, ComponentProps } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 interface Props {
   name: string;

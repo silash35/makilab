@@ -8,4 +8,4 @@ interface ProcessedBudget extends Budget {
   total: number;
 }
 
-export type { ProcessedBudget, Budget };
+export type { Budget, ProcessedBudget };
