@@ -10,7 +10,7 @@ const router = Router();
 router.post("", async (req, res) => {
   const { password } = req.body;
 
-  if (process.env.JWT_SECRET == undefined) {
+  if (import.meta.env.JWT_SECRET == undefined) {
     throw new Error("JWT_SECRET env variable not set");
   }
 
@@ -20,7 +20,7 @@ router.post("", async (req, res) => {
 
   const userWithoutPassword = { ...user, password: undefined };
 
-  const token = jwt.sign(userWithoutPassword, process.env.JWT_SECRET, {
+  const token = jwt.sign(userWithoutPassword, import.meta.env.JWT_SECRET, {
     expiresIn: 86400 * 7, // expires in 7 days
   });
 

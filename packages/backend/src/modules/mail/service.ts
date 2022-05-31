@@ -6,19 +6,19 @@ const { SITE_URL, COMPANY } = config;
 class MailService {
   async sendMail(to: string, text: string) {
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
+      host: import.meta.env.EMAIL_HOST,
       port: 587,
       secure: false,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        user: import.meta.env.EMAIL_USER,
+        pass: import.meta.env.EMAIL_PASSWORD,
       },
     });
 
     // send mail with defined transport object
     const info = await transporter.sendMail({
-      from: `"${COMPANY.name}" <${process.env.EMAIL_USER}>`,
-      to: `${process.env.EMAIL_USER}, ${to}`,
+      from: `"${COMPANY.name}" <${import.meta.env.EMAIL_USER}>`,
+      to: `${import.meta.env.EMAIL_USER}, ${to}`,
       subject: "Atualizações sobre o seu equipamento",
       text: text,
       html: `

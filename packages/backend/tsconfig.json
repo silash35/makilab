@@ -4,11 +4,15 @@
     "checkJs": true,
     "strict": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "./dist"
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "types": ["vite/client"]
   },
-  "include": ["custom.d.ts","./src/*.ts", "**/*.d.ts"],
+  "include": ["custom.d.ts", "./src/*.ts", "**/*.d.ts"],
   "exclude": ["node_modules"]
 }

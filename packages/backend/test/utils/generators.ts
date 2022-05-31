@@ -1,4 +1,4 @@
-import faker from "@faker-js/faker/locale/pt_BR";
+import { faker } from "@faker-js/faker/locale/pt_BR";
 
 export function generateClient(optionals = true, optionalsValueTo?: unknown) {
   if (optionals === true) {
@@ -39,6 +39,7 @@ export function generateServiceOrder(optionals = true, optionalsValueTo?: unknow
       notes: faker.lorem.paragraphs(10),
 
       isUnderWarranty: faker.datatype.boolean(),
+      voltage: faker.datatype.number({ min: 0, max: 500 }) + "V",
       attendedBy: faker.name.findName(),
       attendedOn: faker.name.jobArea(),
     };
@@ -56,6 +57,7 @@ export function generateServiceOrder(optionals = true, optionalsValueTo?: unknow
       notes: optionalsValueTo,
 
       isUnderWarranty: faker.datatype.boolean(),
+      voltage: faker.datatype.number({ min: 0, max: 500 }) + "V",
       attendedBy: faker.name.findName(),
       attendedOn: faker.name.jobArea(),
     };
