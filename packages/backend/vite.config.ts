@@ -23,6 +23,6 @@ export default defineConfig({
   test: {
     globals: true,
     testTimeout: 60 * 1000, // 60 seconds
-    hookTimeout: 2 * 60 * 1000, // 2 minutes
+    hookTimeout: 60 * 1000, // 60 seconds
   },
 });
