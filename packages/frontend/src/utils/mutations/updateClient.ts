@@ -11,7 +11,7 @@ export default async (
   const { response, status, error } = await request({
     method: "PUT",
     url: "/api/private/clients",
-    body: { clientID: id, client: updateClient, serviceOrder: newServiceOrder },
+    body: { clientId: id, client: updateClient, serviceOrder: newServiceOrder },
   });
 
   const client = response as TClientWithSOs;

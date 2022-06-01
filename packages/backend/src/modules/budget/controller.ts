@@ -2,8 +2,8 @@ import { validateID } from "../shared/validation";
 import processBudget from "./processor";
 import budgetService from "./service";
 
-const getAll = async (serviceOrderID: unknown) => {
-  return processBudget(await budgetService.getAll(validateID(serviceOrderID)));
+const getAll = async (serviceOrderId: unknown) => {
+  return processBudget(await budgetService.getAll(validateID(serviceOrderId)));
 };
 
 const getOne = async (id: unknown) => {

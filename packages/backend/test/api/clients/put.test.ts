@@ -14,7 +14,7 @@ describe("Clients API - PUT", () => {
     const client = generateClient();
     const { clientId } = await createClient(client);
     await testSafety("put", "/api/private/clients", {
-      clientID: clientId,
+      clientId,
       client: generateClient(),
     });
   });
@@ -27,7 +27,7 @@ describe("Clients API - PUT", () => {
     const newClient = generateClient();
     const res = await request(app)
       .put("/api/private/clients")
-      .send({ clientID: clientId, client: newClient })
+      .send({ clientId, client: newClient })
       .set("Authorization", await getAuth())
       .expect(200);
 
@@ -58,7 +58,7 @@ describe("Clients API - PUT", () => {
 
     const res = await request(app)
       .put("/api/private/clients")
-      .send({ clientID: clientId, client: newClient, serviceOrder: newServiceOrder })
+      .send({ clientId, client: newClient, serviceOrder: newServiceOrder })
       .set("Authorization", await getAuth())
       .expect(200);
 
@@ -94,7 +94,7 @@ describe("Clients API - PUT", () => {
     for (const testValue of testValues) {
       const res = await request(app)
         .put("/api/private/clients")
-        .send({ clientID: clientId, client: generateClient(false, testValue) })
+        .send({ clientId, client: generateClient(false, testValue) })
         .set("Authorization", await getAuth())
         .expect(200);
 
@@ -120,7 +120,7 @@ describe("Clients API - PUT", () => {
     for (const testValue of testValues) {
       const res = await request(app)
         .put("/api/private/clients")
-        .send({ clientID: clientId, client: { name: testValue } })
+        .send({ clientId, client: { name: testValue } })
         .set("Authorization", await getAuth())
         .expect(400);
 

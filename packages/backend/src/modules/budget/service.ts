@@ -2,9 +2,9 @@ import prisma from "../../database/prisma";
 
 class BudgetService {
   // Read functions
-  async getAll(serviceOrderID: number) {
+  async getAll(serviceOrderId: number) {
     return await prisma.budget.findMany({
-      where: { serviceOrder: { id: serviceOrderID } },
+      where: { serviceOrder: { id: serviceOrderId } },
       include: {
         itens: true,
       },

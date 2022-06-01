@@ -14,8 +14,8 @@ router.post("", async (req: Request, res: Response) => {
 });
 
 router.put("", async (req: Request, res: Response) => {
-  const { clientID, client, serviceOrder } = req.body;
-  return res.status(200).json(await update(clientID, client, serviceOrder));
+  const { clientId, client, serviceOrder } = req.body;
+  return res.status(200).json(await update(clientId, client, serviceOrder));
 });
 
 router.delete("", async (req: Request, res: Response) => {
