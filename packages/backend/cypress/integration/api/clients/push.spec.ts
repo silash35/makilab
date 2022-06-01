@@ -4,41 +4,6 @@ import { generateClient, generateServiceOrder } from "../../../support/generator
 import testSafety from "../../../support/testSafety";
 
 describe("Clients API - POST", () => {
-  it("should return 401 when unauthenticated", () => {
-    testSafety("POST", "/api/private/clients", generateClient());
-  });
-
-  it("should create a new client and service Order", () => {
-    const client = generateClient();
-    client.cpfOrCnpj = "01test376388/t00gfg01-5gggg3";
-    client.tel = "02texts will be removed34-only Numbers will remain4321";
-    const serviceOrder = generateServiceOrder();
-    cy.signIn();
-
-    cy.authFetch({
-      method: "POST",
-      url: "/api/private/clients",
-      body: { client, serviceOrder },
-    }).then((response) => {
-      expect(response.status).equal(200);
-      const newClient = response.body as ResponseClient;
-      // its a new client so the first service order should be the one created
-      const newServiceOrder = (newClient.serviceOrders as ServiceOrder[])[0];
-
-      expect(newClient.name).to.be.equal(client.name);
-      // Check if the numbers was properly formatted
-      expect(newClient.cpfOrCnpj).to.be.equal("01.376.388/0001-53");
-      expect(newClient.tel).to.be.equal("+55 71 0234-4321");
-
-      expect(newServiceOrder?.equipment).to.be.equal(serviceOrder.equipment);
-      expect(newServiceOrder?.notes).to.be.equal(serviceOrder.notes);
-      expect(newServiceOrder?.isUnderWarranty).to.be.equal(serviceOrder.isUnderWarranty);
-      expect(newServiceOrder?.statusName).to.be.equal(
-        serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação"
-      );
-    });
-  });
-
   it("should create only a new client", () => {
     const client = generateClient();
     cy.signIn();

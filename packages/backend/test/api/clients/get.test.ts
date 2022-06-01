@@ -27,7 +27,7 @@ describe("Clients API - GET", () => {
     const clients = res.body as Client[];
     expect(clients).to.be.an("array");
 
-    const newClient = clients.at(-1);
+    const newClient = clients.find((c) => c.id === clientId);
     expect(newClient.id).to.be.equal(clientId);
   });
 });
