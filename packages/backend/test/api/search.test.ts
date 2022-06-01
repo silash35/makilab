@@ -1,5 +1,4 @@
 import request from "supertest";
-import { describe, expect, it } from "vitest";
 
 import PublicSO from "../types/publicSO";
 import app from "../utils/app";

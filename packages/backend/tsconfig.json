@@ -11,8 +11,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "target": "ESNext",
-    "types": ["vite/client"]
+    "types": ["vite/client", "vitest/globals"]
   },
-  "include": ["custom.d.ts", "./src/*.ts", "**/*.d.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

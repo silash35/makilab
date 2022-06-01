@@ -1,5 +1,4 @@
 import request from "supertest";
-import { describe, expect, it } from "vitest";
 
 import app from "../../utils/app";
 import { createClient } from "../../utils/client";

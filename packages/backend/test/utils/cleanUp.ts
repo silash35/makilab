@@ -1,5 +1,4 @@
 import request from "supertest";
-import { expect } from "vitest";
 
 import Client from "../types/client";
 import app from "./app";

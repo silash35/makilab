@@ -1,5 +1,4 @@
 import request from "supertest";
-import { describe, expect, it } from "vitest";
 
 import Client from "../../types/client";
 import ServiceOrder from "../../types/serviceOrder";
@@ -108,7 +107,7 @@ describe("Clients API - PUT", () => {
       expect(updatedClient.cpfOrCnpj).to.be.null;
 
       expect(updatedClient.serviceOrders).to.be.an("array");
-      expect(updatedClient.serviceOrders.length).to.be.equal(0);
+      expect(updatedClient.serviceOrders?.length).to.be.equal(0);
     }
   });
 

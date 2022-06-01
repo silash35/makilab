@@ -1,5 +1,4 @@
 import request from "supertest";
-import { expect } from "vitest";
 
 import app from "./app";
 import { generateClient, generateServiceOrder } from "./generators";

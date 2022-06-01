@@ -1,6 +1,5 @@
 import { faker } from "@faker-js/faker";
 import request from "supertest";
-import { describe, expect, it } from "vitest";
 
 import app from "../utils/app";
 import getAuth from "../utils/getAuth";

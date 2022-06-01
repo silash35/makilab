@@ -1,5 +1,4 @@
 import request from "supertest";
-import { describe, expect, it } from "vitest";
 
 import Client from "../../types/client";
 import ServiceOrder from "../../types/serviceOrder";
@@ -31,7 +30,7 @@ describe("Clients API - POST", () => {
     expect(res.status).equal(200);
     const newClient = res.body as Client;
     // its a new client so the first service order should be the one created
-    const newServiceOrder = newClient.serviceOrders[0];
+    const newServiceOrder = newClient.serviceOrders?.[0];
 
     expect(newClient.name).to.be.equal(client.name);
     // Check if the numbers was properly formatted

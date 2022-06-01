@@ -1,5 +1,4 @@
 import request from "supertest";
-import { describe, expect, it } from "vitest";
 
 import Client from "../../types/client";
 import app from "../../utils/app";
@@ -28,6 +27,6 @@ describe("Clients API - GET", () => {
     expect(clients).to.be.an("array");
 
     const newClient = clients.find((c) => c.id === clientId);
-    expect(newClient.id).to.be.equal(clientId);
+    expect(newClient?.id).to.be.equal(clientId);
   });
 });
