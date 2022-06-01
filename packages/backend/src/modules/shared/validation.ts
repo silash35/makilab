@@ -1,4 +1,4 @@
-import { filterNumber } from "../../utils/filters";
+import { filterNumber } from "@/utils/filters";
 
 const validateID = (id: unknown) => {
   const intId = filterNumber(id);

@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 
-import prisma from "../../database/prisma";
+import prisma from "@/database/prisma";
 
 class BudgetItemService {
   async create(budgetId: number, item: Prisma.BudgetItemCreateManyBudgetInput) {

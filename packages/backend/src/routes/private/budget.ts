@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { deleteOne, getAll, getOne } from "../../modules/budget/controller";
+import { deleteOne, getAll, getOne } from "@/modules/budget/controller";
 
 const router = Router();
 

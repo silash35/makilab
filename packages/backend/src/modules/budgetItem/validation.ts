@@ -1,6 +1,6 @@
 import type { Prisma } from "@prisma/client";
 
-import { filterNumber, filterString } from "../../utils/filters";
+import { filterNumber, filterString } from "@/utils/filters";
 
 const validateItem = (data: unknown) => {
   if (!(typeof data === "object" && data !== null)) {

@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 
-import prisma from "../../database/prisma";
+import prisma from "@/database/prisma";
+
 import processClient from "./processor";
 
 class ClientService {

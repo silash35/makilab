@@ -1,6 +1,5 @@
+import config from "@config";
 import nodemailer from "nodemailer";
-
-import config from "../../../config";
 const { SITE_URL, COMPANY } = config;
 
 class MailService {

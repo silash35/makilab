@@ -1,6 +1,7 @@
 import type { Prisma } from "@prisma/client";
 
-import { filterCpfOrCnpj, filterPhoneNumber, filterString, filterZip } from "../../utils/filters";
+import { filterCpfOrCnpj, filterPhoneNumber, filterString, filterZip } from "@/utils/filters";
+
 import { validateSO } from "../serviceOrder/validation";
 
 const validateClient = (dataClient: unknown, dataSO?: unknown) => {

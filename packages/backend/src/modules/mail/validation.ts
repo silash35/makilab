@@ -1,4 +1,4 @@
-import { filterString } from "../../utils/filters";
+import { filterString } from "@/utils/filters";
 
 const validateString = (variable: unknown, error = "string") => {
   const string = filterString(variable);

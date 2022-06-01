@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { create, deleteOne, getAll, update } from "../../modules/client/controller";
+import { create, deleteOne, getAll, update } from "@/modules/client/controller";
 
 const router = Router();
 

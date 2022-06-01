@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { getOne } from "../../modules/publicSO/controller";
+import { getOne } from "@/modules/publicSO/controller";
 
 const router = Router();
 

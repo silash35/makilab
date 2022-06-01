@@ -1,4 +1,4 @@
-import prisma from "../../database/prisma";
+import prisma from "@/database/prisma";
 
 class PublicSOService {
   getOne = async (id: number) => {

@@ -3,10 +3,10 @@ import "express-async-errors";
 import cors from "cors";
 import express from "express";
 
-import errorHandler from "./middlewares/errorHandler";
-import AuthRoutes from "./routes/auth";
-import PrivateRoutes from "./routes/private";
-import PublicRoutes from "./routes/public";
+import errorHandler from "@/middlewares/errorHandler";
+import AuthRoutes from "@/routes/auth";
+import PrivateRoutes from "@/routes/private";
+import PublicRoutes from "@/routes/public";
 
 const app = express();
 
