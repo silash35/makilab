@@ -1,9 +1,8 @@
 import { faker } from "@faker-js/faker";
+import app from "@test/utils/app";
+import getAuth from "@test/utils/getAuth";
+import testSafety from "@test/utils/testSafety";
 import request from "supertest";
-
-import app from "../utils/app";
-import getAuth from "../utils/getAuth";
-import testSafety from "../utils/testSafety";
 
 describe("Mail API - POST", () => {
   const email = {

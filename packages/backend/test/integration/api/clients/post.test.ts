@@ -1,11 +1,10 @@
+import Client from "@test/types/client";
+import ServiceOrder from "@test/types/serviceOrder";
+import app from "@test/utils/app";
+import { generateClient, generateServiceOrder } from "@test/utils/generators";
+import getAuth from "@test/utils/getAuth";
+import testSafety from "@test/utils/testSafety";
 import request from "supertest";
-
-import Client from "../../types/client";
-import ServiceOrder from "../../types/serviceOrder";
-import app from "../../utils/app";
-import { generateClient, generateServiceOrder } from "../../utils/generators";
-import getAuth from "../../utils/getAuth";
-import testSafety from "../../utils/testSafety";
 
 describe("Clients API - POST", () => {
   it("should return 401 when unauthenticated", async () => {

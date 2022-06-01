@@ -1,6 +1,5 @@
+import app from "@test/utils/app";
 import request from "supertest";
-
-import app from "./utils/app";
 
 describe("Home Page", () => {
   it("should load even if unauthenticated", async () => {
@@ -13,5 +12,5 @@ describe("Home Page", () => {
   });
 });
 
-import cleanUp from "./utils/cleanUp";
+import cleanUp from "@test/utils/cleanUp";
 afterAll(cleanUp);

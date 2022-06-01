@@ -1,6 +1,5 @@
+import app from "@test/utils/app";
 import request from "supertest";
-
-import app from "../utils/app";
 
 describe("Sign in API - POST", () => {
   it("should not return token if password is wrong", async () => {

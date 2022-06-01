@@ -1,3 +1,3 @@
-import { ProcessedSO } from "../../src/modules/serviceOrder/types";
+import { ProcessedSO } from "@/modules/serviceOrder/types";
 
 export default ProcessedSO;

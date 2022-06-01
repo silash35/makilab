@@ -1,3 +1,3 @@
-import { ProcessedClient } from "../../src/modules/client/types";
+import { ProcessedClient } from "@/modules/client/types";
 
 export default ProcessedClient;

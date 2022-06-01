@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig } from "vite";
 import { VitePluginNode } from "vite-plugin-node";
 
@@ -12,6 +13,13 @@ export default defineConfig({
       appPath: "./src/index.ts",
     }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@config": path.resolve(__dirname, "./config"),
+      "@test": path.resolve(__dirname, "./test"),
+    },
+  },
   test: {
     globals: true,
     testTimeout: 60 * 1000, // 60 seconds

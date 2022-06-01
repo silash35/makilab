@@ -11,6 +11,12 @@
     "module": "esnext",
     "moduleResolution": "node",
     "target": "ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@config": ["./config"],
+      "@test/*": ["test/*"]
+    },
     "types": ["vite/client", "vitest/globals"]
   },
   "include": ["**/*.ts"],

@@ -1,9 +1,8 @@
+import PublicSO from "@test/types/publicSO";
+import app from "@test/utils/app";
+import { createClient } from "@test/utils/client";
+import { generateClient, generateServiceOrder } from "@test/utils/generators";
 import request from "supertest";
-
-import PublicSO from "../types/publicSO";
-import app from "../utils/app";
-import { createClient } from "../utils/client";
-import { generateClient, generateServiceOrder } from "../utils/generators";
 
 describe("Search API - POST", () => {
   it("should search by ID", async () => {

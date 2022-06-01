@@ -1,10 +1,9 @@
+import app from "@test/utils/app";
+import { createClient } from "@test/utils/client";
+import { generateClient, generateServiceOrder } from "@test/utils/generators";
+import getAuth from "@test/utils/getAuth";
+import testSafety from "@test/utils/testSafety";
 import request from "supertest";
-
-import app from "../../utils/app";
-import { createClient } from "../../utils/client";
-import { generateClient, generateServiceOrder } from "../../utils/generators";
-import getAuth from "../../utils/getAuth";
-import testSafety from "../../utils/testSafety";
 
 describe("Clients API - DELETE", () => {
   it("should return 401 when unauthenticated", async () => {
