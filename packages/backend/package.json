@@ -36,6 +36,7 @@
   "devDependencies": {
     "@faker-js/faker": "^7.1.0",
     "@types/supertest": "^2.0.12",
+    "c8": "^7.11.3",
     "supertest": "^6.2.3",
     "vitest": "^0.13.0"
   }

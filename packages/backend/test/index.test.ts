@@ -13,3 +13,8 @@ describe("Home Page", () => {
       });
   });
 });
+
+import { afterAll } from "vitest";
+
+import cleanUp from "./utils/cleanUp";
+afterAll(cleanUp);

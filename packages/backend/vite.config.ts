@@ -12,4 +12,8 @@ export default defineConfig({
       appPath: "./src/index.ts",
     }),
   ],
+  test: {
+    testTimeout: 60 * 1000, // 60 seconds
+    hookTimeout: 2 * 60 * 1000, // 2 minutes
+  },
 });

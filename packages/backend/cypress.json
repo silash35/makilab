@@ -1,6 +1,0 @@
-{
-  "baseUrl": "http://localhost:1234",
-  "experimentalStudio": true,
-  "experimentalSessionAndOrigin": true,
-  "chromeWebSecurity": false
-}
