@@ -12,7 +12,7 @@ function ServiceOrderPage({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const serviceOrder = JSON.parse(ServiceOrderJSON) as ServiceOrder;
 
-  const fallback = { [`/api/admin/serviceOrders?id=${id}`]: serviceOrder };
+  const fallback = { [`/api/private/serviceOrders/${id}`]: serviceOrder };
 
   return (
     <>

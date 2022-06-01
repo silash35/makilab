@@ -137,7 +137,7 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
         <EditDialog title="Editar Equipamento" submit={handleEditSO}>
           <ServiceOrderInputs serviceOrder={serviceOrder} />
         </EditDialog>
-        <Link href={`/admin/SO?id=${serviceOrder.id}`} passHref>
+        <Link href={`/admin/SO/${serviceOrder.id}`} passHref>
           <Button variant="outlined" component="a">
             Gerar PDF
           </Button>

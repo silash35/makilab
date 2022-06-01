@@ -30,7 +30,7 @@ function NewServiceOrder() {
       setError(error);
     } else {
       const createdSO = client.serviceOrders[client.serviceOrders.length - 1];
-      router.push(`/admin/SO?id=${String(createdSO.id)}`);
+      router.push(`/admin/SO/${String(createdSO.id)}`);
     }
   };
 
