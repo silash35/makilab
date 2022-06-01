@@ -1,21 +1,10 @@
 import request from "supertest";
 import { describe, expect, it } from "vitest";
 
+import PublicSO from "../types/publicSO";
 import app from "../utils/app";
 import { createClient } from "../utils/client";
 import { generateClient, generateServiceOrder } from "../utils/generators";
-
-interface ServiceOrder {
-  id: number;
-  name: string;
-  isUnderWarranty: boolean;
-  isBudgetApproved: boolean | null;
-  createdAt: Date;
-  budgetedAt: Date | null;
-  budgetAnsweredAt: Date | null;
-  repairedAt: Date | null;
-  deliveredToCustomerAt: Date | null;
-}
 
 describe("Search API - POST", () => {
   it("should search by ID", async () => {
@@ -29,7 +18,7 @@ describe("Search API - POST", () => {
       .send({ search: serviceOrderId })
       .expect(200)
       .then((response) => {
-        const createdServiceOrder = response.body as ServiceOrder;
+        const createdServiceOrder = response.body as PublicSO;
 
         expect(createdServiceOrder.id).equal(serviceOrderId);
         expect(createdServiceOrder.isUnderWarranty).equal(serviceOrder.isUnderWarranty);
