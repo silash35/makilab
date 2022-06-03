@@ -66,6 +66,7 @@ model Budget {
   id        Int      @id @unique @default(autoincrement())
   createdAt DateTime @default(now())
 
+  name           String
   serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id])
   serviceOrderId Int
 

@@ -1,3 +1,5 @@
+import type { Prisma } from "@prisma/client";
+
 import prisma from "@/database/prisma";
 
 class BudgetService {
@@ -18,6 +20,26 @@ class BudgetService {
         itens: true,
       },
     });
+  }
+
+  async create(serviceOrderId: number, budget: Prisma.BudgetCreateManyServiceOrderInput) {
+    return (
+      await prisma.serviceOrder.update({
+        where: { id: serviceOrderId },
+        data: {
+          budget: {
+            create: budget,
+          },
+        },
+        include: {
+          budget: {
+            include: {
+              itens: true,
+            },
+          },
+        },
+      })
+    ).budget;
   }
 
   // Write functions
