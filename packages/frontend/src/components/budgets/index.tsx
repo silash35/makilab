@@ -1,70 +1,65 @@
-import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import styles from "./budgets.module.scss";
+import NewBudgetCard from "@/components/budgets/newBudgetCard";
+import useBudgets from "@/hooks/useBudgets";
+import TBudget from "@/types/budget";
 
-// import useBudgets from "@/hooks/useBudgets";
+import styles from "./budgets.module.scss";
 
 interface Props {
   id: string;
 }
 
 export default function Budgets({ id }: Props) {
-  // const { budgets, mutate } = useBudgets(id);
-  /*
-  if (!serviceOrder) {
+  const { budgets, mutate } = useBudgets(id);
+
+  if (!budgets) {
     return (
       <Stack height="100%" justifyContent="center" alignItems="center">
         <CircularProgress />
       </Stack>
     );
   }
-  */
 
   return (
     <div className={styles.container}>
       <h1>Orçamentos da OS {id}</h1>
       <div className={styles.budgets}>
-        <div className={styles.addCard}>
-          <Card>
-            <CardActionArea>
-              <div className={styles.buttonContent}>
-                <AddIcon fontSize="large" />
-                <Typography variant="body1" component="p">
-                  Novo Orçamento
-                </Typography>
-              </div>
-            </CardActionArea>
-          </Card>
-        </div>
+        <NewBudgetCard serviceOrderId={id} number={budgets.length + 1} mutate={mutate} />
 
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-          <BudgetCard key={i} />
+        {budgets.map((budget) => (
+          <BudgetCard budget={budget} key={budget.id} />
         ))}
       </div>
     </div>
   );
 }
 
-const BudgetCard = () => {
+const BudgetCard = ({ budget }: { budget: TBudget }) => {
+  const reais = (budget.total / 100).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   return (
     <Card>
       <CardContent>
         <Typography variant="h5" component="div">
-          Orçamento #1
+          {budget.name}
         </Typography>
         <Typography variant="h6" component="div">
-          R$ 532,00
+          {reais}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Deletar</Button>
         <Button size="small">Ver mais</Button>
+        <Button size="small">Deletar</Button>
       </CardActions>
     </Card>
   );

@@ -7,23 +7,6 @@
   }
 }
 
-.addCard {
-  display: contents;
-
-  button {
-    height: 100%;
-  }
-
-  .buttonContent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    height: 100%;
-  }
-}
-
 .budgets {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);

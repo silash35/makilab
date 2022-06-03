@@ -1,0 +1,17 @@
+.addCard {
+  display: contents;
+
+  button {
+    height: 100%;
+  }
+
+  .buttonContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    min-height: 142px;
+  }
+}
