@@ -1,0 +1,32 @@
+.container {
+  max-width: 80vw;
+  margin: auto;
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.addCard {
+  display: contents;
+
+  button {
+    height: 100%;
+  }
+
+  .buttonContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+  }
+}
+
+.budgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-evenly;
+  grid-gap: 2em;
+}
