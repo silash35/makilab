@@ -5,15 +5,16 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useState } from "react";
+import { ComponentProps, useState } from "react";
 
 interface Props {
   title: string;
   text: string;
+  buttonProps?: ComponentProps<typeof Button>;
   submit: () => Promise<boolean>;
 }
 
-export default function DeleteDialog({ title, text, submit }: Props) {
+export default function DeleteDialog({ title, text, buttonProps, submit }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +28,7 @@ export default function DeleteDialog({ title, text, submit }: Props) {
 
   return (
     <>
-      <Button variant="outlined" onClick={() => setOpenDialog(true)}>
+      <Button variant="outlined" {...buttonProps} onClick={() => setOpenDialog(true)}>
         Deletar
       </Button>
 

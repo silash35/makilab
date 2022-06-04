@@ -6,6 +6,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import { FormEvent, useState } from "react";
 
@@ -24,10 +25,14 @@ interface Props {
 
 export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { setError } = useError();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData) as unknown as TBudgetInput;
 
@@ -39,6 +44,7 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
       mutate();
       setOpenDialog(false);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -59,6 +65,7 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
           </CardActionArea>
         </Card>
       </div>
+
       <Dialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}
@@ -73,8 +80,6 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
                 name: "name",
                 label: "Nome do novo orçamento",
                 required: true,
-                variant: "outlined",
-                margin: "normal",
                 fullWidth: true,
               }}
             />
@@ -86,6 +91,7 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
             </Button>
           </DialogActions>
         </form>
+        {isLoading ? <LinearProgress /> : <div style={{ height: 4 }} />}
       </Dialog>
     </>
   );
