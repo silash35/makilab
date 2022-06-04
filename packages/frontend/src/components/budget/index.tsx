@@ -52,8 +52,6 @@ export default function BudgetTable({ id }: Props) {
       mutate();
       return true;
     }
-
-    return true;
   };
 
   const itens = budget.itens;
