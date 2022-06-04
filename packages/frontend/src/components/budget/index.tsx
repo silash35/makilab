@@ -1,37 +1,70 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { FormEvent, useState } from "react";
+
+import useBudget from "@/hooks/useBudget";
+import useError from "@/hooks/useError";
+import { TBudgetItemInput } from "@/types/budgetItem";
+import centsToBRL from "@/utils/centsToBRL";
+import addBudgetItem from "@/utils/mutations/addBudgetItem";
 
 import styles from "./budget.module.scss";
+import Item from "./item";
+import NewItemDialog from "./newItemDialog";
 
-const rows = [
-  {
-    name: "Lorem ipsum dolor et eros augue",
-    quantity: "2",
-    price: "R$ 500,00",
-    total: "R$ 1.500,00",
-  },
-  { name: "Lorem ipsum", price: "R$ 5,00", quantity: "0", total: "R$ 1.500,00" },
-  { name: "Lorem ipsum dolor", price: "R$ 5000,00", quantity: "10", total: "R$ 1.500,00" },
-];
+interface Props {
+  id: string;
+}
 
-export default function BudgetTable() {
+export default function BudgetTable({ id }: Props) {
+  const [openDialog, setOpenDialog] = useState(false);
+  const { budget, mutate } = useBudget(id);
+  const { setError } = useError();
+
+  if (!budget) {
+    return (
+      <Stack height="100%" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Stack>
+    );
+  }
+
+  const newItem = async (e: FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData) as unknown as TBudgetItemInput;
+
+    const { error } = await addBudgetItem(Number(id), data);
+
+    if (error) {
+      setError(error);
+      return false;
+    } else {
+      mutate();
+      return true;
+    }
+
+    return true;
+  };
+
+  const itens = budget.itens;
+
   return (
     <TableContainer component={Paper}>
       <div className={styles.header}>
         <h1>Editar Orçamento</h1>
-        <Button>Novo Item</Button>
+        <Button onClick={() => setOpenDialog(true)}>Novo Item</Button>
         <Button>Gerar PDF</Button>
       </div>
-
       <Table size="small" aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -43,37 +76,37 @@ export default function BudgetTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Item key={row.name} item={row} />
+          {itens.map((item) => (
+            <Item key={item.id} item={item} />
           ))}
           <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-            <TableCell align="left">Total</TableCell>
-            <TableCell align="right">R$ 500,00</TableCell>
-            <TableCell align="right">12</TableCell>
-            <TableCell align="right">R$ 1000,00</TableCell>
-            <TableCell align="right"></TableCell>
+            {itens.length === 0 ? (
+              <TableCell colSpan={5} align="center">
+                <div className={styles.empty}>
+                  <p>Orçamento Vazio</p>
+                  <p>Comece adicionando um novo item</p>
+                  <IconButton onClick={() => setOpenDialog(true)}>
+                    <AddIcon color="primary" />
+                  </IconButton>
+                </div>
+              </TableCell>
+            ) : (
+              <>
+                <TableCell align="left">Total</TableCell>
+                <TableCell align="right">
+                  {itens.reduce((acc, item) => acc + item.quantity, 0)}
+                </TableCell>
+                <TableCell align="right">
+                  {centsToBRL(itens.reduce((acc, item) => acc + item.price, 0))}
+                </TableCell>
+                <TableCell align="right">{centsToBRL(budget.total)}</TableCell>
+                <TableCell align="right"></TableCell>
+              </>
+            )}
           </TableRow>
         </TableBody>
       </Table>
+      <NewItemDialog open={openDialog} setOpen={setOpenDialog} submit={newItem} />
     </TableContainer>
   );
 }
-
-const Item = ({ item }: { item: typeof rows[0] }) => {
-  return (
-    <TableRow key={item.name}>
-      <TableCell align="left">{item.name}</TableCell>
-      <TableCell align="right">{item.quantity}</TableCell>
-      <TableCell align="right">{item.price}</TableCell>
-      <TableCell align="right">{item.total}</TableCell>
-      <TableCell align="right">
-        <IconButton aria-label="Deletar">
-          <DeleteIcon />
-        </IconButton>
-        <IconButton aria-label="Editar">
-          <EditIcon />
-        </IconButton>
-      </TableCell>
-    </TableRow>
-  );
-};

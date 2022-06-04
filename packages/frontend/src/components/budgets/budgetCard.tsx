@@ -8,6 +8,7 @@ import Link from "next/link";
 import DeleteDialog from "@/components/common/deleteDialog";
 import useError from "@/hooks/useError";
 import TBudget from "@/types/budget";
+import centsToBRL from "@/utils/centsToBRL";
 import deleteBudget from "@/utils/mutations/deleteBudget";
 
 interface Props {
@@ -18,10 +19,7 @@ interface Props {
 export default function BudgetCard({ budget, mutate }: Props) {
   const { setError } = useError();
 
-  const reais = (budget.total / 100).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+  const reais = centsToBRL(budget.total);
 
   const handleDeleteBudget = async () => {
     const { error } = await deleteBudget(budget.id);

@@ -1,12 +1,4 @@
-interface BudgetItem {
-  id: number;
-  createdAt: Date;
-  budgetId: number;
-
-  name: string;
-  price: number;
-  quantity: number;
-}
+import TBudgetItem from "./budgetItem";
 
 interface TBudget {
   id: number;
@@ -14,7 +6,7 @@ interface TBudget {
   name: string;
   serviceOrderId: number;
 
-  itens: BudgetItem[];
+  itens: TBudgetItem[];
   total: number;
 }
 

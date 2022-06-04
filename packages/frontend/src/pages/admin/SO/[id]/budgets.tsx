@@ -6,13 +6,10 @@ import Budgets from "@/components/budgets";
 import ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/request";
 
-function BudgetsPage({
-  id,
-  ServiceOrderJSON,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const serviceOrder = JSON.parse(ServiceOrderJSON) as ServiceOrder;
+function BudgetsPage({ id, budgetsJSON }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const budgets = JSON.parse(budgetsJSON) as ServiceOrder;
 
-  const fallback = { [`/api/private/budget/serviceOrder/${id}`]: serviceOrder };
+  const fallback = { [`/api/private/budget/serviceOrder/${id}`]: budgets };
 
   return (
     <>
@@ -37,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       id,
-      ServiceOrderJSON: JSON.stringify(response),
+      budgetsJSON: JSON.stringify(response),
     },
     notFound: !id || !response,
   };
