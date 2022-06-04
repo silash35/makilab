@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
 // Create a theme instance.
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    // mode: "dark",
     primary: {
       light: variables.primaryLight,
       main: variables.primaryMain,
