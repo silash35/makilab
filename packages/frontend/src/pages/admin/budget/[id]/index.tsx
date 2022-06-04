@@ -1,5 +1,7 @@
 import Head from "next/head";
 
+import BudgetTable from "@/components/budget";
+
 function EditBudget() {
   return (
     <>
@@ -7,7 +9,7 @@ function EditBudget() {
         <title>Editar Orçamento</title>
       </Head>
 
-      <div>Editar Orçamento</div>
+      <BudgetTable />
     </>
   );
 }
