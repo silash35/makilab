@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -8,6 +9,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+
+import styles from "./budget.module.scss";
 
 const rows = [
   {
@@ -23,9 +26,13 @@ const rows = [
 export default function BudgetTable() {
   return (
     <TableContainer component={Paper}>
-      <h1>Editar Orçamento</h1>
+      <div className={styles.header}>
+        <h1>Editar Orçamento</h1>
+        <Button>Novo Item</Button>
+        <Button>Gerar PDF</Button>
+      </div>
 
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table size="small" aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="left">Nome</TableCell>
@@ -37,7 +44,7 @@ export default function BudgetTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Item key={row.name} row={row} />
+            <Item key={row.name} item={row} />
           ))}
           <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
             <TableCell align="left">Total</TableCell>
