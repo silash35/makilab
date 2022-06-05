@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { create, deleteOne, getAll, getOne } from "@/modules/budget/controller";
+import { create, deleteOne, getAll, getOne, update } from "@/modules/budget/controller";
 
 const router = Router();
 
@@ -14,6 +14,10 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("", async (req: Request, res: Response) => {
   return res.status(200).json(await create(req.body.serviceOrderId, req.body.budget));
+});
+
+router.put("", async (req: Request, res: Response) => {
+  return res.status(200).json(await update(req.body.id, req.body));
 });
 
 router.delete("", async (req: Request, res: Response) => {

@@ -22,6 +22,7 @@ class BudgetService {
     });
   }
 
+  // Write functions
   async create(serviceOrderId: number, budget: Prisma.BudgetCreateManyServiceOrderInput) {
     return (
       await prisma.serviceOrder.update({
@@ -42,7 +43,16 @@ class BudgetService {
     ).budget;
   }
 
-  // Write functions
+  async update(id: number, budget: Prisma.BudgetUpdateInput) {
+    return await prisma.budget.update({
+      where: { id },
+      data: budget,
+      include: {
+        itens: true,
+      },
+    });
+  }
+
   async deleteOne(id: number) {
     await prisma.budget.delete({
       where: { id },

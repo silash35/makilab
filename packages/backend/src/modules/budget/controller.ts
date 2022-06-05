@@ -17,9 +17,13 @@ const create = async (serviceOrderId: unknown, budget: unknown) => {
   );
 };
 
+const update = async (id: unknown, budget: unknown) => {
+  return processBudget(await budgetService.update(validateID(id), validateBudget(budget)));
+};
+
 const deleteOne = async (id: unknown) => {
   await budgetService.deleteOne(validateID(id));
   return { deletedID: id };
 };
 
-export { create, deleteOne, getAll, getOne };
+export { create, deleteOne, getAll, getOne, update };
