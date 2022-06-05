@@ -3,10 +3,9 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Link from "next/link";
-import type { FormEvent } from "react";
 
 import DeleteDialog from "@/components/common/deleteDialog";
-import EditDialog from "@/components/common/editDialog";
+import { FormDialogButton } from "@/components/common/dialogs/formDialog";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
 import useError from "@/hooks/useError";
@@ -39,20 +38,10 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
     }
   };
 
-  const handleEditSO = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData) as unknown as TServiceOrderInput;
-
-    const { error } = await updateSO(serviceOrder.id, data);
-
-    if (error) {
-      setError(error);
-      return false;
-    } else {
-      reload();
-      return true;
-    }
+  const editSO = async (data: unknown) => {
+    const { error } = await updateSO(serviceOrder.id, data as TServiceOrderInput);
+    reload();
+    return error;
   };
 
   return (
@@ -134,9 +123,17 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
           submit={handleDeleteSO}
         />
         {owner.email && <SendMailDialog to={owner.email} defaultText={serviceOrder.defaultEmail} />}
-        <EditDialog title="Editar Equipamento" submit={handleEditSO}>
-          <ServiceOrderInputs serviceOrder={serviceOrder} />
-        </EditDialog>
+        <FormDialogButton
+          buttonText="Editar Equipamento"
+          formDialogProps={{
+            title: "Editar Equipamento",
+            children: <ServiceOrderInputs serviceOrder={serviceOrder} />,
+            yesButtonText: "Confirmar",
+            showLoading: true,
+            submit: editSO,
+          }}
+        />
+
         <Link href={`/admin/SO/${serviceOrder.id}`} passHref>
           <Button variant="outlined" component="a">
             Gerar PDF

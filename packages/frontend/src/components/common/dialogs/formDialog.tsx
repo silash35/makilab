@@ -85,7 +85,7 @@ const FormDialogButton = (props: FormDialogButtonProps) => {
       {props.button ? (
         props.button({ onClick: () => setOpen(true) })
       ) : (
-        <Button onClick={() => setOpen(true)} {...props.buttonProps}>
+        <Button variant="outlined" onClick={() => setOpen(true)} {...props.buttonProps}>
           {props.buttonText}
         </Button>
       )}

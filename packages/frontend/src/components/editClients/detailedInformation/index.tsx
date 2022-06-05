@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
-import type { FormEvent } from "react";
 
 import DeleteDialog from "@/components/common/deleteDialog";
-import EditDialog from "@/components/common/editDialog";
+import { FormDialogButton } from "@/components/common/dialogs/formDialog";
 import ClientInputs from "@/components/common/inputs/client";
 import SendMailDialog from "@/components/common/sendMailDialog";
 import ServiceOrderCard from "@/components/editClients/detailedInformation/serviceOrderCard";
@@ -33,20 +32,10 @@ export default function DetailedInformation({ client, reload }: Props) {
     }
   };
 
-  const handleEditClient = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData) as unknown as TClientInput;
-
-    const { error } = await updateClient(client.id, data);
-
-    if (error) {
-      setError(error);
-      return false;
-    } else {
-      reload();
-      return true;
-    }
+  const editClient = async (data: unknown) => {
+    const { error } = await updateClient(client.id, data as TClientInput);
+    reload();
+    return error;
   };
 
   return (
@@ -68,9 +57,16 @@ export default function DetailedInformation({ client, reload }: Props) {
           submit={handleDeleteClient}
         />
         {client.email && <SendMailDialog to={client.email} defaultText="" />}
-        <EditDialog title="Editar Cliente" submit={handleEditClient}>
-          <ClientInputs client={client} />
-        </EditDialog>
+        <FormDialogButton
+          buttonText="Editar Cliente"
+          formDialogProps={{
+            title: "Editar Cliente",
+            children: <ClientInputs client={client} />,
+            yesButtonText: "Confirmar",
+            showLoading: true,
+            submit: editClient,
+          }}
+        />
       </div>
 
       {client.serviceOrders.length > 0 && (
