@@ -75,7 +75,7 @@ export default function BudgetTable({ id }: Props) {
         </TableHead>
         <TableBody>
           {itens.map((item) => (
-            <Item key={item.id} item={item} />
+            <Item key={item.id} item={item} mutate={mutate} />
           ))}
           <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
             {itens.length === 0 ? (
