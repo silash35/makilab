@@ -4,11 +4,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Link from "next/link";
 
-import DeleteDialog from "@/components/common/deleteDialog";
+import { ConfirmationDialogButton } from "@/components/common/dialogs/confirmationDialog";
 import { FormDialogButton } from "@/components/common/dialogs/formDialog";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
 import SendMailDialog from "@/components/common/sendMailDialog";
-import useError from "@/hooks/useError";
 import { TServiceOrderInput, TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 import deleteSO from "@/utils/mutations/deleteSO";
 import updateSO from "@/utils/mutations/updateSO";
@@ -22,20 +21,12 @@ interface Props {
 }
 
 export default function DetailedInformation({ serviceOrder, reload }: Props) {
-  const { setError } = useError();
-
   const owner = serviceOrder.owner;
 
   const handleDeleteSO = async () => {
     const { error } = await deleteSO(serviceOrder.id);
-
-    if (error) {
-      setError(error);
-      return false;
-    } else {
-      reload();
-      return true;
-    }
+    reload();
+    return error;
   };
 
   const editSO = async (data: unknown) => {
@@ -117,10 +108,15 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
       </Box>
 
       <div className={styles.buttonsContainer}>
-        <DeleteDialog
-          title={`Deletar ${serviceOrder.id}`}
-          text={`Tem certeza que deseja excluir a OS ${serviceOrder.id}?`}
-          submit={handleDeleteSO}
+        <ConfirmationDialogButton
+          buttonText="Deletar"
+          confirmationDialogProps={{
+            title: `Deletar ${serviceOrder.id}`,
+            text: `Tem certeza que deseja excluir a OS ${serviceOrder.id}?`,
+            yesButtonText: "Deletar",
+            showLoading: true,
+            submit: handleDeleteSO,
+          }}
         />
         {owner.email && <SendMailDialog to={owner.email} defaultText={serviceOrder.defaultEmail} />}
         <FormDialogButton

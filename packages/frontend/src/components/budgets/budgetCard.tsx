@@ -5,8 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
-import DeleteDialog from "@/components/common/deleteDialog";
-import useError from "@/hooks/useError";
+import { ConfirmationDialogButton } from "@/components/common/dialogs/confirmationDialog";
 import TBudget from "@/types/budget";
 import centsToBRL from "@/utils/centsToBRL";
 import deleteBudget from "@/utils/mutations/deleteBudget";
@@ -17,20 +16,12 @@ interface Props {
 }
 
 export default function BudgetCard({ budget, mutate }: Props) {
-  const { setError } = useError();
-
   const reais = centsToBRL(budget.total);
 
   const handleDeleteBudget = async () => {
     const { error } = await deleteBudget(budget.id);
-
-    if (error) {
-      setError(error);
-      return false;
-    } else {
-      mutate();
-      return true;
-    }
+    mutate();
+    return error;
   };
 
   return (
@@ -47,11 +38,17 @@ export default function BudgetCard({ budget, mutate }: Props) {
         <Link href={`/admin/budget/${budget.id}`} passHref>
           <Button component="a">Ver mais</Button>
         </Link>
-        <DeleteDialog
-          title={`Deletar ${budget.name}`}
-          text="Tem certeza que deseja excluir este orçamento? Não será possível recuperar depois."
+
+        <ConfirmationDialogButton
+          buttonText="Deletar"
           buttonProps={{ variant: "text" }}
-          submit={handleDeleteBudget}
+          confirmationDialogProps={{
+            title: `Deletar ${budget.name}`,
+            text: "Tem certeza que deseja excluir este orçamento? Não será possível recuperar depois.",
+            yesButtonText: "Deletar",
+            showLoading: true,
+            submit: handleDeleteBudget,
+          }}
         />
       </CardActions>
     </Card>
