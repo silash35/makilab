@@ -1,35 +1,31 @@
-import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
+import { FormDialog, FormDialogButton } from "@/components/common/dialogs/formDialog";
+import BudgetItemInputs from "@/components/common/inputs/budgetItem";
+import TextInput from "@/components/common/inputs/fields/text";
 import useBudget from "@/hooks/useBudget";
-import useError from "@/hooks/useError";
+import { TBudgetInput } from "@/types/budget";
 import { TBudgetItemInput } from "@/types/budgetItem";
-import centsToBRL from "@/utils/centsToBRL";
 import addBudgetItem from "@/utils/mutations/addBudgetItem";
+import updateBudget from "@/utils/mutations/updateBudget";
 
 import styles from "./budget.module.scss";
-import Item from "./item";
-import NewItemDialog from "./newItemDialog";
+import BudgetTable from "./table";
 
 interface Props {
   id: string;
 }
 
-export default function BudgetTable({ id }: Props) {
+export default function BudgetTableContainer({ id }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
   const { budget, mutate } = useBudget(id);
-  const { setError } = useError();
 
   if (!budget) {
     return (
@@ -39,72 +35,65 @@ export default function BudgetTable({ id }: Props) {
     );
   }
 
-  const newItem = async (e: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData) as unknown as TBudgetItemInput;
-
-    const { error } = await addBudgetItem(Number(id), data);
-
-    if (error) {
-      setError(error);
-      return false;
-    } else {
-      mutate();
-      return true;
-    }
+  const newItem = async (data: unknown) => {
+    const { error } = await addBudgetItem(Number(id), data as TBudgetItemInput);
+    mutate();
+    return error;
   };
 
-  const itens = budget.itens;
+  const editBudget = async (data: unknown) => {
+    const { error } = await updateBudget(Number(id), data as TBudgetInput);
+    mutate();
+    return error;
+  };
 
   return (
     <TableContainer component={Paper}>
       <div className={styles.header}>
-        <h1>Editar Orçamento</h1>
+        <div className={styles.side}>
+          <h1>{budget.name}</h1>
+          <FormDialogButton
+            button={(props) => (
+              <IconButton aria-label="Editar Orçamento" size="small" {...props}>
+                <EditIcon fontSize="small" />
+              </IconButton>
+            )}
+            formDialogProps={{
+              title: "Editar Orçamento",
+              children: (
+                <TextInput
+                  defaultValue={budget.name}
+                  textFieldProps={{
+                    name: "name",
+                    label: "Nome do orçamento",
+                    margin: "dense",
+                    required: true,
+                    fullWidth: true,
+                  }}
+                />
+              ),
+              yesButtonText: "Confirmar",
+              showLoading: true,
+              submit: editBudget,
+            }}
+          />
+        </div>
         <Button onClick={() => setOpenDialog(true)}>Novo Item</Button>
         <Button>Gerar PDF</Button>
       </div>
-      <Table size="small" aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Nome</TableCell>
-            <TableCell align="right">Quantidade</TableCell>
-            <TableCell align="right">Valor unitário</TableCell>
-            <TableCell align="right">Valor Total</TableCell>
-            <TableCell align="right">Ações</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {itens.map((item) => (
-            <Item key={item.id} item={item} mutate={mutate} />
-          ))}
-          <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-            {itens.length === 0 ? (
-              <TableCell colSpan={5} align="center">
-                <div className={styles.empty}>
-                  <p>Orçamento Vazio</p>
-                  <p>Comece adicionando um novo item</p>
-                  <IconButton onClick={() => setOpenDialog(true)}>
-                    <AddIcon color="primary" />
-                  </IconButton>
-                </div>
-              </TableCell>
-            ) : (
-              <>
-                <TableCell align="left">Total</TableCell>
-                <TableCell align="right">
-                  {itens.reduce((acc, item) => acc + item.quantity, 0)}
-                </TableCell>
-                <TableCell align="right">
-                  {centsToBRL(itens.reduce((acc, item) => acc + item.price, 0))}
-                </TableCell>
-                <TableCell align="right">{centsToBRL(budget.total)}</TableCell>
-                <TableCell align="right"></TableCell>
-              </>
-            )}
-          </TableRow>
-        </TableBody>
-      </Table>
-      <NewItemDialog open={openDialog} setOpen={setOpenDialog} submit={newItem} />
+
+      <BudgetTable budget={budget} openNewItemDialog={() => setOpenDialog(true)} mutate={mutate} />
+
+      <FormDialog
+        title="Criar Novo Item"
+        yesButtonText="Enviar"
+        showLoading={true}
+        submit={newItem}
+        open={openDialog}
+        setOpen={setOpenDialog}
+      >
+        <BudgetItemInputs />
+      </FormDialog>
     </TableContainer>
   );
 }

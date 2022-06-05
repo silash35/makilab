@@ -22,7 +22,7 @@ interface FormDialogProps {
   setOpen: (open: boolean) => void;
 }
 
-export default function FormDialog(props: FormDialogProps) {
+const FormDialog = (props: FormDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { setError } = useError();
 
@@ -67,7 +67,7 @@ export default function FormDialog(props: FormDialogProps) {
       {isLoading && props.showLoading ? <LinearProgress /> : <div style={{ height: 4 }} />}
     </Dialog>
   );
-}
+};
 
 interface FormDialogButtonProps {
   buttonText?: string;
@@ -77,7 +77,7 @@ interface FormDialogButtonProps {
   formDialogProps: Omit<FormDialogProps, "open" | "setOpen">;
 }
 
-export function FormDialogButton(props: FormDialogButtonProps) {
+const FormDialogButton = (props: FormDialogButtonProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -92,4 +92,7 @@ export function FormDialogButton(props: FormDialogButtonProps) {
       <FormDialog {...props.formDialogProps} open={open} setOpen={setOpen} />
     </>
   );
-}
+};
+
+export default FormDialog;
+export { FormDialog, FormDialogButton };
