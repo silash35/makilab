@@ -16,7 +16,7 @@ interface FormDialogProps {
   yesButtonText: string;
   showLoading: boolean;
 
-  submit: (data: unknown) => Promise<string | undefined>;
+  submit: (data: unknown, formData: FormData) => Promise<string | undefined>;
 
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -32,7 +32,7 @@ const FormDialog = (props: FormDialogProps) => {
     const data = Object.fromEntries(formData);
 
     setIsLoading(true);
-    const error = await props.submit(data);
+    const error = await props.submit(data, formData);
 
     if (error) {
       setError(error);

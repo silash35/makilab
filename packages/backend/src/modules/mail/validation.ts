@@ -9,4 +9,16 @@ const validateString = (variable: unknown, error = "string") => {
   return string;
 };
 
-export { validateString };
+const validateAttachment = (file: Express.Multer.File | undefined) => {
+  if (file) {
+    return [
+      {
+        filename: file.originalname,
+        content: file.buffer,
+      },
+    ];
+  }
+
+  return undefined;
+};
+export { validateAttachment, validateString };

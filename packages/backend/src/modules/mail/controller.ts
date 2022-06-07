@@ -1,10 +1,11 @@
 import mailService from "./service";
-import { validateString } from "./validation";
+import { validateAttachment, validateString } from "./validation";
 
-const sendMail = async (to: unknown, text: unknown) => {
+const sendMail = async (to: unknown, text: unknown, file: Express.Multer.File | undefined) => {
   const testMessageUrl = await mailService.sendMail(
     validateString(to, "e-mail address"),
-    validateString(text)
+    validateString(text),
+    validateAttachment(file)
   );
 
   return { status: "success", testMessageUrl };

@@ -8,6 +8,7 @@ interface Req {
   url: string;
   method: Method;
   body?: unknown;
+  notJson?: boolean;
 }
 
 export default async function request(req: Req, ctx?: Pick<NextPageContext, "req">) {
@@ -18,7 +19,7 @@ export default async function request(req: Req, ctx?: Pick<NextPageContext, "req
 
   // Set headers
   const headers: HeadersInit = {};
-  if (body) {
+  if (body && !req.notJson) {
     headers["Content-Type"] = "application/json";
   }
   const token = parseCookies(ctx).token;
@@ -29,7 +30,7 @@ export default async function request(req: Req, ctx?: Pick<NextPageContext, "req
     res = await fetch(`${config.BACKEND_URL}${url}`, {
       method,
       headers,
-      body: body ? JSON.stringify(body) : undefined,
+      body: body ? (req.notJson ? (body as BodyInit) : JSON.stringify(body)) : undefined,
     });
     json = await res.json();
   } catch (e) {

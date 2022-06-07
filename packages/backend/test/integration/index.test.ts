@@ -12,5 +12,7 @@ describe("Home Page", () => {
   });
 });
 
+/*
 import cleanUp from "@test/utils/cleanUp";
 afterAll(cleanUp);
+*/

@@ -1,9 +1,10 @@
 import config from "@config";
 import nodemailer from "nodemailer";
+import type Mail from "nodemailer/lib/mailer";
 const { SITE_URL, COMPANY } = config;
 
 class MailService {
-  async sendMail(to: string, text: string) {
+  async sendMail(to: string, text: string, attachments?: Mail.Attachment[]) {
     const transporter = nodemailer.createTransport({
       host: import.meta.env.EMAIL_HOST,
       port: 587,
@@ -19,6 +20,7 @@ class MailService {
       from: `"${COMPANY.name}" <${import.meta.env.EMAIL_USER}>`,
       to: `${import.meta.env.EMAIL_USER}, ${to}`,
       subject: "Atualizações sobre o seu equipamento",
+      attachments,
       text: text,
       html: `
       <div
