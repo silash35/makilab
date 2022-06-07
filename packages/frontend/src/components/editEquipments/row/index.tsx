@@ -6,10 +6,13 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 
+import { FormDialogButton } from "@/components/common/dialogs/formDialog";
+import ServiceOrderStatusInputs from "@/components/common/inputs/serviceOrderStatus";
+import type { TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
 import { TServiceOrderWithClient } from "@/types/serviceOrder";
+import updateStatusSO from "@/utils/mutations/updateStatusSO";
 
 import DetailedInformation from "../detailedInformation";
-import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./row.module.scss";
 
 interface Props {
@@ -19,6 +22,12 @@ interface Props {
 
 export default function Equipment({ serviceOrder, reload }: Props) {
   const [openRow, setOpenRow] = useState(false);
+
+  const editStatusSO = async (data: unknown) => {
+    const { error } = await updateStatusSO(serviceOrder.id, data as TServiceOrderUpdateStatusInput);
+    reload();
+    return error;
+  };
 
   return (
     <>
@@ -44,7 +53,17 @@ export default function Equipment({ serviceOrder, reload }: Props) {
           )}
         </TableCell>
         <TableCell align="right">
-          <UpdateStatusDialog serviceOrder={serviceOrder} reload={reload} />
+          <FormDialogButton
+            buttonText="Atualizar Status"
+            buttonProps={{ variant: "contained" }}
+            formDialogProps={{
+              title: "Atualizar Status",
+              children: <ServiceOrderStatusInputs serviceOrder={serviceOrder} />,
+              yesButtonText: "Salvar Alterações",
+              showLoading: true,
+              submit: editStatusSO,
+            }}
+          />
         </TableCell>
       </TableRow>
       <TableRow>

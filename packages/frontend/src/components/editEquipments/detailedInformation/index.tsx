@@ -7,12 +7,14 @@ import Link from "next/link";
 import { ConfirmationDialogButton } from "@/components/common/dialogs/confirmationDialog";
 import { FormDialogButton } from "@/components/common/dialogs/formDialog";
 import ServiceOrderInputs from "@/components/common/inputs/serviceOrder";
+import ServiceOrderStatusInputs from "@/components/common/inputs/serviceOrderStatus";
 import SendMailDialog from "@/components/common/sendMailDialog";
+import type { TServiceOrderUpdateStatusInput } from "@/types/serviceOrder";
 import { TServiceOrderInput, TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 import deleteSO from "@/utils/mutations/deleteSO";
 import updateSO from "@/utils/mutations/updateSO";
+import updateStatusSO from "@/utils/mutations/updateStatusSO";
 
-import UpdateStatusDialog from "../updateStatusDialog";
 import styles from "./detailedInformation.module.scss";
 
 interface Props {
@@ -31,6 +33,12 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
 
   const editSO = async (data: unknown) => {
     const { error } = await updateSO(serviceOrder.id, data as TServiceOrderInput);
+    reload();
+    return error;
+  };
+
+  const editStatusSO = async (data: unknown) => {
+    const { error } = await updateStatusSO(serviceOrder.id, data as TServiceOrderUpdateStatusInput);
     reload();
     return error;
   };
@@ -135,7 +143,17 @@ export default function DetailedInformation({ serviceOrder, reload }: Props) {
             Gerar PDF
           </Button>
         </Link>
-        <UpdateStatusDialog serviceOrder={serviceOrder} reload={reload} />
+        <FormDialogButton
+          buttonText="Atualizar Status"
+          buttonProps={{ variant: "contained" }}
+          formDialogProps={{
+            title: "Atualizar Status",
+            children: <ServiceOrderStatusInputs serviceOrder={serviceOrder} />,
+            yesButtonText: "Salvar Alterações",
+            showLoading: true,
+            submit: editStatusSO,
+          }}
+        />
       </div>
     </Box>
   );
