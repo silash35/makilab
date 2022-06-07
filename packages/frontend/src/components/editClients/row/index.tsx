@@ -13,10 +13,10 @@ import styles from "./row.module.scss";
 
 interface Props {
   client: Client;
-  reload: () => void;
+  mutate: () => void;
 }
 
-export default function ClientRow({ client, reload }: Props) {
+export default function ClientRow({ client, mutate }: Props) {
   const [openRow, setOpenRow] = useState(false);
 
   return (
@@ -38,7 +38,7 @@ export default function ClientRow({ client, reload }: Props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
-            <DetailedInformation client={client} reload={reload} />
+            <DetailedInformation client={client} mutate={mutate} />
           </Collapse>
         </TableCell>
       </TableRow>

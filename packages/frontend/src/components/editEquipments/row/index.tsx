@@ -17,15 +17,15 @@ import styles from "./row.module.scss";
 
 interface Props {
   serviceOrder: TServiceOrderWithClient;
-  reload: () => void;
+  mutate: () => void;
 }
 
-export default function Equipment({ serviceOrder, reload }: Props) {
+export default function Equipment({ serviceOrder, mutate }: Props) {
   const [openRow, setOpenRow] = useState(false);
 
   const editStatusSO = async (data: unknown) => {
     const { error } = await updateStatusSO(serviceOrder.id, data as TServiceOrderUpdateStatusInput);
-    reload();
+    mutate();
     return error;
   };
 
@@ -69,7 +69,7 @@ export default function Equipment({ serviceOrder, reload }: Props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
-            <DetailedInformation serviceOrder={serviceOrder} reload={reload} />
+            <DetailedInformation serviceOrder={serviceOrder} mutate={mutate} />
           </Collapse>
         </TableCell>
       </TableRow>

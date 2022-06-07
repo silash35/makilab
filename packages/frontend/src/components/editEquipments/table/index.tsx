@@ -20,13 +20,13 @@ import styles from "./table.module.scss";
 
 interface Props {
   serviceOrders: ServiceOrder[];
-  reload: () => void;
+  mutate: () => void;
 }
 
 type SortableProperty = "id" | "equipment" | "brand" | "model" | "statusName";
 type Direction = "asc" | "desc";
 
-export default function CollapsibleTable({ serviceOrders, reload }: Props) {
+export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
   const [sortDirection, setSortDirection] = useState<Direction>("asc");
   const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
   const [search, setSearch] = useState("");
@@ -138,7 +138,7 @@ export default function CollapsibleTable({ serviceOrders, reload }: Props) {
         </TableHead>
         <TableBody>
           {serviceOrders.map((serviceOrder) => (
-            <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} reload={reload} />
+            <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} mutate={mutate} />
           ))}
         </TableBody>
       </Table>

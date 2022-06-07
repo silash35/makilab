@@ -16,7 +16,7 @@ function EditSOs() {
       </Head>
 
       {serviceOrders ? (
-        <EquipmentsTable serviceOrders={serviceOrders} reload={mutate} />
+        <EquipmentsTable serviceOrders={serviceOrders} mutate={mutate} />
       ) : (
         <Stack height="100%" justifyContent="center" alignItems="center">
           {error ? <ErrorComponent /> : <CircularProgress />}

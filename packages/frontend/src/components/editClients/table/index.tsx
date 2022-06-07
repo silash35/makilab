@@ -19,13 +19,13 @@ import styles from "./table.module.scss";
 
 interface TableProps {
   clients: Client[];
-  reload: () => void;
+  mutate: () => void;
 }
 
 type SortableProperty = "id" | "name" | "email";
 type Direction = "asc" | "desc";
 
-export default function CollapsibleTable({ clients, reload }: TableProps) {
+export default function CollapsibleTable({ clients, mutate }: TableProps) {
   const [sortDirection, setSortDirection] = useState<Direction>("asc");
   const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
 
@@ -110,7 +110,7 @@ export default function CollapsibleTable({ clients, reload }: TableProps) {
         </TableHead>
         <TableBody>
           {clients.map((client) => (
-            <ClientRow key={client.id} client={client} reload={reload} />
+            <ClientRow key={client.id} client={client} mutate={mutate} />
           ))}
         </TableBody>
       </Table>

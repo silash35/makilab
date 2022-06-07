@@ -19,27 +19,27 @@ import styles from "./detailedInformation.module.scss";
 
 interface Props {
   serviceOrder: ServiceOrder;
-  reload: () => void;
+  mutate: () => void;
 }
 
-export default function DetailedInformation({ serviceOrder, reload }: Props) {
+export default function DetailedInformation({ serviceOrder, mutate }: Props) {
   const owner = serviceOrder.owner;
 
   const handleDeleteSO = async () => {
     const { error } = await deleteSO(serviceOrder.id);
-    reload();
+    mutate();
     return error;
   };
 
   const editSO = async (data: unknown) => {
     const { error } = await updateSO(serviceOrder.id, data as TServiceOrderInput);
-    reload();
+    mutate();
     return error;
   };
 
   const editStatusSO = async (data: unknown) => {
     const { error } = await updateStatusSO(serviceOrder.id, data as TServiceOrderUpdateStatusInput);
-    reload();
+    mutate();
     return error;
   };
 

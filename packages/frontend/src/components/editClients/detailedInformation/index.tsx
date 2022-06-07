@@ -13,19 +13,19 @@ import styles from "./detailedInformation.module.scss";
 
 interface Props {
   client: Client;
-  reload: () => void;
+  mutate: () => void;
 }
 
-export default function DetailedInformation({ client, reload }: Props) {
+export default function DetailedInformation({ client, mutate }: Props) {
   const handleDeleteClient = async () => {
     const { error } = await deleteClient(client.id);
-    reload();
+    mutate();
     return error;
   };
 
   const editClient = async (data: unknown) => {
     const { error } = await updateClient(client.id, data as TClientInput);
-    reload();
+    mutate();
     return error;
   };
 

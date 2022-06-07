@@ -16,7 +16,7 @@ function EditClients() {
       </Head>
 
       {clients ? (
-        <ClientsTable clients={clients} reload={mutate} />
+        <ClientsTable clients={clients} mutate={mutate} />
       ) : (
         <Stack height="100%" justifyContent="center" alignItems="center">
           {error ? <ErrorComponent /> : <CircularProgress />}
