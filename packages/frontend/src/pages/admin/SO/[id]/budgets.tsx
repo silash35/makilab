@@ -2,7 +2,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 
-import Budgets from "@/components/pages/SO/budgets";
+import Budgets from "@/components/pages/SO/Budgets";
 import ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/request";
 

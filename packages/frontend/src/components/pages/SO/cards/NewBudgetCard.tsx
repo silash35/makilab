@@ -4,7 +4,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Typography from "@mui/material/Typography";
 
 import { FormDialogButton } from "@/components/common/dialogs/FormDialog";
-import TextInput from "@/components/common/inputs/fields/text";
+import TextInput from "@/components/common/inputs/fields/Text";
 import type { TBudgetInput } from "@/types/budget";
 import addBudget from "@/utils/mutations/addBudget";
 
