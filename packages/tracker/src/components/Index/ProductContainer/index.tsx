@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
 
-import ProductComponent from "@/components/common/product";
+import ProductComponent from "@/components/common/Product";
 import type { Product } from "@/utils/getProduct";
 
 import styles from "./product.module.scss";

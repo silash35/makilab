@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import SearchBar from "@/components/track/search";
+import SearchBar from "@/components/Index/Search";
 import getProduct, { Product as ProductType } from "@/utils/getProduct";
 
-import Product from "../productContainer";
+import Product from "../ProductContainer";
 import styles from "./track.module.scss";
 
 type ProductState = "loading" | "empty" | "Unknown error" | "Not found" | ProductType;

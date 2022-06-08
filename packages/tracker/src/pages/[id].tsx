@@ -1,8 +1,9 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 
-import Product from "@/components/common/product";
-import Header from "@/components/header";
+import Header from "@/components/common/Header";
+import Info from "@/components/common/Info";
+import Product from "@/components/common/Product";
 import getProduct from "@/utils/getProduct";
 
 const en = {
@@ -29,6 +30,7 @@ export default function TrackPage({
 
       <main style={{ display: "contents" }}>
         <Product product={product} />
+        <Info />
       </main>
     </>
   );

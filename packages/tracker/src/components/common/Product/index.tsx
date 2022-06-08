@@ -8,7 +8,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import type { Product } from "@/utils/getProduct";
 
-import Dates from "./dates";
+import Dates from "./Dates";
 import styles from "./product.module.scss";
 
 interface Props {
