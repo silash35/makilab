@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import SignIn from "@/components/pages/signin";
+import SignIn from "@/components/pages/SignIn";
 
 export default function SignInPage() {
   return (

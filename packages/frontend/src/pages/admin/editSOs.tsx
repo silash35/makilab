@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import EditSOs from "@/components/pages/editSOs";
+import EditSOs from "@/components/pages/EditSOs";
 
 function EditSOsPage() {
   return (

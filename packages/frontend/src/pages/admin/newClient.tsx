@@ -2,8 +2,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import type { FormEvent } from "react";
 
-import Form from "@/components/common/form";
-import ClientInputs from "@/components/common/inputs/client";
+import Form from "@/components/common/Form";
+import ClientInputs from "@/components/common/inputs/Client";
 import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import addClient from "@/utils/mutations/addClient";

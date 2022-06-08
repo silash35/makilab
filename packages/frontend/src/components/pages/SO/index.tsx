@@ -3,8 +3,8 @@ import Stack from "@mui/material/Stack";
 
 import useServiceOrder from "@/hooks/useServiceOrder";
 
-import Options from "./options";
-import Pdf from "./pdf";
+import Options from "./Options";
+import Pdf from "./Pdf";
 import styles from "./so.module.scss";
 
 interface Props {

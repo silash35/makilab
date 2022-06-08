@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import EditClients from "@/components/pages/editClients";
+import EditClients from "@/components/pages/EditClients";
 
 function EditClientsPage() {
   return (

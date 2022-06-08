@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSession from "@/hooks/useSession";
 
 import styles from "./layout.module.scss";
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 
 interface Props {
   children: React.ReactNode;
