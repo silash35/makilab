@@ -143,6 +143,12 @@ export default function DetailedInformation({ serviceOrder, mutate }: Props) {
             Gerar PDF
           </Button>
         </Link>
+        <Link href={`/admin/SO/${serviceOrder.id}/budgets`} passHref>
+          <Button variant="outlined" component="a">
+            Orçamentos
+          </Button>
+        </Link>
+
         <FormDialogButton
           buttonText="Atualizar Status"
           buttonProps={{ variant: "contained" }}
