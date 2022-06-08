@@ -1,9 +1,4 @@
 export default {
-  title: "Check your product",
-  titleSpan: "status",
-  placeholder: "Enter your Service Order number",
-  button: "Search",
-
   stepText0:
     "We have received your product for technical evaluation. Wait for our contact by Whatsapp or Email",
   stepText1v1:

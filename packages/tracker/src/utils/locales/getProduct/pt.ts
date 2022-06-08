@@ -1,9 +1,4 @@
 export default {
-  title: "Verifique o status do seu",
-  titleSpan: "produto",
-  placeholder: "Digite o número da sua Ordem de serviço",
-  button: "Pesquisar",
-
   stepText0:
     "Recebemos seu produto para avaliação técnica. Aguarde nosso contato pelo Whatsapp ou Email",
   stepText1v1:
