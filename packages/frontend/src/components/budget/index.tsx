@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import TableContainer from "@mui/material/TableContainer";
+import Link from "next/link";
 import { useState } from "react";
 
 import { FormDialog, FormDialogButton } from "@/components/common/dialogs/formDialog";
@@ -78,8 +79,13 @@ export default function BudgetTableContainer({ id }: Props) {
             }}
           />
         </div>
+        <Link href={`/admin/SO/${budget.serviceOrderId}/budgets`} passHref>
+          <Button component="a">Voltar</Button>
+        </Link>
         <Button onClick={() => setOpenDialog(true)}>Novo Item</Button>
-        <Button>Gerar PDF</Button>
+        <Link href={`/admin/budget/${budget.id}/pdf`} passHref>
+          <Button component="a">Gerar PDF</Button>
+        </Link>
       </div>
 
       <BudgetTable budget={budget} openNewItemDialog={() => setOpenDialog(true)} mutate={mutate} />

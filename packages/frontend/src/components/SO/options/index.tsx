@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import Link from "next/link";
 
 import { FormDialogButton } from "@/components/common/dialogs/formDialog";
 import ClientInputs from "@/components/common/inputs/client";
@@ -37,6 +38,11 @@ export default function Options({ serviceOrder, mutate }: Props) {
       <Button variant="contained" onClick={window.print}>
         Imprimir
       </Button>
+      <Link href={`/admin/SO/${serviceOrder.id}/budgets`} passHref>
+        <Button variant="outlined" component="a">
+          Orçamentos
+        </Button>
+      </Link>
       <FormDialogButton
         buttonText="Editar Equipamento"
         formDialogProps={{

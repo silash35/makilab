@@ -35,6 +35,14 @@
   }
 }
 
+.info {
+  margin-bottom: 8px;
+  p {
+    font-size: large;
+    margin: 0;
+  }
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -84,23 +92,5 @@
 
   .flex {
     display: flex;
-  }
-}
-
-.info {
-  display: flex;
-  background-color: gray;
-  margin-top: 16px;
-
-  p {
-    text-align: justify;
-    font-weight: bold;
-
-    padding: 16px;
-    margin: 0;
-  }
-
-  div {
-    display: contents;
   }
 }

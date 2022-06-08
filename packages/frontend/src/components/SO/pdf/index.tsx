@@ -2,6 +2,7 @@ import config from "@config";
 import add from "date-fns/add";
 import format from "date-fns/format";
 
+import Header from "@/components/common/pdf/header";
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 
 import styles from "./pdf.module.scss";
@@ -18,7 +19,7 @@ export default function Pdf({ serviceOrder }: Props) {
 
   return (
     <section className={styles.page}>
-      <Header />
+      <Header title="Ordem de Serviço de Entrada" />
       <table className={styles.table}>
         <tbody>
           <Data serviceOrder={serviceOrder} />
@@ -69,7 +70,7 @@ export default function Pdf({ serviceOrder }: Props) {
 
       <hr />
 
-      <Header />
+      <Header title="Ordem de Serviço de Entrada" />
       <table className={styles.table}>
         <tbody>
           <Data serviceOrder={serviceOrder} variant />
@@ -131,20 +132,6 @@ export default function Pdf({ serviceOrder }: Props) {
         </tbody>
       </table>
     </section>
-  );
-}
-
-function Header() {
-  return (
-    <div className={styles.header}>
-      <img src="/YOUR_COMPANY_LOGO.svg" alt={`Logo da ${COMPANY.name}`} width={100} />
-      <h2>Ordem de Serviço de Entrada</h2>
-      <ul>
-        <li>{COMPANY.name}</li>
-        <li>{COMPANY.phones.join(" | ")}</li>
-        <li>{COMPANY.email}</li>
-      </ul>
-    </div>
   );
 }
 
