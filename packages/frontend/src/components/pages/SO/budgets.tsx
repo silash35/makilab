@@ -1,11 +1,11 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 
-import NewBudgetCard from "@/components/budgets/newBudgetCard";
 import useBudgets from "@/hooks/useBudgets";
 
-import BudgetCard from "./budgetCard";
 import styles from "./budgets.module.scss";
+import BudgetCard from "./cards/budgetCard";
+import NewBudgetCard from "./cards/newBudgetCard";
 
 interface Props {
   id: string;

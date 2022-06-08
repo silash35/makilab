@@ -3,14 +3,14 @@ import Stack from "@mui/material/Stack";
 
 import useBudget from "@/hooks/useBudget";
 
-import Options from "./options";
-import Page from "./page";
+import Options from "./print/options";
+import Page from "./print/page";
 
 interface Props {
   id: number;
 }
 
-export default function Pdf({ id }: Props) {
+export default function BudgetPdf({ id }: Props) {
   const { budget } = useBudget(String(id));
 
   if (!budget) {

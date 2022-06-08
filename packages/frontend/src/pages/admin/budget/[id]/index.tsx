@@ -2,11 +2,11 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 
-import BudgetTable from "@/components/budget";
+import Budget from "@/components/pages/budget";
 import ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/request";
 
-function EditBudget({ id, budgetJSON }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function BudgetPage({ id, budgetJSON }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const budget = JSON.parse(budgetJSON) as ServiceOrder;
 
   const fallback = { [`/api/private/budget/${id}`]: budget };
@@ -17,7 +17,7 @@ function EditBudget({ id, budgetJSON }: InferGetServerSidePropsType<typeof getSe
         <title>Editar Orçamento</title>
       </Head>
       <SWRConfig value={{ fallback }}>
-        <BudgetTable id={id} />
+        <Budget id={id} />
       </SWRConfig>
     </>
   );
@@ -37,4 +37,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default EditBudget;
+export default BudgetPage;

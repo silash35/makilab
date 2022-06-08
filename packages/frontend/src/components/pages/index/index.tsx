@@ -1,9 +1,9 @@
 import Button from "@mui/material/Button";
 import Link from "next/link";
 
-import styles from "./adminMenu.module.scss";
+import styles from "./index.module.scss";
 
-export default function AdminMenu() {
+export default function Index() {
   return (
     <div className={styles.adminMenu}>
       <BigButton link="admin/newSO" color={styles.green}>

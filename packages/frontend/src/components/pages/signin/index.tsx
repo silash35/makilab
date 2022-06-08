@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import SignInForm from "@/components/signin/Form";
+import SignInForm from "@/components/pages/signin/Form";
 import useSession from "@/hooks/useSession";
 
 import styles from "./signin.module.scss";

@@ -2,11 +2,11 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 
-import Pdf from "@/components/budget/pdf";
+import Pdf from "@/components/pages/budget/pdf";
 import ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/request";
 
-function EditBudget({ id, budgetJSON }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function BudgetPdfPage({ id, budgetJSON }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const budget = JSON.parse(budgetJSON) as ServiceOrder;
 
   const fallback = { [`/api/private/budget/${id}`]: budget };
@@ -37,4 +37,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default EditBudget;
+export default BudgetPdfPage;

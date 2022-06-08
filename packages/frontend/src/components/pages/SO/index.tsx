@@ -11,7 +11,7 @@ interface Props {
   id: string;
 }
 
-export default function Container({ id }: Props) {
+export default function ServiceOrder({ id }: Props) {
   const { serviceOrder, mutate } = useServiceOrder(id);
 
   if (!serviceOrder) {

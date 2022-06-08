@@ -18,13 +18,13 @@ import addBudgetItem from "@/utils/mutations/addBudgetItem";
 import updateBudget from "@/utils/mutations/updateBudget";
 
 import styles from "./budget.module.scss";
-import BudgetTable from "./table";
+import BudgetTable from "./table/table";
 
 interface Props {
   id: string;
 }
 
-export default function BudgetTableContainer({ id }: Props) {
+export default function Budget({ id }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
   const { budget, mutate } = useBudget(id);
 
