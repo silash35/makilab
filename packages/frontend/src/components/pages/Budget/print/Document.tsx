@@ -1,11 +1,12 @@
 import config from "@config";
 
 import Header from "@/components/common/pdf/Header";
+import Page from "@/components/common/pdf/Page";
 import useServiceOrder from "@/hooks/useServiceOrder";
 import Budget from "@/types/budget";
 import centsToBRL from "@/utils/centsToBRL";
 
-import styles from "./page.module.scss";
+import styles from "./document.module.scss";
 
 const { COMPANY } = config;
 
@@ -13,11 +14,11 @@ interface Props {
   budget: Budget;
 }
 
-export default function Page({ budget }: Props) {
+export default function Document({ budget }: Props) {
   const { serviceOrder } = useServiceOrder(String(budget.serviceOrderId));
 
   return (
-    <article className={styles.page}>
+    <Page>
       <Header title={`Orçamento da OS ${budget.serviceOrderId}`} />
       <section className={styles.info}>
         <p>Empresa: {COMPANY.name}</p>
@@ -50,6 +51,6 @@ export default function Page({ budget }: Props) {
           </tr>
         </tbody>
       </table>
-    </article>
+    </Page>
   );
 }

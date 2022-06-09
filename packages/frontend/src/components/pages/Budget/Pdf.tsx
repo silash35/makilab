@@ -3,8 +3,8 @@ import Stack from "@mui/material/Stack";
 
 import useBudget from "@/hooks/useBudget";
 
+import Page from "./print/Document";
 import Options from "./print/Options";
-import Page from "./print/Page";
 
 interface Props {
   id: number;

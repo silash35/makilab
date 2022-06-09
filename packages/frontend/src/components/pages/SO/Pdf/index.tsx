@@ -3,6 +3,7 @@ import add from "date-fns/add";
 import format from "date-fns/format";
 
 import Header from "@/components/common/pdf/Header";
+import Page from "@/components/common/pdf/Page";
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 
 import styles from "./pdf.module.scss";
@@ -18,7 +19,7 @@ export default function Pdf({ serviceOrder }: Props) {
   const owner = serviceOrder.owner;
 
   return (
-    <section className={styles.page}>
+    <Page>
       <Header title="Ordem de Serviço de Entrada" />
       <table className={styles.table}>
         <tbody>
@@ -131,7 +132,7 @@ export default function Pdf({ serviceOrder }: Props) {
           </tr>
         </tbody>
       </table>
-    </section>
+    </Page>
   );
 }
 
