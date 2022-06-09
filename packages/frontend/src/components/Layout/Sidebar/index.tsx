@@ -1,4 +1,5 @@
 import AddOSIcon from "@mui/icons-material/Add";
+import MoonIcon from "@mui/icons-material/DarkMode";
 import HomeIcon from "@mui/icons-material/Home";
 import EditClientsIcon from "@mui/icons-material/ManageAccounts";
 import EditOSsIcon from "@mui/icons-material/ManageSearch";
@@ -11,15 +12,19 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Switch from "@mui/material/Switch";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+import useTheme from "@/hooks/useTheme";
+
 import styles from "./sidebar.module.scss";
 
 export default function Sidebar() {
   const matches = useMediaQuery("(max-width: 1023px)");
+  const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -53,6 +58,19 @@ export default function Sidebar() {
             <ListLink href="/admin/newClient" text="Cadastrar cliente" Icon={AddClientIcon} />
             <ListLink href="/admin/editClients" text="Gerenciar Clientes" Icon={EditClientsIcon} />
           </List>
+        </div>
+
+        <div className={styles.config}>
+          <p>Ajustes:</p>
+          <div>
+            <div>
+              <div className={styles.icon}>
+                <MoonIcon color="primary" />
+              </div>
+              <p>Tema Escuro:</p>
+            </div>
+            <Switch color="primary" value={theme === "dark"} onClick={toggleTheme} />
+          </div>
         </div>
       </Drawer>
     </aside>

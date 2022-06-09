@@ -10,13 +10,14 @@
   padding: 16px;
   font-size: 12px;
 
+  background-color: white;
+  color: #212121;
   hr {
     border: 1px black dashed;
   }
 
   @media print {
     position: absolute;
-    background-color: white;
 
     z-index: 9999;
     left: 0;
