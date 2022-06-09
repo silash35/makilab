@@ -1,3 +1,5 @@
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
 import { useRouter } from "next/router";
 
 import useSession from "@/hooks/useSession";
@@ -14,7 +16,11 @@ export default function Layout({ children }: Props) {
   const { session } = useSession();
 
   if (session.status === "loading") {
-    return null;
+    return (
+      <Stack height="100%" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Stack>
+    );
   }
 
   if (session.status === "unauthenticated") {

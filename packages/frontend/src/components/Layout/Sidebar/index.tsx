@@ -69,7 +69,7 @@ export default function Sidebar() {
               </div>
               <p>Tema Escuro:</p>
             </div>
-            <Switch color="primary" value={theme === "dark"} onClick={toggleTheme} />
+            <Switch color="primary" checked={theme === "dark"} onClick={toggleTheme} />
           </div>
         </div>
       </Drawer>
