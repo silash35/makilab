@@ -15,7 +15,8 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     }
   }
 
-  console.error(String(statusCode), String(err.message));
+  // Log error
+  if (import.meta.env.SILENT !== "true") console.error(String(statusCode), String(err.message));
 
   return res.status(statusCode).send({
     statusCode: statusCode,

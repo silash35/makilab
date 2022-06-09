@@ -14,7 +14,7 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(logger);
+if (import.meta.env.SILENT !== "true") app.use(logger);
 
 // Static files
 app.use(express.static("public"));
