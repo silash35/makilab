@@ -1,5 +1,8 @@
 import config from "@config";
 
+import en from "./locales/getProduct/en";
+import pt from "./locales/getProduct/pt";
+
 interface Product {
   id: number;
 
@@ -12,22 +15,6 @@ interface Product {
   budgetAnsweredAt: string;
   repairedAt: string;
   deliveredToCustomerAt: string;
-}
-
-interface T {
-  stepText0: string;
-  stepText1v1: string;
-  stepText1v2: string;
-  stepText2v1: string;
-  stepText2v2: string;
-  stepText3: string;
-  stepText4: string;
-
-  stepLabel0: string;
-  stepLabel1: string;
-  stepLabel2: string;
-  stepLabel3: string;
-  stepLabel4: string;
 }
 
 interface Step {
@@ -43,7 +30,9 @@ interface ProcessedProduct extends Product {
   steps: Step[];
 }
 
-function processProduct(product: Product, t: T) {
+function processProduct(product: Product, locale?: string) {
+  const t = locale === "en" ? en : pt;
+
   let isFinished = false;
   let activeStep = 0;
   let stepText = t.stepText0;
@@ -111,7 +100,7 @@ function processProduct(product: Product, t: T) {
   return processedProduct;
 }
 
-async function getProduct(search: string, t: T) {
+async function getProduct(search: string, locale?: string) {
   let res;
 
   try {
@@ -133,7 +122,7 @@ async function getProduct(search: string, t: T) {
   }
 
   const product: Product = await res.json();
-  return processProduct(product, t);
+  return processProduct(product, locale);
 }
 
 export type { ProcessedProduct as Product };

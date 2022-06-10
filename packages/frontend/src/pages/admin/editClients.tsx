@@ -1,28 +1,17 @@
-import CircularProgress from "@mui/material/CircularProgress";
-import Stack from "@mui/material/Stack";
 import Head from "next/head";
 
-import ClientsTable from "@/components/editClients/table";
-import useClients from "@/hooks/useClients";
+import EditClients from "@/components/pages/EditClients";
 
-function EditClients() {
-  const { clients, mutate } = useClients();
-
+function EditClientsPage() {
   return (
     <>
       <Head>
         <title>Gerenciar Clientes</title>
       </Head>
 
-      {clients ? (
-        <ClientsTable clients={clients} reload={mutate} />
-      ) : (
-        <Stack height="100%" justifyContent="center" alignItems="center">
-          <CircularProgress />
-        </Stack>
-      )}
+      <EditClients />
     </>
   );
 }
 
-export default EditClients;
+export default EditClientsPage;

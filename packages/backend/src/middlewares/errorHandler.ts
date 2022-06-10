@@ -2,11 +2,7 @@ import type { ErrorRequestHandler } from "express";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  // Log error to console
-  console.error(err);
-
   // Respond to client with error message and status code
-
   let statusCode = 500;
 
   if (err instanceof Error) {
@@ -19,7 +15,13 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     }
   }
 
-  return res.status(statusCode).send(err.message);
+  // Log error
+  if (import.meta.env.SILENT !== "true") console.error(String(statusCode), String(err.message));
+
+  return res.status(statusCode).send({
+    statusCode: statusCode,
+    message: err.message,
+  });
 };
 
 export default errorHandler;

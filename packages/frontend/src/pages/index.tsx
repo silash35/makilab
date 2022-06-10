@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import AdminMenu from "@/components/adminMenu";
+import Index from "@/components/pages/index/index";
 
 function Home() {
   return (
@@ -9,7 +9,7 @@ function Home() {
         <title>Painel de Administração</title>
       </Head>
 
-      <AdminMenu />
+      <Index />
     </>
   );
 }

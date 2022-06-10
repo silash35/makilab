@@ -11,7 +11,7 @@
   "dependencies": {
     "@opensom/backend": "workspace:*",
     "@opensom/frontend": "workspace:*",
-    "concurrently": "^7.1.0",
-    "nativefier": "^47.1.3"
+    "concurrently": "^7.2.1",
+    "nativefier": "^47.2.0"
   }
 }

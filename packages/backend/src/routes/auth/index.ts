@@ -1,6 +1,7 @@
 import { Router } from "express";
 
-import protectRoute from "../../middlewares/protect";
+import protectRoute from "@/middlewares/protect";
+
 import signinRouter from "./signin";
 import UserRouter from "./user";
 

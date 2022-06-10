@@ -14,7 +14,12 @@ export const filterBoolean = (variable: unknown) => {
 
 export const filterNumber = (variable: unknown) => {
   if (variable !== undefined && variable !== null && variable !== "") {
-    const number = Number(variable);
+    const string = String(variable).replace(/\D/g, "");
+    if (!(string.length > 0)) {
+      return null;
+    }
+
+    const number = Number(string);
     return isNaN(number) ? null : number;
   } else {
     return null;

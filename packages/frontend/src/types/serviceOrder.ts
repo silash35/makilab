@@ -15,12 +15,12 @@ interface TServiceOrder {
   notes: string | null;
 
   isUnderWarranty: boolean;
+  voltage: string;
   attendedBy: string;
   attendedOn: string;
 
   ownerId: number;
 
-  wasEdited: boolean;
   isBudgetApproved: boolean | null;
 
   createdAt: string;

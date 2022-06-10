@@ -2,8 +2,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
-import Form from "@/components/common/form";
-import ClientAndSOInputs from "@/components/common/inputs/clientAndSO";
+import Form from "@/components/common/Form";
+import ClientAndSOInputs from "@/components/common/inputs/ClientAndSO";
 import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import { TServiceOrderInput } from "@/types/serviceOrder";
@@ -30,7 +30,7 @@ function NewServiceOrder() {
       setError(error);
     } else {
       const createdSO = client.serviceOrders[client.serviceOrders.length - 1];
-      router.push(`/admin/SO?id=${String(createdSO.id)}`);
+      router.push(`/admin/SO/${String(createdSO.id)}`);
     }
   };
 

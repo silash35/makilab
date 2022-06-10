@@ -1,0 +1,59 @@
+.info {
+  margin-bottom: 8px;
+  p {
+    font-size: large;
+    margin: 0;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid black;
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 0 5px;
+    text-align: left;
+  }
+
+  th,
+  span {
+    background-color: gray;
+    color: white;
+  }
+
+  span {
+    font-weight: bold;
+    color: gray;
+    background-color: white;
+  }
+
+  .alignCenter {
+    text-align: center;
+  }
+
+  .disableBorder {
+    border: none;
+  }
+
+  .enableTopBorder {
+    border-top: 1px solid black;
+  }
+
+  .signature {
+    margin: auto;
+    margin-top: 40px;
+    padding: 5px 40px;
+    border-top: 1px solid black;
+    text-align: center;
+    width: min-content;
+
+    white-space: nowrap;
+  }
+
+  .flex {
+    display: flex;
+  }
+}

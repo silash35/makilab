@@ -1,7 +1,5 @@
 import "@/styles/globals.scss";
 
-import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import type { NextPage } from "next";
 import { AppProps } from "next/app";
 import Head from "next/head";
@@ -10,7 +8,7 @@ import { SWRConfig } from "swr";
 import DefaultLayout from "@/components/Layout";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ErrorProvider } from "@/contexts/ErrorContext";
-import variables from "@/styles/variables.module.scss";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { fetcher } from "@/utils/request";
 
 type NextPageWithLayout = NextPage & {
@@ -47,8 +45,7 @@ function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
 
       <ErrorProvider>
         <AuthProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+          <ThemeProvider>
             <SWRConfig value={{ fetcher }}>
               <Layout>
                 <Component {...pageProps} />
@@ -60,21 +57,5 @@ function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
     </>
   );
 }
-
-// Create a theme instance.
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: variables.primaryLight,
-      main: variables.primaryMain,
-      dark: variables.primaryDark,
-      contrastText: "#fff",
-    },
-  },
-  typography: {
-    fontFamily: ["Ubuntu", "sans-serif"].join(","),
-  },
-  components: { MuiButton: { styleOverrides: { root: { fontWeight: "bold", letterSpacing: 1 } } } },
-});
 
 export default MyApp;

@@ -1,6 +1,7 @@
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { createContext, useState } from "react";
+import { SWRConfig } from "swr";
 
 interface ErrorContextType {
   setError: (error: string) => void;
@@ -23,7 +24,15 @@ export function ErrorProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ErrorContext.Provider value={{ setError }}>
-      {children}
+      <SWRConfig
+        value={{
+          onError: (error) => {
+            setError(String(error));
+          },
+        }}
+      >
+        {children}
+      </SWRConfig>
       <Snackbar open={isOpen} onClose={handleClose} autoHideDuration={6000}>
         <Alert variant="filled" severity="error" onClose={handleClose} sx={{ width: "100%" }}>
           <p style={{ margin: "0" }}>{errorText}</p>

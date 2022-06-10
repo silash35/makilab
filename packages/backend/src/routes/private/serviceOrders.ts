@@ -1,48 +1,28 @@
 import { Request, Response, Router } from "express";
 
-import { deleteOne, getAll, getOne, update } from "../../services/serviceOrder";
-import { filterNumber } from "../../utils/filters";
-import { parseSO, parseStatusSO } from "../../utils/parsers";
+import { deleteOne, getAll, getOne, update } from "@/modules/serviceOrder/controller";
+import { update as updateStatus } from "@/modules/serviceOrderStatus/controller";
 
 const router = Router();
 
 router.get("", async (req: Request, res: Response) => {
-  let answer;
+  return res.status(200).json(await getAll());
+});
 
-  if (req.query.id === undefined) {
-    answer = await getAll();
-  } else {
-    const id = Array.isArray(req.query.id) ? Number(req.query.id[0]) : Number(req.query.id);
-    if (!isNaN(id)) {
-      answer = await getOne(Number(id));
-    }
-  }
-
-  if (!answer) {
-    throw new Error("Not Found");
-  }
-
-  return res.status(200).json(answer);
+router.get("/:id", async (req: Request, res: Response) => {
+  return res.status(200).json(await getOne(req.params.id));
 });
 
 router.post("", async (req: Request, res: Response) => {
-  const updatedSO = await update(Number(req.body.id), parseSO(req.body));
-  return res.status(200).json(updatedSO);
+  return res.status(200).json(await update(req.body.id, req.body));
 });
 
 router.put("", async (req: Request, res: Response) => {
-  const updatedSO = await update(Number(req.body.id), parseStatusSO(req.body));
-  return res.status(200).json(updatedSO);
+  return res.status(200).json(await updateStatus(req.body.id, req.body));
 });
 
 router.delete("", async (req: Request, res: Response) => {
-  const id = filterNumber(req.body.id);
-  if (id === null) {
-    throw new Error("Invalid data: id");
-  }
-
-  await deleteOne(id);
-  return res.status(200).json({ deletedID: id });
+  return res.status(200).json(await deleteOne(req.body.id));
 });
 
 export default router;

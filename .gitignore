@@ -10,6 +10,9 @@ node_modules
 # TypeScript
 tsconfig.tsbuildinfo
 
+# Vitest
+coverage
+
 # cypress
 **/cypress/plugins
 **/cypress/fixtures

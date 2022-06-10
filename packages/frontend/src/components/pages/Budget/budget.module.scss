@@ -1,0 +1,16 @@
+.header {
+  padding: 0 24px;
+
+  .side {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 24px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+}

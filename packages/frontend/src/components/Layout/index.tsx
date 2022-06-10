@@ -1,9 +1,11 @@
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
 import { useRouter } from "next/router";
 
 import useSession from "@/hooks/useSession";
 
 import styles from "./layout.module.scss";
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 
 interface Props {
   children: React.ReactNode;
@@ -14,7 +16,11 @@ export default function Layout({ children }: Props) {
   const { session } = useSession();
 
   if (session.status === "loading") {
-    return null;
+    return (
+      <Stack height="100%" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Stack>
+    );
   }
 
   if (session.status === "unauthenticated") {
