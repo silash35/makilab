@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-const protect = async (req: Request, res: Response, next: NextFunction) => {
+const authentication = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
 
   if (import.meta.env.JWT_SECRET == undefined) {
@@ -21,4 +21,4 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default protect;
+export default authentication;

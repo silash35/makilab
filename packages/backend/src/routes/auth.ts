@@ -1,16 +1,12 @@
 import { Router } from "express";
 
-import protectRoute from "@/middlewares/protect";
-
-import signinRouter from "./auth/signin";
-import UserRouter from "./auth/user";
+import authRouter from "@/modules/auth/router";
 
 // Init
 const router = Router();
 
 // Auth Routes are related to authentication
-router.use("/api/auth/signin", signinRouter);
-router.use("/api/auth/user", protectRoute, UserRouter);
+router.use("/api/auth", authRouter);
 
 // Export default
 export default router;

@@ -1,14 +1,9 @@
 import config from "@config";
-import { Router } from "express";
 import jwt from "jsonwebtoken";
 
 const user = config.users[0];
 
-const router = Router();
-
-router.post("", async (req, res) => {
-  const { password } = req.body;
-
+const signIn = async (password: unknown) => {
   if (import.meta.env.JWT_SECRET == undefined) {
     throw new Error("JWT_SECRET env variable not set");
   }
@@ -23,7 +18,7 @@ router.post("", async (req, res) => {
     expiresIn: 86400 * 7, // expires in 7 days
   });
 
-  return res.status(200).json({ token, userWithoutPassword });
-});
+  return { token, user: userWithoutPassword };
+};
 
-export default router;
+export { signIn };

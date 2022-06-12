@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import protectRoute from "@/middlewares/protect";
+import protectRoute from "@/middlewares/authentication";
 import budgetRouter from "@/modules/budget/router";
 import budgetItemRouter from "@/modules/budgetItem/router";
 import clientsRouter from "@/modules/client/router";

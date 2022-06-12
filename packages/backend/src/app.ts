@@ -3,8 +3,8 @@ import "express-async-errors";
 import cors from "cors";
 import express from "express";
 
-import errorHandler from "@/middlewares/errorHandler";
-import logger from "@/middlewares/logger";
+import errorHandler from "@/middlewares/errorHandling";
+import logger from "@/middlewares/logging";
 import AuthRoutes from "@/routes/auth";
 import PrivateRoutes from "@/routes/private";
 import PublicRoutes from "@/routes/public";
