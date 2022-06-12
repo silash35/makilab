@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { deleteOne, getAll, getOne, update } from "@/modules/serviceOrder/controller";
-import { update as updateStatus } from "@/modules/serviceOrderStatus/controller";
+import { deleteOne, getAll, getOne, update, updateStatus } from "@/modules/serviceOrder/controller";
 
 const router = Router();
 
