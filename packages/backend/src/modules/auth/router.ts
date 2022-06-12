@@ -11,7 +11,7 @@ router.get("/user", authentication, async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-  return res.status(200).json(signIn(req.body.password));
+  return res.status(200).json(await signIn(req.body.password));
 });
 
 export default router;
