@@ -44,7 +44,8 @@ const processSO = (serviceOrder?: ServiceOrder | ServiceOrder[] | null) => {
     })();
 
     const isUrgent =
-      statusNumber <= 10 && isAfter(new Date(), add(new Date(s.createdAt), { days: 5 }));
+      statusNumber <= Situation.WAITING_BUDGET &&
+      isAfter(new Date(), add(new Date(s.createdAt), { days: 5 }));
     const defaultEmailStart = `Prezado(a) ${s.owner?.name}, seu produto (${s.equipment} ${s.brand}) de OS ${s.id}`;
     let statusName: string | undefined = undefined;
     let defaultEmail: string | undefined = undefined;
