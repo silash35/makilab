@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
+import compare from "@/utils/compare";
 
 import Equipment from "../Row";
 import styles from "./table.module.scss";
@@ -32,7 +33,7 @@ export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
   const [search, setSearch] = useState("");
   const [showEnded, setShowEnded] = useState(false);
 
-  function compare(a: ServiceOrder, b: ServiceOrder) {
+  function sort(a: ServiceOrder, b: ServiceOrder) {
     // Put urgent equipments at the top
     if (a.isUrgent && !b.isUrgent) {
       return -1;
@@ -41,39 +42,11 @@ export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
       return 1;
     }
 
-    const aValue = a[sortProperty];
-    const bValue = b[sortProperty];
-
-    if (sortDirection == "asc") {
-      if (aValue === null) {
-        return -1;
-      }
-      if (bValue === null) {
-        return 1;
-      }
-
-      if (aValue < bValue) {
-        return -1;
-      }
-      if (aValue > bValue) {
-        return 1;
-      }
+    if (sortDirection === "asc") {
+      return compare(a[sortProperty], b[sortProperty]);
     } else {
-      if (aValue === null) {
-        return 1;
-      }
-      if (bValue === null) {
-        return -1;
-      }
-
-      if (aValue < bValue) {
-        return 1;
-      }
-      if (aValue > bValue) {
-        return -1;
-      }
+      return compare(b[sortProperty], a[sortProperty]);
     }
-    return 0;
   }
 
   serviceOrders = serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
@@ -84,7 +57,7 @@ export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
       searchText.toLowerCase().includes(search.toLowerCase())
     );
   });
-  serviceOrders.sort(compare);
+  serviceOrders.sort(sort);
 
   const common = { setSortDirection: setSortDirection, setSortProperty: setSortProperty };
 

@@ -13,6 +13,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
 
 import { TClientWithSOs as Client } from "@/types/client";
+import compare from "@/utils/compare";
 
 import ClientRow from "../Row";
 import styles from "./table.module.scss";
@@ -29,42 +30,15 @@ export default function CollapsibleTable({ clients, mutate }: TableProps) {
   const [sortDirection, setSortDirection] = useState<Direction>("asc");
   const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
 
-  function compare(a: Client, b: Client) {
-    const aValue = a[sortProperty];
-    const bValue = b[sortProperty];
-
-    if (sortDirection == "asc") {
-      if (aValue === null) {
-        return -1;
-      }
-      if (bValue === null) {
-        return 1;
-      }
-
-      if (aValue < bValue) {
-        return -1;
-      }
-      if (aValue > bValue) {
-        return 1;
-      }
+  function sort(a: Client, b: Client) {
+    if (sortDirection === "asc") {
+      return compare(a[sortProperty], b[sortProperty]);
     } else {
-      if (aValue === null) {
-        return 1;
-      }
-      if (bValue === null) {
-        return -1;
-      }
-
-      if (aValue < bValue) {
-        return 1;
-      }
-      if (aValue > bValue) {
-        return -1;
-      }
+      return compare(b[sortProperty], a[sortProperty]);
     }
-    return 0;
   }
-  clients.sort(compare);
+
+  clients.sort(sort);
 
   // Search
   const [search, setSearch] = useState("");
