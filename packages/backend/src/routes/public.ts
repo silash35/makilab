@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import searchRouter from "./search";
+import searchRouter from "@/modules/publicSO/router";
 
 // Init
 const router = Router();

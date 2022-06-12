@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import multer from "multer";
 
-import { sendMail } from "@/modules/mail/controller";
+import { sendMail } from "./controller";
 
 const router = Router();
 

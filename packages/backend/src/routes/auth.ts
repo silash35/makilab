@@ -2,8 +2,8 @@ import { Router } from "express";
 
 import protectRoute from "@/middlewares/protect";
 
-import signinRouter from "./signin";
-import UserRouter from "./user";
+import signinRouter from "./auth/signin";
+import UserRouter from "./auth/user";
 
 // Init
 const router = Router();

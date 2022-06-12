@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { create, deleteOne, getAll, update } from "@/modules/client/controller";
+import { deleteOne, getAll, getOne, update, updateStatus } from "./controller";
 
 const router = Router();
 
@@ -8,14 +8,16 @@ router.get("", async (req: Request, res: Response) => {
   return res.status(200).json(await getAll());
 });
 
+router.get("/:id", async (req: Request, res: Response) => {
+  return res.status(200).json(await getOne(req.params.id));
+});
+
 router.post("", async (req: Request, res: Response) => {
-  const { client, serviceOrder } = req.body;
-  return res.status(200).json(await create(client, serviceOrder));
+  return res.status(200).json(await update(req.body.id, req.body));
 });
 
 router.put("", async (req: Request, res: Response) => {
-  const { clientId, client, serviceOrder } = req.body;
-  return res.status(200).json(await update(clientId, client, serviceOrder));
+  return res.status(200).json(await updateStatus(req.body.id, req.body));
 });
 
 router.delete("", async (req: Request, res: Response) => {

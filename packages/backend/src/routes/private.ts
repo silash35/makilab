@@ -1,12 +1,11 @@
 import { Router } from "express";
 
 import protectRoute from "@/middlewares/protect";
-
-import budgetRouter from "./budget";
-import budgetItemRouter from "./budgetItem";
-import clientsRouter from "./clients";
-import mailRouter from "./mail";
-import serviceOrdersRouter from "./serviceOrders";
+import budgetRouter from "@/modules/budget/router";
+import budgetItemRouter from "@/modules/budgetItem/router";
+import clientsRouter from "@/modules/client/router";
+import mailRouter from "@/modules/mail/router";
+import serviceOrdersRouter from "@/modules/serviceOrder/router";
 
 // Init
 const router = Router();
