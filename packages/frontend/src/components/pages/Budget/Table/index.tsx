@@ -35,7 +35,7 @@ export default function BudgetTable({ budget, openNewItemDialog, mutate }: Props
         {itens.map((item) => (
           <Item key={item.id} item={item} mutate={mutate} />
         ))}
-        <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+        <TableRow>
           {itens.length === 0 ? (
             <TableCell colSpan={5} align="center">
               <div className={styles.empty}>
