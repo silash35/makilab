@@ -1,4 +1,4 @@
-const isString = (variable: unknown): variable is string => {
+export const isString = (variable: unknown): variable is string => {
   return typeof variable === "string" && variable.length > 0;
 };
 

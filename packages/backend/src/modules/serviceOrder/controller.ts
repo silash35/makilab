@@ -1,10 +1,12 @@
+import type { Request } from "express";
+
 import { validateID } from "../shared/validation";
 import processSO from "./processor";
 import serviceOrderService from "./service";
-import { validateSO, validateStatusSO } from "./validation";
+import { validateQuery, validateSO, validateStatusSO } from "./validation";
 
-const getAll = async () => {
-  return processSO(await serviceOrderService.getAll());
+const getAll = async (query: Request["query"]) => {
+  return processSO(await serviceOrderService.getAll(validateQuery(query)));
 };
 
 const getOne = async (id: unknown) => {

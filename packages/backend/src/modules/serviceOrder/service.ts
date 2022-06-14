@@ -4,8 +4,9 @@ import prisma from "@/database/prisma";
 
 class ServiceOrderService {
   // Read functions
-  async getAll() {
+  async getAll(query: Prisma.ServiceOrderFindManyArgs) {
     return await prisma.serviceOrder.findMany({
+      ...query,
       include: {
         owner: true,
       },
