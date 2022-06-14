@@ -7,11 +7,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
 
+import TableCellWithSort, { Direction } from "@/components/common/table/CellWithSort";
 import { TClientWithSOs as Client } from "@/types/client";
 import compare from "@/utils/compare";
 
@@ -24,12 +24,11 @@ interface TableProps {
 }
 
 type SortableProperty = "id" | "name" | "email";
-type Direction = "asc" | "desc";
 
 export default function CollapsibleTable({ clients, mutate }: TableProps) {
+  // Sort
   const [sortDirection, setSortDirection] = useState<Direction>("asc");
   const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
-
   function sort(a: Client, b: Client) {
     if (sortDirection === "asc") {
       return compare(a[sortProperty], b[sortProperty]);
@@ -89,39 +88,5 @@ export default function CollapsibleTable({ clients, mutate }: TableProps) {
         </TableBody>
       </Table>
     </TableContainer>
-  );
-}
-
-interface CellProps {
-  children: React.ReactNode;
-  property: SortableProperty;
-  setSortDirection: (direction: Direction) => void;
-  setSortProperty: (property: SortableProperty) => void;
-  align?: "inherit" | "left" | "center" | "right" | "justify";
-}
-
-function TableCellWithSort({
-  children,
-  property,
-  setSortDirection,
-  setSortProperty,
-  align,
-}: CellProps) {
-  const [sortDirection, setThisSortDirection] = useState<Direction>("asc");
-
-  return (
-    <TableCell align={align}>
-      <TableSortLabel
-        direction={sortDirection}
-        onClick={() => {
-          const newSortDirection = sortDirection === "asc" ? "desc" : "asc";
-          setSortProperty(property);
-          setSortDirection(newSortDirection);
-          setThisSortDirection(newSortDirection);
-        }}
-      >
-        {children}
-      </TableSortLabel>
-    </TableCell>
   );
 }

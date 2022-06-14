@@ -9,10 +9,10 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
+import TableCellWithSort, { Direction } from "@/components/common/table/CellWithSort";
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
 import compare from "@/utils/compare";
 
@@ -25,13 +25,13 @@ interface Props {
 }
 
 type SortableProperty = "id" | "equipment" | "brand" | "model" | "statusName";
-type Direction = "asc" | "desc";
 
 export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
+  const [showEnded, setShowEnded] = useState(false);
+
+  // Sort
   const [sortDirection, setSortDirection] = useState<Direction>("asc");
   const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
-  const [search, setSearch] = useState("");
-  const [showEnded, setShowEnded] = useState(false);
 
   function sort(a: ServiceOrder, b: ServiceOrder) {
     // Put urgent equipments at the top
@@ -49,6 +49,8 @@ export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
     }
   }
 
+  // Search
+  const [search, setSearch] = useState("");
   serviceOrders = serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
     const searchText = equipment + id + brand + model + owner?.name + statusName;
 
@@ -116,39 +118,5 @@ export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
         </TableBody>
       </Table>
     </TableContainer>
-  );
-}
-
-interface CellProps {
-  children: React.ReactNode;
-  property: SortableProperty;
-  setSortDirection: (direction: Direction) => void;
-  setSortProperty: (property: SortableProperty) => void;
-  align?: "inherit" | "left" | "center" | "right" | "justify";
-}
-
-function TableCellWithSort({
-  children,
-  property,
-  setSortDirection,
-  setSortProperty,
-  align,
-}: CellProps) {
-  const [sortDirection, setThisSortDirection] = useState<Direction>("asc");
-
-  return (
-    <TableCell align={align}>
-      <TableSortLabel
-        direction={sortDirection}
-        onClick={() => {
-          const newSortDirection = sortDirection === "asc" ? "desc" : "asc";
-          setSortProperty(property);
-          setSortDirection(newSortDirection);
-          setThisSortDirection(newSortDirection);
-        }}
-      >
-        {children}
-      </TableSortLabel>
-    </TableCell>
   );
 }
