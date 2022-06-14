@@ -1,18 +1,24 @@
-import request from "supertest";
+import { Prisma } from "@prisma/client";
 
-import app from "./app";
+import prisma from "@/database/prisma";
+
 import { generateClient, generateServiceOrder } from "./generators";
-import getAuth from "./getAuth";
 
 export const createClient = async (
   client: ReturnType<typeof generateClient>,
   serviceOrder?: ReturnType<typeof generateServiceOrder>
 ) => {
-  const response = await request(app)
-    .post("/api/private/clients")
-    .send({ client, serviceOrder })
-    .set("Authorization", await getAuth());
-  const newClient = response.body;
+  const data = {
+    ...client,
+    serviceOrders: serviceOrder ? { create: [serviceOrder] } : undefined,
+  } as Prisma.ClientCreateInput;
+
+  const newClient = await prisma.client.create({
+    data,
+    include: {
+      serviceOrders: true,
+    },
+  });
 
   if (serviceOrder) {
     expect(newClient.serviceOrders).to.be.an("array");
