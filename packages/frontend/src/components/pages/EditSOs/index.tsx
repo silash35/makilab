@@ -90,13 +90,12 @@ export default function EditSOs() {
           />
         </div>
         <EquipmentsTable
-          serviceOrders={showedSOs.slice(0, 300)}
+          serviceOrders={showedSOs}
           mutate={mutate}
           setSortDirection={setSortDirection}
           setSortProperty={setSortProperty}
         />
       </TableContainer>
-      {showedSOs.length > 300 && <p>*Mostrando 300 de {showedSOs.length} resultados</p>}
     </>
   );
 }

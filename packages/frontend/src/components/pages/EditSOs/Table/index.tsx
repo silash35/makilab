@@ -1,8 +1,12 @@
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 import TableCellWithSort, { Direction } from "@/components/common/table/CellWithSort";
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
@@ -20,6 +24,19 @@ interface Props {
 }
 
 export default function CollapsibleTable({ serviceOrders, mutate, ...props }: Props) {
+  const router = useRouter();
+
+  const [rowsPerPage, setRowsPerPage] = useState(50);
+  const page = router.query.page ? parseInt(router.query.page as string) : 0;
+
+  const setPage = (page: number) => {
+    router.push(`/admin/editSOs?page=${page}`, undefined, { shallow: true });
+  };
+
+  if (serviceOrders.length < page * rowsPerPage && page > 0) {
+    setPage(page - 1);
+  }
+
   const common = {
     setSortDirection: props.setSortDirection,
     setSortProperty: props.setSortProperty,
@@ -50,10 +67,33 @@ export default function CollapsibleTable({ serviceOrders, mutate, ...props }: Pr
         </TableRow>
       </TableHead>
       <TableBody>
-        {serviceOrders.map((serviceOrder) => (
-          <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} mutate={mutate} />
-        ))}
+        {serviceOrders
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((serviceOrder) => (
+            <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} mutate={mutate} />
+          ))}
       </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TablePagination
+            rowsPerPageOptions={[50, 100, 200, 300]}
+            colSpan={7}
+            count={serviceOrders.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            SelectProps={{
+              inputProps: {
+                "aria-label": "Linhas por página",
+              },
+            }}
+            onPageChange={(e, newPage) => setPage(newPage)}
+            onRowsPerPageChange={(event) => {
+              setRowsPerPage(parseInt(event.target.value, 10));
+              setPage(0);
+            }}
+          />
+        </TableRow>
+      </TableFooter>
     </Table>
   );
 }
