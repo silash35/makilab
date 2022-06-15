@@ -2,40 +2,17 @@
 import type { Prisma } from "@prisma/client";
 import type { Request } from "express";
 
-import { filterBoolean, filterDate, filterNumber, filterString, isString } from "@/utils/filters";
+import { filterBoolean, filterDate, filterString } from "@/utils/filters";
 
 const validateQuery = (query: Request["query"]): Prisma.ServiceOrderFindManyArgs => {
-  const search = isString(query.search) ? query.search : undefined;
   const showFinalized = query.showFinalized === "true";
 
-  const orderProp = isString(query.orderProp) ? query.orderProp : undefined;
-  const orderDirection = query.orderDirection === "desc" ? "desc" : "asc";
-
-  const skip = filterNumber(query.skip) ?? undefined;
-
-  let orderBy;
-  if (orderProp) {
-    orderBy = {
-      [orderProp]: orderDirection,
-    };
-  }
-
   return {
-    skip,
-    take: 100,
-    orderBy,
-    where: {
-      OR: search
-        ? [
-            { id: Number(search) },
-            { equipment: { contains: search, mode: "insensitive" } },
-            { brand: { contains: search, mode: "insensitive" } },
-            { model: { contains: search, mode: "insensitive" } },
-            { owner: { name: { contains: search, mode: "insensitive" } } },
-          ]
-        : undefined,
-      deliveredToCustomerAt: showFinalized ? undefined : null,
-    },
+    where: showFinalized
+      ? undefined
+      : {
+          deliveredToCustomerAt: null,
+        },
   };
 };
 
