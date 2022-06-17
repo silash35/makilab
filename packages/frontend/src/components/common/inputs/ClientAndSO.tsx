@@ -19,8 +19,10 @@ interface Props {
 const newClient: ClientWithLabel = { label: "Novo Cliente", id: 0 } as ClientWithLabel;
 
 export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
-  const { clients } = useClients();
   const [options, setOptions] = useState([newClient]);
+  const [search, setSearch] = useState("");
+
+  const { clients } = useClients(`?take=50${search.length > 0 ? `&start=${search}` : ""}`);
 
   const [clientSelectorValue, setClientSelectorValue] = useState(options[0]);
 
@@ -46,17 +48,26 @@ export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
       <Autocomplete
         options={options}
         value={clientSelectorValue}
+        filterOptions={(x) => x}
         onChange={(e, newValue) => {
           if (newValue) setClientSelectorValue(newValue);
         }}
         renderOption={(props, option) => {
           return (
             <li {...props} key={option.id}>
-              {option.name}
+              {option.label}
             </li>
           );
         }}
-        renderInput={(params) => <TextField {...params} label="Cliente" required />}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            label="Cliente"
+            required
+          />
+        )}
       />
       <ClientInputs client={clientSelectorValue} />
 
