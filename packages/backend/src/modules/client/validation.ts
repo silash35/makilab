@@ -1,8 +1,29 @@
 import type { Prisma } from "@prisma/client";
+import type { Request } from "express";
 
-import { filterCpfOrCnpj, filterPhoneNumber, filterString, filterZip } from "@/utils/filters";
+import {
+  filterCpfOrCnpj,
+  filterNumber,
+  filterPhoneNumber,
+  filterString,
+  filterZip,
+} from "@/utils/filters";
 
 import { validateSO } from "../serviceOrder/validation";
+
+const validateQuery = (query: Request["query"]): Prisma.ClientFindManyArgs => {
+  const take = filterNumber(query.take);
+  const start = filterString(query.start);
+
+  return {
+    take: take ? take : undefined,
+    where: start
+      ? {
+          name: { startsWith: start },
+        }
+      : undefined,
+  };
+};
 
 const validateClient = (dataClient: unknown, dataSO?: unknown) => {
   if (!(typeof dataClient === "object" && dataClient !== null)) {
@@ -34,4 +55,4 @@ const validateClient = (dataClient: unknown, dataSO?: unknown) => {
   return parsedData;
 };
 
-export { validateClient };
+export { validateClient, validateQuery };
