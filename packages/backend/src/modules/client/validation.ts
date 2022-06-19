@@ -14,6 +14,7 @@ import { validateSO } from "../serviceOrder/validation";
 const validateQuery = (query: Request["query"]): Prisma.ClientFindManyArgs => {
   const take = filterNumber(query.take);
   const start = filterString(query.start);
+  const hideSOs = filterString(query.hideSOs) === "true";
 
   return {
     take: take ? take : undefined,
@@ -22,6 +23,9 @@ const validateQuery = (query: Request["query"]): Prisma.ClientFindManyArgs => {
           name: { startsWith: start },
         }
       : undefined,
+    include: {
+      serviceOrders: !hideSOs,
+    },
   };
 };
 
