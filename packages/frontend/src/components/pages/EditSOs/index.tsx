@@ -48,18 +48,12 @@ export default function EditSOs() {
   // Search
   const [search, setSearch] = useState("");
 
-  if (!serviceOrders) {
-    return (
-      <Stack height="100%" justifyContent="center" alignItems="center">
-        {error ? <ErrorComponent /> : <CircularProgress />}
-      </Stack>
-    );
-  }
-
-  const showedSOs = serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
-    const searchText = equipment + id + brand + model + owner?.name + statusName;
-    return searchText.toLowerCase().includes(search.toLowerCase());
-  });
+  const showedSOs = serviceOrders
+    ? serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
+        const searchText = equipment + id + brand + model + owner?.name + statusName;
+        return searchText.toLowerCase().includes(search.toLowerCase());
+      })
+    : [];
 
   showedSOs.sort(sort);
 
@@ -89,12 +83,18 @@ export default function EditSOs() {
             }}
           />
         </div>
-        <EquipmentsTable
-          serviceOrders={showedSOs}
-          mutate={mutate}
-          setSortDirection={setSortDirection}
-          setSortProperty={setSortProperty}
-        />
+        {serviceOrders ? (
+          <EquipmentsTable
+            serviceOrders={showedSOs}
+            mutate={mutate}
+            setSortDirection={setSortDirection}
+            setSortProperty={setSortProperty}
+          />
+        ) : (
+          <Stack height="50vh" justifyContent="center" alignItems="center">
+            {error ? <ErrorComponent /> : <CircularProgress />}
+          </Stack>
+        )}
       </TableContainer>
     </>
   );
