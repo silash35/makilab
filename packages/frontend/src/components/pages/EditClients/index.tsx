@@ -35,21 +35,13 @@ export default function EditClients() {
   // Search
   const [search, setSearch] = useState("");
 
-  if (!clients) {
-    return (
-      <Stack height="100%" justifyContent="center" alignItems="center">
-        {error ? <ErrorComponent /> : <CircularProgress />}
-      </Stack>
-    );
-  }
+  const showedClients = clients
+    ? clients.filter(({ name, email, zip, whatsapp, tel, cpfOrCnpj, address }) => {
+        const searchText = name + email + zip + whatsapp + tel + cpfOrCnpj + address;
 
-  const showedClients = clients.filter(
-    ({ name, email, zip, whatsapp, tel, cpfOrCnpj, address }) => {
-      const searchText = name + email + zip + whatsapp + tel + cpfOrCnpj + address;
-
-      return searchText.toLowerCase().includes(search.toLowerCase());
-    }
-  );
+        return searchText.toLowerCase().includes(search.toLowerCase());
+      })
+    : [];
 
   showedClients.sort(sort);
 
@@ -70,12 +62,18 @@ export default function EditClients() {
           }}
         />
       </Toolbar>
-      <ClientsTable
-        clients={showedClients}
-        mutate={mutate}
-        setSortDirection={setSortDirection}
-        setSortProperty={setSortProperty}
-      />
+      {clients ? (
+        <ClientsTable
+          clients={showedClients}
+          mutate={mutate}
+          setSortDirection={setSortDirection}
+          setSortProperty={setSortProperty}
+        />
+      ) : (
+        <Stack height="50vh" justifyContent="center" alignItems="center">
+          {error ? <ErrorComponent /> : <CircularProgress />}
+        </Stack>
+      )}
     </TableContainer>
   );
 }

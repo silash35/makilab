@@ -3,6 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
@@ -35,7 +36,9 @@ export default function BudgetTable({ budget, openNewItemDialog, mutate }: Props
         {itens.map((item) => (
           <Item key={item.id} item={item} mutate={mutate} />
         ))}
-        <TableRow>
+      </TableBody>
+      <TableFooter>
+        <TableRow className={styles.footer}>
           {itens.length === 0 ? (
             <TableCell colSpan={5} align="center">
               <div className={styles.empty}>
@@ -60,7 +63,7 @@ export default function BudgetTable({ budget, openNewItemDialog, mutate }: Props
             </>
           )}
         </TableRow>
-      </TableBody>
+      </TableFooter>
     </Table>
   );
 }

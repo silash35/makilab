@@ -54,8 +54,8 @@ export const ThemeProvider = ({ children }: Props) => {
       },
       components: {
         MuiButton: { styleOverrides: { root: { fontWeight: "bold", letterSpacing: 1 } } },
-        MuiTableRow: {
-          styleOverrides: { root: { "&:last-child td, &:last-child th": { border: 0 } } },
+        MuiTableFooter: {
+          styleOverrides: { root: { ">:last-child td": { border: 0 } } },
         },
       },
     },
