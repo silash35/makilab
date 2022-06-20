@@ -1,11 +1,13 @@
 import config from "@config";
 import jwt from "jsonwebtoken";
 
-const user = config.users[0];
+const USERS = config.USERS;
 
-const signIn = async (password: unknown) => {
-  if (import.meta.env.JWT_SECRET == undefined) {
-    throw new Error("JWT_SECRET env variable not set");
+const signIn = async (name: unknown, password: unknown) => {
+  const user = USERS.find((u) => u.name === name);
+
+  if (!user) {
+    throw new Error("Unauthorized: User not found");
   }
 
   if (password !== user.password) {
@@ -14,7 +16,7 @@ const signIn = async (password: unknown) => {
 
   const userWithoutPassword = { ...user, password: undefined };
 
-  const token = jwt.sign(userWithoutPassword, import.meta.env.JWT_SECRET, {
+  const token = jwt.sign(userWithoutPassword, config.JWT_SECRET, {
     expiresIn: 86400 * 7, // expires in 7 days
   });
 
