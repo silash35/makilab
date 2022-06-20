@@ -44,7 +44,7 @@ export default function SendMailDialog({ to, defaultText }: Props) {
                 enviar uma mensagem ao cliente?
               </Alert>
             )}
-            <input hidden type="text" value={to} name="to" />
+            <input type="hidden" value={to} name="to" />
             <TextField
               label="Texto do Email"
               variant="outlined"

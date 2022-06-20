@@ -42,7 +42,7 @@ export default function DateTime({
   }, [defaultValue]);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
       <DateTimePicker
         label={label}
         renderInput={(params) => <TextField {...textFieldProps} {...params} />}
