@@ -20,8 +20,9 @@ export default function Money({ defaultValue, textFieldProps }: Props) {
     <TextField
       value={value}
       onChange={(e) => {
+        const negative = e.target.value.match(/-/g)?.length === 1;
         const input = e.target.value.replace(/\D/g, "");
-        setValue(processValue(input));
+        setValue(processValue((negative ? "-" : "") + input));
       }}
       {...textFieldProps}
     />
