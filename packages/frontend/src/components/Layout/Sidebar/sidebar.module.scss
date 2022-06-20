@@ -39,6 +39,7 @@
 
 div.active {
   background-color: #f5f5f5;
+  transition: none;
 
   :global(.dark) & {
     background-color: #0a0a0a;
