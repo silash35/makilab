@@ -12,6 +12,19 @@ export const filterBoolean = (variable: unknown) => {
   );
 };
 
+export const filterMoney = (variable: unknown) => {
+  const number = filterNumber(variable);
+  if (number === null) {
+    return null;
+  }
+
+  if ((variable as string).match(/-/g)?.length === 1) {
+    return -number;
+  } else {
+    return number;
+  }
+};
+
 export const filterNumber = (variable: unknown) => {
   if (variable !== undefined && variable !== null && variable !== "") {
     const string = String(variable).replace(/\D/g, "");

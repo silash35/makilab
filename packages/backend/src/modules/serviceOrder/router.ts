@@ -5,7 +5,7 @@ import { deleteOne, getAll, getOne, update, updateStatus } from "./controller";
 const router = Router();
 
 router.get("", async (req: Request, res: Response) => {
-  return res.status(200).json(await getAll());
+  return res.status(200).json(await getAll(req.query));
 });
 
 router.get("/:id", async (req: Request, res: Response) => {

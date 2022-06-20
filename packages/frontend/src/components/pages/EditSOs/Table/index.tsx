@@ -1,122 +1,99 @@
-import SearchIcon from "@mui/icons-material/Search";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
+import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import TextField from "@mui/material/TextField";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import TableCellWithSort, { Direction } from "@/components/common/table/CellWithSort";
 import { TServiceOrderWithClient as ServiceOrder } from "@/types/serviceOrder";
-import compare from "@/utils/compare";
 
 import Equipment from "../Row";
-import styles from "./table.module.scss";
+
+export type SortableProperty = "id" | "equipment" | "brand" | "model" | "statusName";
 
 interface Props {
   serviceOrders: ServiceOrder[];
   mutate: () => void;
+
+  setSortDirection: (direction: Direction) => void;
+  setSortProperty: (property: SortableProperty) => void;
 }
 
-type SortableProperty = "id" | "equipment" | "brand" | "model" | "statusName";
+export default function CollapsibleTable({ serviceOrders, mutate, ...props }: Props) {
+  const router = useRouter();
 
-export default function CollapsibleTable({ serviceOrders, mutate }: Props) {
-  const [showEnded, setShowEnded] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
+  const page = router.query.page ? parseInt(router.query.page as string) : 0;
 
-  // Sort
-  const [sortDirection, setSortDirection] = useState<Direction>("asc");
-  const [sortProperty, setSortProperty] = useState<SortableProperty>("id");
+  const setPage = (page: number) => {
+    router.push(`/admin/editSOs?page=${page}`, undefined, { shallow: true });
+  };
 
-  function sort(a: ServiceOrder, b: ServiceOrder) {
-    // Put urgent equipments at the top
-    if (a.isUrgent && !b.isUrgent) {
-      return -1;
-    }
-    if (!a.isUrgent && b.isUrgent) {
-      return 1;
-    }
-
-    if (sortDirection === "asc") {
-      return compare(a[sortProperty], b[sortProperty]);
-    } else {
-      return compare(b[sortProperty], a[sortProperty]);
-    }
+  if (serviceOrders.length < page * rowsPerPage && page > 0) {
+    setPage(page - 1);
   }
 
-  // Search
-  const [search, setSearch] = useState("");
-  serviceOrders = serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
-    const searchText = equipment + id + brand + model + owner?.name + statusName;
-
-    return (
-      (showEnded || statusName !== "Finalizado") &&
-      searchText.toLowerCase().includes(search.toLowerCase())
-    );
-  });
-  serviceOrders.sort(sort);
-
-  const common = { setSortDirection: setSortDirection, setSortProperty: setSortProperty };
+  const common = {
+    setSortDirection: props.setSortDirection,
+    setSortProperty: props.setSortProperty,
+  };
 
   return (
-    <TableContainer component={Paper}>
-      <div className={styles.toolbar}>
-        <div>
-          <h1 className={styles.title}>Ordens de Serviço</h1>
-          <FormControlLabel
-            control={
-              <Checkbox checked={showEnded} onChange={(e) => setShowEnded(e.target.checked)} />
-            }
-            label="Mostrar Finalizados"
-          />
-        </div>
-        <TextField
-          margin="normal"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </div>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCellWithSort property="id" {...common}>
-              OS
-            </TableCellWithSort>
-            <TableCellWithSort align="right" property="equipment" {...common}>
-              Equipamento
-            </TableCellWithSort>
-            <TableCellWithSort align="right" property="brand" {...common}>
-              Marca
-            </TableCellWithSort>
-            <TableCellWithSort align="right" property="model" {...common}>
-              Modelo
-            </TableCellWithSort>
-            <TableCellWithSort align="right" property="statusName" {...common}>
-              Situação
-            </TableCellWithSort>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell />
+          <TableCellWithSort property="id" {...common}>
+            OS
+          </TableCellWithSort>
+          <TableCellWithSort align="right" property="equipment" {...common}>
+            Equipamento
+          </TableCellWithSort>
+          <TableCellWithSort align="right" property="brand" {...common}>
+            Marca
+          </TableCellWithSort>
+          <TableCellWithSort align="right" property="model" {...common}>
+            Modelo
+          </TableCellWithSort>
+          <TableCellWithSort align="right" property="statusName" {...common}>
+            Situação
+          </TableCellWithSort>
 
-            <TableCell align="right">Ações</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {serviceOrders.map((serviceOrder) => (
+          <TableCell align="right">Ações</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {serviceOrders
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((serviceOrder) => (
             <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} mutate={mutate} />
           ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TablePagination
+            rowsPerPageOptions={[50, 100, 200, 300]}
+            colSpan={7}
+            count={serviceOrders.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            SelectProps={{
+              inputProps: {
+                "aria-label": "Linhas por página",
+              },
+            }}
+            onPageChange={(e, newPage) => setPage(newPage)}
+            onRowsPerPageChange={(event) => {
+              setRowsPerPage(parseInt(event.target.value, 10));
+              setPage(0);
+            }}
+          />
+        </TableRow>
+      </TableFooter>
+    </Table>
   );
 }

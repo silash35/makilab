@@ -1,10 +1,12 @@
+import type { Request } from "express";
+
 import { validateID } from "../shared/validation";
 import processClient from "./processor";
 import clientService from "./service";
-import { validateClient } from "./validation";
+import { validateClient, validateQuery } from "./validation";
 
-const getAll = async () => {
-  return processClient(await clientService.getAll());
+const getAll = async (query: Request["query"]) => {
+  return processClient(await clientService.getAll(validateQuery(query)));
 };
 
 const create = async (client: unknown, ServiceOrder?: unknown) => {

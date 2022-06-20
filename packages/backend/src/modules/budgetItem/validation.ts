@@ -1,6 +1,6 @@
 import type { Prisma } from "@prisma/client";
 
-import { filterNumber, filterString } from "@/utils/filters";
+import { filterMoney, filterNumber, filterString } from "@/utils/filters";
 
 const validateItem = (data: unknown) => {
   if (!(typeof data === "object" && data !== null)) {
@@ -13,7 +13,7 @@ const validateItem = (data: unknown) => {
     throw new Error("Invalid data: Budget Item name");
   }
 
-  const price = filterNumber(item.price);
+  const price = filterMoney(item.price);
   if (price === null) {
     throw new Error("Invalid data: Budget Item price");
   }

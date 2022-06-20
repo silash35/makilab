@@ -4,12 +4,8 @@ import prisma from "@/database/prisma";
 
 class ClientService {
   // Read functions
-  async getAll() {
-    return await prisma.client.findMany({
-      include: {
-        serviceOrders: true,
-      },
-    });
+  async getAll(query: Prisma.ClientFindManyArgs) {
+    return await prisma.client.findMany(query);
   }
 
   // Write functions

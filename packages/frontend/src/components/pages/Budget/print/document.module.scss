@@ -1,5 +1,13 @@
 .info {
-  margin-bottom: 8px;
+  margin: 32px 8px;
+
+  h3 {
+    font-weight: normal;
+    font-size: x-large;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
   p {
     font-size: large;
     margin: 0;
@@ -9,51 +17,58 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  border: 2px solid black;
 
-  th,
-  td {
-    border: 1px solid black;
-    padding: 0 5px;
-    text-align: left;
+  thead {
+    border-bottom: 1px solid gray;
+
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 1px;
+
+    th {
+      font-weight: normal;
+      padding: 8px;
+    }
   }
 
-  th,
-  span {
-    background-color: gray;
-    color: white;
-  }
-
-  span {
+  tbody,
+  tfoot {
+    font-size: 1rem;
     font-weight: bold;
-    color: gray;
-    background-color: white;
+
+    td {
+      padding: 16px 8px;
+    }
   }
 
-  .alignCenter {
-    text-align: center;
+  tfoot {
+    border-top: 1px solid gray;
+
+    font-size: 1.8em;
   }
 
-  .disableBorder {
-    border: none;
+  tr {
+    th,
+    td {
+      text-align: center;
+    }
+
+    :first-child {
+      text-align: left;
+    }
+
+    :last-child {
+      text-align: right;
+    }
   }
+}
 
-  .enableTopBorder {
-    border-top: 1px solid black;
-  }
-
-  .signature {
-    margin: auto;
-    margin-top: 40px;
-    padding: 5px 40px;
-    border-top: 1px solid black;
-    text-align: center;
-    width: min-content;
-
-    white-space: nowrap;
-  }
-
-  .flex {
-    display: flex;
+.end {
+  display: flex;
+  justify-content: end;
+  p {
+    font-size: large;
+    margin-right: 8px;
   }
 }

@@ -1,4 +1,5 @@
 import CssBaseline from "@mui/material/CssBaseline";
+import { ptBR } from "@mui/material/locale";
 import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
@@ -37,26 +38,29 @@ export const ThemeProvider = ({ children }: Props) => {
     }
   }, []);
 
-  const muiTheme = createTheme({
-    palette: {
-      mode: theme,
-      primary: {
-        light: variables.primaryLight,
-        main: variables.primaryMain,
-        dark: variables.primaryDark,
-        contrastText: "#fff",
+  const muiTheme = createTheme(
+    {
+      palette: {
+        mode: theme,
+        primary: {
+          light: variables.primaryLight,
+          main: variables.primaryMain,
+          dark: variables.primaryDark,
+          contrastText: "#fff",
+        },
+      },
+      typography: {
+        fontFamily: ["Ubuntu", "sans-serif"].join(","),
+      },
+      components: {
+        MuiButton: { styleOverrides: { root: { fontWeight: "bold", letterSpacing: 1 } } },
+        MuiTableRow: {
+          styleOverrides: { root: { "&:last-child td, &:last-child th": { border: 0 } } },
+        },
       },
     },
-    typography: {
-      fontFamily: ["Ubuntu", "sans-serif"].join(","),
-    },
-    components: {
-      MuiButton: { styleOverrides: { root: { fontWeight: "bold", letterSpacing: 1 } } },
-      MuiTableRow: {
-        styleOverrides: { root: { "&:last-child td, &:last-child th": { border: 0 } } },
-      },
-    },
-  });
+    ptBR
+  );
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

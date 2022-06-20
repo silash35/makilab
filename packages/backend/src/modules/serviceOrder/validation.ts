@@ -1,6 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Prisma } from "@prisma/client";
+import type { Request } from "express";
 
 import { filterBoolean, filterDate, filterString } from "@/utils/filters";
+
+const validateQuery = (query: Request["query"]): Prisma.ServiceOrderFindManyArgs => {
+  const showFinalized = query.showFinalized === "true";
+
+  return {
+    where: showFinalized
+      ? undefined
+      : {
+          deliveredToCustomerAt: null,
+        },
+  };
+};
 
 const validateSO = (data: unknown) => {
   if (!(typeof data === "object" && data !== null)) {
@@ -79,4 +93,4 @@ const validateStatusSO = (data: unknown) => {
   return parsedData;
 };
 
-export { validateSO, validateStatusSO };
+export { validateQuery, validateSO, validateStatusSO };
