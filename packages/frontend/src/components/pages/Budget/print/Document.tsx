@@ -1,4 +1,5 @@
 import config from "@config";
+import format from "date-fns/format";
 
 import Header from "@/components/common/pdf/Header";
 import Page from "@/components/common/pdf/Page";
@@ -21,36 +22,45 @@ export default function Document({ budget }: Props) {
     <Page>
       <Header title={`Orçamento da OS ${budget.serviceOrderId}`} />
       <section className={styles.info}>
-        <p>Empresa: {COMPANY.name}</p>
-        <p>Cliente: {serviceOrder?.owner.name}</p>
-        <p>Equipamento: {serviceOrder?.equipment}</p>
+        <h3>{serviceOrder?.owner.name}</h3>
+        <p>
+          {serviceOrder?.equipment} {serviceOrder?.brand} {serviceOrder?.model}{" "}
+          {serviceOrder?.batchOrImei} {serviceOrder?.productNumber}
+        </p>
       </section>
 
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Quantidade</th>
             <th>Descrição</th>
-            <th>Valor Unitário</th>
-            <th>Valor Total</th>
+            <th>Valor</th>
+            <th>Quantidade</th>
+            <th>Subtotal</th>
           </tr>
         </thead>
         <tbody>
           {budget.itens.map((item) => (
             <tr key={item.id}>
-              <td>{item.quantity}</td>
               <td>{item.name}</td>
               <td>{centsToBRL(item.price)}</td>
+              <td>{item.quantity}</td>
               <td>{centsToBRL(item.price * item.quantity)}</td>
             </tr>
           ))}
-
-          <tr>
-            <td colSpan={3}>Total</td>
-            <td>{centsToBRL(budget.total)}</td>
-          </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td>Total</td>
+            <td colSpan={3}>{centsToBRL(budget.total)}</td>
+          </tr>
+        </tfoot>
       </table>
+
+      <section className={styles.end}>
+        <p>
+          {COMPANY.city}, {format(new Date(), "dd/MM/yyyy")}
+        </p>
+      </section>
     </Page>
   );
 }
