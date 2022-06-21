@@ -7,6 +7,8 @@ import styles from "./form.module.scss";
 
 export default function SignInForm() {
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
+
   const [isBusy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -22,14 +24,14 @@ export default function SignInForm() {
     setBusy(true);
     setError("");
 
-    const status = await signIn({ password });
+    const status = await signIn({ user, password });
 
     if (status === 200) {
       router.push("/");
       setError("");
     } else {
       if (status === 401) {
-        setError("Senha incorreta. Tente novamente.");
+        setError("Usuário ou senha incorretos.");
       } else {
         setError("Erro desconhecido. Tente novamente.");
       }
@@ -40,6 +42,18 @@ export default function SignInForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      <label className={styles.field}>
+        Usuário
+        <input
+          className={error ? styles.invalid : ""}
+          type="text"
+          placeholder="Digite seu nome de usuário"
+          value={user}
+          onChange={(e) => setUser(e.target.value)}
+          data-testid="user-input"
+          required
+        />
+      </label>
       <label className={styles.field}>
         Senha
         <input
@@ -52,7 +66,7 @@ export default function SignInForm() {
           required
         />
       </label>
-      {!!error && <div className={styles.error}>{error}</div>}
+      {error && <div className={styles.error}>{error}</div>}
 
       <button type="submit" disabled={isBusy} className={styles.button}>
         {isBusy ? "Fazendo Login..." : "Login"}

@@ -7,12 +7,13 @@ interface Session {
   user: {
     id: number;
     name: string;
-    accessTypes: string[];
+    permissions: string[];
   } | null;
   status: "loading" | "authenticated" | "unauthenticated";
 }
 
 interface SignInData {
+  user: string;
   password: string;
 }
 
@@ -47,11 +48,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  async function signIn({ password }: SignInData) {
+  async function signIn({ user, password }: SignInData) {
     const { response, status, error } = await request({
       method: "POST",
       url: "/api/auth/signin",
-      body: { password },
+      body: { user, password },
     });
 
     if (!error) {

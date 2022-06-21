@@ -18,8 +18,7 @@ export default function SignIn() {
       <div className={styles.signin}>
         <img width="130" height="auto" src={"/icon.svg"} alt="Logo" />
 
-        <div className={styles.formContainer} id="password-form">
-          <h1>Login</h1>
+        <div className={styles.formContainer}>
           <SignInForm />
         </div>
       </div>
