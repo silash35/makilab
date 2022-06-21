@@ -2,6 +2,8 @@
 
 OpenSOM is an open source and Self-Hosted Service Order Manager. This repository contains all packages related to it.
 
+> Fork > Customize > Deploy
+
 ## Git Flow
 
 The project branches are organized as follows:
