@@ -1,4 +1,4 @@
-import { setCookie } from "nookies";
+import { destroyCookie, setCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
 
 import request from "@/utils/request";
@@ -20,6 +20,7 @@ interface SignInData {
 interface AuthContextType {
   session: Session;
   signIn: (data: SignInData) => Promise<number | undefined>;
+  signOut: () => void;
 }
 
 const loadingSession: Session = { user: null, status: "loading" };
@@ -68,5 +69,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return status;
   }
 
-  return <AuthContext.Provider value={{ session, signIn }}>{children}</AuthContext.Provider>;
+  async function signOut() {
+    destroyCookie(undefined, "token");
+    location.reload();
+  }
+
+  return (
+    <AuthContext.Provider value={{ session, signIn, signOut }}>{children}</AuthContext.Provider>
+  );
 }

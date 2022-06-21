@@ -1,5 +1,4 @@
 import AddOSIcon from "@mui/icons-material/Add";
-import MoonIcon from "@mui/icons-material/DarkMode";
 import HomeIcon from "@mui/icons-material/Home";
 import EditClientsIcon from "@mui/icons-material/ManageAccounts";
 import EditOSsIcon from "@mui/icons-material/ManageSearch";
@@ -12,19 +11,16 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Switch from "@mui/material/Switch";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import useTheme from "@/hooks/useTheme";
-
+import Settings from "./Settings";
 import styles from "./sidebar.module.scss";
 
 export default function Sidebar() {
   const matches = useMediaQuery("(max-width: 1023px)");
-  const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -48,9 +44,7 @@ export default function Sidebar() {
               <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40" />
             </a>
           </Link>
-
           <Divider />
-
           <List>
             <ListLink href="/" text="Página Inicial" Icon={HomeIcon} />
             <ListLink href="/admin/newSO" text="Criar nova OS" Icon={AddOSIcon} />
@@ -60,18 +54,7 @@ export default function Sidebar() {
           </List>
         </div>
 
-        <div className={styles.config}>
-          <p>Ajustes:</p>
-          <div>
-            <div>
-              <div className={styles.icon}>
-                <MoonIcon color="primary" />
-              </div>
-              <p>Tema Escuro:</p>
-            </div>
-            <Switch color="primary" checked={theme === "dark"} onClick={toggleTheme} />
-          </div>
-        </div>
+        <Settings />
       </Drawer>
     </aside>
   );
