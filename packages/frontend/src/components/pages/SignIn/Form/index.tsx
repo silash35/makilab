@@ -1,19 +1,20 @@
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 import useSession from "@/hooks/useSession";
+import useTheme from "@/hooks/useTheme";
 
 import styles from "./form.module.scss";
 
 export default function SignInForm() {
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
-
   const [isBusy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
   const { signIn } = useSession();
-
+  const { theme } = useTheme();
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -21,10 +22,14 @@ export default function SignInForm() {
     if (isBusy) {
       return;
     }
-    setBusy(true);
-    setError("");
 
-    const status = await signIn({ user, password });
+    setBusy(true);
+
+    const formData = new FormData(e.currentTarget);
+    const user = formData.get("user")?.toString();
+    const password = formData.get("password")?.toString();
+
+    const status = user && password ? await signIn({ user, password }) : 401;
 
     if (status === 200) {
       router.push("/");
@@ -35,42 +40,34 @@ export default function SignInForm() {
       } else {
         setError("Erro desconhecido. Tente novamente.");
       }
+      setBusy(false);
     }
-
-    setBusy(false);
   };
+
+  const common = { required: true, fullWidth: true, margin: "none" } as TextFieldProps;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label className={styles.field}>
-        Usuário
-        <input
-          className={error ? styles.invalid : ""}
-          type="text"
-          placeholder="Digite seu nome de usuário"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
-          data-testid="user-input"
-          required
-        />
-      </label>
-      <label className={styles.field}>
-        Senha
-        <input
-          className={error ? styles.invalid : ""}
-          type="password"
-          placeholder="Digite sua senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          data-testid="password-input"
-          required
-        />
-      </label>
-      {error && <div className={styles.error}>{error}</div>}
+      <h1>Login</h1>
 
-      <button type="submit" disabled={isBusy} className={styles.button}>
+      <TextField className={error ? styles.invalid : ""} name="user" label="Usuário" {...common} />
+      <TextField
+        className={error ? styles.invalid : ""}
+        type="password"
+        name="password"
+        label="Senha"
+        {...common}
+      />
+
+      {error && (
+        <Alert variant={theme === "dark" ? "filled" : "standard"} severity="error">
+          {error}
+        </Alert>
+      )}
+
+      <Button variant="contained" type="submit" size="large" disabled={isBusy}>
         {isBusy ? "Fazendo Login..." : "Login"}
-      </button>
+      </Button>
     </form>
   );
 }
