@@ -8,9 +8,6 @@ export const setup = async () => {
 import prisma from "@/database/prisma";
 
 export const teardown = async () => {
-  await prisma.budgetItem.deleteMany();
-  await prisma.budget.deleteMany();
-  await prisma.serviceOrder.deleteMany();
   await prisma.client.deleteMany();
 };
 */

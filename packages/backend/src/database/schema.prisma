@@ -45,7 +45,7 @@ model ServiceOrder {
   attendedOn      String
 
 
-  owner   Client @relation(fields: [ownerId], references: [id])
+  owner   Client @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId Int
 
   budget           Budget[]
@@ -67,7 +67,7 @@ model Budget {
   createdAt DateTime @default(now())
 
   name           String
-  serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id])
+  serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id], onDelete: Cascade)
   serviceOrderId Int
 
   itens BudgetItem[]
@@ -77,7 +77,7 @@ model BudgetItem {
   id        Int      @id @unique @default(autoincrement())
   createdAt DateTime @default(now())
 
-  budget   Budget @relation(fields: [budgetId], references: [id])
+  budget   Budget @relation(fields: [budgetId], references: [id], onDelete: Cascade)
   budgetId Int
 
   name     String

@@ -29,11 +29,6 @@ class ClientService {
   }
 
   async deleteOne(id: number) {
-    await prisma.serviceOrder.deleteMany({
-      where: {
-        ownerId: id,
-      },
-    });
     await prisma.client.delete({
       where: { id },
     });
