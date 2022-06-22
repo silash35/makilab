@@ -37,12 +37,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function loadUser() {
-    const { response, error } = await request({
+    const { response, error, status } = await request({
       method: "GET",
       url: "/api/auth/user",
     });
 
-    if (!error) {
+    if (!error && status === 200 && response.name !== "anonymous") {
       setSession({ user: response, status: "authenticated" });
     } else {
       setSession(unauthenticatedSession);
