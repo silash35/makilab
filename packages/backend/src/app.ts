@@ -4,6 +4,7 @@ import config from "@config";
 import cors from "cors";
 import express from "express";
 
+import authentication from "@/middlewares/authentication";
 import errorHandler from "@/middlewares/errorHandling";
 import logger from "@/middlewares/logging";
 import AuthRoutes from "@/routes/auth";
@@ -15,6 +16,7 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(authentication);
 if (!config.SILENT) app.use(logger);
 
 // Static files

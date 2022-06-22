@@ -8,7 +8,7 @@ const logger: RequestHandler = (req, res, next) => {
 
   const method = req.method;
   const url = req.url;
-  const user = `user:${req.user ? req.user.name : "anonymous"}`;
+  const user = `user:${req.user.name}`;
 
   const log = `[${formatted_date}] ${user} ${method}:${url}`;
   console.log(log);
