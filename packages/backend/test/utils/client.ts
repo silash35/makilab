@@ -16,14 +16,11 @@ export const createClient = async (
   const newClient = await prisma.client.create({
     data,
     include: {
-      serviceOrders: true,
+      serviceOrders: !!serviceOrder,
     },
   });
 
   if (serviceOrder) {
-    expect(newClient.serviceOrders).to.be.an("array");
-    expect(newClient.serviceOrders).to.have.length(1);
-
     const newServiceOrder = newClient.serviceOrders[0];
     return { clientId: newClient.id, serviceOrderId: newServiceOrder.id };
   }

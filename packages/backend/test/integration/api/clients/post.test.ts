@@ -29,6 +29,8 @@ describe("Clients API - POST", () => {
     expect(res.status).equal(200);
     const newClient = res.body as Client;
     // its a new client so the first service order should be the one created
+    expect(newClient.serviceOrders).to.be.an("array");
+    expect(newClient.serviceOrders).to.have.length(1);
     const newServiceOrder = newClient.serviceOrders?.[0];
 
     expect(newClient.name).to.be.equal(client.name);
