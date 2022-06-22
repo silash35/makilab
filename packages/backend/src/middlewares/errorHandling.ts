@@ -1,3 +1,4 @@
+import config from "@config";
 import type { ErrorRequestHandler } from "express";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,7 +17,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   }
 
   // Log error
-  if (import.meta.env.SILENT !== "true") console.error(String(statusCode), String(err.message));
+  if (!config.SILENT) console.error(String(statusCode), String(err.message));
 
   return res.status(statusCode).send({
     statusCode: statusCode,

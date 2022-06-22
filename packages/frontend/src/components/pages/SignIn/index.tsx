@@ -1,3 +1,4 @@
+import Card from "@mui/material/Card";
 import { useRouter } from "next/router";
 
 import SignInForm from "@/components/pages/SignIn/Form";
@@ -18,10 +19,9 @@ export default function SignIn() {
       <div className={styles.signin}>
         <img width="130" height="auto" src={"/icon.svg"} alt="Logo" />
 
-        <div className={styles.formContainer} id="password-form">
-          <h1>Login</h1>
+        <Card elevation={4}>
           <SignInForm />
-        </div>
+        </Card>
       </div>
     </main>
   );

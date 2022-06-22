@@ -1,5 +1,6 @@
 import "express-async-errors";
 
+import config from "@config";
 import cors from "cors";
 import express from "express";
 
@@ -14,7 +15,7 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
-if (import.meta.env.SILENT !== "true") app.use(logger);
+if (!config.SILENT) app.use(logger);
 
 // Static files
 app.use(express.static("public"));

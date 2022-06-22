@@ -1,0 +1,31 @@
+@use "@/styles/variables.module" as v;
+@use "sass:color";
+
+.settings {
+  padding: 16px;
+  padding-top: 8px;
+
+  p {
+    margin: 0;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  > div {
+    justify-content: space-between;
+  }
+
+  .icon {
+    border-radius: 50%;
+    background-color: color.adjust($color: v.$primaryLight, $whiteness: 40%);
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+
+    margin: 8px;
+    margin-left: 0;
+  }
+}

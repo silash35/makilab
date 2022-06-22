@@ -1,4 +1,4 @@
-# OpenSOM
+# OpenSOM Tracker
 
 OpenSOM is an open source and Self-Hosted Service Order Manager.
 

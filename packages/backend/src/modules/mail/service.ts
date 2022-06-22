@@ -1,24 +1,24 @@
 import config from "@config";
 import nodemailer from "nodemailer";
 import type Mail from "nodemailer/lib/mailer";
-const { SITE_URL, COMPANY } = config;
+const { SITE_URL, COMPANY, EMAIL } = config;
 
 class MailService {
   async sendMail(to: string, text: string, attachments?: Mail.Attachment[]) {
     const transporter = nodemailer.createTransport({
-      host: import.meta.env.EMAIL_HOST,
+      host: EMAIL.host,
       port: 587,
       secure: false,
       auth: {
-        user: import.meta.env.EMAIL_USER,
-        pass: import.meta.env.EMAIL_PASSWORD,
+        user: EMAIL.user,
+        pass: EMAIL.password,
       },
     });
 
     // send mail with defined transport object
     const info = await transporter.sendMail({
-      from: `"${COMPANY.name}" <${import.meta.env.EMAIL_USER}>`,
-      to: `${import.meta.env.EMAIL_USER}, ${to}`,
+      from: `"${COMPANY.name}" <${EMAIL.user}>`,
+      to: `${EMAIL.user}, ${to}`,
       subject: "Atualizações sobre o seu equipamento",
       attachments,
       text: text,
