@@ -34,12 +34,13 @@ export default function EditClients() {
 
   // Search
   const [search, setSearch] = useState("");
+  const lowerCaseSearch = search.toLowerCase();
 
   const showedClients = clients
     ? clients.filter(({ name, email, zip, whatsapp, tel, cpfOrCnpj, address }) => {
         const searchText = name + email + zip + whatsapp + tel + cpfOrCnpj + address;
 
-        return searchText.toLowerCase().includes(search.toLowerCase());
+        return searchText.toLowerCase().includes(lowerCaseSearch);
       })
     : [];
 

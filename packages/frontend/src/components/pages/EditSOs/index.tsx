@@ -47,11 +47,12 @@ export default function EditSOs() {
 
   // Search
   const [search, setSearch] = useState("");
+  const lowerCaseSearch = search.toLowerCase();
 
   const showedSOs = serviceOrders
     ? serviceOrders.filter(({ equipment, id, brand, model, owner, statusName }) => {
         const searchText = equipment + id + brand + model + owner?.name + statusName;
-        return searchText.toLowerCase().includes(search.toLowerCase());
+        return searchText.toLowerCase().includes(lowerCaseSearch);
       })
     : [];
 
