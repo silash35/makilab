@@ -1,7 +1,7 @@
 import config from "@config";
 
-import en from "./locales/getProduct/en";
-import pt from "./locales/getProduct/pt";
+import en from "./locale/en";
+import pt from "./locale/pt";
 
 interface Product {
   id: number;
