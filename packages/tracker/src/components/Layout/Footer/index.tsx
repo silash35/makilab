@@ -13,7 +13,7 @@ export default function Footer() {
   const url = new URL(config.API_URL);
   const link = url.origin;
   return (
-    <footer className={styles.footer}>
+    <footer>
       <div className={styles.info}>
         <Alert variant="filled" severity="info">
           <p>

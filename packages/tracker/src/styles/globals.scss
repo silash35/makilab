@@ -11,5 +11,9 @@ body {
   flex-flow: column;
   min-height: 100vh;
 
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+
+main {
+  display: contents;
 }
