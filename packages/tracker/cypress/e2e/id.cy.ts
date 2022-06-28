@@ -1,6 +1,6 @@
 describe("Id Page", () => {
   it("should give 404 error when product is not found", () => {
-    const id = 100000000;
+    const id = "aaaaaaaaa";
 
     cy.visit("/" + id, { failOnStatusCode: false });
     cy.contains("Page Not Found");
