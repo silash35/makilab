@@ -4,7 +4,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import LinearProgress from "@mui/material/LinearProgress";
-import { ComponentProps, FormEvent, ReactNode, useState } from "react";
+import { ComponentProps, FormEvent, ReactNode, useId, useState } from "react";
 
 import useError from "@/hooks/useError";
 
@@ -25,6 +25,7 @@ interface FormDialogProps {
 const FormDialog = (props: FormDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { setError } = useError();
+  const id = useId();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,13 +44,9 @@ const FormDialog = (props: FormDialogProps) => {
   };
 
   return (
-    <Dialog
-      open={props.open}
-      onClose={() => props.setOpen(false)}
-      aria-labelledby="form-dialog-title"
-    >
+    <Dialog open={props.open} onClose={() => props.setOpen(false)} aria-labelledby={id}>
       {props.title && (
-        <DialogTitle id="form-dialog-title" className={styles.title}>
+        <DialogTitle id={id} className={styles.title}>
           {props.title}
         </DialogTitle>
       )}

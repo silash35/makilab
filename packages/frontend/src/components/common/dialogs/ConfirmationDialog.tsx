@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import LinearProgress from "@mui/material/LinearProgress";
-import { ComponentProps, ReactNode, useState } from "react";
+import { ComponentProps, ReactNode, useId, useState } from "react";
 
 import useError from "@/hooks/useError";
 
@@ -24,6 +24,7 @@ interface ConfirmationDialogProps {
 export default function ConfirmationDialog(props: ConfirmationDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { setError } = useError();
+  const id = useId();
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -38,12 +39,8 @@ export default function ConfirmationDialog(props: ConfirmationDialogProps) {
   };
 
   return (
-    <Dialog
-      open={props.open}
-      onClose={() => props.setOpen(false)}
-      aria-labelledby="confirmation-dialog-title"
-    >
-      <DialogTitle id="confirmation-dialog-title">{props.title}</DialogTitle>
+    <Dialog open={props.open} onClose={() => props.setOpen(false)} aria-labelledby={id}>
+      <DialogTitle id={id}>{props.title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{props.text}</DialogContentText>
       </DialogContent>
