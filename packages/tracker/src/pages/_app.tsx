@@ -7,6 +7,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
+import Layout from "@/components/Layout";
 import variables from "@/styles/variables.module.scss";
 
 const { COMPANY } = config;
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const { locale } = router;
   const ogLocale = locale === "en" ? "en_US" : "pt_BR";
+
   return (
     <>
       <Head>
@@ -33,7 +35,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );

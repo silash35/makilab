@@ -5,11 +5,20 @@ import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useRouter } from "next/router";
 
 import type { Product } from "@/utils/getProduct";
 
 import Dates from "./Dates";
 import styles from "./product.module.scss";
+
+const en = {
+  so: "SO",
+};
+
+const pt = {
+  so: "OS",
+};
 
 interface Props {
   product: Product;
@@ -17,6 +26,8 @@ interface Props {
 
 export default function Product({ product }: Props) {
   const isMobile = useMediaQuery("(max-width: 1100px)");
+  const router = useRouter();
+  const t = router.locale === "en" ? en : pt;
 
   const theme = createTheme({
     palette: {
@@ -26,7 +37,9 @@ export default function Product({ product }: Props) {
 
   return (
     <Paper elevation={5} className={styles.product} component="section">
-      <h2>{product.name}</h2>
+      <h2>
+        {t.so} {product.id}: {product.name}
+      </h2>
 
       <ThemeProvider theme={theme}>
         <Stepper activeStep={product.activeStep} orientation={isMobile ? "vertical" : "horizontal"}>

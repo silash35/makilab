@@ -1,17 +1,33 @@
-import Header from "@/components/common/Header";
-import Info from "@/components/common/Info";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
-import Track from "./Track";
+import SearchBar from "@/components/Index/Search";
+import getProduct, { Product as ProductType } from "@/utils/getProduct";
+
+import styles from "./index.module.scss";
+import Product from "./ProductContainer";
+
+type ProductState = "loading" | "empty" | "Unknown error" | "Not found" | ProductType;
 
 export default function Index() {
-  return (
-    <>
-      <Header />
+  const router = useRouter();
+  const [product, setProduct] = useState<ProductState>("empty");
 
-      <main style={{ display: "contents" }}>
-        <Track />
-        <Info />
-      </main>
-    </>
+  const load = async (s: string) => {
+    setProduct("loading");
+    if (!s) {
+      setProduct("Not found");
+      return;
+    }
+
+    const newProduct = await getProduct(s, router.locale);
+    setProduct(newProduct);
+  };
+
+  return (
+    <article className={styles.track}>
+      <SearchBar load={load} />
+      <Product product={product} />
+    </article>
   );
 }
