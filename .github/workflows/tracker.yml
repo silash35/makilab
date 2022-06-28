@@ -61,8 +61,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-      - name: Copy .env file
+      - name: Copy .env files
         run: cp .env.test .env
+        run: cd ../backend && cp .env.test .env
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
