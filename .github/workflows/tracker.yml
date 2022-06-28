@@ -48,9 +48,38 @@ jobs:
       - name: Run Type Checking
         run: pnpm tsc
 
+  Cypress:
+    needs: [ESLint, TypeScript]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/tracker
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Copy .env file
+        run: cp .env.test .env
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: true
+      - name: Cypress.io
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          build: pnpm build:forTest
+          start: pnpm start:forTest
+          wait-on: "http://localhost:3000"
+          working-directory: ./packages/tracker
+
   Deploy:
     runs-on: ubuntu-latest
-    needs: [ESLint, TypeScript]
+    needs: [Cypress]
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Setup repo

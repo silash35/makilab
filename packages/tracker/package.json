@@ -5,8 +5,14 @@
   "scripts": {
     "dev": "concurrently -k \"cd ../backend && pnpm dev\" \"next dev\"",
     "build": "next build",
+    "build:forTest": "concurrently \"cd ../backend && pnpm build\" \"next build\"",
     "start": "next start",
-    "lint": "next lint"
+    "start:forTest": "concurrently -k \"cd ../backend && pnpm start\" \"next start\"",
+    "lint": "next lint",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run",
+    "e2e": "pnpm build:forTest && start-test 'pnpm start:forTest' http://0.0.0.0:3000/ 'pnpm cypress'",
+    "e2e:headless": "pnpm build:forTest && start-test 'pnpm start:forTest' http://0.0.0.0:3000/ 'pnpm cypress:headless'"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -24,6 +30,9 @@
     "typescript": "^4.7.4"
   },
   "devDependencies": {
-    "concurrently": "^7.2.2"
+    "@faker-js/faker": "^7.3.0",
+    "concurrently": "^7.2.2",
+    "cypress": "^10.3.0",
+    "start-server-and-test": "^1.14.0"
   }
 }
