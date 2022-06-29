@@ -5,8 +5,8 @@
   "license": "Unlicense",
   "type": "module",
   "scripts": {
-    "start": "node start.js",
-    "update": "node update.js"
+    "start": "node start.js >> logs/$(date +%F).txt",
+    "fix": "node fix.js"
   },
   "dependencies": {
     "@opensom/backend": "workspace:*",

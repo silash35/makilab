@@ -1,6 +1,6 @@
-import fs from "fs";
 import { execSync } from "child_process";
 import concurrently from "concurrently";
+import fs from "fs";
 
 console.log("Deleting Old Files");
 try {
@@ -23,13 +23,22 @@ execSync("pnpm build", {
 });
 
 console.log("Starting server");
-const { commands } = concurrently(
+const { commands, result } = concurrently(
   [
     { command: "pnpm start", name: "backend", cwd: "./node_modules/@opensom/backend/" },
     { command: "pnpm start", name: "frontend", cwd: "./node_modules/@opensom/frontend/" },
   ],
   { killOthers: ["success", "failure"] }
 );
+
+result.catch(() => {
+  // do nothing
+});
+
+if (!fs.existsSync("./logs")) {
+  console.log("Creating log directory");
+  fs.mkdirSync("./logs");
+}
 
 console.log("Generating new executables");
 execSync("pnpm nativefier --name OpenSOM --portable http://127.0.0.1:3000 ./");
