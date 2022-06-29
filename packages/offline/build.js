@@ -26,7 +26,11 @@ console.log("Starting server");
 const { commands, result } = concurrently(
   [
     { command: "pnpm start", name: "backend", cwd: "./node_modules/@opensom/backend/" },
-    { command: "pnpm start", name: "frontend", cwd: "./node_modules/@opensom/frontend/" },
+    {
+      command: "pnpm wait-on tcp:1234 && pnpm start",
+      name: "frontend",
+      cwd: "./node_modules/@opensom/frontend/",
+    },
   ],
   { killOthers: ["success", "failure"] }
 );
@@ -41,7 +45,7 @@ if (!fs.existsSync("./logs")) {
 }
 
 console.log("Generating new executables");
-execSync("pnpm nativefier --name OpenSOM --portable http://127.0.0.1:3000 ./");
+execSync("wait-on tcp:3000 && pnpm nativefier --name OpenSOM --portable http://127.0.0.1:3000 ./");
 
 console.log("closing servers");
 commands.forEach((command) => {
