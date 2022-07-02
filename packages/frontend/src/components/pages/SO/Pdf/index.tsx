@@ -110,7 +110,7 @@ export default function Pdf({ serviceOrder }: Props) {
               <strong>
                 {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
                 {serviceOrder.batchOrImei} {serviceOrder.productNumber}{" "}
-                {isNaN(+serviceOrder.voltage[0]) ? "" : serviceOrder.voltage}
+                {serviceOrder.voltage[0] === "N" ? "" : serviceOrder.voltage}
               </strong>
             </td>
           </tr>
