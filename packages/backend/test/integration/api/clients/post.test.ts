@@ -41,6 +41,7 @@ describe("Clients API - POST", () => {
     expect(newServiceOrder?.equipment).to.be.equal(serviceOrder.equipment);
     expect(newServiceOrder?.notes).to.be.equal(serviceOrder.notes);
     expect(newServiceOrder?.isUnderWarranty).to.be.equal(serviceOrder.isUnderWarranty);
+    expect(newServiceOrder?.problemDescription).to.be.equal(serviceOrder.problemDescription);
     expect(newServiceOrder?.statusName).to.be.equal(
       serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação"
     );

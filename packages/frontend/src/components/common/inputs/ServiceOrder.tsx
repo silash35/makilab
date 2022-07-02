@@ -75,6 +75,11 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
       />
 
       <Text
+        defaultValue={serviceOrder?.problemDescription}
+        textFieldProps={{ name: "problemDescription", label: "Defeitos do equipamento", ...common }}
+      />
+
+      <Text
         defaultValue={
           serviceOrder?.listOfServices ? serviceOrder?.listOfServices : "Avaliação Técnica"
         }

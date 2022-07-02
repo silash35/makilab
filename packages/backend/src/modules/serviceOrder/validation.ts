@@ -55,6 +55,7 @@ const validateSO = (data: unknown) => {
     batchOrImei: filterString(so.batchOrImei),
     accessories: filterString(so.accessories),
     productCondition: filterString(so.productCondition),
+    problemDescription: filterString(so.problemDescription),
     createdAt: createdAt,
     voltage: voltage,
     attendedBy: attendedBy,
