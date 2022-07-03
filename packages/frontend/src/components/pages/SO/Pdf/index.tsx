@@ -20,118 +20,125 @@ export default function Pdf({ serviceOrder }: Props) {
 
   return (
     <Page>
-      <Header title="Ordem de Serviço de Entrada" />
-      <table className={styles.table}>
-        <tbody>
-          <Data serviceOrder={serviceOrder} />
-          <tr>
-            <td colSpan={2} className={styles.disableBorder}>
-              <span>Estado: </span>
-              {filter(serviceOrder.productCondition)}
-            </td>
+      <section>
+        <Header title="Ordem de Serviço de Entrada" />
+        <table className={styles.table}>
+          <tbody>
+            <Data serviceOrder={serviceOrder} />
+            <tr>
+              <td colSpan={2} className={styles.disableBorder}>
+                <span>Estado: </span>
+                {filter(serviceOrder.productCondition)}
+              </td>
 
-            <td colSpan={2} className={styles.disableBorder}>
-              <span>Garantia: </span>
-              {serviceOrder.isUnderWarranty ? "Sim" : "Não"}
-            </td>
-          </tr>
-          <tr>
-            <th colSpan={4} className={styles.alignCenter}>
-              Descrição do problema (Defeito(s) Reclamado(s))
-            </th>
-          </tr>
-          <tr>
-            <td colSpan={4} className={styles.disableBorder}>
-              {filter(serviceOrder.problemDescription)}
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={4} className={styles.disableBorder}>
-              <span>Acessórios: </span>
-              {filter(serviceOrder.accessories, "Sem acessórios")}
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={4} className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
-              Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
-              <br />
-              {COMPANY.city} {format(new Date(), "dd/MM/yyyy")}
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={4} className={styles.disableBorder}>
-              <div className={styles.flex}>
-                <div className={styles.signature}>{serviceOrder.attendedBy}</div>
-                <div className={styles.signature}> {owner.name}</div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <hr />
-
-      <Header title="Ordem de Serviço de Entrada" />
-      <table className={styles.table}>
-        <tbody>
-          <Data serviceOrder={serviceOrder} variant />
-          <tr>
-            <th colSpan={4} className={styles.alignCenter}>
-              Descrição do problema
-            </th>
-          </tr>
-          <tr>
-            <td colSpan={4} className={styles.disableBorder}>
-              {filter(serviceOrder.problemDescription)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div className={styles.info}>
-        <p>
-          IMPORTANTE! Será concedido garantia, desde que o defeito seja de fabricação, de acordo com
-          as instruções contidas no Manual do Produto e Certificado de Garantia, e que esteja dentro
-          do prazo de garantia. O prazo para conserto em garantia é de até 30 dias. (ART. 18 do
-          CDC). Entrega somente mediante a apresentação deste canhoto. Declaro estar ciente que a
-          garantia de fábrica cessa quando constatado mau uso. Garantia de balcão, não inclui visita
-          técnica. Nosso orçamento é válido por 5 dias. Após 90 dias sem aprovação nem retirada do
-          equipamento o mesmo será descartado ou vendido para custear despesas de armazenamento.
-        </p>
-        {PDF.hasQrCode && <QrCode id={String(serviceOrder.id)} />}
-      </div>
+              <td colSpan={2} className={styles.disableBorder}>
+                <span>Garantia: </span>
+                {serviceOrder.isUnderWarranty ? "Sim" : "Não"}
+              </td>
+            </tr>
+            <tr>
+              <th colSpan={4} className={styles.alignCenter}>
+                Descrição do problema (Defeito(s) Reclamado(s))
+              </th>
+            </tr>
+            <tr>
+              <td colSpan={4} className={styles.disableBorder}>
+                {filter(serviceOrder.problemDescription)}
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4} className={styles.disableBorder}>
+                <span>Acessórios: </span>
+                {filter(serviceOrder.accessories, "Sem acessórios")}
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4} className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
+                Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
+                <br />
+                {COMPANY.city} {format(new Date(), "dd/MM/yyyy")}
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4} className={styles.disableBorder}>
+                <div className={styles.flex}>
+                  <div className={styles.signature}>{serviceOrder.attendedBy}</div>
+                  <div className={styles.signature}> {owner.name}</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
       <hr />
 
-      <table className={styles.table}>
-        <tbody>
-          <tr>
-            <td className={styles.disableBorder}>{filter(owner.name)}</td>
-            <td rowSpan={2} className={styles.disableBorder}>
-              <strong>
-                {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
-                {serviceOrder.batchOrImei} {serviceOrder.productNumber}{" "}
-                {serviceOrder.voltage[0] === "N" ? "" : serviceOrder.voltage}
-              </strong>
-            </td>
-          </tr>
-          <tr>
-            <td className={styles.disableBorder}>
-              <strong>NÚMERO DA OS: {filter(String(serviceOrder.id))}</strong>
-            </td>
-          </tr>
-          <tr>
-            <td className={styles.disableBorder}>
-              DATA DA ENTRADA: {format(new Date(serviceOrder.createdAt), "dd/MM/yyyy")}
-            </td>
-            <td rowSpan={2} className={styles.disableBorder}>
-              <strong> {filter(serviceOrder.problemDescription)}</strong>
-            </td>
-          </tr>
-          <tr>
-            <td className={styles.disableBorder}>WhatsApp: {filter(owner.whatsapp)}</td>
-          </tr>
-        </tbody>
-      </table>
+      <section>
+        <Header title="Ordem de Serviço de Entrada" />
+        <table className={styles.table}>
+          <tbody>
+            <Data serviceOrder={serviceOrder} variant />
+            <tr>
+              <th colSpan={4} className={styles.alignCenter}>
+                Descrição do problema
+              </th>
+            </tr>
+            <tr>
+              <td colSpan={4} className={styles.disableBorder}>
+                {filter(serviceOrder.problemDescription)}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className={styles.info}>
+          <p>
+            IMPORTANTE! Será concedido garantia, desde que o defeito seja de fabricação, de acordo
+            com as instruções contidas no Manual do Produto e Certificado de Garantia, e que esteja
+            dentro do prazo de garantia. O prazo para conserto em garantia é de até 30 dias. (ART.
+            18 do CDC). Entrega somente mediante a apresentação deste canhoto. Declaro estar ciente
+            que a garantia de fábrica cessa quando constatado mau uso. Garantia de balcão, não
+            inclui visita técnica. Nosso orçamento é válido por 5 dias. Após 90 dias sem aprovação
+            nem retirada do equipamento o mesmo será descartado ou vendido para custear despesas de
+            armazenamento.
+          </p>
+          {PDF.hasQrCode && <QrCode id={String(serviceOrder.id)} />}
+        </div>
+      </section>
+
+      <hr />
+
+      <section>
+        <table className={styles.table}>
+          <tbody>
+            <tr>
+              <td className={styles.disableBorder}>{filter(owner.name)}</td>
+              <td rowSpan={2} className={styles.disableBorder}>
+                <strong>
+                  {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
+                  {serviceOrder.batchOrImei} {serviceOrder.productNumber}{" "}
+                  {serviceOrder.voltage[0] === "N" ? "" : serviceOrder.voltage}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td className={styles.disableBorder}>
+                <strong>NÚMERO DA OS: {filter(String(serviceOrder.id))}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td className={styles.disableBorder}>
+                DATA DA ENTRADA: {format(new Date(serviceOrder.createdAt), "dd/MM/yyyy")}
+              </td>
+              <td rowSpan={2} className={styles.disableBorder}>
+                <strong> {filter(serviceOrder.problemDescription)}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td className={styles.disableBorder}>WhatsApp: {filter(owner.whatsapp)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </Page>
   );
 }
