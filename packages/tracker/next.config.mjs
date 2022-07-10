@@ -5,7 +5,7 @@ export default {
     API_URL: process.env.API_URL,
   },
   i18n: {
-    locales: ["en", "pt"],
-    defaultLocale: "en",
+    locales: ["pt", "en"],
+    defaultLocale: "pt",
   },
 };
