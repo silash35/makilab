@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "es5",
-    "types": ["cypress"],
-    "esModuleInterop": true
-  },
-  "include": ["**/*.ts"]
-}

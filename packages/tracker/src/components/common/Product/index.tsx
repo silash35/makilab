@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useRouter } from "next/router";
 
-import type { Product } from "@/utils/getProduct";
+import type { Product as TProduct } from "@/utils/getProduct";
 
 import Dates from "./Dates";
 import styles from "./product.module.scss";
@@ -21,7 +21,7 @@ const pt = {
 };
 
 interface Props {
-  product: Product;
+  product: TProduct;
 }
 
 export default function Product({ product }: Props) {

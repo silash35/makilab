@@ -25,9 +25,9 @@ export default function Index() {
   };
 
   return (
-    <article className={styles.track}>
+    <main className={styles.track}>
       <SearchBar load={load} />
       <Product product={product} />
-    </article>
+    </main>
   );
 }
