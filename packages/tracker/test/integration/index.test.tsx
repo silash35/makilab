@@ -1,10 +1,18 @@
 import generateProduct from "@test/utils/generateProduct";
 import mockRouter from "@test/utils/mockRouter";
+import testSOCard from "@test/utils/testSOCard";
 import { fireEvent, render, screen, within } from "@testing-library/react";
+import createFetchMock from "vitest-fetch-mock";
 
 import Home from "@/pages/index";
 
+const fetchMock = createFetchMock(vi);
+
 describe("Home Page", () => {
+  beforeAll(() => {
+    fetchMock.enableMocks();
+  });
+
   it("should load in portuguese by default", () => {
     mockRouter("");
     render(<Home />);
@@ -28,30 +36,50 @@ describe("Home Page", () => {
 
   it("should search and found", async () => {
     const product = generateProduct();
-    const fetchMock = vi.fn((url: string, body: unknown) => {
-      console.log(url);
-      console.log(body);
-      return async () => ({
-        status: 200,
-        json: async () => product,
-      });
-    });
-    vi.stubGlobal("fetch", fetchMock);
+
+    fetchMock.mockResponseOnce(JSON.stringify(product));
 
     mockRouter("en");
     render(<Home />);
 
-    const searchBar = screen.getByPlaceholderText(
-      "Enter your Service Order number"
-    ) as HTMLInputElement;
+    search("OS23");
 
-    fireEvent.change(searchBar, { target: { value: "OS23" } });
+    await testSOCard(product);
+  });
 
-    expect(searchBar.value).toBe("OS23");
+  it("should search and not found", async () => {
+    fetchMock.mockResponseOnce(() => ({
+      status: 404,
+    }));
 
-    const button = screen.getByText("Search");
-    fireEvent.click(button);
+    mockRouter("en");
+    render(<Home />);
+
+    search("OS23");
+
+    await screen.findByText("No products found, did you type the Service Order correctly?");
+  });
+
+  it("should search and handle unknown error", async () => {
+    fetchMock.mockRejectOnce(Error("Unknown error"));
+
+    mockRouter("en");
+    render(<Home />);
+
+    search("OS23");
 
     await screen.findByText("Unknown error, please try again later");
   });
 });
+
+const search = (value: string) => {
+  const searchBar = screen.getByPlaceholderText(
+    "Enter your Service Order number"
+  ) as HTMLInputElement;
+  fireEvent.change(searchBar, { target: { value } });
+
+  expect(searchBar.value).toBe(value);
+
+  const button = screen.getByText("Search");
+  fireEvent.click(button);
+};

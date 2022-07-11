@@ -1,13 +1,11 @@
-export default (product) => {
-  cy.get("input").click();
-  cy.get("input").type(product.id + "{enter}");
-  cy.contains(`SO ${product.id}: ${product.name}`);
-  cy.contains("Budgeting");
-  cy.contains("Waiting for parts");
+import { screen } from "@testing-library/react";
 
-  if (product.isUnderWarranty) {
-    cy.contains("Waiting for budget approval").should("not.exist");
-  } else {
-    cy.contains("Waiting for budget approval");
-  }
+import type generateProduct from "./generateProduct";
+
+export default async (product: ReturnType<typeof generateProduct>) => {
+  await screen.findByText(`SO ${product.id}:`, { exact: false });
+  screen.getByText(product.name, { exact: false });
+  screen.getByText(
+    "We have received your product for technical evaluation. Wait for our contact by Whatsapp or Email"
+  );
 };
