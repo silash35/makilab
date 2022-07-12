@@ -36,7 +36,6 @@ describe("Home Page", () => {
 
   it("should search and found", async () => {
     const product = generateProduct();
-
     fetchMock.mockResponseOnce(JSON.stringify(product));
 
     mockRouter("en");
@@ -48,9 +47,7 @@ describe("Home Page", () => {
   });
 
   it("should search and not found", async () => {
-    fetchMock.mockResponseOnce(() => ({
-      status: 404,
-    }));
+    fetchMock.mockResponseOnce(() => ({ status: 404 }));
 
     mockRouter("en");
     render(<Home />);
