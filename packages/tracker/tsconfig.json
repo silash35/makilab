@@ -16,11 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@config": ["./config"]
+      "@config": ["./config"],
+      "@test/*": ["test/*"]
     },
     "incremental": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["vitest/globals"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.mjs"],
-  "exclude": ["node_modules", ".next", "cypress.config.ts", "cypress"]
+  "exclude": ["node_modules", ".next"]
 }
