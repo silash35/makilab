@@ -24,17 +24,5 @@ export default () => {
     };
   }
 
-  if (process.env.PROCFILE === "packages/frontend/Procfile") {
-    // If is running on Heroku, there is no need to check eslint or typescript
-    // The checks was already done in the github actions
-    // This allows to eslint and other packages not be installed on Heroku instance
-    nextConfig.eslint = {
-      ignoreDuringBuilds: true,
-    };
-    nextConfig.typescript = {
-      ignoreBuildErrors: true,
-    };
-  }
-
   return nextConfig;
 };
