@@ -24,7 +24,7 @@ describe("Search API - POST", () => {
   });
 
   it("should not search invalid data", async () => {
-    const testValues = [null, undefined, NaN, "", "a"];
+    const testValues = [null, undefined, NaN, "", "a", "OS94334-4234254"];
 
     for (const testValue of testValues) {
       await request(app)
@@ -38,7 +38,7 @@ describe("Search API - POST", () => {
   });
 
   it("should return not found when valid search, but inexistent SO", async () => {
-    const testValues = [99999999, "OS99999999", "OS94334-42342542"];
+    const testValues = [99999999, "OS99999999", "OS94334-42"];
     for (const testValue of testValues) {
       await request(app)
         .post("/api/public/search")
