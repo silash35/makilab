@@ -22,7 +22,7 @@ import useSession from "@/hooks/useSession";
 import Settings from "./Settings";
 import styles from "./sidebar.module.scss";
 
-export default function Sidebar() {
+const Sidebar = () => {
   const matches = useMediaQuery("(max-width: 1023px)");
   const [isOpen, setIsOpen] = useState(false);
   const { signOut } = useSession();
@@ -38,23 +38,21 @@ export default function Sidebar() {
       )}
       <Drawer
         className={styles.drawer}
-        variant={matches ? "temporary" : "permanent"}
-        open={isOpen}
         onClose={() => setIsOpen(false)}
+        open={isOpen}
+        variant={matches ? "temporary" : "permanent"}
       >
         <div onClick={() => setIsOpen(false)} style={{ display: "contents" }}>
-          <Link href="/">
-            <a className={styles.image}>
-              <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40" />
-            </a>
+          <Link className={styles.image} href="/">
+            <img alt="OpenSOM, with SOM written in green" height="40" src="/text.svg" />
           </Link>
           <Divider />
           <List>
-            <ListLink href="/" text="Página Inicial" Icon={HomeIcon} />
-            <ListLink href="/admin/newSO" text="Criar nova OS" Icon={AddOSIcon} />
-            <ListLink href="/admin/editSOs" text="Gerenciar OSs" Icon={EditOSsIcon} />
-            <ListLink href="/admin/newClient" text="Cadastrar Cliente" Icon={AddClientIcon} />
-            <ListLink href="/admin/editClients" text="Gerenciar Clientes" Icon={EditClientsIcon} />
+            <ListLink Icon={HomeIcon} href="/" text="Página Inicial" />
+            <ListLink Icon={AddOSIcon} href="/admin/newSO" text="Criar nova OS" />
+            <ListLink Icon={EditOSsIcon} href="/admin/editSOs" text="Gerenciar OSs" />
+            <ListLink Icon={AddClientIcon} href="/admin/newClient" text="Cadastrar Cliente" />
+            <ListLink Icon={EditClientsIcon} href="/admin/editClients" text="Gerenciar Clientes" />
 
             <ListItemButton onClick={signOut}>
               <ListItemIcon>
@@ -68,7 +66,9 @@ export default function Sidebar() {
       </Drawer>
     </aside>
   );
-}
+};
+
+export default Sidebar;
 
 interface ListLinkProps {
   href: string;
@@ -81,14 +81,12 @@ const ListLink = ({ href, text, Icon }: ListLinkProps) => {
 
   return (
     <Link href={href}>
-      <a>
-        <ListItemButton className={router.pathname === href ? styles.active : undefined}>
-          <ListItemIcon>
-            <Icon />
-          </ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItemButton>
-      </a>
+      <ListItemButton className={router.pathname === href ? styles.active : undefined}>
+        <ListItemIcon>
+          <Icon />
+        </ListItemIcon>
+        <ListItemText primary={text} />
+      </ListItemButton>
     </Link>
   );
 };

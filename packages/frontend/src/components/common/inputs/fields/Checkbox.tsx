@@ -9,7 +9,7 @@ interface Props {
   defaultValue: boolean;
 }
 
-export default function Checkbox({ name, label, defaultValue }: Props) {
+const Checkbox = ({ name, label, defaultValue }: Props) => {
   const [value, setValue] = useState(defaultValue);
 
   useEffect(() => {
@@ -22,16 +22,18 @@ export default function Checkbox({ name, label, defaultValue }: Props) {
         <FormControlLabel
           control={
             <MCheckbox
-              checked={value}
               onChange={(e) => {
                 setValue(e.target.checked);
               }}
+              checked={value}
             />
           }
           label={label}
         />
       </FormGroup>
-      <input type="hidden" name={name} value={Number(value)} />
+      <input name={name} type="hidden" value={Number(value)} />
     </>
   );
-}
+};
+
+export default Checkbox;

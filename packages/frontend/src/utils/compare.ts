@@ -1,4 +1,4 @@
-export default function compare(a: string | number | null, b: string | number | null): number {
+function compare(a: string | number | null, b: string | number | null): number {
   if (a === null) {
     return -1;
   }
@@ -15,3 +15,5 @@ export default function compare(a: string | number | null, b: string | number | 
 
   return 0;
 }
+
+export default compare;

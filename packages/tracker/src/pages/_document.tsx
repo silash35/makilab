@@ -11,40 +11,40 @@ class MyDocument extends Document {
         <Head>
           {/* Primary Meta Tags */}
           <meta charSet="utf-8" />
-          <meta httpEquiv="content-type" content="text/html" />
+          <meta content="text/html" httpEquiv="content-type" />
 
           {/* SEO Meta Tags */}
-          <meta name="author" content="Silas Henrique Alves Araújo" />
-          <meta name="description" content={COMPANY.description} />
+          <meta content="Silas Henrique Alves Araújo" name="author" />
+          <meta content={COMPANY.description} name="description" />
 
           {/* Open Graph / Facebook */}
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={SITE_URL} />
-          <meta property="og:image" content={`${SITE_URL}/card.png`} />
-          <meta property="og:image:alt" content={`${COMPANY.name} logo`} />
+          <meta content="website" property="og:type" />
+          <meta content={SITE_URL} property="og:url" />
+          <meta content={`${SITE_URL}/card.png`} property="og:image" />
+          <meta content={`${COMPANY.name} logo`} property="og:image:alt" />
 
           {/* Twitter */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:url" content={SITE_URL} />
-          <meta name="twitter:creator" content="@silash35" />
-          <meta name="twitter:image" content={`${SITE_URL}/card.png`} />
+          <meta content="summary_large_image" name="twitter:card" />
+          <meta content={SITE_URL} name="twitter:url" />
+          <meta content="@silash35" name="twitter:creator" />
+          <meta content={`${SITE_URL}/card.png`} name="twitter:image" />
 
           {/* Icons */}
-          <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
-          <link rel="manifest" href="/icons/site.webmanifest" />
-          <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#0070f3" />
-          <link rel="shortcut icon" href="/icons/favicon.ico" />
-          <meta name="apple-mobile-web-app-title" content="OpenSOM" />
-          <meta name="application-name" content="OpenSOM" />
-          <meta name="msapplication-TileColor" content="#2d89ef" />
-          <meta name="msapplication-config" content="/icons/browserconfig.xml" />
-          <meta name="theme-color" content="#ffffff" />
+          <link href="/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+          <link href="/icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
+          <link href="/icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
+          <link href="/icons/site.webmanifest" rel="manifest" />
+          <link color="#0070f3" href="/icons/safari-pinned-tab.svg" rel="mask-icon" />
+          <link href="/icons/favicon.ico" rel="shortcut icon" />
+          <meta content="OpenSOM" name="apple-mobile-web-app-title" />
+          <meta content="OpenSOM" name="application-name" />
+          <meta content="#2d89ef" name="msapplication-TileColor" />
+          <meta content="/icons/browserconfig.xml" name="msapplication-config" />
+          <meta content="#ffffff" name="theme-color" />
 
           {/* Fonts */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link href="https://fonts.googleapis.com" rel="preconnect" />
+          <link crossOrigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect" />
           <link
             href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
             rel="stylesheet"

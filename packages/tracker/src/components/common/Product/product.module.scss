@@ -18,9 +18,9 @@
 
 .flex {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
 
   @media screen and (max-width: 850px) {
     justify-content: center;

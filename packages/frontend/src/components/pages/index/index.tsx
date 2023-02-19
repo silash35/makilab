@@ -3,27 +3,29 @@ import Link from "next/link";
 
 import styles from "./index.module.scss";
 
-export default function Index() {
+const Index = () => {
   return (
     <div className={styles.adminMenu}>
-      <BigButton link="admin/newSO" color={styles.green}>
+      <BigButton color={styles.green} link="admin/newSO">
         Criar nova Ordem de Serviço
       </BigButton>
 
-      <BigButton link="admin/editSOs" color={styles.yellow}>
+      <BigButton color={styles.yellow} link="admin/editSOs">
         Gerenciar Ordens de Serviço
       </BigButton>
 
-      <BigButton link="admin/newClient" color={styles.blue}>
+      <BigButton color={styles.blue} link="admin/newClient">
         Adicionar Cliente
       </BigButton>
 
-      <BigButton link="admin/editClients" color={styles.red}>
+      <BigButton color={styles.red} link="admin/editClients">
         Gerenciar Clientes
       </BigButton>
     </div>
   );
-}
+};
+
+export default Index;
 
 interface BigButtonProps {
   children: React.ReactNode;
@@ -31,12 +33,15 @@ interface BigButtonProps {
   link: string;
 }
 
-function BigButton({ children, color, link }: BigButtonProps) {
+const BigButton = ({ children, color, link }: BigButtonProps) => {
   return (
-    <Link href={link} passHref>
-      <Button variant="contained" component="a" className={`${styles.bigButton} ${color}`}>
-        {children}
-      </Button>
-    </Link>
+    <Button
+      className={`${styles.bigButton} ${color}`}
+      component={Link}
+      href={link}
+      variant="contained"
+    >
+      {children}
+    </Button>
   );
-}
+};

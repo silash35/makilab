@@ -22,7 +22,7 @@ interface Props {
   mutate: () => void;
 }
 
-export default function DetailedInformation({ serviceOrder, mutate }: Props) {
+const DetailedInformation = ({ serviceOrder, mutate }: Props) => {
   const owner = serviceOrder.owner;
 
   const handleDeleteSO = async () => {
@@ -117,7 +117,6 @@ export default function DetailedInformation({ serviceOrder, mutate }: Props) {
 
       <div className={styles.buttonsContainer}>
         <ConfirmationDialogButton
-          buttonText="Deletar"
           confirmationDialogProps={{
             title: `Deletar ${serviceOrder.id}`,
             text: `Tem certeza que deseja excluir a OS ${serviceOrder.id}?`,
@@ -125,10 +124,10 @@ export default function DetailedInformation({ serviceOrder, mutate }: Props) {
             showLoading: true,
             submit: handleDeleteSO,
           }}
+          buttonText="Deletar"
         />
-        {owner.email && <SendMailDialog to={owner.email} defaultText={serviceOrder.defaultEmail} />}
+        {owner.email && <SendMailDialog defaultText={serviceOrder.defaultEmail} to={owner.email} />}
         <FormDialogButton
-          buttonText="Editar Equipamento"
           formDialogProps={{
             title: "Editar Equipamento",
             children: <ServiceOrderInputs serviceOrder={serviceOrder} />,
@@ -136,22 +135,17 @@ export default function DetailedInformation({ serviceOrder, mutate }: Props) {
             showLoading: true,
             submit: editSO,
           }}
+          buttonText="Editar Equipamento"
         />
 
-        <Link href={`/admin/SO/${serviceOrder.id}`} passHref>
-          <Button variant="outlined" component="a">
-            Gerar PDF
-          </Button>
-        </Link>
-        <Link href={`/admin/SO/${serviceOrder.id}/budgets`} passHref>
-          <Button variant="outlined" component="a">
-            Orçamentos
-          </Button>
-        </Link>
+        <Button component={Link} href={`/admin/SO/${serviceOrder.id}`} variant="outlined">
+          Gerar PDF
+        </Button>
+        <Button component={Link} href={`/admin/SO/${serviceOrder.id}/budgets`} variant="outlined">
+          Orçamentos
+        </Button>
 
         <FormDialogButton
-          buttonText="Atualizar Status"
-          buttonProps={{ variant: "contained" }}
           formDialogProps={{
             title: "Atualizar Status",
             children: <ServiceOrderStatusInputs serviceOrder={serviceOrder} />,
@@ -159,8 +153,12 @@ export default function DetailedInformation({ serviceOrder, mutate }: Props) {
             showLoading: true,
             submit: editStatusSO,
           }}
+          buttonProps={{ variant: "contained" }}
+          buttonText="Atualizar Status"
         />
       </div>
     </Box>
   );
-}
+};
+
+export default DetailedInformation;

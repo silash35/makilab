@@ -1,17 +1,16 @@
 .page {
-  //height: 297mm;
-  width: 210mm;
-  min-height: 297mm;
-  min-width: 210mm;
-  max-width: 210mm;
-
   margin: auto;
   border: 1px solid black;
-  padding: 16px;
-  font-size: 12px;
 
   background-color: white;
+  padding: 16px;
+  //height: 297mm;
+  width: 210mm;
+  min-width: 210mm;
+  max-width: 210mm;
+  min-height: 297mm;
   color: #212121;
+  font-size: 12px;
   hr {
     border: 1px black dashed;
   }
@@ -22,17 +21,17 @@
 
   @media print {
     position: absolute;
+    top: 0;
+    left: 0;
 
     z-index: 9999;
-    left: 0;
-    top: 0;
-
-    width: auto;
-    height: auto;
-    min-height: 100%;
-    min-width: 100%;
-    background-color: white;
 
     border: none;
+    background-color: white;
+
+    width: auto;
+    min-width: 100%;
+    height: auto;
+    min-height: 100%;
   }
 }

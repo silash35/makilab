@@ -9,13 +9,15 @@ const pt = {
   notFound: "Pagina não encontrada",
 };
 
-export default function Custom404() {
+const Custom404 = () => {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
   return (
-    <Stack margin="auto" justifyContent="center" alignItems="center">
+    <Stack alignItems="center" justifyContent="center" margin="auto">
       <h1>404 - {t.notFound}</h1>
     </Stack>
   );
-}
+};
+
+export default Custom404;

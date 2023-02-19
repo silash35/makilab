@@ -3,23 +3,23 @@
   max-width: 100vw;
 
   h2 {
+    margin: 0;
     font-weight: 400;
     font-size: 1.5rem;
-    margin: 0;
   }
 
   h3 {
+    margin: 0;
     font-weight: 400;
     font-size: 1.2rem;
-    margin: 0;
   }
 }
 
 .flex {
   display: flex;
   align-items: center;
-  margin: 16px 0;
   gap: 16px;
+  margin: 16px 0;
 
   @media screen and (max-width: 850px) {
     flex-wrap: wrap;
@@ -27,11 +27,11 @@
 }
 
 .cardsContainer {
-  margin: 16px;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
   justify-content: space-around;
+  gap: 16px;
+  margin: 16px;
 
   & > div {
     flex-grow: 1;

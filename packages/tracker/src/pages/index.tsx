@@ -11,7 +11,7 @@ const pt = {
   title: "Verifique o status do seu produto",
 };
 
-export default function IndexPage() {
+const IndexPage = () => {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
@@ -24,4 +24,6 @@ export default function IndexPage() {
       <Index />
     </>
   );
-}
+};
+
+export default IndexPage;

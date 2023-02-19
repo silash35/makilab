@@ -24,13 +24,13 @@ interface Props {
   id: string;
 }
 
-export default function Budget({ id }: Props) {
+const Budget = ({ id }: Props) => {
   const [openDialog, setOpenDialog] = useState(false);
   const { budget, mutate } = useBudget(id);
 
   if (!budget) {
     return (
-      <Stack height="100%" justifyContent="center" alignItems="center">
+      <Stack alignItems="center" height="100%" justifyContent="center">
         <CircularProgress />
       </Stack>
     );
@@ -63,7 +63,6 @@ export default function Budget({ id }: Props) {
               title: "Editar Orçamento",
               children: (
                 <TextInput
-                  defaultValue={budget.name}
                   textFieldProps={{
                     name: "name",
                     label: "Nome do orçamento",
@@ -71,6 +70,7 @@ export default function Budget({ id }: Props) {
                     required: true,
                     fullWidth: true,
                   }}
+                  defaultValue={budget.name}
                 />
               ),
               yesButtonText: "Confirmar",
@@ -79,27 +79,29 @@ export default function Budget({ id }: Props) {
             }}
           />
         </div>
-        <Link href={`/admin/SO/${budget.serviceOrderId}/budgets`} passHref>
-          <Button component="a">Voltar</Button>
-        </Link>
+        <Button component={Link} href={`/admin/SO/${budget.serviceOrderId}/budgets`}>
+          Voltar
+        </Button>
         <Button onClick={() => setOpenDialog(true)}>Novo Item</Button>
-        <Link href={`/admin/budget/${budget.id}/pdf`} passHref>
-          <Button component="a">Gerar PDF</Button>
-        </Link>
+        <Button component={Link} href={`/admin/budget/${budget.id}/pdf`}>
+          Gerar PDF
+        </Button>
       </div>
 
-      <BudgetTable budget={budget} openNewItemDialog={() => setOpenDialog(true)} mutate={mutate} />
+      <BudgetTable budget={budget} mutate={mutate} openNewItemDialog={() => setOpenDialog(true)} />
 
       <FormDialog
-        title="Criar Novo Item"
-        yesButtonText="Enviar"
-        showLoading={true}
-        submit={newItem}
         open={openDialog}
         setOpen={setOpenDialog}
+        showLoading={true}
+        submit={newItem}
+        title="Criar Novo Item"
+        yesButtonText="Enviar"
       >
         <BudgetItemInputs />
       </FormDialog>
     </TableContainer>
   );
-}
+};
+
+export default Budget;

@@ -2,7 +2,7 @@ import useSWR from "swr";
 
 import TBudget from "@/types/budget";
 
-export default function useBudget(id: string) {
+function useBudget(id: string) {
   const { data, error, mutate } = useSWR(`/api/private/budget/${id}`);
 
   return {
@@ -12,3 +12,5 @@ export default function useBudget(id: string) {
     error,
   };
 }
+
+export default useBudget;

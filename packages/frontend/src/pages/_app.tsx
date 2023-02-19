@@ -19,27 +19,27 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
+const MyApp = ({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) => {
   const Layout = Component.Layout ? Component.Layout : DefaultLayout;
 
   return (
     <>
       <Head>
         {/* Viewport meta tag should not be used in _document.tsx. That's why it's in this file */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
         {/* These meta tags need to be here for the key attribute to work properly */}
-        <meta property="og:title" content="OpenSOM" key="ogTitle" />
-        <meta name="twitter:title" content="OpenSOM" key="twitterTitle" />
+        <meta content="OpenSOM" key="ogTitle" property="og:title" />
+        <meta content="OpenSOM" key="twitterTitle" name="twitter:title" />
         <meta
-          property="og:description"
           content="The Open source Service Order Manager"
           key="ogDescription"
+          property="og:description"
         />
         <meta
-          name="twitter:description"
           content="The Open source Service Order Manager"
           key="twitterDescription"
+          name="twitter:description"
         />
       </Head>
 
@@ -56,6 +56,6 @@ function MyApp({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
       </ErrorProvider>
     </>
   );
-}
+};
 
 export default MyApp;

@@ -10,30 +10,32 @@ interface Props<SortableProperty> {
   align?: "inherit" | "left" | "center" | "right" | "justify";
 }
 
-export default function TableCellWithSort<Properties>({
+const TableCellWithSort = <Properties,>({
   children,
   property,
   setSortDirection,
   setSortProperty,
   align,
-}: Props<Properties>) {
+}: Props<Properties>) => {
   const [sortDirection, setThisSortDirection] = useState<Direction>("asc");
 
   return (
     <TableCell align={align}>
       <TableSortLabel
-        direction={sortDirection}
         onClick={() => {
           const newSortDirection = sortDirection === "asc" ? "desc" : "asc";
           setSortProperty(property);
           setSortDirection(newSortDirection);
           setThisSortDirection(newSortDirection);
         }}
+        direction={sortDirection}
       >
         {children}
       </TableSortLabel>
     </TableCell>
   );
-}
+};
+
+export default TableCellWithSort;
 
 export type Direction = "asc" | "desc";

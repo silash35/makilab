@@ -28,7 +28,7 @@ const unauthenticatedSession: Session = { user: null, status: "unauthenticated" 
 
 export const AuthContext = createContext({} as AuthContextType);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session>(loadingSession);
 
   useEffect(() => {
@@ -77,4 +77,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider value={{ session, signIn, signOut }}>{children}</AuthContext.Provider>
   );
-}
+};

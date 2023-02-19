@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import SignIn from "@/components/pages/SignIn";
 
-export default function SignInPage() {
+const SignInPage = () => {
   return (
     <>
       <Head>
@@ -11,7 +11,9 @@ export default function SignInPage() {
       <SignIn />
     </>
   );
-}
+};
+
+export default SignInPage;
 
 SignInPage.Layout = function Layout({ children }: { children: React.ReactNode }) {
   return children;

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import EditClients from "@/components/pages/EditClients";
 
-function EditClientsPage() {
+const EditClientsPage = () => {
   return (
     <>
       <Head>
@@ -12,6 +12,6 @@ function EditClientsPage() {
       <EditClients />
     </>
   );
-}
+};
 
 export default EditClientsPage;

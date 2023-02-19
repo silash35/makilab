@@ -6,7 +6,7 @@ interface Props {
   textFieldProps: Omit<TextFieldProps, "value" | "onChange">;
 }
 
-export default function Integer({ defaultValue, textFieldProps }: Props) {
+const Integer = ({ defaultValue, textFieldProps }: Props) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : "1");
 
   useEffect(() => {
@@ -15,7 +15,6 @@ export default function Integer({ defaultValue, textFieldProps }: Props) {
 
   return (
     <TextField
-      value={value}
       onChange={(e) => {
         const newValue = e.target.value.replace(/\D/g, "");
         if (newValue.length === 0) {
@@ -24,7 +23,10 @@ export default function Integer({ defaultValue, textFieldProps }: Props) {
           setValue(newValue);
         }
       }}
+      value={value}
       {...textFieldProps}
     />
   );
-}
+};
+
+export default Integer;

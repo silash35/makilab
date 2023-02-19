@@ -11,9 +11,9 @@
 .flexNoWrap {
   display: flex;
   align-items: center;
+  gap: 8px;
 
   min-width: 400px;
-  gap: 8px;
 }
 
 .minWidth {

@@ -6,7 +6,7 @@ import useSession from "@/hooks/useSession";
 
 import styles from "./signin.module.scss";
 
-export default function SignIn() {
+const SignIn = () => {
   const { session } = useSession();
   const router = useRouter();
 
@@ -17,7 +17,7 @@ export default function SignIn() {
   return (
     <main className={styles.main}>
       <div className={styles.signin}>
-        <img width="130" height="auto" src={"/icon.svg"} alt="Logo" />
+        <img alt="Logo" height="auto" src={"/icon.svg"} width="130" />
 
         <Card elevation={4}>
           <SignInForm />
@@ -25,4 +25,6 @@ export default function SignIn() {
       </div>
     </main>
   );
-}
+};
+
+export default SignIn;

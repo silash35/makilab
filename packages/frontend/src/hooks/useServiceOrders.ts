@@ -2,7 +2,7 @@ import useSWR from "swr";
 
 import { TServiceOrderWithClient } from "@/types/serviceOrder";
 
-export default function useServiceOrders(query = "") {
+function useServiceOrders(query = "") {
   const { data, error, mutate } = useSWR(`/api/private/serviceOrders${query}`);
 
   return {
@@ -12,3 +12,5 @@ export default function useServiceOrders(query = "") {
     error,
   };
 }
+
+export default useServiceOrders;

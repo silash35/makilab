@@ -23,7 +23,7 @@ interface Props {
   setSortProperty: (property: SortableProperty) => void;
 }
 
-export default function CollapsibleTable({ serviceOrders, mutate, ...props }: Props) {
+const CollapsibleTable = ({ serviceOrders, mutate, ...props }: Props) => {
   const router = useRouter();
 
   const [rowsPerPage, setRowsPerPage] = useState(50);
@@ -70,30 +70,32 @@ export default function CollapsibleTable({ serviceOrders, mutate, ...props }: Pr
         {serviceOrders
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((serviceOrder) => (
-            <Equipment key={serviceOrder.id} serviceOrder={serviceOrder} mutate={mutate} />
+            <Equipment key={serviceOrder.id} mutate={mutate} serviceOrder={serviceOrder} />
           ))}
       </TableBody>
       <TableFooter>
         <TableRow>
           <TablePagination
-            rowsPerPageOptions={[50, 100, 200, 300]}
-            colSpan={7}
-            count={serviceOrders.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
             SelectProps={{
               inputProps: {
                 "aria-label": "Linhas por página",
               },
             }}
-            onPageChange={(e, newPage) => setPage(newPage)}
             onRowsPerPageChange={(event) => {
               setRowsPerPage(parseInt(event.target.value, 10));
               setPage(0);
             }}
+            colSpan={7}
+            count={serviceOrders.length}
+            onPageChange={(e, newPage) => setPage(newPage)}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOptions={[50, 100, 200, 300]}
           />
         </TableRow>
       </TableFooter>
     </Table>
   );
-}
+};
+
+export default CollapsibleTable;

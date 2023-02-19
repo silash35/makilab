@@ -9,7 +9,7 @@ import Product from "./ProductContainer";
 
 type ProductState = "loading" | "empty" | "Unknown error" | "Not found" | ProductType;
 
-export default function Index() {
+const Index = () => {
   const router = useRouter();
   const [product, setProduct] = useState<ProductState>("empty");
 
@@ -30,4 +30,6 @@ export default function Index() {
       <Product product={product} />
     </main>
   );
-}
+};
+
+export default Index;

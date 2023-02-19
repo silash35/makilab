@@ -15,7 +15,7 @@ interface Props {
   budget: Budget;
 }
 
-export default function Document({ budget }: Props) {
+const Document = ({ budget }: Props) => {
   const { serviceOrder } = useServiceOrder(String(budget.serviceOrderId));
 
   return (
@@ -63,4 +63,6 @@ export default function Document({ budget }: Props) {
       </section>
     </Page>
   );
-}
+};
+
+export default Document;

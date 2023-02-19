@@ -12,10 +12,7 @@ const pt = {
   title: "Verifique o status do seu produto",
 };
 
-export default function TrackPage({
-  product,
-  locale,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+const TrackPage = ({ product, locale }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const t = locale === "en" ? en : pt;
 
   return (
@@ -27,7 +24,9 @@ export default function TrackPage({
       <Id product={product} />
     </>
   );
-}
+};
+
+export default TrackPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Array.isArray(context.query.id) ? context.query.id[0] : context.query.id;

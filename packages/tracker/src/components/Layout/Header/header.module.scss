@@ -5,11 +5,11 @@
   justify-content: center;
   nav {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    padding: 20px;
 
     width: 80%;
-    padding: 20px;
 
     @media screen and (max-width: 850px) {
       justify-content: center;
@@ -27,13 +27,13 @@
 
 .headerButton {
   margin-left: 20px;
-  letter-spacing: 1px;
+  color: black;
   font-weight: bold;
   font-size: 1.2rem;
-  text-decoration: none;
   font-family: "Noto Sans", sans-serif;
+  letter-spacing: 1px;
+  text-decoration: none;
   text-transform: uppercase;
-  color: black;
 
   &:hover,
   &:focus,

@@ -1,6 +1,7 @@
+import fs from "node:fs";
+
 import { execSync } from "child_process";
 import concurrently from "concurrently";
-import fs from "fs";
 
 console.log("Deleting Old Files");
 try {
@@ -27,7 +28,7 @@ const { commands, result } = concurrently(
   [
     { command: "pnpm start", name: "backend", cwd: "./node_modules/@opensom/backend/" },
     {
-      command: "pnpm wait-on tcp:1234 && pnpm start",
+      command: "pnpm wait-on http://127.0.0.1:1234 && pnpm start",
       name: "frontend",
       cwd: "./node_modules/@opensom/frontend/",
     },
@@ -35,8 +36,8 @@ const { commands, result } = concurrently(
   { killOthers: ["success", "failure"] }
 );
 
-result.catch(() => {
-  // do nothing
+result.catch((errors) => {
+  console.log(errors);
 });
 
 if (!fs.existsSync("./logs")) {
@@ -45,7 +46,9 @@ if (!fs.existsSync("./logs")) {
 }
 
 console.log("Generating new executables");
-execSync("wait-on tcp:3000 && pnpm nativefier --name OpenSOM --portable http://127.0.0.1:3000 ./");
+execSync(
+  "pnpm wait-on http://127.0.0.1:3000 && pnpm nativefier --name OpenSOM --portable http://127.0.0.1:3000 ./"
+);
 
 console.log("closing servers");
 commands.forEach((command) => {

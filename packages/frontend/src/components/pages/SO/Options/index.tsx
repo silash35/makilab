@@ -18,7 +18,7 @@ interface Props {
   mutate: () => Promise<void>;
 }
 
-export default function Options({ serviceOrder, mutate }: Props) {
+const Options = ({ serviceOrder, mutate }: Props) => {
   const owner = serviceOrder.owner;
 
   const editSO = async (data: unknown) => {
@@ -35,16 +35,13 @@ export default function Options({ serviceOrder, mutate }: Props) {
 
   return (
     <div className={styles.options}>
-      <Button variant="contained" onClick={window.print}>
+      <Button onClick={window.print} variant="contained">
         Imprimir
       </Button>
-      <Link href={`/admin/SO/${serviceOrder.id}/budgets`} passHref>
-        <Button variant="outlined" component="a">
-          Orçamentos
-        </Button>
-      </Link>
+      <Button component={Link} href={`/admin/SO/${serviceOrder.id}/budgets`} variant="outlined">
+        Orçamentos
+      </Button>
       <FormDialogButton
-        buttonText="Editar Equipamento"
         formDialogProps={{
           title: "Editar Equipamento",
           children: <ServiceOrderInputs serviceOrder={serviceOrder} />,
@@ -52,9 +49,9 @@ export default function Options({ serviceOrder, mutate }: Props) {
           showLoading: true,
           submit: editSO,
         }}
+        buttonText="Editar Equipamento"
       />
       <FormDialogButton
-        buttonText="Editar Cliente"
         formDialogProps={{
           title: "Editar Cliente",
           children: <ClientInputs client={owner} />,
@@ -62,14 +59,17 @@ export default function Options({ serviceOrder, mutate }: Props) {
           showLoading: true,
           submit: editClient,
         }}
+        buttonText="Editar Cliente"
       />
 
       {owner.email && (
         <SendMailDialog
-          to={owner.email}
           defaultText={`Prezado(a) ${owner.name}, seu produto (${serviceOrder.equipment} ${serviceOrder.brand}) de OS ${serviceOrder.id} foi recebido e está aguardando avaliação técnica.`}
+          to={owner.email}
         />
       )}
     </div>
   );
-}
+};
+
+export default Options;

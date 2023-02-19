@@ -1,6 +1,6 @@
 .container {
-  max-width: 80vw;
   margin: auto;
+  max-width: 80vw;
 
   h1 {
     margin-top: 0;
@@ -8,8 +8,8 @@
 }
 
 .budgets {
+  grid-gap: 2em;
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   justify-content: space-evenly;
-  grid-gap: 2em;
 }

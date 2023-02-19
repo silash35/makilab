@@ -18,7 +18,7 @@ interface Props {
 
 const newClient: ClientWithLabel = { label: "Novo Cliente", id: 0 } as ClientWithLabel;
 
-export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
+const ClientAndSOInputs = ({ setSelectedClientId }: Props) => {
   const [options, setOptions] = useState([newClient]);
   const [search, setSearch] = useState("");
 
@@ -48,12 +48,18 @@ export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
     <>
       <h2>Dados do Cliente</h2>
       <Autocomplete
-        options={options}
-        value={clientSelectorValue}
-        filterOptions={(x) => x}
         onChange={(e, newValue) => {
           if (newValue) setClientSelectorValue(newValue);
         }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Cliente"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            required
+          />
+        )}
         renderOption={(props, option) => {
           return (
             <li {...props} key={option.id}>
@@ -61,15 +67,9 @@ export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
             </li>
           );
         }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            label="Cliente"
-            required
-          />
-        )}
+        filterOptions={(x) => x}
+        options={options}
+        value={clientSelectorValue}
       />
       <ClientInputs client={clientSelectorValue} />
 
@@ -77,4 +77,6 @@ export default function ClientAndSOInputs({ setSelectedClientId }: Props) {
       <EquipmentInputs />
     </>
   );
-}
+};
+
+export default ClientAndSOInputs;

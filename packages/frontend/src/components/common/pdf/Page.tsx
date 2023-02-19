@@ -4,6 +4,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function Page({ children }: Props) {
+const Page = ({ children }: Props) => {
   return <article className={styles.page}>{children}</article>;
-}
+};
+
+export default Page;

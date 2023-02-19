@@ -16,7 +16,7 @@ interface Props {
   mutate: () => void;
 }
 
-export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props) {
+const NewBudgetCard = ({ serviceOrderId, number, mutate }: Props) => {
   const newBudget = async (data: unknown) => {
     const { error } = await addBudget(Number(serviceOrderId), data as TBudgetInput);
     mutate();
@@ -31,7 +31,7 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
             <CardActionArea {...props}>
               <div className={styles.buttonContent}>
                 <AddIcon fontSize="large" />
-                <Typography variant="body1" component="p">
+                <Typography component="p" variant="body1">
                   Novo Orçamento
                 </Typography>
               </div>
@@ -41,7 +41,6 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
             title: "Criar Novo Orçamento",
             children: (
               <TextInput
-                defaultValue={`Novo Orçamento #${number}`}
                 textFieldProps={{
                   name: "name",
                   label: "Nome do novo orçamento",
@@ -49,6 +48,7 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
                   fullWidth: true,
                   margin: "normal",
                 }}
+                defaultValue={`Novo Orçamento #${number}`}
               />
             ),
             yesButtonText: "Enviar",
@@ -59,4 +59,6 @@ export default function NewBudgetCard({ serviceOrderId, number, mutate }: Props)
       </Card>
     </div>
   );
-}
+};
+
+export default NewBudgetCard;

@@ -2,7 +2,7 @@ import useSWR from "swr";
 
 import { TClientWithSOs } from "@/types/client";
 
-export default function useClients(query = "") {
+function useClients(query = "") {
   const { data, error, mutate } = useSWR(`/api/private/clients${query}`);
 
   return {
@@ -12,3 +12,5 @@ export default function useClients(query = "") {
     error,
   };
 }
+
+export default useClients;

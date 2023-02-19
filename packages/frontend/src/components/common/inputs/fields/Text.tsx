@@ -6,12 +6,14 @@ interface Props {
   textFieldProps: Omit<TextFieldProps, "value" | "onChange">;
 }
 
-export default function Text({ defaultValue, textFieldProps }: Props) {
+const Text = ({ defaultValue, textFieldProps }: Props) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : "");
 
   useEffect(() => {
     setValue(defaultValue ? defaultValue : "");
   }, [defaultValue]);
 
-  return <TextField value={value} onChange={(e) => setValue(e.target.value)} {...textFieldProps} />;
-}
+  return <TextField onChange={(e) => setValue(e.target.value)} value={value} {...textFieldProps} />;
+};
+
+export default Text;

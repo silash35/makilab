@@ -8,7 +8,7 @@ interface Props {
   textFieldProps: Omit<TextFieldProps, "value" | "onChange">;
 }
 
-export default function Money({ defaultValue, textFieldProps }: Props) {
+const Money = ({ defaultValue, textFieldProps }: Props) => {
   const processValue = (value: string) => centsToBRL(Number(value));
 
   const [value, setValue] = useState(processValue(defaultValue ? defaultValue : "0"));
@@ -18,13 +18,15 @@ export default function Money({ defaultValue, textFieldProps }: Props) {
 
   return (
     <TextField
-      value={value}
       onChange={(e) => {
         const negative = e.target.value.match(/-/g)?.length === 1;
         const input = e.target.value.replace(/\D/g, "");
         setValue(processValue((negative ? "-" : "") + input));
       }}
+      value={value}
       {...textFieldProps}
     />
   );
-}
+};
+
+export default Money;

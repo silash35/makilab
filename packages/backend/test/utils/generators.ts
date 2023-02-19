@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker/locale/pt_BR";
 export function generateClient(optionals = true, optionalsValueTo?: unknown) {
   if (optionals === true) {
     return {
-      name: faker.name.findName(),
+      name: faker.name.fullName(),
       email: faker.internet.email(),
       address: faker.address.streetAddress(true),
       zip: faker.address.zipCode("#####-###"),
@@ -13,7 +13,7 @@ export function generateClient(optionals = true, optionalsValueTo?: unknown) {
     };
   } else {
     return {
-      name: faker.name.findName(),
+      name: faker.name.fullName(),
       email: optionalsValueTo,
       address: optionalsValueTo,
       zip: optionalsValueTo,
@@ -40,7 +40,7 @@ export function generateServiceOrder(optionals = true, optionalsValueTo?: unknow
 
       isUnderWarranty: faker.datatype.boolean(),
       voltage: faker.datatype.number({ min: 0, max: 500 }) + "V",
-      attendedBy: faker.name.findName(),
+      attendedBy: faker.name.fullName(),
       attendedOn: faker.name.jobArea(),
     };
   } else {
@@ -58,7 +58,7 @@ export function generateServiceOrder(optionals = true, optionalsValueTo?: unknow
 
       isUnderWarranty: faker.datatype.boolean(),
       voltage: faker.datatype.number({ min: 0, max: 500 }) + "V",
-      attendedBy: faker.name.findName(),
+      attendedBy: faker.name.fullName(),
       attendedOn: faker.name.jobArea(),
     };
   }

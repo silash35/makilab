@@ -10,7 +10,7 @@ interface Props {
   handleSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
-export default function Form({ title, children, handleSubmit }: Props) {
+const Form = ({ title, children, handleSubmit }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmitWrapper = async (event: FormEvent<HTMLFormElement>) => {
@@ -27,9 +27,11 @@ export default function Form({ title, children, handleSubmit }: Props) {
 
       <p>*Campo Obrigatório</p>
 
-      <Button variant="contained" fullWidth size="large" type="submit" disabled={isSubmitting}>
+      <Button disabled={isSubmitting} size="large" type="submit" variant="contained" fullWidth>
         {isSubmitting ? "Cadastrando..." : "Cadastrar"}
       </Button>
     </form>
   );
-}
+};
+
+export default Form;

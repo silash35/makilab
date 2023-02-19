@@ -11,12 +11,12 @@ interface Props {
   id: string;
 }
 
-export default function ServiceOrder({ id }: Props) {
+const ServiceOrder = ({ id }: Props) => {
   const { serviceOrder, mutate } = useServiceOrder(id);
 
   if (!serviceOrder) {
     return (
-      <Stack height="100%" justifyContent="center" alignItems="center">
+      <Stack alignItems="center" height="100%" justifyContent="center">
         <CircularProgress />
       </Stack>
     );
@@ -24,10 +24,12 @@ export default function ServiceOrder({ id }: Props) {
 
   return (
     <>
-      <Options serviceOrder={serviceOrder} mutate={mutate} />
+      <Options mutate={mutate} serviceOrder={serviceOrder} />
       <div className={styles.pdfContainer}>
         <Pdf serviceOrder={serviceOrder} />
       </div>
     </>
   );
-}
+};
+
+export default ServiceOrder;

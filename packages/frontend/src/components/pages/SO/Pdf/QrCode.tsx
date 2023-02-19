@@ -8,7 +8,7 @@ interface Props {
   id: string;
 }
 
-export default function QrCode({ id }: Props) {
+const QrCode = ({ id }: Props) => {
   const qrcode = useRef<HTMLDivElement>(null);
   const qrCodeLink = PDF.qrCodeLink.replace("%ID%", id);
 
@@ -29,4 +29,6 @@ export default function QrCode({ id }: Props) {
   }, [id]);
 
   return <div ref={qrcode}></div>;
-}
+};
+
+export default QrCode;

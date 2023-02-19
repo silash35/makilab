@@ -16,13 +16,7 @@ interface Props {
   >;
 }
 
-export default function DateTime({
-  name,
-  label,
-  defaultValue,
-  textFieldProps,
-  dateTimePickerProps,
-}: Props) {
+const DateTime = ({ name, label, defaultValue, textFieldProps, dateTimePickerProps }: Props) => {
   let initialValue: string | null | "none";
 
   if (defaultValue) {
@@ -42,16 +36,18 @@ export default function DateTime({
   }, [defaultValue]);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ptBR}>
+    <LocalizationProvider adapterLocale={ptBR} dateAdapter={AdapterDateFns}>
       <DateTimePicker
         label={label}
+        onChange={(newValue) => setValue(newValue as string | null)}
         renderInput={(params) => <TextField {...textFieldProps} {...params} />}
         value={value}
-        onChange={(newValue) => setValue(newValue as string | null)}
         {...dateTimePickerProps}
       />
 
-      <input type="hidden" name={name} value={value ? new Date(value).toISOString() : ""} />
+      <input name={name} type="hidden" value={value ? new Date(value).toISOString() : ""} />
     </LocalizationProvider>
   );
-}
+};
+
+export default DateTime;

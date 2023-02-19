@@ -16,14 +16,14 @@ interface Props {
   mutate: () => void;
 }
 
-export default function ClientRow({ client, mutate }: Props) {
+const ClientRow = ({ client, mutate }: Props) => {
   const [openRow, setOpenRow] = useState(false);
 
   return (
     <>
       <TableRow className={styles.row}>
         <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpenRow(!openRow)}>
+          <IconButton aria-label="expand row" onClick={() => setOpenRow(!openRow)} size="small">
             {openRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -36,7 +36,7 @@ export default function ClientRow({ client, mutate }: Props) {
         <TableCell align="center">{client.cpfOrCnpj}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell colSpan={6} style={{ paddingBottom: 0, paddingTop: 0 }}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
             <DetailedInformation client={client} mutate={mutate} />
           </Collapse>
@@ -44,4 +44,6 @@ export default function ClientRow({ client, mutate }: Props) {
       </TableRow>
     </>
   );
-}
+};
+
+export default ClientRow;

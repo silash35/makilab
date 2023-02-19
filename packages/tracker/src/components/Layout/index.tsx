@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: Props) {
+const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
@@ -14,4 +14,6 @@ export default function Layout({ children }: Props) {
       <Footer />
     </>
   );
-}
+};
+
+export default Layout;

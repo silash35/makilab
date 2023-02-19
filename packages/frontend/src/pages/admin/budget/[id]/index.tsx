@@ -6,7 +6,7 @@ import Budget from "@/components/pages/Budget";
 import ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/request";
 
-function BudgetPage({ id, budgetJSON }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+const BudgetPage = ({ id, budgetJSON }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const budget = JSON.parse(budgetJSON) as ServiceOrder;
 
   const fallback = { [`/api/private/budget/${id}`]: budget };
@@ -21,7 +21,7 @@ function BudgetPage({ id, budgetJSON }: InferGetServerSidePropsType<typeof getSe
       </SWRConfig>
     </>
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Array.isArray(context.query.id) ? context.query.id[0] : context.query.id;

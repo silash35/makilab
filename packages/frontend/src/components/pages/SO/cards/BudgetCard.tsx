@@ -15,7 +15,7 @@ interface Props {
   mutate: () => void;
 }
 
-export default function BudgetCard({ budget, mutate }: Props) {
+const BudgetCard = ({ budget, mutate }: Props) => {
   const reais = centsToBRL(budget.total);
 
   const handleDeleteBudget = async () => {
@@ -27,21 +27,19 @@ export default function BudgetCard({ budget, mutate }: Props) {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography component="div" variant="h5">
           {budget.name}
         </Typography>
-        <Typography variant="h6" component="div">
+        <Typography component="div" variant="h6">
           {reais}
         </Typography>
       </CardContent>
       <CardActions>
-        <Link href={`/admin/budget/${budget.id}`} passHref>
-          <Button component="a">Ver mais</Button>
-        </Link>
+        <Button component={Link} href={`/admin/budget/${budget.id}`}>
+          Ver mais
+        </Button>
 
         <ConfirmationDialogButton
-          buttonText="Deletar"
-          buttonProps={{ variant: "text" }}
           confirmationDialogProps={{
             title: `Deletar ${budget.name}`,
             text: "Tem certeza que deseja excluir este orçamento? Não será possível recuperar depois.",
@@ -49,8 +47,12 @@ export default function BudgetCard({ budget, mutate }: Props) {
             showLoading: true,
             submit: handleDeleteBudget,
           }}
+          buttonProps={{ variant: "text" }}
+          buttonText="Deletar"
         />
       </CardActions>
     </Card>
   );
-}
+};
+
+export default BudgetCard;
