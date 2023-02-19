@@ -79,13 +79,13 @@ export default function Budget({ id }: Props) {
             }}
           />
         </div>
-        <Link href={`/admin/SO/${budget.serviceOrderId}/budgets`} passHref>
-          <Button component="a">Voltar</Button>
-        </Link>
+        <Button component={Link} href={`/admin/SO/${budget.serviceOrderId}/budgets`}>
+          Voltar
+        </Button>
         <Button onClick={() => setOpenDialog(true)}>Novo Item</Button>
-        <Link href={`/admin/budget/${budget.id}/pdf`} passHref>
-          <Button component="a">Gerar PDF</Button>
-        </Link>
+        <Button component={Link} href={`/admin/budget/${budget.id}/pdf`}>
+          Gerar PDF
+        </Button>
       </div>
 
       <BudgetTable budget={budget} openNewItemDialog={() => setOpenDialog(true)} mutate={mutate} />

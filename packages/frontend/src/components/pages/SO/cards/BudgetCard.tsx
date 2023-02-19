@@ -35,9 +35,9 @@ export default function BudgetCard({ budget, mutate }: Props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link href={`/admin/budget/${budget.id}`} passHref>
-          <Button component="a">Ver mais</Button>
-        </Link>
+        <Button href={`/admin/budget/${budget.id}`} component={Link}>
+          Ver mais
+        </Button>
 
         <ConfirmationDialogButton
           buttonText="Deletar"

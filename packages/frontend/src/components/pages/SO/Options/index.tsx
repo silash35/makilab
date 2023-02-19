@@ -38,11 +38,9 @@ export default function Options({ serviceOrder, mutate }: Props) {
       <Button variant="contained" onClick={window.print}>
         Imprimir
       </Button>
-      <Link href={`/admin/SO/${serviceOrder.id}/budgets`} passHref>
-        <Button variant="outlined" component="a">
-          Orçamentos
-        </Button>
-      </Link>
+      <Button variant="outlined" href={`/admin/SO/${serviceOrder.id}/budgets`} component={Link}>
+        Orçamentos
+      </Button>
       <FormDialogButton
         buttonText="Editar Equipamento"
         formDialogProps={{

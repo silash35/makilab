@@ -43,10 +43,8 @@ export default function Sidebar() {
         onClose={() => setIsOpen(false)}
       >
         <div onClick={() => setIsOpen(false)} style={{ display: "contents" }}>
-          <Link href="/">
-            <a className={styles.image}>
-              <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40" />
-            </a>
+          <Link href="/" className={styles.image}>
+            <img alt="OpenSOM, with SOM written in green" src="/text.svg" height="40" />
           </Link>
           <Divider />
           <List>
@@ -81,14 +79,12 @@ const ListLink = ({ href, text, Icon }: ListLinkProps) => {
 
   return (
     <Link href={href}>
-      <a>
-        <ListItemButton className={router.pathname === href ? styles.active : undefined}>
-          <ListItemIcon>
-            <Icon />
-          </ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItemButton>
-      </a>
+      <ListItemButton className={router.pathname === href ? styles.active : undefined}>
+        <ListItemIcon>
+          <Icon />
+        </ListItemIcon>
+        <ListItemText primary={text} />
+      </ListItemButton>
     </Link>
   );
 };

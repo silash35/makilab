@@ -35,11 +35,9 @@ export default function Options({ budget }: Props) {
       <Button variant="contained" onClick={window.print}>
         Imprimir
       </Button>
-      <Link href={`/admin/budget/${budget.id}`} passHref>
-        <Button variant="outlined" component="a">
-          Editar Orçamento
-        </Button>
-      </Link>
+      <Button variant="outlined" component={Link} href={`/admin/budget/${budget.id}`}>
+        Editar Orçamento
+      </Button>
       {MailButton}
     </div>
   );

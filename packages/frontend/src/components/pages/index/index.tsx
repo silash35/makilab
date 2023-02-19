@@ -33,10 +33,13 @@ interface BigButtonProps {
 
 function BigButton({ children, color, link }: BigButtonProps) {
   return (
-    <Link href={link} passHref>
-      <Button variant="contained" component="a" className={`${styles.bigButton} ${color}`}>
-        {children}
-      </Button>
-    </Link>
+    <Button
+      variant="contained"
+      component={Link}
+      href={link}
+      className={`${styles.bigButton} ${color}`}
+    >
+      {children}
+    </Button>
   );
 }

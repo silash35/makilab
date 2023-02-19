@@ -138,16 +138,12 @@ export default function DetailedInformation({ serviceOrder, mutate }: Props) {
           }}
         />
 
-        <Link href={`/admin/SO/${serviceOrder.id}`} passHref>
-          <Button variant="outlined" component="a">
-            Gerar PDF
-          </Button>
-        </Link>
-        <Link href={`/admin/SO/${serviceOrder.id}/budgets`} passHref>
-          <Button variant="outlined" component="a">
-            Orçamentos
-          </Button>
-        </Link>
+        <Button variant="outlined" href={`/admin/SO/${serviceOrder.id}`} component={Link}>
+          Gerar PDF
+        </Button>
+        <Button variant="outlined" href={`/admin/SO/${serviceOrder.id}/budgets`} component={Link}>
+          Orçamentos
+        </Button>
 
         <FormDialogButton
           buttonText="Atualizar Status"
