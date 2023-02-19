@@ -1,6 +1,7 @@
 import config from "./config";
 
-type User = Omit<typeof config.USERS[0], "password">;
+type UsersWithPassword = typeof config.USERS;
+type User = Omit<UsersWithPassword[number], "password">;
 
 declare global {
   namespace Express {
