@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import Index from "@/components/pages/index/index";
 
-function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -12,6 +12,6 @@ function Home() {
       <Index />
     </>
   );
-}
+};
 
 export default Home;

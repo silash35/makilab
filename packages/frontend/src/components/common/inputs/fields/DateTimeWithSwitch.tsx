@@ -18,14 +18,14 @@ interface Props {
   >;
 }
 
-export default function DateTimeWithSwitch({
+const DateTimeWithSwitch = ({
   name,
   label,
   children,
   defaultValue,
   textFieldProps,
   dateTimePickerProps,
-}: Props) {
+}: Props) => {
   const [switchState, setSwitch] = useState(defaultValue == null);
 
   useEffect(() => {
@@ -47,22 +47,24 @@ export default function DateTimeWithSwitch({
     <>
       <div className={styles.flexNoWrap}>
         <Switch
-          checked={switchState}
           onChange={() => {
             setSwitch(!switchState);
           }}
+          checked={switchState}
         />
 
         <DateTime
-          name={name}
-          label={label}
-          defaultValue={inputValue}
-          textFieldProps={textFieldProps}
           dateTimePickerProps={dateTimePickerProps}
+          defaultValue={inputValue}
+          label={label}
+          name={name}
+          textFieldProps={textFieldProps}
         />
       </div>
 
       {switchState && children}
     </>
   );
-}
+};
+
+export default DateTimeWithSwitch;

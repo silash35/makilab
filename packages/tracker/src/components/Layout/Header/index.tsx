@@ -7,30 +7,30 @@ import en from "./locales/en";
 import pt from "./locales/pt";
 const { COMPANY } = config;
 
-export default function Header() {
+const Header = () => {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
   return (
     <header className={styles.header}>
       <nav>
-        <Link href="/" className={styles.image}>
-          <img alt={`${COMPANY.name} logo`} src="/YOUR_COMPANY_LOGO.svg" height="40" />
+        <Link className={styles.image} href="/">
+          <img alt={`${COMPANY.name} logo`} height="40" src="/YOUR_COMPANY_LOGO.svg" />
         </Link>
 
         <div>
-          <Link href={`mailto:${COMPANY.email}`} className={styles.headerButton}>
+          <Link className={styles.headerButton} href={`mailto:${COMPANY.email}`}>
             E-mail
           </Link>
           <Link
-            href={`tel:${COMPANY.phones[0].replace(/[^0-9]/g, "")}`}
             className={styles.headerButton}
+            href={`tel:${COMPANY.phones[0].replace(/[^0-9]/g, "")}`}
           >
             {t.phone}
           </Link>
           <Link
-            href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
             className={`${styles.headerButton} ${styles.contact}`}
+            href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
           >
             WhatsApp
           </Link>
@@ -38,4 +38,6 @@ export default function Header() {
       </nav>
     </header>
   );
-}
+};
+
+export default Header;

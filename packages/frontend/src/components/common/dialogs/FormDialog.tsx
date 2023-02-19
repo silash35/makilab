@@ -44,19 +44,19 @@ const FormDialog = (props: FormDialogProps) => {
   };
 
   return (
-    <Dialog open={props.open} onClose={() => props.setOpen(false)} aria-labelledby={id}>
+    <Dialog aria-labelledby={id} onClose={() => props.setOpen(false)} open={props.open}>
       {props.title && (
-        <DialogTitle id={id} className={styles.title}>
+        <DialogTitle className={styles.title} id={id}>
           {props.title}
         </DialogTitle>
       )}
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <DialogContent className={props.title ? styles.content : undefined}>
           {props.children}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => props.setOpen(false)}>Cancelar</Button>
-          <Button variant="outlined" type="submit">
+          <Button type="submit" variant="outlined">
             {props.yesButtonText}
           </Button>
         </DialogActions>
@@ -82,7 +82,7 @@ const FormDialogButton = (props: FormDialogButtonProps) => {
       {props.button ? (
         props.button({ onClick: () => setOpen(true) })
       ) : (
-        <Button variant="outlined" onClick={() => setOpen(true)} {...props.buttonProps}>
+        <Button onClick={() => setOpen(true)} variant="outlined" {...props.buttonProps}>
           {props.buttonText}
         </Button>
       )}

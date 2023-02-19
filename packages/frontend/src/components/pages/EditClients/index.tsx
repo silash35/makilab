@@ -17,7 +17,7 @@ import compare from "@/utils/compare";
 import styles from "./editClients.module.scss";
 import ClientsTable, { SortableProperty } from "./Table";
 
-export default function EditClients() {
+const EditClients = () => {
   const { clients, mutate, error } = useClients();
 
   // Sort
@@ -51,9 +51,6 @@ export default function EditClients() {
       <Toolbar className={styles.toolbar}>
         <h1 className={styles.title}>Clientes</h1>
         <TextField
-          margin="normal"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -61,6 +58,9 @@ export default function EditClients() {
               </InputAdornment>
             ),
           }}
+          margin="normal"
+          onChange={(event) => setSearch(event.target.value)}
+          value={search}
         />
       </Toolbar>
       {clients ? (
@@ -71,10 +71,12 @@ export default function EditClients() {
           setSortProperty={setSortProperty}
         />
       ) : (
-        <Stack height="50vh" justifyContent="center" alignItems="center">
+        <Stack alignItems="center" height="50vh" justifyContent="center">
           {error ? <ErrorComponent /> : <CircularProgress />}
         </Stack>
       )}
     </TableContainer>
   );
-}
+};
+
+export default EditClients;

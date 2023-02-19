@@ -8,10 +8,10 @@ interface Props {
   title: string;
 }
 
-export default function PdfHeader({ title }: Props) {
+const PdfHeader = ({ title }: Props) => {
   return (
     <div className={styles.header}>
-      <img src="/YOUR_COMPANY_LOGO.svg" alt={`Logo da ${COMPANY.name}`} width={100} />
+      <img alt={`Logo da ${COMPANY.name}`} src="/YOUR_COMPANY_LOGO.svg" width={100} />
       <h2>{title}</h2>
       <ul>
         <li>{COMPANY.name}</li>
@@ -20,4 +20,6 @@ export default function PdfHeader({ title }: Props) {
       </ul>
     </div>
   );
-}
+};
+
+export default PdfHeader;

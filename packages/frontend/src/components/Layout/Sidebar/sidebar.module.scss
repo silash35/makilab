@@ -11,8 +11,8 @@
 }
 
 .menuButton {
-  margin-left: 8px;
   margin-top: 8px;
+  margin-left: 8px;
 }
 
 .drawer > div {
@@ -26,21 +26,21 @@
 
   ul a {
     display: contents;
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
   }
 }
 
 .image {
+  padding: 16px;
   line-height: 0;
 
   text-align: center;
-  padding: 16px;
 }
 
 div.active {
-  background-color: #f5f5f5;
   transition: none;
+  background-color: #f5f5f5;
 
   :global(.dark) & {
     background-color: #0a0a0a;

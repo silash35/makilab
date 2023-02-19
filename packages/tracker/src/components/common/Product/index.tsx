@@ -24,7 +24,7 @@ interface Props {
   product: TProduct;
 }
 
-export default function Product({ product }: Props) {
+const Product = ({ product }: Props) => {
   const isMobile = useMediaQuery("(max-width: 1100px)");
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
@@ -36,7 +36,7 @@ export default function Product({ product }: Props) {
   });
 
   return (
-    <Paper elevation={5} className={styles.product} component="section">
+    <Paper className={styles.product} component="section" elevation={5}>
       <h2>
         {t.so} {product.id}: {product.name}
       </h2>
@@ -61,4 +61,6 @@ export default function Product({ product }: Props) {
       </div>
     </Paper>
   );
-}
+};
+
+export default Product;

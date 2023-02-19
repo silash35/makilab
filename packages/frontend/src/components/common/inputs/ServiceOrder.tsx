@@ -16,29 +16,29 @@ interface Props {
   serviceOrder?: TServiceOrder;
 }
 
-export default function ServiceOrderInputs({ serviceOrder }: Props) {
+const ServiceOrderInputs = ({ serviceOrder }: Props) => {
   const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
   return (
     <>
       <div className={styles.flex}>
         <Text
-          defaultValue={serviceOrder?.equipment}
           textFieldProps={{
             name: "equipment",
             label: "Equipamento",
             required: true,
             ...common,
           }}
+          defaultValue={serviceOrder?.equipment}
         />
 
         <Autocomplete
-          freeSolo
-          options={VOLTAGES_OPTIONS}
-          defaultValue={serviceOrder?.voltage ? serviceOrder?.voltage : VOLTAGES_OPTIONS[0]}
           renderInput={(params) => (
-            <TextField {...params} name="voltage" label="Tensão" required {...common} />
+            <TextField {...params} label="Tensão" name="voltage" required {...common} />
           )}
           className={styles.minWidth}
+          defaultValue={serviceOrder?.voltage ? serviceOrder?.voltage : VOLTAGES_OPTIONS[0]}
+          options={VOLTAGES_OPTIONS}
+          freeSolo
         />
       </div>
 
@@ -88,42 +88,42 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
 
       <div className={styles.flex}>
         <Autocomplete
-          freeSolo
-          options={ATTENDANTS}
-          defaultValue={serviceOrder?.attendedBy}
           renderInput={(params) => (
-            <TextField {...params} name="attendedBy" label="Atendente" required {...common} />
+            <TextField {...params} label="Atendente" name="attendedBy" required {...common} />
           )}
           className={styles.maxWidth}
+          defaultValue={serviceOrder?.attendedBy}
+          options={ATTENDANTS}
+          freeSolo
         />
 
         <Autocomplete
-          freeSolo
-          options={SERVICE_PLACES}
-          defaultValue={serviceOrder?.attendedOn ? serviceOrder?.attendedOn : SERVICE_PLACES[0]}
           renderInput={(params) => (
             <TextField
               {...params}
-              name="attendedOn"
               label="Local de atendimento"
+              name="attendedOn"
               required
               {...common}
             />
           )}
           className={styles.maxWidth}
+          defaultValue={serviceOrder?.attendedOn ? serviceOrder?.attendedOn : SERVICE_PLACES[0]}
+          options={SERVICE_PLACES}
+          freeSolo
         />
       </div>
       <div className={styles.flex}>
         <DateTime
-          name="createdAt"
-          label="Data de criação da OS"
           defaultValue={serviceOrder?.createdAt}
+          label="Data de criação da OS"
+          name="createdAt"
           textFieldProps={{ required: true, ...common }}
         />
 
         <FormControlLabel
           control={
-            <Checkbox name="isUnderWarranty" defaultChecked={serviceOrder?.isUnderWarranty} />
+            <Checkbox defaultChecked={serviceOrder?.isUnderWarranty} name="isUnderWarranty" />
           }
           label="Garantia"
         />
@@ -135,4 +135,6 @@ export default function ServiceOrderInputs({ serviceOrder }: Props) {
       />
     </>
   );
-}
+};
+
+export default ServiceOrderInputs;

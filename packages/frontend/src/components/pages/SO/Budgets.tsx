@@ -11,12 +11,12 @@ interface Props {
   id: string;
 }
 
-export default function Budgets({ id }: Props) {
+const Budgets = ({ id }: Props) => {
   const { budgets, mutate } = useBudgets(id);
 
   if (!budgets) {
     return (
-      <Stack height="100%" justifyContent="center" alignItems="center">
+      <Stack alignItems="center" height="100%" justifyContent="center">
         <CircularProgress />
       </Stack>
     );
@@ -26,12 +26,14 @@ export default function Budgets({ id }: Props) {
     <div className={styles.container}>
       <h1>Orçamentos da OS {id}</h1>
       <div className={styles.budgets}>
-        <NewBudgetCard serviceOrderId={id} number={budgets.length + 1} mutate={mutate} />
+        <NewBudgetCard mutate={mutate} number={budgets.length + 1} serviceOrderId={id} />
 
         {budgets.map((budget) => (
-          <BudgetCard budget={budget} mutate={mutate} key={budget.id} />
+          <BudgetCard budget={budget} key={budget.id} mutate={mutate} />
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default Budgets;

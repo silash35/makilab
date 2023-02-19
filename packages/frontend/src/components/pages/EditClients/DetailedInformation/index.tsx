@@ -16,7 +16,7 @@ interface Props {
   mutate: () => void;
 }
 
-export default function DetailedInformation({ client, mutate }: Props) {
+const DetailedInformation = ({ client, mutate }: Props) => {
   const handleDeleteClient = async () => {
     const { error } = await deleteClient(client.id);
     mutate();
@@ -43,7 +43,6 @@ export default function DetailedInformation({ client, mutate }: Props) {
 
       <div className={styles.flex}>
         <ConfirmationDialogButton
-          buttonText="Deletar"
           confirmationDialogProps={{
             title: `Deletar ${client.name}`,
             text: `Tem certeza que deseja excluir o cliente ${client.name}? Todos os seus equipamentos também serão deletados`,
@@ -51,10 +50,10 @@ export default function DetailedInformation({ client, mutate }: Props) {
             showLoading: true,
             submit: handleDeleteClient,
           }}
+          buttonText="Deletar"
         />
-        {client.email && <SendMailDialog to={client.email} defaultText="" />}
+        {client.email && <SendMailDialog defaultText="" to={client.email} />}
         <FormDialogButton
-          buttonText="Editar Cliente"
           formDialogProps={{
             title: "Editar Cliente",
             children: <ClientInputs client={client} />,
@@ -62,6 +61,7 @@ export default function DetailedInformation({ client, mutate }: Props) {
             showLoading: true,
             submit: editClient,
           }}
+          buttonText="Editar Cliente"
         />
       </div>
 
@@ -71,11 +71,13 @@ export default function DetailedInformation({ client, mutate }: Props) {
 
           <Box className={styles.cardsContainer}>
             {client.serviceOrders.map((serviceOrder) => {
-              return <ServiceOrderCard serviceOrder={serviceOrder} key={serviceOrder.id} />;
+              return <ServiceOrderCard key={serviceOrder.id} serviceOrder={serviceOrder} />;
             })}
           </Box>
         </>
       )}
     </Box>
   );
-}
+};
+
+export default DetailedInformation;

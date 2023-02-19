@@ -9,7 +9,7 @@ interface ErrorContextType {
 
 export const ErrorContext = createContext({} as ErrorContextType);
 
-export function ErrorProvider({ children }: { children: React.ReactNode }) {
+export const ErrorProvider = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [errorText, setErrorText] = useState("");
 
@@ -33,12 +33,12 @@ export function ErrorProvider({ children }: { children: React.ReactNode }) {
       >
         {children}
       </SWRConfig>
-      <Snackbar open={isOpen} onClose={handleClose} autoHideDuration={6000}>
-        <Alert variant="filled" severity="error" onClose={handleClose} sx={{ width: "100%" }}>
+      <Snackbar autoHideDuration={6000} onClose={handleClose} open={isOpen}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }} variant="filled">
           <p style={{ margin: "0" }}>{errorText}</p>
           <small>Tente novamente mais tarde, recarregue a pagina ou procure ajuda</small>
         </Alert>
       </Snackbar>
     </ErrorContext.Provider>
   );
-}
+};

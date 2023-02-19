@@ -5,7 +5,7 @@ import useTheme from "@/hooks/useTheme";
 
 import styles from "./settings.module.scss";
 
-export default function Settings() {
+const Settings = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -18,8 +18,10 @@ export default function Settings() {
           </div>
           <p>Tema Escuro:</p>
         </div>
-        <Switch color="primary" checked={theme === "dark"} onClick={toggleTheme} />
+        <Switch checked={theme === "dark"} color="primary" onClick={toggleTheme} />
       </div>
     </div>
   );
-}
+};
+
+export default Settings;

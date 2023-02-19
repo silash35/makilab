@@ -10,7 +10,7 @@ import { TServiceOrderInput } from "@/types/serviceOrder";
 import addClient from "@/utils/mutations/addClient";
 import updateClient from "@/utils/mutations/updateClient";
 
-function NewServiceOrder() {
+const NewServiceOrder = () => {
   const { setError } = useError();
   const router = useRouter();
 
@@ -40,11 +40,11 @@ function NewServiceOrder() {
         <title>Cadastrar nova Ordem de Serviço</title>
       </Head>
 
-      <Form title="Cadastrar Nova Ordem de Serviço" handleSubmit={handleSubmit}>
+      <Form handleSubmit={handleSubmit} title="Cadastrar Nova Ordem de Serviço">
         <ClientAndSOInputs setSelectedClientId={setSelectedClientId} />
       </Form>
     </>
   );
-}
+};
 
 export default NewServiceOrder;

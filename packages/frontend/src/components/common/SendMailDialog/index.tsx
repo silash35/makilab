@@ -13,7 +13,7 @@ interface Props {
   defaultText?: string;
 }
 
-export default function SendMailDialog({ to, defaultText }: Props) {
+const SendMailDialog = ({ to, defaultText }: Props) => {
   const [text, setText] = useState(defaultText);
   const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
@@ -33,7 +33,6 @@ export default function SendMailDialog({ to, defaultText }: Props) {
 
   return (
     <FormDialogButton
-      buttonText="Enviar Email"
       formDialogProps={{
         title: `Confirmar Envio do Email para ${to}`,
         children: (
@@ -44,30 +43,30 @@ export default function SendMailDialog({ to, defaultText }: Props) {
                 enviar uma mensagem ao cliente?
               </Alert>
             )}
-            <input type="hidden" value={to} name="to" />
+            <input name="to" type="hidden" value={to} />
             <TextField
-              label="Texto do Email"
-              variant="outlined"
-              name="text"
-              margin="normal"
-              minRows={5}
-              fullWidth
-              multiline
-              required
-              value={text}
               onChange={(event) => {
                 setText(event.target.value);
               }}
+              label="Texto do Email"
+              margin="normal"
+              minRows={5}
+              name="text"
+              value={text}
+              variant="outlined"
+              fullWidth
+              multiline
+              required
             />
-            <Button variant="outlined" component="label">
+            <Button component="label" variant="outlined">
               <div className={styles.selectFileText}>
                 {selectedFile ? selectedFile.name : "Anexar Arquivo"}
               </div>
               <input
-                type="file"
                 name="attachment"
-                hidden
                 onChange={(e) => setSelectedFile(e.target.files?.[0])}
+                type="file"
+                hidden
               />
             </Button>
           </>
@@ -76,6 +75,9 @@ export default function SendMailDialog({ to, defaultText }: Props) {
         showLoading: true,
         submit: sendEmail,
       }}
+      buttonText="Enviar Email"
     />
   );
-}
+};
+
+export default SendMailDialog;

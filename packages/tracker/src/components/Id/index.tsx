@@ -7,10 +7,12 @@ interface Props {
   product: TProduct;
 }
 
-export default function IdPage({ product }: Props) {
+const IdPage = ({ product }: Props) => {
   return (
     <article className={styles.container}>
       <Product product={product} />
     </article>
   );
-}
+};
+
+export default IdPage;

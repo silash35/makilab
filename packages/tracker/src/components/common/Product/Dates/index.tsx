@@ -11,39 +11,41 @@ interface Props {
   product: Product;
 }
 
-export default function Dates({ product }: Props) {
+const Dates = ({ product }: Props) => {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
   const dates = [];
 
   if (product.createdAt != null) {
-    dates.push(<DateItem text={t.arrived} date={product.createdAt} key={1} />);
+    dates.push(<DateItem date={product.createdAt} key={1} text={t.arrived} />);
   }
   if (product.budgetedAt != null) {
-    dates.push(<DateItem text={t.budgeted} date={product.budgetedAt} key={2} />);
+    dates.push(<DateItem date={product.budgetedAt} key={2} text={t.budgeted} />);
   }
   if (product.budgetAnsweredAt != null) {
-    dates.push(<DateItem text={t.budgetAnswered} date={product.budgetAnsweredAt} key={3} />);
+    dates.push(<DateItem date={product.budgetAnsweredAt} key={3} text={t.budgetAnswered} />);
   }
   if (product.repairedAt != null) {
-    dates.push(<DateItem text={t.repaired} date={product.repairedAt} key={4} />);
+    dates.push(<DateItem date={product.repairedAt} key={4} text={t.repaired} />);
   }
   if (product.deliveredToCustomerAt != null) {
     dates.push(
-      <DateItem text={t.deliveredToCustomer} date={product.deliveredToCustomerAt} key={5} />
+      <DateItem date={product.deliveredToCustomerAt} key={5} text={t.deliveredToCustomer} />
     );
   }
 
   return <ul className={styles.list}>{dates}</ul>;
-}
+};
+
+export default Dates;
 
 interface DateItemProps {
   text: string;
   date: string;
 }
 
-function DateItem({ text, date }: DateItemProps) {
+const DateItem = ({ text, date }: DateItemProps) => {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
@@ -57,4 +59,4 @@ function DateItem({ text, date }: DateItemProps) {
       </div>
     </li>
   );
-}
+};

@@ -6,10 +6,10 @@ import SO from "@/components/pages/SO";
 import ServiceOrder from "@/types/serviceOrder";
 import request from "@/utils/request";
 
-function ServiceOrderPage({
+const ServiceOrderPage = ({
   id,
   ServiceOrderJSON,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const serviceOrder = JSON.parse(ServiceOrderJSON) as ServiceOrder;
 
   const fallback = { [`/api/private/serviceOrders/${id}`]: serviceOrder };
@@ -24,7 +24,7 @@ function ServiceOrderPage({
       </SWRConfig>
     </>
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = Array.isArray(context.query.id) ? context.query.id[0] : context.query.id;

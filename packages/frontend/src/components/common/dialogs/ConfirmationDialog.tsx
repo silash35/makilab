@@ -21,7 +21,7 @@ interface ConfirmationDialogProps {
   setOpen: (open: boolean) => void;
 }
 
-export default function ConfirmationDialog(props: ConfirmationDialogProps) {
+const ConfirmationDialog = (props: ConfirmationDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { setError } = useError();
   const id = useId();
@@ -39,21 +39,23 @@ export default function ConfirmationDialog(props: ConfirmationDialogProps) {
   };
 
   return (
-    <Dialog open={props.open} onClose={() => props.setOpen(false)} aria-labelledby={id}>
+    <Dialog aria-labelledby={id} onClose={() => props.setOpen(false)} open={props.open}>
       <DialogTitle id={id}>{props.title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{props.text}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => props.setOpen(false)}>Cancelar</Button>
-        <Button variant="outlined" onClick={handleSubmit}>
+        <Button onClick={handleSubmit} variant="outlined">
           {props.yesButtonText}
         </Button>
       </DialogActions>
       {isLoading && props.showLoading ? <LinearProgress /> : <div style={{ height: 4 }} />}
     </Dialog>
   );
-}
+};
+
+export default ConfirmationDialog;
 
 interface ConfirmationDialogButtonProps {
   buttonText?: string;
@@ -63,7 +65,7 @@ interface ConfirmationDialogButtonProps {
   confirmationDialogProps: Omit<ConfirmationDialogProps, "open" | "setOpen">;
 }
 
-export function ConfirmationDialogButton(props: ConfirmationDialogButtonProps) {
+export const ConfirmationDialogButton = (props: ConfirmationDialogButtonProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -71,11 +73,11 @@ export function ConfirmationDialogButton(props: ConfirmationDialogButtonProps) {
       {props.button ? (
         props.button({ onClick: () => setOpen(true) })
       ) : (
-        <Button variant="outlined" onClick={() => setOpen(true)} {...props.buttonProps}>
+        <Button onClick={() => setOpen(true)} variant="outlined" {...props.buttonProps}>
           {props.buttonText}
         </Button>
       )}
       <ConfirmationDialog {...props.confirmationDialogProps} open={open} setOpen={setOpen} />
     </>
   );
-}
+};

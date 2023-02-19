@@ -9,79 +9,81 @@ interface Props {
   client?: TClient;
 }
 
-export default function ClientInputs({ client }: Props) {
+const ClientInputs = ({ client }: Props) => {
   const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
 
   return (
     <>
       <Text
-        defaultValue={client?.name}
         textFieldProps={{
           name: "name",
           label: "Nome completo",
           required: true,
           ...common,
         }}
+        defaultValue={client?.name}
       />
 
       <Text
-        defaultValue={client?.email}
         textFieldProps={{
           name: "email",
           label: "E-mail",
           type: "email",
           ...common,
         }}
+        defaultValue={client?.email}
       />
 
       <Text
-        defaultValue={client?.cpfOrCnpj}
         textFieldProps={{
           name: "cpfOrCnpj",
           label: "CPF ou CNPJ",
           ...common,
         }}
+        defaultValue={client?.cpfOrCnpj}
       />
 
       <div className={styles.flex}>
         <Text
-          defaultValue={client?.address}
           textFieldProps={{
             name: "address",
             label: "Endereço",
             ...common,
           }}
+          defaultValue={client?.address}
         />
         <Text
-          defaultValue={client?.zip}
           textFieldProps={{
             name: "zip",
             label: "CEP",
             ...common,
           }}
+          defaultValue={client?.zip}
         />
       </div>
 
       <div className={styles.flex}>
         <Text
-          defaultValue={client?.whatsapp}
           textFieldProps={{
             name: "whatsapp",
             label: "WhatsApp",
             placeholder: "+55 71 99999-9999",
             ...common,
           }}
+          defaultValue={client?.whatsapp}
         />
         <Text
-          defaultValue={client?.whatsapp}
           textFieldProps={{
             name: "tel",
             label: "Telefone",
             placeholder: "+55 71 99999-9999",
             ...common,
           }}
+          defaultValue={client?.whatsapp}
         />
       </div>
     </>
   );
-}
+};
+
+export default ClientInputs;

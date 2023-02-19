@@ -20,7 +20,7 @@ interface Props {
   product: "loading" | "empty" | "Unknown error" | "Not found" | Product;
 }
 
-export default function productContainer({ product }: Props) {
+function productContainer({ product }: Props) {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
@@ -46,3 +46,5 @@ export default function productContainer({ product }: Props) {
 
   return <ProductComponent product={product} />;
 }
+
+export default productContainer;

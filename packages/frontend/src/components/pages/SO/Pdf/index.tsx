@@ -15,7 +15,7 @@ interface Props {
   serviceOrder: ServiceOrder;
 }
 
-export default function Pdf({ serviceOrder }: Props) {
+const Pdf = ({ serviceOrder }: Props) => {
   const owner = serviceOrder.owner;
 
   return (
@@ -26,41 +26,41 @@ export default function Pdf({ serviceOrder }: Props) {
           <tbody>
             <Data serviceOrder={serviceOrder} />
             <tr>
-              <td colSpan={2} className={styles.disableBorder}>
+              <td className={styles.disableBorder} colSpan={2}>
                 <span>Estado: </span>
                 {filter(serviceOrder.productCondition)}
               </td>
 
-              <td colSpan={2} className={styles.disableBorder}>
+              <td className={styles.disableBorder} colSpan={2}>
                 <span>Garantia: </span>
                 {serviceOrder.isUnderWarranty ? "Sim" : "Não"}
               </td>
             </tr>
             <tr>
-              <th colSpan={4} className={styles.alignCenter}>
+              <th className={styles.alignCenter} colSpan={4}>
                 Descrição do problema (Defeito(s) Reclamado(s))
               </th>
             </tr>
             <tr>
-              <td colSpan={4} className={styles.disableBorder}>
+              <td className={styles.disableBorder} colSpan={4}>
                 {filter(serviceOrder.problemDescription)}
               </td>
             </tr>
             <tr>
-              <td colSpan={4} className={styles.disableBorder}>
+              <td className={styles.disableBorder} colSpan={4}>
                 <span>Acessórios: </span>
                 {filter(serviceOrder.accessories, "Sem acessórios")}
               </td>
             </tr>
             <tr>
-              <td colSpan={4} className={`${styles.disableBorder} ${styles.enableTopBorder}`}>
+              <td className={`${styles.disableBorder} ${styles.enableTopBorder}`} colSpan={4}>
                 Autorizo e concordo com a realização dos serviços listados acima conforme combinado,
                 <br />
                 {COMPANY.city} {format(new Date(), "dd/MM/yyyy")}
               </td>
             </tr>
             <tr>
-              <td colSpan={4} className={styles.disableBorder}>
+              <td className={styles.disableBorder} colSpan={4}>
                 <div className={styles.flex}>
                   <div className={styles.signature}>{serviceOrder.attendedBy}</div>
                   <div className={styles.signature}> {owner.name}</div>
@@ -79,12 +79,12 @@ export default function Pdf({ serviceOrder }: Props) {
           <tbody>
             <Data serviceOrder={serviceOrder} variant />
             <tr>
-              <th colSpan={4} className={styles.alignCenter}>
+              <th className={styles.alignCenter} colSpan={4}>
                 Descrição do problema
               </th>
             </tr>
             <tr>
-              <td colSpan={4} className={styles.disableBorder}>
+              <td className={styles.disableBorder} colSpan={4}>
                 {filter(serviceOrder.problemDescription)}
               </td>
             </tr>
@@ -112,7 +112,7 @@ export default function Pdf({ serviceOrder }: Props) {
           <tbody>
             <tr>
               <td className={styles.disableBorder}>{filter(owner.name)}</td>
-              <td rowSpan={2} className={styles.disableBorder}>
+              <td className={styles.disableBorder} rowSpan={2}>
                 <strong>
                   {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
                   {serviceOrder.batchOrImei} {serviceOrder.productNumber}{" "}
@@ -129,7 +129,7 @@ export default function Pdf({ serviceOrder }: Props) {
               <td className={styles.disableBorder}>
                 DATA DA ENTRADA: {format(new Date(serviceOrder.createdAt), "dd/MM/yyyy")}
               </td>
-              <td rowSpan={2} className={styles.disableBorder}>
+              <td className={styles.disableBorder} rowSpan={2}>
                 <strong> {filter(serviceOrder.problemDescription)}</strong>
               </td>
             </tr>
@@ -141,14 +141,16 @@ export default function Pdf({ serviceOrder }: Props) {
       </section>
     </Page>
   );
-}
+};
+
+export default Pdf;
 
 interface DataProps {
   serviceOrder: ServiceOrder;
   variant?: boolean;
 }
 
-function Data({ serviceOrder, variant }: DataProps) {
+const Data = ({ serviceOrder, variant }: DataProps) => {
   const owner = serviceOrder.owner;
   if (!owner) {
     throw new Error("Owner not found");
@@ -202,19 +204,19 @@ function Data({ serviceOrder, variant }: DataProps) {
         )}
       </tr>
       <tr>
-        <th colSpan={4} className={styles.alignCenter}>
+        <th className={styles.alignCenter} colSpan={4}>
           Equipamento/Marca/Modelo/N° de Serie/PN
         </th>
       </tr>
       <tr>
-        <td colSpan={4} className={styles.disableBorder}>
+        <td className={styles.disableBorder} colSpan={4}>
           {serviceOrder.equipment} {serviceOrder.brand} {serviceOrder.model}{" "}
           {serviceOrder.batchOrImei} {serviceOrder.productNumber}
         </td>
       </tr>
     </>
   );
-}
+};
 
 const filter = (string: string | null, altText = "Não informado") => {
   if (string === null || string == "") {

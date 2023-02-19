@@ -10,12 +10,12 @@ interface Props {
   id: number;
 }
 
-export default function BudgetPdf({ id }: Props) {
+const BudgetPdf = ({ id }: Props) => {
   const { budget } = useBudget(String(id));
 
   if (!budget) {
     return (
-      <Stack height="100%" justifyContent="center" alignItems="center">
+      <Stack alignItems="center" height="100%" justifyContent="center">
         <CircularProgress />
       </Stack>
     );
@@ -27,4 +27,6 @@ export default function BudgetPdf({ id }: Props) {
       <Page budget={budget} />
     </>
   );
-}
+};
+
+export default BudgetPdf;

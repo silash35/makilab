@@ -6,11 +6,11 @@
 
   input {
     all: unset;
+
+    margin: 6px 12px;
     width: 600px;
     max-width: 50vw;
     height: 50px;
-
-    margin: 6px 12px;
 
     @media screen and (max-width: 850px) {
       height: 40px;
@@ -18,11 +18,10 @@
   }
 
   button {
-    font-size: 1.2rem;
-    font-weight: bold;
-    letter-spacing: 0.12em;
-
     border-radius: 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
 
     @media screen and (max-width: 850px) {
       font-size: 1rem;

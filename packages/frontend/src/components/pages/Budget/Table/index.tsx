@@ -19,10 +19,10 @@ interface Props {
   mutate: () => void;
 }
 
-export default function BudgetTable({ budget, openNewItemDialog, mutate }: Props) {
+const BudgetTable = ({ budget, openNewItemDialog, mutate }: Props) => {
   const itens = budget.itens;
   return (
-    <Table size="small" aria-label="Lista de Itens do Orçamento">
+    <Table aria-label="Lista de Itens do Orçamento" size="small">
       <TableHead>
         <TableRow>
           <TableCell align="left">Nome</TableCell>
@@ -34,13 +34,13 @@ export default function BudgetTable({ budget, openNewItemDialog, mutate }: Props
       </TableHead>
       <TableBody>
         {itens.map((item) => (
-          <Item key={item.id} item={item} mutate={mutate} />
+          <Item item={item} key={item.id} mutate={mutate} />
         ))}
       </TableBody>
       <TableFooter>
         <TableRow className={styles.footer}>
           {itens.length === 0 ? (
-            <TableCell colSpan={5} align="center">
+            <TableCell align="center" colSpan={5}>
               <div className={styles.empty}>
                 <p>Orçamento Vazio</p>
                 <p>Comece adicionando um novo item</p>
@@ -66,4 +66,6 @@ export default function BudgetTable({ budget, openNewItemDialog, mutate }: Props
       </TableFooter>
     </Table>
   );
-}
+};
+
+export default BudgetTable;

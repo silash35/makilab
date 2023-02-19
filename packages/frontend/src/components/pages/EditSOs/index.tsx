@@ -18,7 +18,7 @@ import compare from "@/utils/compare";
 import styles from "./editSOs.module.scss";
 import EquipmentsTable, { SortableProperty } from "./Table";
 
-export default function EditSOs() {
+const EditSOs = () => {
   const [showEnded, setShowEnded] = useState(false);
 
   const { serviceOrders, mutate, error } = useServiceOrders(
@@ -72,9 +72,6 @@ export default function EditSOs() {
             />
           </div>
           <TextField
-            margin="normal"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -82,21 +79,26 @@ export default function EditSOs() {
                 </InputAdornment>
               ),
             }}
+            margin="normal"
+            onChange={(event) => setSearch(event.target.value)}
+            value={search}
           />
         </div>
         {serviceOrders ? (
           <EquipmentsTable
-            serviceOrders={showedSOs}
             mutate={mutate}
+            serviceOrders={showedSOs}
             setSortDirection={setSortDirection}
             setSortProperty={setSortProperty}
           />
         ) : (
-          <Stack height="50vh" justifyContent="center" alignItems="center">
+          <Stack alignItems="center" height="50vh" justifyContent="center">
             {error ? <ErrorComponent /> : <CircularProgress />}
           </Stack>
         )}
       </TableContainer>
     </>
   );
-}
+};
+
+export default EditSOs;

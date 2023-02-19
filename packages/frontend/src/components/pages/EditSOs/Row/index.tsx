@@ -20,7 +20,7 @@ interface Props {
   mutate: () => void;
 }
 
-export default function Equipment({ serviceOrder, mutate }: Props) {
+const Equipment = ({ serviceOrder, mutate }: Props) => {
   const [openRow, setOpenRow] = useState(false);
 
   const editStatusSO = async (data: unknown) => {
@@ -33,7 +33,7 @@ export default function Equipment({ serviceOrder, mutate }: Props) {
     <>
       <TableRow className={styles.row}>
         <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpenRow(!openRow)}>
+          <IconButton aria-label="expand row" onClick={() => setOpenRow(!openRow)} size="small">
             {openRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -43,7 +43,7 @@ export default function Equipment({ serviceOrder, mutate }: Props) {
         <TableCell align="right">{serviceOrder.equipment}</TableCell>
         <TableCell align="right">{serviceOrder.brand}</TableCell>
         <TableCell align="right">{serviceOrder.model}</TableCell>
-        <TableCell className={serviceOrder.isUrgent ? styles.urgent : undefined} align="right">
+        <TableCell align="right" className={serviceOrder.isUrgent ? styles.urgent : undefined}>
           {serviceOrder.statusName}
           {serviceOrder.isUrgent && (
             <>
@@ -54,8 +54,6 @@ export default function Equipment({ serviceOrder, mutate }: Props) {
         </TableCell>
         <TableCell align="right">
           <FormDialogButton
-            buttonText="Atualizar Status"
-            buttonProps={{ variant: "contained" }}
             formDialogProps={{
               title: "Atualizar Status",
               children: <ServiceOrderStatusInputs serviceOrder={serviceOrder} />,
@@ -63,16 +61,20 @@ export default function Equipment({ serviceOrder, mutate }: Props) {
               showLoading: true,
               submit: editStatusSO,
             }}
+            buttonProps={{ variant: "contained" }}
+            buttonText="Atualizar Status"
           />
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+        <TableCell colSpan={7} style={{ paddingBottom: 0, paddingTop: 0 }}>
           <Collapse in={openRow} timeout="auto" unmountOnExit>
-            <DetailedInformation serviceOrder={serviceOrder} mutate={mutate} />
+            <DetailedInformation mutate={mutate} serviceOrder={serviceOrder} />
           </Collapse>
         </TableCell>
       </TableRow>
     </>
   );
-}
+};
+
+export default Equipment;

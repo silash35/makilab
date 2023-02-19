@@ -12,6 +12,6 @@
     "tracker:start": "cd packages/tracker && pnpm start"
   },
   "devDependencies": {
-    "eslint-config-silash35": "^1.2.1"
+    "eslint-config-silash35": "^2.0.1"
   }
 }

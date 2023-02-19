@@ -12,7 +12,7 @@ import variables from "@/styles/variables.module.scss";
 
 const { COMPANY } = config;
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
   const { locale } = router;
   const ogLocale = locale === "en" ? "en_US" : "pt_BR";
@@ -21,16 +21,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         {/* Viewport meta tag should not be used in _document.tsx. That's why it's in this file */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
         {/* These meta tags need to be here for the key attribute to work properly */}
-        <meta property="og:title" content={COMPANY.name} key="ogTitle" />
-        <meta name="twitter:title" content={COMPANY.name} key="twitterTitle" />
-        <meta property="og:description" content={COMPANY.description} key="ogDescription" />
-        <meta name="twitter:description" content={COMPANY.description} key="twitterDescription" />
+        <meta content={COMPANY.name} key="ogTitle" property="og:title" />
+        <meta content={COMPANY.name} key="twitterTitle" name="twitter:title" />
+        <meta content={COMPANY.description} key="ogDescription" property="og:description" />
+        <meta content={COMPANY.description} key="twitterDescription" name="twitter:description" />
 
         {/* Locale Meta Tags */}
-        <meta property="og:locale" content={ogLocale} />
+        <meta content={ogLocale} property="og:locale" />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ThemeProvider>
     </>
   );
-}
+};
 
 // Create a theme instance.
 const theme = createTheme({

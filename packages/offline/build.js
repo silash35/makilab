@@ -1,6 +1,7 @@
+import fs from "node:fs";
+
 import { execSync } from "child_process";
 import concurrently from "concurrently";
-import fs from "node:fs";
 
 console.log("Deleting Old Files");
 try {

@@ -1,9 +1,11 @@
 import Stack from "@mui/material/Stack";
 
-export default function Custom404() {
+const Custom404 = () => {
   return (
-    <Stack height="100%" justifyContent="center" alignItems="center">
+    <Stack alignItems="center" height="100%" justifyContent="center">
       <h1>404 - Page Not Found</h1>
     </Stack>
   );
-}
+};
+
+export default Custom404;

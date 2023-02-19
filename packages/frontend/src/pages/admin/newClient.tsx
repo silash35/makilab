@@ -8,7 +8,7 @@ import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import addClient from "@/utils/mutations/addClient";
 
-function NewClient() {
+const NewClient = () => {
   const { setError } = useError();
   const router = useRouter();
 
@@ -32,11 +32,11 @@ function NewClient() {
         <title>Cadastrar novo Cliente</title>
       </Head>
 
-      <Form title="Cadastrar novo Cliente" handleSubmit={handleSubmit}>
+      <Form handleSubmit={handleSubmit} title="Cadastrar novo Cliente">
         <ClientInputs />
       </Form>
     </>
   );
-}
+};
 
 export default NewClient;

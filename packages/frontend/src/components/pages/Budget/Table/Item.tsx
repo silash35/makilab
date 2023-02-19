@@ -17,7 +17,7 @@ interface Props {
   mutate: () => void;
 }
 
-export default function Item({ item, mutate }: Props) {
+const Item = ({ item, mutate }: Props) => {
   const total = item.quantity * item.price;
 
   const deleteItem = async () => {
@@ -71,4 +71,6 @@ export default function Item({ item, mutate }: Props) {
       </TableCell>
     </TableRow>
   );
-}
+};
+
+export default Item;

@@ -6,7 +6,7 @@ import styles from "./footer.module.scss";
 import en from "./locales/en";
 import pt from "./locales/pt";
 
-export default function Footer() {
+const Footer = () => {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer>
       <div className={styles.info}>
-        <Alert variant="filled" severity="info">
+        <Alert severity="info" variant="filled">
           <p>
             {t.text1p1} <a href="https://github.com/silash35/opensom">OpenSOM</a> {t.text1p2}
           </p>
@@ -26,4 +26,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

@@ -7,7 +7,7 @@ interface Props {
   serviceOrder: ServiceOrder;
 }
 
-export default function ServiceOrderCard({ serviceOrder }: Props) {
+const ServiceOrderCard = ({ serviceOrder }: Props) => {
   return (
     <Card variant="outlined">
       <CardContent>
@@ -42,4 +42,6 @@ export default function ServiceOrderCard({ serviceOrder }: Props) {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default ServiceOrderCard;

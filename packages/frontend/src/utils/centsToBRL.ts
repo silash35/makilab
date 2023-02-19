@@ -1,4 +1,4 @@
-export default function centsToBRL(cents: number): string {
+function centsToBRL(cents: number): string {
   const value = cents / 100;
   const valueString = value.toLocaleString("pt-BR", {
     style: "currency",
@@ -7,3 +7,5 @@ export default function centsToBRL(cents: number): string {
 
   return valueString;
 }
+
+export default centsToBRL;

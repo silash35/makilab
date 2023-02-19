@@ -9,7 +9,7 @@ import useTheme from "@/hooks/useTheme";
 
 import styles from "./form.module.scss";
 
-export default function SignInForm() {
+const SignInForm = () => {
   const [isBusy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -50,24 +50,26 @@ export default function SignInForm() {
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1>Login</h1>
 
-      <TextField className={error ? styles.invalid : ""} name="user" label="Usuário" {...common} />
+      <TextField className={error ? styles.invalid : ""} label="Usuário" name="user" {...common} />
       <TextField
         className={error ? styles.invalid : ""}
-        type="password"
-        name="password"
         label="Senha"
+        name="password"
+        type="password"
         {...common}
       />
 
       {error && (
-        <Alert variant={theme === "dark" ? "filled" : "standard"} severity="error">
+        <Alert severity="error" variant={theme === "dark" ? "filled" : "standard"}>
           {error}
         </Alert>
       )}
 
-      <Button variant="contained" type="submit" size="large" disabled={isBusy}>
+      <Button disabled={isBusy} size="large" type="submit" variant="contained">
         {isBusy ? "Fazendo Login..." : "Login"}
       </Button>
     </form>
   );
-}
+};
+
+export default SignInForm;

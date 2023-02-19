@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import EditSOs from "@/components/pages/EditSOs";
 
-function EditSOsPage() {
+const EditSOsPage = () => {
   return (
     <>
       <Head>
@@ -12,6 +12,6 @@ function EditSOsPage() {
       <EditSOs />
     </>
   );
-}
+};
 
 export default EditSOsPage;

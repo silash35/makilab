@@ -11,13 +11,13 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: Props) {
+const Layout = ({ children }: Props) => {
   const router = useRouter();
   const { session } = useSession();
 
   if (session.status === "loading") {
     return (
-      <Stack height="100%" justifyContent="center" alignItems="center">
+      <Stack alignItems="center" height="100%" justifyContent="center">
         <CircularProgress />
       </Stack>
     );
@@ -34,4 +34,6 @@ export default function Layout({ children }: Props) {
       <main className={styles.main}>{children}</main>
     </div>
   );
-}
+};
+
+export default Layout;

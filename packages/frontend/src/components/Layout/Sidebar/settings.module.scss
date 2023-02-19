@@ -19,13 +19,13 @@
   }
 
   .icon {
-    border-radius: 50%;
-    background-color: color.adjust($color: v.$primaryLight, $whiteness: 40%);
-    width: 32px;
-    height: 32px;
     justify-content: center;
 
     margin: 8px;
     margin-left: 0;
+    border-radius: 50%;
+    background-color: color.adjust($color: v.$primaryLight, $whiteness: 40%);
+    width: 32px;
+    height: 32px;
   }
 }

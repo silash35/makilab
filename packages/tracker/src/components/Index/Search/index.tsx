@@ -11,7 +11,7 @@ interface Props {
   load: (s: string) => Promise<void>;
 }
 
-export default function SearchBar({ load }: Props) {
+const SearchBar = ({ load }: Props) => {
   const router = useRouter();
   const t = router.locale === "en" ? en : pt;
 
@@ -33,14 +33,14 @@ export default function SearchBar({ load }: Props) {
           className={styles.search}
           component="label"
           elevation={paperElevation}
-          onMouseOver={() => setPaperElevation(8)}
           onMouseOut={() => setPaperElevation(4)}
+          onMouseOver={() => setPaperElevation(8)}
         >
           <input
-            type="text"
-            placeholder={t.placeholder}
-            value={search}
             onChange={(event) => setSearch(event.target.value)}
+            placeholder={t.placeholder}
+            type="text"
+            value={search}
           ></input>
           <Button type="submit" variant="contained">
             {t.button}
@@ -49,4 +49,6 @@ export default function SearchBar({ load }: Props) {
       </form>
     </>
   );
-}
+};
+
+export default SearchBar;

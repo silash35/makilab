@@ -11,15 +11,15 @@ interface Props {
   budget: Budget;
 }
 
-export default function Options({ budget }: Props) {
+const Options = ({ budget }: Props) => {
   const { serviceOrder } = useServiceOrder(String(budget.serviceOrderId));
 
   let MailButton;
   if (serviceOrder && serviceOrder.owner.email) {
     MailButton = (
       <SendMailDialog
-        to={serviceOrder.owner.email}
         defaultText={`Prezado(a) ${serviceOrder.owner.name}, seu produto (${serviceOrder.equipment} ${serviceOrder.brand}) de OS ${serviceOrder.id} foi orçado. Confira o orçamento em anexo.`}
+        to={serviceOrder.owner.email}
       />
     );
   } else {
@@ -32,13 +32,15 @@ export default function Options({ budget }: Props) {
 
   return (
     <div className={styles.options}>
-      <Button variant="contained" onClick={window.print}>
+      <Button onClick={window.print} variant="contained">
         Imprimir
       </Button>
-      <Button variant="outlined" component={Link} href={`/admin/budget/${budget.id}`}>
+      <Button component={Link} href={`/admin/budget/${budget.id}`} variant="outlined">
         Editar Orçamento
       </Button>
       {MailButton}
     </div>
   );
-}
+};
+
+export default Options;
