@@ -2,6 +2,14 @@
   "name": "@opensom/backend",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": "20.x",
+    "pnpm": "8.x"
+  },
+  "prisma": {
+    "schema": "src/database/schema.prisma"
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "prisma generate && vite build",
@@ -10,9 +18,6 @@
     "test": "vitest",
     "test:headless": "prisma generate && vitest run",
     "coverage": "vitest run --coverage"
-  },
-  "prisma": {
-    "schema": "src/database/schema.prisma"
   },
   "dependencies": {
     "@opensom/config": "workspace:*",

@@ -7,8 +7,8 @@ export function generateClient(optionals = true, optionalsValueTo?: unknown) {
       email: faker.internet.email(),
       address: faker.location.streetAddress(true),
       zip: faker.location.zipCode("#####-###"),
-      whatsapp: faker.phone.number("+## ## #####-####"),
-      tel: faker.phone.number("(##) #####-####"),
+      whatsapp: faker.phone.number(),
+      tel: faker.phone.number(),
       cpfOrCnpj: faker.finance.pin(14),
     };
   } else {
