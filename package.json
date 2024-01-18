@@ -2,6 +2,10 @@
   "name": "opensom",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20.x",
+    "pnpm": "8.x"
+  },
   "scripts": {
     "build": "./build.sh",
     "backend:build": "cd packages/backend && pnpm build",

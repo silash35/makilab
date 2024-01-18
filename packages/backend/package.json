@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": "20.x",
-    "pnpm": "8.x"
-  },
   "prisma": {
     "schema": "src/database/schema.prisma"
   },
