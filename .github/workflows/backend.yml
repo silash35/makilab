@@ -7,20 +7,20 @@ on:
       - "packages/config/**"
       - "packages/eslint-config/**"
       - ".github/workflows/backend.yml"
+defaults:
+  run:
+    working-directory: ./packages/backend
 
 jobs:
   ESLint:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./packages/backend
     steps:
       - name: Setup repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
@@ -31,16 +31,13 @@ jobs:
 
   TypeScript:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./packages/backend
     steps:
       - name: Setup repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
@@ -54,16 +51,13 @@ jobs:
   Vitest:
     needs: [ESLint, TypeScript]
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./packages/backend
     steps:
       - name: Setup repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:

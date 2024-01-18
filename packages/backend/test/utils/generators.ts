@@ -3,17 +3,17 @@ import { faker } from "@faker-js/faker/locale/pt_BR";
 export function generateClient(optionals = true, optionalsValueTo?: unknown) {
   if (optionals === true) {
     return {
-      name: faker.name.fullName(),
+      name: faker.person.fullName(),
       email: faker.internet.email(),
-      address: faker.address.streetAddress(true),
-      zip: faker.address.zipCode("#####-###"),
+      address: faker.location.streetAddress(true),
+      zip: faker.location.zipCode("#####-###"),
       whatsapp: faker.phone.number("+## ## #####-####"),
       tel: faker.phone.number("(##) #####-####"),
       cpfOrCnpj: faker.finance.pin(14),
     };
   } else {
     return {
-      name: faker.name.fullName(),
+      name: faker.person.fullName(),
       email: optionalsValueTo,
       address: optionalsValueTo,
       zip: optionalsValueTo,
@@ -39,9 +39,9 @@ export function generateServiceOrder(optionals = true, optionalsValueTo?: unknow
       notes: faker.lorem.paragraphs(10),
 
       isUnderWarranty: faker.datatype.boolean(),
-      voltage: faker.datatype.number({ min: 0, max: 500 }) + "V",
-      attendedBy: faker.name.fullName(),
-      attendedOn: faker.name.jobArea(),
+      voltage: faker.number.int({ min: 0, max: 500 }) + "V",
+      attendedBy: faker.person.fullName(),
+      attendedOn: faker.person.jobArea(),
     };
   } else {
     return {
@@ -57,9 +57,9 @@ export function generateServiceOrder(optionals = true, optionalsValueTo?: unknow
       notes: optionalsValueTo,
 
       isUnderWarranty: faker.datatype.boolean(),
-      voltage: faker.datatype.number({ min: 0, max: 500 }) + "V",
-      attendedBy: faker.name.fullName(),
-      attendedOn: faker.name.jobArea(),
+      voltage: faker.number.int({ min: 0, max: 500 }) + "V",
+      attendedBy: faker.person.fullName(),
+      attendedOn: faker.person.jobArea(),
     };
   }
 }
