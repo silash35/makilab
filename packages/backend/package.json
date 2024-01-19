@@ -26,7 +26,7 @@
     "nodemailer": "^6.9.1",
     "prisma": "^4.10.1",
     "typescript": "^4.9.5",
-    "vite": "^4.1.2",
+    "vite": "^4.5.2",
     "vite-plugin-node": "^3.0.2"
   },
   "devDependencies": {
