@@ -1,6 +1,6 @@
 import server from "./app";
 
-const port = process.env.PORT || 1234;
+const port = process.env.PORT;
 console.log(`Server listening on port ${port}`);
 
 // Start server

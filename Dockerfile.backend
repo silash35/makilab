@@ -1,0 +1,18 @@
+FROM node:20-alpine as build
+RUN npm install -g pnpm
+
+COPY . /monorepo
+WORKDIR /monorepo
+RUN pnpm install --frozen-lockfile
+RUN pnpm --filter=backend build
+RUN pnpm --filter=backend deploy --prod ./app
+WORKDIR /monorepo/app
+RUN pnpm prisma generate
+
+FROM node:20-alpine
+COPY --from=build /monorepo/app/dist /app/dist
+COPY --from=build /monorepo/app/node_modules /app/node_modules
+COPY --from=build /monorepo/app/package.json /app/package.json
+WORKDIR /app/dist
+EXPOSE $PORT
+ENTRYPOINT ["node", "index.js"]
