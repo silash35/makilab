@@ -1,18 +1,7 @@
 import path from "path";
-import { defineConfig } from "vite";
-import { VitePluginNode } from "vite-plugin-node";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  envPrefix: ["A", "D", "E", "J", "P", "S", "U"], // It is a backend server, so all env variables can be exposed
-  server: {
-    port: 1234,
-  },
-  plugins: [
-    ...VitePluginNode({
-      adapter: "express",
-      appPath: "./src/index.ts",
-    }),
-  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

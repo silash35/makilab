@@ -17,7 +17,7 @@
       "@config": ["./config"],
       "@test/*": ["test/*"]
     },
-    "types": ["vite/client", "vitest/globals"]
+    "types": ["vitest/globals"]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
