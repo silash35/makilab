@@ -1,9 +1,12 @@
 node_modules
+test
+dist
+
+.github
+.next
+.swc
+
 .git
 .gitignore
 *.md
-dist
-.github
 .env*
-.next
-.swc
