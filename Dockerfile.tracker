@@ -1,7 +1,7 @@
-FROM node:20-alpine as pnpm
+FROM node:20-alpine AS pnpm
 RUN npm install -g pnpm
 
-FROM pnpm
+FROM pnpm AS build
 COPY . /monorepo
 WORKDIR /monorepo
 RUN pnpm install --frozen-lockfile
