@@ -1,0 +1,17 @@
+FROM node:20-alpine as pnpm
+RUN npm install -g pnpm
+
+FROM pnpm
+COPY . /monorepo
+WORKDIR /monorepo
+RUN pnpm install --frozen-lockfile
+RUN pnpm --filter=tracker build
+RUN pnpm --filter=tracker deploy --prod ./app
+
+FROM pnpm
+COPY --from=build /monorepo/app /app
+
+WORKDIR /app
+EXPOSE $PORT
+
+CMD pnpm start
