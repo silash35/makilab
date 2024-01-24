@@ -2,11 +2,16 @@ FROM node:20-alpine AS pnpm
 RUN npm install -g pnpm
 
 FROM pnpm AS build
+COPY package.json /monorepo
+COPY pnpm-lock.yaml /monorepo
+COPY pnpm-workspace.yaml /monorepo
+COPY packages/tracker/package.json /monorepo/packages/tracker
+RUN pnpm install --frozen-lockfile
+
 ARG SITE_URL
 ARG API_URL
 COPY . /monorepo
 WORKDIR /monorepo
-RUN pnpm install --frozen-lockfile
 RUN pnpm --filter=tracker build
 RUN pnpm --filter=tracker deploy --prod ./app
 
