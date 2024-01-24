@@ -2,14 +2,14 @@ FROM node:20-alpine AS pnpm
 RUN npm install -g pnpm
 
 FROM pnpm AS build
-
+# Copy and Install dependencies separately
 WORKDIR /monorepo
 COPY package.json .
 COPY pnpm-lock.yaml .
 COPY pnpm-workspace.yaml .
 COPY packages/tracker/package.json ./packages/tracker/package.json
 RUN pnpm install --frozen-lockfile
-
+# Copy the rest of the files and build
 ARG SITE_URL
 ARG API_URL
 COPY . .

@@ -1,9 +1,14 @@
 FROM node:20-alpine AS build
 RUN npm install -g pnpm
-
-COPY . /monorepo
+# Copy and Install dependencies separately
 WORKDIR /monorepo
+COPY package.json .
+COPY pnpm-lock.yaml .
+COPY pnpm-workspace.yaml .
+COPY packages/backend/package.json ./packages/backend/package.json
 RUN pnpm install --frozen-lockfile
+# Copy the rest of the files and build
+COPY . .
 RUN pnpm --filter=backend build
 RUN pnpm --filter=backend deploy --prod ./app
 WORKDIR /monorepo/app
