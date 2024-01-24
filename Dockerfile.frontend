@@ -11,7 +11,7 @@ COPY packages/frontend/package.json ./packages/frontend/package.json
 RUN pnpm install --frozen-lockfile
 # Copy the rest of the files and build
 ARG SITE_URL
-ARG API_URL
+ARG BACKEND_URL
 COPY . .
 RUN pnpm --filter=frontend build
 RUN pnpm --filter=frontend deploy --prod ./app
