@@ -1,5 +1,5 @@
 import config from "@config";
-import format from "date-fns/format";
+import { format } from "date-fns/format";
 
 import Header from "@/components/common/pdf/Header";
 import Page from "@/components/common/pdf/Page";

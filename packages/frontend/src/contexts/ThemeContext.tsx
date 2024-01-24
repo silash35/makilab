@@ -59,7 +59,7 @@ export const ThemeProvider = ({ children }: Props) => {
         },
       },
     },
-    ptBR
+    ptBR,
   );
 
   return (

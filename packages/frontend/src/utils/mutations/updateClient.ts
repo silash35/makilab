@@ -6,7 +6,7 @@ import request from "../request";
 export default async (
   id: number,
   updateClient: TClientInput,
-  newServiceOrder?: TServiceOrderInput
+  newServiceOrder?: TServiceOrderInput,
 ) => {
   const { response, status, error } = await request({
     method: "PUT",

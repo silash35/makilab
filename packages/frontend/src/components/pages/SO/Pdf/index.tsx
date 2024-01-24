@@ -1,6 +1,6 @@
 import config from "@config";
-import add from "date-fns/add";
-import format from "date-fns/format";
+import { add } from "date-fns/add";
+import { format } from "date-fns/format";
 
 import Header from "@/components/common/pdf/Header";
 import Page from "@/components/common/pdf/Page";
