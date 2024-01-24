@@ -2,6 +2,7 @@
   "name": "opensom",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "engines": {
     "node": "20.x",
     "pnpm": "8.x"
@@ -16,6 +17,6 @@
     "tracker:start": "cd packages/tracker && pnpm start"
   },
   "devDependencies": {
-    "eslint-config-silash35": "^2.0.1"
+    "eslint-config-silash35": "^3.3.1"
   }
 }

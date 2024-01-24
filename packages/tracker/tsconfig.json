@@ -17,12 +17,12 @@
     "paths": {
       "@/*": ["src/*"],
       "@config": ["./config"],
-      "@test/*": ["test/*"]
+      "@test/*": ["test/*"],
     },
     "incremental": true,
     "isolatedModules": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
-  "exclude": ["node_modules", ".next"]
+  "exclude": ["node_modules", ".next"],
 }

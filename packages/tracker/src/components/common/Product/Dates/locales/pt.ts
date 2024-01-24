@@ -1,4 +1,4 @@
-import ptBR from "date-fns/locale/pt-BR";
+import { ptBR } from "date-fns/locale";
 
 export default {
   dateLocale: ptBR,
