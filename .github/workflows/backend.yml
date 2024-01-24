@@ -5,8 +5,9 @@ on:
     paths:
       - "packages/backend/**"
       - "packages/config/**"
-      - "packages/eslint-config/**"
       - ".github/workflows/backend.yml"
+      - "Dockerfile.backend"
+      - "package.json"
 defaults:
   run:
     working-directory: ./packages/backend
@@ -67,3 +68,17 @@ jobs:
         run: mv .env.test .env
       - name: Run Tests
         run: pnpm test:headless
+  Deploy:
+    if: github.ref == 'refs/heads/master'
+    needs: [Vitest]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+    - name: Push to dokku
+      uses: dokku/github-action@master
+      with:
+        git_remote_url: 'ssh://dokku@168.138.240.103:22/opensom-backend'
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
