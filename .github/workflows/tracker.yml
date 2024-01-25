@@ -81,5 +81,5 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@168.138.240.103:22/opensom-tracker"
+          git_remote_url: "ssh://dokku@168.138.240.103/opensom-tracker"
           ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}

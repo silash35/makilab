@@ -126,3 +126,17 @@ dokku letsencrypt:enable opensom-frontend
 sudo apt install cron # Crontab command is not available by default on Ubuntu server minimal
 dokku letsencrypt:cron-job --add
 ```
+
+## Deploy locally (to work only in your PC)
+
+Just run this command at the root of the project:
+
+```sh
+docker compose up
+```
+
+If you want to keep track of the logs, You can also use:
+
+```sh
+docker compose up >> logs/$(date +%F).txt
+```
