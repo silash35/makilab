@@ -11,7 +11,7 @@
     "build": "prisma generate && tsup",
     "start": "node dist/index.js",
     "lint": "eslint .",
-    "db:migrate": "prisma db push",
+    "prisma:migrate": "ls -lR && prisma db push",
     "test": "VITEST=true vitest",
     "test:headless": "VITEST=true prisma generate && vitest run",
     "coverage": "VITEST=true vitest run --coverage"
