@@ -16,11 +16,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@config": ["./config"]
+      "@config": ["./config"],
     },
     "incremental": true,
-    "isolatedModules": true
+    "isolatedModules": true,
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".next"]
+  "exclude": ["node_modules", ".next"],
 }
