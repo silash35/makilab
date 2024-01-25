@@ -61,6 +61,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       setCookie(undefined, "token", token, {
         maxAge: 86400 * 7, // expires in 7 days
+        sameSite: "none",
+        secure: true,
       });
 
       setSession({ user, status: "authenticated" });
