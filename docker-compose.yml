@@ -1,0 +1,77 @@
+# docker-compose to run OpenSOM in a offline environment
+
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=opensom
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: npm run prisma:migrate
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres/opensom
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      - PORT=1234
+      - SITE_URL=http://localhost:1234
+      - DATABASE_URL=postgres://postgres:postgres@postgres/opensom
+
+      # As this docker-compose is meant to be used locally and never in a server,
+      # there is no need to hide the credentials, because every person with
+      # access to the PC will have access to the database, this file, the env files and everything.
+      # So there is not much we can do.
+      - ADMIN_PASSWORD=admin
+      - USER1_PASSWORD=user1
+      - USER2_PASSWORD=user2
+      - JWT_SECRET=Iam23FMEvpwVXOcrxR5SZHXEXO93hfpMMUptvkwKan4
+
+      - EMAIL_HOST=smtp.ethereal.email
+      - EMAIL_USER=cody43@ethereal.email
+      - EMAIL_PASSWORD=6ZxztpxH3y8QsMW1M8
+    ports:
+      - 1234:1234
+
+  tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile.tracker
+    restart: always
+    depends_on:
+      - backend
+    environment:
+      - PORT=3001
+      - SITE_URL=http://localhost:3001
+      - API_URL=http://localhost:1234/api/public/search
+    ports:
+      - 3001:3001
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: always
+    network_mode: host
+    depends_on:
+      - backend
+    environment:
+      - SITE_URL=http://localhost:3000
+      - BACKEND_URL=http://localhost:1234

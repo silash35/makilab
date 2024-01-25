@@ -26,9 +26,9 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.3.1",
+    "@faker-js/faker": "^8.4.0",
     "@testing-library/react": "^14.1.2",
-    "@types/node": "^20.11.5",
+    "@types/node": "^20.11.6",
     "@types/react": "^18.2.48",
     "@vitejs/plugin-react": "^4.2.1",
     "concurrently": "^8.2.2",
