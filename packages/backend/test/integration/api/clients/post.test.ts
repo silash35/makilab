@@ -43,7 +43,7 @@ describe("Clients API - POST", () => {
     expect(newServiceOrder?.isUnderWarranty).to.be.equal(serviceOrder.isUnderWarranty);
     expect(newServiceOrder?.problemDescription).to.be.equal(serviceOrder.problemDescription);
     expect(newServiceOrder?.statusName).to.be.equal(
-      serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação"
+      serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação",
     );
   });
 
@@ -145,7 +145,7 @@ describe("Clients API - POST", () => {
 
       // Remove the sssZ part of the date before comparing it
       expect(String(newServiceOrder.createdAt).slice(0, -4)).to.be.equal(
-        now.toISOString().slice(0, -4)
+        now.toISOString().slice(0, -4),
       );
     }
   });

@@ -5,7 +5,7 @@ const sendMail = async (to: unknown, text: unknown, file: Express.Multer.File | 
   const testMessageUrl = await mailService.sendMail(
     validateString(to, "e-mail address"),
     validateString(text),
-    validateAttachment(file)
+    validateAttachment(file),
   );
 
   return { status: "success", testMessageUrl };

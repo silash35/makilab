@@ -1,8 +1,8 @@
 import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import ptBR from "date-fns/locale/pt-BR";
+import { ptBR } from "date-fns/locale";
 import { ComponentProps, useEffect, useState } from "react";
 
 interface Props {
@@ -40,7 +40,7 @@ const DateTime = ({ name, label, defaultValue, textFieldProps, dateTimePickerPro
       <DateTimePicker
         label={label}
         onChange={(newValue) => setValue(newValue as string | null)}
-        renderInput={(params) => <TextField {...textFieldProps} {...params} />}
+        slotProps={{ textField: textFieldProps }}
         value={value}
         {...dateTimePickerProps}
       />

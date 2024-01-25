@@ -1,0 +1,13 @@
+node_modules
+test
+dist
+pgdata
+
+.github
+.next
+.swc
+
+.git
+.gitignore
+*.md
+.env*

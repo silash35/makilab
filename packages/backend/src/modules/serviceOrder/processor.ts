@@ -1,5 +1,5 @@
-import add from "date-fns/add";
-import isAfter from "date-fns/isAfter";
+import { addDays } from "date-fns/addDays";
+import { isAfter } from "date-fns/isAfter";
 
 import processClient from "../client/processor";
 import type { ProcessedSO, ServiceOrder } from "./types";
@@ -45,7 +45,7 @@ const processSO = (serviceOrder?: ServiceOrder | ServiceOrder[] | null) => {
 
     const isUrgent =
       statusNumber <= Situation.WAITING_BUDGET &&
-      isAfter(new Date(), add(new Date(s.createdAt), { days: 5 }));
+      isAfter(new Date(), addDays(new Date(s.createdAt), 5));
     const defaultEmailStart = `Prezado(a) ${s.owner?.name}, seu produto (${s.equipment} ${s.brand}) de OS ${s.id}`;
     let statusName: string | undefined = undefined;
     let defaultEmail: string | undefined = undefined;

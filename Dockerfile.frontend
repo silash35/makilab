@@ -1,0 +1,23 @@
+FROM node:20-alpine AS pnpm
+RUN npm install -g pnpm
+
+FROM pnpm AS build
+# Copy and Install dependencies separately
+WORKDIR /monorepo
+COPY package.json .
+COPY pnpm-lock.yaml .
+COPY pnpm-workspace.yaml .
+COPY packages/frontend/package.json ./packages/frontend/package.json
+RUN pnpm install --frozen-lockfile
+# Copy the rest of the files and build
+ARG SITE_URL
+ARG BACKEND_URL
+COPY . .
+RUN pnpm --filter=frontend build
+RUN pnpm --filter=frontend deploy --prod ./app
+
+FROM pnpm
+COPY --from=build /monorepo/app /app
+WORKDIR /app
+EXPOSE $PORT
+CMD pnpm start

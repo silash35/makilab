@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { response } = await request(
     { url: `/api/private/serviceOrders/${id}`, method: "GET" },
-    context
+    context,
   );
 
   return {

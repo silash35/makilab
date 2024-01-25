@@ -42,7 +42,7 @@ describe("Clients API - PUT", () => {
     expect(responseSO.notes).to.be.equal(serviceOrder.notes);
     expect(responseSO.isUnderWarranty).to.be.equal(serviceOrder.isUnderWarranty);
     expect(responseSO.statusName).to.be.equal(
-      serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação"
+      serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação",
     );
   });
 
@@ -74,14 +74,14 @@ describe("Clients API - PUT", () => {
     expect(responseOldSO.notes).to.be.equal(serviceOrder.notes);
     expect(responseOldSO.isUnderWarranty).to.be.equal(serviceOrder.isUnderWarranty);
     expect(responseOldSO.statusName).to.be.equal(
-      serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação"
+      serviceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação",
     );
 
     expect(responseNewSO.equipment).to.be.equal(newServiceOrder.equipment);
     expect(responseNewSO.notes).to.be.equal(newServiceOrder.notes);
     expect(responseNewSO.isUnderWarranty).to.be.equal(newServiceOrder.isUnderWarranty);
     expect(responseNewSO.statusName).to.be.equal(
-      newServiceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação"
+      newServiceOrder.isUnderWarranty ? "Esperando criar OSF" : "Esperando Avaliação",
     );
   });
 

@@ -22,7 +22,7 @@ const EditSOs = () => {
   const [showEnded, setShowEnded] = useState(false);
 
   const { serviceOrders, mutate, error } = useServiceOrders(
-    showEnded ? "?showFinalized=true" : undefined
+    showEnded ? "?showFinalized=true" : undefined,
   );
 
   // Sort

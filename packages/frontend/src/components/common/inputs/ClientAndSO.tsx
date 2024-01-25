@@ -23,7 +23,7 @@ const ClientAndSOInputs = ({ setSelectedClientId }: Props) => {
   const [search, setSearch] = useState("");
 
   const { clients } = useClients(
-    `?hideSOs=true&take=50${search.length > 0 ? `&start=${search}` : ""}`
+    `?hideSOs=true&take=50${search.length > 0 ? `&start=${search}` : ""}`,
   );
 
   const [clientSelectorValue, setClientSelectorValue] = useState(options[0]);

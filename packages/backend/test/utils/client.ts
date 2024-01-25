@@ -6,7 +6,7 @@ import { generateClient, generateServiceOrder } from "./generators";
 
 export const createClient = async (
   client: ReturnType<typeof generateClient>,
-  serviceOrder?: ReturnType<typeof generateServiceOrder>
+  serviceOrder?: ReturnType<typeof generateServiceOrder>,
 ) => {
   const data = {
     ...client,

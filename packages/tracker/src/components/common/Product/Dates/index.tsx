@@ -1,4 +1,4 @@
-import format from "date-fns/format";
+import { format } from "date-fns/format";
 import { useRouter } from "next/router";
 
 import type { Product } from "@/utils/getProduct";
@@ -31,7 +31,7 @@ const Dates = ({ product }: Props) => {
   }
   if (product.deliveredToCustomerAt != null) {
     dates.push(
-      <DateItem date={product.deliveredToCustomerAt} key={5} text={t.deliveredToCustomer} />
+      <DateItem date={product.deliveredToCustomerAt} key={5} text={t.deliveredToCustomer} />,
     );
   }
 
