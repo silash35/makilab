@@ -15,7 +15,7 @@ const create = async (client: unknown, ServiceOrder?: unknown) => {
 
 const update = async (id: unknown, client: unknown, serviceOrder?: unknown) => {
   return processClient(
-    await clientService.update(validateID(id), validateClient(client, serviceOrder))
+    await clientService.update(validateID(id), validateClient(client, serviceOrder)),
   );
 };
 

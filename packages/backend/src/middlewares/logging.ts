@@ -3,7 +3,7 @@ import type { RequestHandler } from "express";
 const logger: RequestHandler = (req, res, next) => {
   const current_dateTime = new Date();
   const formatted_date = `${current_dateTime.toLocaleDateString(
-    "pt-BR"
+    "pt-BR",
   )} ${current_dateTime.toLocaleTimeString("pt-BR")}`;
 
   const method = req.method;

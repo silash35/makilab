@@ -13,7 +13,7 @@ const getOne = async (id: unknown) => {
 
 const create = async (serviceOrderId: unknown, budget: unknown) => {
   return processBudget(
-    await budgetService.create(validateID(serviceOrderId), validateBudget(budget))
+    await budgetService.create(validateID(serviceOrderId), validateBudget(budget)),
   );
 };
 
