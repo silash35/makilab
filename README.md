@@ -26,10 +26,9 @@ sudo reboot
 
 1. Install Dokku following the instructions on [Dokku Docs](https://dokku.com/docs/getting-started/installation/).
 
-2. Setup SSH Keys for Dokku
+2. Setup SSH Keys for Dokku (run these commands as root).
 
 ```sh
-sudo su
 echo the_content_of_ssh_key_file.pub | dokku ssh-keys:add admin
 ```
 
