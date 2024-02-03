@@ -11,7 +11,7 @@ export default (() => {
     },
     PDF: {
       hasQrCode: true,
-      qrCodeLink: "https://opensom-tracker.vercel.app/%ID%", // %ID% will be replaced by the equipment id
+      qrCodeLink: "https://opensom-tracker.silas.eng.br/%ID%", // %ID% will be replaced by the equipment id
     },
     ATTENDANTS: ["Dan Cordova", "Larissa Brain", "Tom Coffee"],
     SERVICE_PLACES: ["Balcão", "Telefone"],

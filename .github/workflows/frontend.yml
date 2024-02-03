@@ -4,10 +4,11 @@ on:
   push:
     paths:
       - "packages/frontend/**"
+      - "packages/config/**"
       - ".github/workflows/frontend.yml"
       - "Dockerfile.frontend"
       - "package.json"
-
+      - pnpm-lock.yaml
 jobs:
   ESLint:
     runs-on: ubuntu-latest

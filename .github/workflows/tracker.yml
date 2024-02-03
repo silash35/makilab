@@ -4,10 +4,11 @@ on:
   push:
     paths:
       - "packages/tracker/**"
+      - "packages/config/**"
       - ".github/workflows/tracker.yml"
       - "Dockerfile.tracker"
       - "package.json"
-
+      - pnpm-lock.yaml
 jobs:
   ESLint:
     runs-on: ubuntu-latest
