@@ -4,7 +4,39 @@ OpenSOM is an open source and Self-Hosted Service Order Manager. This repository
 
 > Fork > Customize > Deploy
 
-## Deploy on a server with Docker
+## What do all these packages do?
+
+### backend
+
+The backend package contains the backend of the application. The backend also exposes a public API that can be used to build an interface where the customer can track the progress of their service orders. An example of an interface that uses this API is in the tracker package.
+
+### config
+
+The config package contains the configuration of the application. It is something that you will change to match the needs of you or your company.
+
+### Contract
+
+This package contains the contract of the application API. It is what defines the data that is sent to the backend and what the backend returns. It is shared between the backend, the tracker and the frontend, just like [ts-rest](https://ts-rest.com/docs/core/) says.
+
+### frontend
+
+The frontend package contains the main application. The manager interface where the employees and the administrator can manage the orders, the customers and etc.
+
+### tracker
+
+The tracker package is a example of site consuming the OpenSOM API, it provides a nice interface for clients track their service orders status. You can modify this project to use it as a real application for your business or make a new website that consumes the OpenSOM API.
+
+## How to deploy a offline instance?
+
+Just install Docker and Docker Compose, and then run
+
+```sh
+docker-compose up
+```
+
+It will start all services, including the postgres database. I recommend you also edit the config package and the `docker-compose.yml` file to your needs.
+
+## How to deploy on a server? (Using Docker)
 
 This repo provides 3 Dockerfiles that you can use to deploy OpenSOM on a server. Do not use the `docker-compose.yml` file. As it meant to be used in a offline environment. Like a local PC, if your company does not have a server.
 
