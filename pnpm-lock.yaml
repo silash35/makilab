@@ -17,9 +17,15 @@ importers:
       '@opensom/config':
         specifier: workspace:*
         version: link:../config
+      '@opensom/contract':
+        specifier: workspace:*
+        version: link:../contract
       '@prisma/client':
         specifier: ^5.8.1
         version: 5.8.1(prisma@5.8.1)
+      '@ts-rest/express':
+        specifier: ^3.33.0
+        version: 3.33.0(express@4.18.2)
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -92,6 +98,19 @@ importers:
         version: 1.2.1(@types/node@20.11.6)(jsdom@24.0.0)(sass@1.70.0)
 
   packages/config: {}
+
+  packages/contract:
+    dependencies:
+      '@ts-rest/core':
+        specifier: ^3.33.0
+        version: 3.33.0(zod@3.22.4)
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
+    devDependencies:
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/frontend:
     dependencies:
@@ -1462,6 +1481,29 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: true
+
+  /@ts-rest/core@3.33.0(zod@3.22.4):
+    resolution: {integrity: sha512-EUV+VmHWXrtvjBcGURrAuW29ajKhteGGgbf//KcrEhq0pYuENJfxfg4mx23OXVOliuceY/kSXO4HiEYs9jH79g==}
+    peerDependencies:
+      zod: ^3.22.3
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      zod: 3.22.4
+    dev: false
+
+  /@ts-rest/express@3.33.0(express@4.18.2):
+    resolution: {integrity: sha512-lnHSwhK0CX0Wf55eSoEgmqO3M1gteh4snlkiJ5bhLX1MsHDfiE4SOkWG9d73L2D1mhXK1nrF4Fz66w/XkJcrkA==}
+    peerDependencies:
+      express: ^4.0.0
+      zod: ^3.22.3
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      express: 4.18.2
+    dev: false
 
   /@types/aria-query@5.0.4:
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==}
@@ -5934,3 +5976,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: false

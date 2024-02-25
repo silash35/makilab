@@ -1,12 +1,13 @@
+import { createExpressEndpoints } from "@ts-rest/express";
 import { Router } from "express";
 
-import searchRouter from "@/modules/publicSO/router";
+import { contract as ProductContract, router as ProductRouter } from "@/modules/product/router";
 
 // Init
 const router = Router();
 
 // Public routes will be accessible without authentication by everyone
-router.use("/api/public/search", searchRouter);
+createExpressEndpoints(ProductContract, ProductRouter, router, { responseValidation: true });
 
 router.get("/", (req, res) => {
   return res.status(200).send("This is a backend of OpenSOM. Where the magic happens.");
