@@ -6,6 +6,7 @@ import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+import useLocale from "@/hooks/useLocale";
 import type { Product as TProduct } from "@/hooks/useProduct";
 
 import Dates from "./Dates";

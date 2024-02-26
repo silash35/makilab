@@ -60,7 +60,6 @@ describe("Search API - POST", () => {
     const testValues = ["-1", -1, -2, -34234];
 
     for (const testValue of testValues) {
-      console.log(testValue);
       await request(app)
         .get("/api/public/products/" + testValue)
         .expect(400)

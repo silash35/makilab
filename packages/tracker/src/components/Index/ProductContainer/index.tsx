@@ -27,8 +27,6 @@ function productContainer({ productId, enabled }: Props) {
 
   const { product, status, error } = useProduct(productId, enabled);
 
-  console.log(productId, status, enabled);
-
   if (enabled !== true) {
     return null;
   }

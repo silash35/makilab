@@ -16,12 +16,13 @@ export default (() => {
     ATTENDANTS: ["Dan Cordova", "Larissa Brain", "Tom Coffee"],
     SERVICE_PLACES: ["Balcão", "Telefone"],
     VOLTAGES_OPTIONS: [
+      // Options that starts "N" will not be printed in PDF. They are for internal use only.
       "Não se aplica",
       "Não identificável",
       "Bivolt (127V-220V)",
       "127V",
       "220V",
       "380V",
-    ], // Options that starts "N" will not be printed in PDF. They are for internal use only.
+    ],
   };
 })();

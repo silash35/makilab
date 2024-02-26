@@ -1,5 +1,6 @@
 import { format } from "date-fns/format";
 
+import useLocale from "@/hooks/useLocale";
 import type { Product } from "@/hooks/useProduct";
 
 import styles from "./dates.module.scss";
@@ -41,7 +42,7 @@ export default Dates;
 
 interface DateItemProps {
   text: string;
-  date: string;
+  date: Date;
 }
 
 const DateItem = ({ text, date }: DateItemProps) => {
@@ -50,10 +51,10 @@ const DateItem = ({ text, date }: DateItemProps) => {
 
   return (
     <li className={styles.item}>
-      <p>{format(new Date(date), t.dateFormat, { locale: t.dateLocale })}</p>
+      <p>{format(date, t.dateFormat, { locale: t.dateLocale })}</p>
 
       <div className={styles.flex}>
-        <p className={styles.time}>{format(new Date(date), "hh:mm a", { locale: t.dateLocale })}</p>
+        <p className={styles.time}>{format(date, "hh:mm a", { locale: t.dateLocale })}</p>
         <p className={styles.text}>{text}</p>
       </div>
     </li>
