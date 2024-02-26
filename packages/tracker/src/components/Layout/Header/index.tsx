@@ -1,15 +1,17 @@
 import config from "@config";
 import Link from "next/link";
-import { useRouter } from "next/router";
+
+import useLocale from "@/hooks/useLocale";
 
 import styles from "./header.module.scss";
 import en from "./locales/en";
 import pt from "./locales/pt";
+
 const { COMPANY } = config;
 
 const Header = () => {
-  const router = useRouter();
-  const t = router.locale === "en" ? en : pt;
+  const { locale } = useLocale();
+  const t = locale === "en" ? en : pt;
 
   return (
     <header className={styles.header}>

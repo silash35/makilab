@@ -1,7 +1,6 @@
 import { format } from "date-fns/format";
-import { useRouter } from "next/router";
 
-import type { Product } from "@/utils/getProduct";
+import type { Product } from "@/hooks/useProduct";
 
 import styles from "./dates.module.scss";
 import en from "./locales/en";
@@ -12,8 +11,8 @@ interface Props {
 }
 
 const Dates = ({ product }: Props) => {
-  const router = useRouter();
-  const t = router.locale === "en" ? en : pt;
+  const { locale } = useLocale();
+  const t = locale === "en" ? en : pt;
 
   const dates = [];
 
@@ -46,8 +45,8 @@ interface DateItemProps {
 }
 
 const DateItem = ({ text, date }: DateItemProps) => {
-  const router = useRouter();
-  const t = router.locale === "en" ? en : pt;
+  const { locale } = useLocale();
+  const t = locale === "en" ? en : pt;
 
   return (
     <li className={styles.item}>

@@ -1,26 +1,37 @@
 import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, useId, useState } from "react";
+
+import useLocale from "@/hooks/useLocale";
 
 import en from "./locales/en";
 import pt from "./locales/pt";
 import styles from "./search.module.scss";
 
 interface Props {
-  load: (s: string) => Promise<void>;
+  setSearch: Dispatch<string>;
+  setEnabled: Dispatch<boolean>;
 }
 
-const SearchBar = ({ load }: Props) => {
-  const router = useRouter();
-  const t = router.locale === "en" ? en : pt;
+const SearchBar = ({ setSearch, setEnabled }: Props) => {
+  const { locale } = useLocale();
+  const t = locale === "en" ? en : pt;
 
-  const [search, setSearch] = useState<string>("");
   const [paperElevation, setPaperElevation] = useState(4);
+
+  const inputId = useId();
 
   const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    load(search);
+
+    const inputValue = event.currentTarget[inputId].value as string;
+    setSearch(inputValue);
+
+    if (inputValue === "") {
+      setEnabled(false);
+    } else {
+      setEnabled(true);
+    }
   };
 
   return (
@@ -36,12 +47,7 @@ const SearchBar = ({ load }: Props) => {
           onMouseOut={() => setPaperElevation(4)}
           onMouseOver={() => setPaperElevation(8)}
         >
-          <input
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder={t.placeholder}
-            type="text"
-            value={search}
-          ></input>
+          <input id={inputId} placeholder={t.placeholder} type="text"></input>
           <Button type="submit" variant="contained">
             {t.button}
           </Button>

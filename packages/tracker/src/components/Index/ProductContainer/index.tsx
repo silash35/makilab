@@ -1,8 +1,8 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import { useRouter } from "next/router";
 
 import ProductComponent from "@/components/common/Product";
-import type { Product } from "@/utils/getProduct";
+import useLocale from "@/hooks/useLocale";
+import useProduct from "@/hooks/useProduct";
 
 import styles from "./product.module.scss";
 
@@ -17,14 +17,23 @@ const pt = {
 };
 
 interface Props {
-  product: "loading" | "empty" | "Unknown error" | "Not found" | Product;
+  productId: number;
+  enabled: boolean;
 }
 
-function productContainer({ product }: Props) {
-  const router = useRouter();
-  const t = router.locale === "en" ? en : pt;
+function productContainer({ productId, enabled }: Props) {
+  const { locale } = useLocale();
+  const t = locale === "en" ? en : pt;
 
-  if (product === "loading") {
+  const { product, status, error } = useProduct(productId, enabled);
+
+  console.log(productId, status, enabled);
+
+  if (enabled !== true) {
+    return null;
+  }
+
+  if (status === "pending") {
     return (
       <div className={styles.loading}>
         <CircularProgress />
@@ -32,16 +41,15 @@ function productContainer({ product }: Props) {
     );
   }
 
-  if (product === "empty") {
-    return null;
-  }
-
-  if (product === "Unknown error") {
+  if (status === "error") {
+    if (error.status === 404) {
+      return <p>{t.notFound}</p>;
+    }
     return <p>{t.unknownError}</p>;
   }
 
-  if (product === "Not found") {
-    return <p>{t.notFound}</p>;
+  if (product === undefined) {
+    return null;
   }
 
   return <ProductComponent product={product} />;

@@ -1,17 +1,17 @@
-import { useRouter } from "next/router";
+import useLocale from "@/hooks/useLocale";
 
 vi.mock("next/router", () => ({
   useRouter: vi.fn(),
 }));
 
 // Shut Up Typescript
-const mock = vi.fn(useRouter);
+const mock = vi.fn(useLocale);
 
 const mockRouter = (locale: string) => {
-  (useRouter as typeof mock).mockImplementation(() => {
+  (useLocale as typeof mock).mockImplementation(() => {
     return {
       locale,
-    } as ReturnType<typeof useRouter>;
+    } as ReturnType<typeof useLocale>;
   });
 };
 

@@ -1,17 +1,13 @@
 html,
 body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  scroll-behavior: smooth;
-}
-
-#__next {
   display: flex;
   flex-flow: column;
 
   justify-content: space-between;
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 main {

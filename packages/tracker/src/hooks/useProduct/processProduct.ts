@@ -1,21 +1,10 @@
-import config from "@config";
+import contract from "@opensom/contract";
+import type { ClientInferResponseBody } from "@ts-rest/core";
 
 import en from "./locale/en";
 import pt from "./locale/pt";
 
-interface Product {
-  id: number;
-
-  name: string;
-  isUnderWarranty: boolean;
-  isBudgetApproved: boolean;
-
-  createdAt: string;
-  budgetedAt: string;
-  budgetAnsweredAt: string;
-  repairedAt: string;
-  deliveredToCustomerAt: string;
-}
+type Product = ClientInferResponseBody<typeof contract.getProduct, 200>;
 
 interface Step {
   label: string;
@@ -100,30 +89,5 @@ function processProduct(product: Product, locale?: string) {
   return processedProduct;
 }
 
-async function getProduct(search: string, locale?: string) {
-  let res;
-
-  try {
-    res = await fetch(config.API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ search }),
-    });
-  } catch (e) {
-    return "Unknown error";
-  }
-
-  if (res.status === 404) {
-    return "Not found";
-  }
-
-  if (res.status !== 200) {
-    return "Unknown error";
-  }
-
-  const product: Product = await res.json();
-  return processProduct(product, locale);
-}
-
-export type { ProcessedProduct as Product };
-export default getProduct;
+export type { ProcessedProduct };
+export default processProduct;

@@ -60,7 +60,7 @@ services:
     environment:
       - PORT=3001
       - SITE_URL=http://localhost:3001
-      - API_URL=http://localhost:1234/api/public/search
+      - BACKEND_URL=http://localhost:1234
     ports:
       - 3001:3001
 

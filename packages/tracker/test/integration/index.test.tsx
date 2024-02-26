@@ -71,7 +71,7 @@ describe("Home Page", () => {
 
 const search = (value: string) => {
   const searchBar = screen.getByPlaceholderText(
-    "Enter your Service Order number"
+    "Enter your Service Order number",
   ) as HTMLInputElement;
   fireEvent.change(searchBar, { target: { value } });
 

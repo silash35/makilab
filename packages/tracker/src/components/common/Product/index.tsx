@@ -5,9 +5,8 @@ import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useRouter } from "next/router";
 
-import type { Product as TProduct } from "@/utils/getProduct";
+import type { Product as TProduct } from "@/hooks/useProduct";
 
 import Dates from "./Dates";
 import styles from "./product.module.scss";
@@ -26,8 +25,8 @@ interface Props {
 
 const Product = ({ product }: Props) => {
   const isMobile = useMediaQuery("(max-width: 1100px)");
-  const router = useRouter();
-  const t = router.locale === "en" ? en : pt;
+  const { locale } = useLocale();
+  const t = locale === "en" ? en : pt;
 
   const theme = createTheme({
     palette: {

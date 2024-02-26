@@ -8,7 +8,6 @@
     "pnpm": "8.x"
   },
   "scripts": {
-    "build": "./build.sh",
     "backend:build": "cd packages/backend && pnpm build",
     "backend:start": "cd packages/backend && pnpm start",
     "frontend:build": "cd packages/frontend && pnpm build",
@@ -17,6 +16,6 @@
     "tracker:start": "cd packages/tracker && pnpm start"
   },
   "devDependencies": {
-    "eslint-config-silash35": "^3.3.1"
+    "eslint-config-silash35": "^3.4.0"
   }
 }
