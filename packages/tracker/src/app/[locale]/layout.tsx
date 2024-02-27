@@ -19,7 +19,7 @@ const theme = createTheme({
 
 // React Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,

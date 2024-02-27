@@ -1,10 +1,10 @@
 import generateProduct from "@test/utils/generateProduct";
-import mockRouter from "@test/utils/mockRouter";
+import mockLocale from "@test/utils/mockLocale";
 import testSOCard from "@test/utils/testSOCard";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import createFetchMock from "vitest-fetch-mock";
 
-import Home from "@/pages/index";
+import Home from "@/app/[locale]/page";
 
 const fetchMock = createFetchMock(vi);
 
@@ -14,21 +14,21 @@ describe("Home Page", () => {
   });
 
   it("should load in portuguese by default", () => {
-    mockRouter("");
+    mockLocale("");
     render(<Home />);
     const main = within(screen.getByRole("main"));
     expect(main.getByText("Verifique o status do seu")).toBeDefined();
   });
 
   it("should load in portuguese when locale is pt", () => {
-    mockRouter("pt");
+    mockLocale("pt");
     render(<Home />);
     const main = within(screen.getByRole("main"));
     expect(main.getByText("Verifique o status do seu")).toBeDefined();
   });
 
   it("should load in english when locale is en", () => {
-    mockRouter("en");
+    mockLocale("en");
     render(<Home />);
     const main = within(screen.getByRole("main"));
     expect(main.getByText("Check your product")).toBeDefined();
@@ -38,7 +38,7 @@ describe("Home Page", () => {
     const product = generateProduct();
     fetchMock.mockResponseOnce(JSON.stringify(product));
 
-    mockRouter("en");
+    mockLocale("en");
     render(<Home />);
 
     search("OS23");
@@ -49,7 +49,7 @@ describe("Home Page", () => {
   it("should search and not found", async () => {
     fetchMock.mockResponseOnce(() => ({ status: 404 }));
 
-    mockRouter("en");
+    mockLocale("en");
     render(<Home />);
 
     search("OS23");
@@ -60,7 +60,7 @@ describe("Home Page", () => {
   it("should search and handle unknown error", async () => {
     fetchMock.mockRejectOnce(Error("Unknown error"));
 
-    mockRouter("en");
+    mockLocale("en");
     render(<Home />);
 
     search("OS23");

@@ -3,7 +3,7 @@ import path from "path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  envPrefix: ["A", "S"], // This is only for testing, so all env variables can be exposed
+  envPrefix: ["B", "S"], // This is only for testing, so all env variables can be exposed
   plugins: [react()],
   resolve: {
     alias: {
