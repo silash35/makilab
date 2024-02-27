@@ -1,10 +1,10 @@
 "use client";
 
 import CircularProgress from "@mui/material/CircularProgress";
+import { Suspense } from "react";
 
-import ProductComponent from "@/components/Product";
+import ProductFetcher from "@/components/ProductFetcher";
 import useLocale from "@/hooks/useLocale";
-import useProduct from "@/hooks/useProduct";
 
 import styles from "./product.module.scss";
 
@@ -20,39 +20,30 @@ const pt = {
 
 interface Props {
   productId: number;
-  enabled: boolean;
 }
 
-function productContainer({ productId, enabled }: Props) {
+function productContainer({ productId }: Props) {
   const { locale } = useLocale();
   const t = locale === "en" ? en : pt;
 
-  const { product, status, error } = useProduct(productId, enabled);
-
-  if (enabled !== true) {
-    return null;
-  }
-
-  if (status === "pending") {
-    return (
-      <div className={styles.loading}>
-        <CircularProgress />
-      </div>
-    );
-  }
-
-  if (status === "error") {
-    if (error.status === 404) {
-      return <p>{t.notFound}</p>;
-    }
-    return <p>{t.unknownError}</p>;
-  }
-
-  if (product === undefined) {
-    return null;
-  }
-
-  return <ProductComponent product={product} />;
+  return (
+    <Suspense
+      fallback={
+        <div className={styles.loading}>
+          <CircularProgress />
+        </div>
+      }
+    >
+      <ProductFetcher
+        fallback={{
+          notFound: <p>{t.notFound}</p>,
+          default: <p>{t.unknownError}</p>,
+        }}
+        id={productId}
+        locale={locale}
+      />
+    </Suspense>
+  );
 }
 
 export default productContainer;

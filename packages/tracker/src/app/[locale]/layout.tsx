@@ -1,5 +1,14 @@
 "use client";
 
+// Font
+import { Ubuntu } from "next/font/google";
+
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "700"],
+});
+
 // Material UI and CSS
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -14,26 +23,10 @@ const theme = createTheme({
       contrastText: "#fff",
     },
   },
-  components: { MuiButton: { styleOverrides: { root: { fontWeight: "bold", letterSpacing: 1 } } } },
-});
-
-// React Query
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
+  typography: {
+    fontFamily: ubuntu.style.fontFamily,
   },
-});
-
-// Font
-import { Ubuntu } from "next/font/google";
-
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "700"],
+  components: { MuiButton: { styleOverrides: { root: { fontWeight: "bold", letterSpacing: 1 } } } },
 });
 
 // Components
@@ -50,12 +43,10 @@ const MainLayout = ({ children, params: { locale } }: Props) => (
       <meta content="text/html" httpEquiv="content-type" />
     </head>
     <body>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Layout>{children}</Layout>
-        </ThemeProvider>
-      </QueryClientProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Layout>{children}</Layout>
+      </ThemeProvider>
     </body>
   </html>
 );

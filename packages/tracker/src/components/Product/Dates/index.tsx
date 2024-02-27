@@ -1,7 +1,7 @@
 import { format } from "date-fns/format";
 
 import useLocale from "@/hooks/useLocale";
-import type { Product } from "@/hooks/useProduct";
+import type { Product } from "@/utils/getProduct";
 
 import styles from "./dates.module.scss";
 import en from "./locales/en";

@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <main className={styles.track}>
       <SearchBar setEnabled={setEnabled} setSearch={setId} />
-      <ProductContainer enabled={enabled} productId={numberId} />
+      {enabled && <ProductContainer productId={numberId} />}
     </main>
   );
 };

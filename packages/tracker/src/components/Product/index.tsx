@@ -1,3 +1,5 @@
+"use client";
+
 import { blue, green } from "@mui/material/colors";
 import Paper from "@mui/material/Paper";
 import Step from "@mui/material/Step";
@@ -7,7 +9,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import useLocale from "@/hooks/useLocale";
-import type { Product as TProduct } from "@/hooks/useProduct";
+import type { Product as TProduct } from "@/utils/getProduct";
 
 import Dates from "./Dates";
 import styles from "./product.module.scss";
