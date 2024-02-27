@@ -1,8 +1,6 @@
 "use client";
 
 // Material UI and CSS
-import "@/styles/globals.scss";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -29,16 +27,37 @@ const queryClient = new QueryClient({
   },
 });
 
-// Components
-import Layout from "@/components/Layout";
+// Font
+import { Ubuntu } from "next/font/google";
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Layout>{children}</Layout>
-    </ThemeProvider>
-  </QueryClientProvider>
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "700"],
+});
+
+// Components
+import Layout from "./components/Layout";
+
+interface Props {
+  children: React.ReactNode;
+  params: { locale: string };
+}
+
+const MainLayout = ({ children, params: { locale } }: Props) => (
+  <html className={ubuntu.className} dir="ltr" lang={locale === "en" ? "en-US" : "pt-BR"}>
+    <head>
+      <meta content="text/html" httpEquiv="content-type" />
+    </head>
+    <body>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Layout>{children}</Layout>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </body>
+  </html>
 );
 
-export default RootLayout;
+export default MainLayout;

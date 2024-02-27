@@ -52,34 +52,17 @@ function processProduct(product: Product, locale?: string) {
   }
 
   // Get Steps
-  const steps: Step[] = [];
-
-  steps.push({
-    label: t.stepLabel0,
-  });
-
+  const steps: Step[] = [{ label: t.stepLabel0 }];
   if (!product.isUnderWarranty) {
     steps.push({
       label: t.stepLabel1,
       error: product.isBudgetApproved === false && activeStep < 2,
     });
   }
-
-  steps.push({
-    label: t.stepLabel2,
-  });
-
-  steps.push({
-    label: t.stepLabel3,
-  });
-
-  steps.push({
-    label: t.stepLabel4,
-  });
+  steps.push({ label: t.stepLabel2 }, { label: t.stepLabel3 }, { label: t.stepLabel4 });
 
   const processedProduct: ProcessedProduct = {
     ...product,
-
     isFinished,
     activeStep,
     stepText,

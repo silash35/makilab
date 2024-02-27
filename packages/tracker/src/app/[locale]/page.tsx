@@ -1,4 +1,2 @@
-import Index from "@/components/Index";
-
-const Home = () => <Index />;
-export default Home;
+import Index from "./components/Index";
+export default Index;

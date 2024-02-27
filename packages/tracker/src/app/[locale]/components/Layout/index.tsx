@@ -1,5 +1,4 @@
-import Footer from "@/components/Layout/Footer";
-
+import Footer from "./Footer";
 import Header from "./Header";
 
 interface Props {

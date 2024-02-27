@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
 
-import SearchBar from "@/components/Index/Search";
-
 import styles from "./index.module.scss";
 import ProductContainer from "./ProductContainer";
+import SearchBar from "./Search";
 
 const Index = () => {
   const [id, setId] = useState("");

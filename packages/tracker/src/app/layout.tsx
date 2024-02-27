@@ -5,14 +5,6 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-import { Ubuntu } from "next/font/google";
-
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "700"],
-});
-
 import config from "@config";
 import { Metadata } from "next";
 const { COMPANY, SITE_URL } = config;
@@ -49,13 +41,6 @@ export const metadata: Metadata = {
   },
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html className={ubuntu.className} dir="ltr" lang="en">
-    <head>
-      <meta content="text/html" httpEquiv="content-type" />
-    </head>
-    <body>{children}</body>
-  </html>
-);
+const RootLayout = ({ children }: { children: React.ReactNode }) => children;
 
 export default RootLayout;

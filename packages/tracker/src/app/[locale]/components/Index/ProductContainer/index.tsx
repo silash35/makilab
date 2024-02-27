@@ -1,6 +1,8 @@
+"use client";
+
 import CircularProgress from "@mui/material/CircularProgress";
 
-import ProductComponent from "@/components/common/Product";
+import ProductComponent from "@/components/Product";
 import useLocale from "@/hooks/useLocale";
 import useProduct from "@/hooks/useProduct";
 
