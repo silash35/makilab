@@ -1,6 +1,8 @@
 import { ptBR } from "date-fns/locale";
 
 export default {
+  so: "OS",
+
   dateLocale: ptBR,
   dateFormat: "EEEE, d 'de' MMMM 'de' yyyy",
 

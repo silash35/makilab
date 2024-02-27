@@ -13,14 +13,8 @@ import useLocale from "@/hooks/useLocale";
 import type { Product as TProduct } from "@/utils/getProduct";
 
 import Dates from "./Dates";
-
-const en = {
-  so: "SO",
-};
-
-const pt = {
-  so: "OS",
-};
+import en from "./locales/en";
+import pt from "./locales/pt";
 
 interface Props {
   product: TProduct;

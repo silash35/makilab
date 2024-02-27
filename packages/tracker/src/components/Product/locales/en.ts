@@ -1,6 +1,8 @@
 import { enUS } from "date-fns/locale";
 
 export default {
+  so: "SO",
+
   dateLocale: enUS,
   dateFormat: "EEEE, d MMMM, yyyy",
 

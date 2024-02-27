@@ -1,15 +1,20 @@
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import { styled } from "@mui/material/styles";
 import { format } from "date-fns/format";
 
 import useLocale from "@/hooks/useLocale";
 import type { Product } from "@/utils/getProduct";
 
-import styles from "./dates.module.scss";
 import en from "./locales/en";
 import pt from "./locales/pt";
 
 interface Props {
   product: Product;
 }
+
+const Ul = styled("ul")({ padding: 0, listStyle: "none", margin: 0 });
+const P = styled("p")({ margin: 0 });
 
 const Dates = ({ product }: Props) => {
   const { locale } = useLocale();
@@ -35,7 +40,7 @@ const Dates = ({ product }: Props) => {
     );
   }
 
-  return <ul className={styles.list}>{dates}</ul>;
+  return <Ul>{dates}</Ul>;
 };
 
 export default Dates;
@@ -50,13 +55,14 @@ const DateItem = ({ text, date }: DateItemProps) => {
   const t = locale === "en" ? en : pt;
 
   return (
-    <li className={styles.item}>
-      <p>{format(date, t.dateFormat, { locale: t.dateLocale })}</p>
+    <li>
+      <P>{format(date, t.dateFormat, { locale: t.dateLocale })}</P>
 
-      <div className={styles.flex}>
-        <p className={styles.time}>{format(date, "hh:mm a", { locale: t.dateLocale })}</p>
-        <p className={styles.text}>{text}</p>
-      </div>
+      <Box display="flex" gap={2} marginBottom={2} marginTop={0.5}>
+        <P>{format(date, "hh:mm a", { locale: t.dateLocale })}</P>
+        <Divider orientation="vertical" sx={{ backgroundColor: "#00000038" }} flexItem />
+        <P>{text}</P>
+      </Box>
     </li>
   );
 };
