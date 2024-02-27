@@ -1,5 +1,6 @@
 "use client";
 
+import { Box, Typography } from "@mui/material";
 import { blue, green } from "@mui/material/colors";
 import Paper from "@mui/material/Paper";
 import Step from "@mui/material/Step";
@@ -12,7 +13,6 @@ import useLocale from "@/hooks/useLocale";
 import type { Product as TProduct } from "@/utils/getProduct";
 
 import Dates from "./Dates";
-import styles from "./product.module.scss";
 
 const en = {
   so: "SO",
@@ -38,10 +38,14 @@ const Product = ({ product }: Props) => {
   });
 
   return (
-    <Paper className={styles.product} component="section" elevation={5}>
-      <h2>
+    <Paper
+      component="section"
+      elevation={5}
+      sx={{ maxWidth: "90vw", width: "1200px", margin: 10, padding: 5 }}
+    >
+      <Typography fontSize={24} fontWeight="bold" marginBottom={4} textAlign="center" variant="h2">
         {t.so} {product.id}: {product.name}
-      </h2>
+      </Typography>
 
       <ThemeProvider theme={theme}>
         <Stepper activeStep={product.activeStep} orientation={isMobile ? "vertical" : "horizontal"}>
@@ -55,12 +59,10 @@ const Product = ({ product }: Props) => {
         </Stepper>
       </ThemeProvider>
 
-      <div className={styles.flex}>
-        <div>
-          <p>{product.stepText}</p>
-          <Dates product={product} />
-        </div>
-      </div>
+      <Box display="flex" flexDirection="column">
+        <p>{product.stepText}</p>
+        <Dates product={product} />
+      </Box>
     </Paper>
   );
 };
