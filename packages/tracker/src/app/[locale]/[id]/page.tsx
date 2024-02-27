@@ -1,31 +1,32 @@
-import Stack from "@mui/material/Stack";
+import { notFound } from "next/navigation";
 
 import ProductFetcher from "@/components/ProductFetcher";
 
 const en = {
-  notFound: "No products found",
   unknownError: "Unknown error, please try again later",
 };
 
 const pt = {
-  notFound: "Nenhum produto encontrado",
   unknownError: "Erro desconhecido, tente novamente mais tarde",
+};
+
+const NotFound = () => {
+  notFound();
+  return null;
 };
 
 const ProductPage = ({ params: { locale, id } }: { params: { locale?: string; id: string } }) => {
   const t = locale === "en" ? en : pt;
 
   return (
-    <Stack alignItems="center">
-      <ProductFetcher
-        fallback={{
-          notFound: <p>{t.notFound}</p>,
-          default: <p>{t.unknownError}</p>,
-        }}
-        id={Number(id.replace(/\D/g, ""))}
-        locale={locale}
-      />
-    </Stack>
+    <ProductFetcher
+      fallback={{
+        notFound: <NotFound />,
+        default: <p>{t.unknownError}</p>,
+      }}
+      id={Number(id.replace(/\D/g, ""))}
+      locale={locale}
+    />
   );
 };
 export default ProductPage;

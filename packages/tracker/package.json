@@ -10,10 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/cache": "^11.11.0",
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
+    "@mui/material-nextjs": "^5.15.11",
     "@opensom/config": "workspace:*",
     "@opensom/contract": "workspace:*",
     "@ts-rest/core": "^3.33.0",

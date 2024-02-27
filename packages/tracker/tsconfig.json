@@ -21,7 +21,6 @@
     },
     "incremental": true,
     "isolatedModules": true,
-    "types": ["vitest/globals"],
     "plugins": [
       {
         "name": "next"
