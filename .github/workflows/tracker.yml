@@ -50,26 +50,6 @@ jobs:
       - name: Run Type Checking
         run: pnpm tsc
 
-  Vitest:
-    needs: [ESLint, TypeScript]
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./packages/tracker
-    steps:
-      - name: Setup repo
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-          run_install: true
-      - name: Run Tests
-        run: pnpm test:headless
   Deploy:
     if: github.ref == 'refs/heads/master'
     needs: [Vitest]
