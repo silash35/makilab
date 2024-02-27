@@ -7,10 +7,7 @@
     "dev": "concurrently -k \"cd ../backend && pnpm dev\" \"next dev\"",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "vitest",
-    "test:headless": "vitest run",
-    "coverage": "vitest run --coverage"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -31,13 +28,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.58",
-    "@vitejs/plugin-react": "^4.2.1",
-    "concurrently": "^8.2.2",
-    "jsdom": "^24.0.0",
-    "vitest": "^1.3.1",
-    "vitest-fetch-mock": "^0.2.2"
+    "concurrently": "^8.2.2"
   }
 }
