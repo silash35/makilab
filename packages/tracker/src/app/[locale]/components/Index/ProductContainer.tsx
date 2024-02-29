@@ -1,12 +1,11 @@
 "use client";
 
+import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Suspense } from "react";
 
 import ProductFetcher from "@/components/ProductFetcher";
 import useLocale from "@/hooks/useLocale";
-
-import styles from "./product.module.scss";
 
 const en = {
   notFound: "No products found, did you type the Service Order correctly?",
@@ -29,9 +28,9 @@ function productContainer({ productId }: Props) {
   return (
     <Suspense
       fallback={
-        <div className={styles.loading}>
+        <Box margin={8}>
           <CircularProgress />
-        </div>
+        </Box>
       }
     >
       <ProductFetcher

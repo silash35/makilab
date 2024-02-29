@@ -9,10 +9,12 @@ import pt from "./locales/pt";
 
 const { COMPANY } = config;
 
-const Header = styled("nav")(({ theme }) => ({
+const Header = styled("header")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   margin: "auto",
+  marginTop: 0,
+  marginBottom: 0,
   padding: theme.spacing(3),
   width: "80%",
   [theme.breakpoints.up("md")]: {
