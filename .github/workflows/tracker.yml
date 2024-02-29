@@ -52,7 +52,6 @@ jobs:
 
   Deploy:
     if: github.ref == 'refs/heads/master'
-    needs: [Vitest]
     runs-on: ubuntu-latest
     steps:
       - name: Setup repo
