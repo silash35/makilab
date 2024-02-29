@@ -34,9 +34,7 @@ const ClientAndSOInputs = ({ setSelectedClientId }: Props) => {
 
   useEffect(() => {
     if (Array.isArray(clients)) {
-      const clientsWithLabel = clients.map((client) => {
-        return { ...client, label: client.name };
-      });
+      const clientsWithLabel = clients.map((client) => ({ ...client, label: client.name }));
 
       const processedOptions = [newClient].concat(clientsWithLabel);
 
@@ -60,13 +58,11 @@ const ClientAndSOInputs = ({ setSelectedClientId }: Props) => {
             required
           />
         )}
-        renderOption={(props, option) => {
-          return (
-            <li {...props} key={option.id}>
-              {option.label}
-            </li>
-          );
-        }}
+        renderOption={(props, option) => (
+          <li {...props} key={option.id}>
+            {option.label}
+          </li>
+        )}
         filterOptions={(x) => x}
         options={options}
         value={clientSelectorValue}

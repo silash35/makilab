@@ -19,9 +19,7 @@ const SignInForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isBusy) {
-      return;
-    }
+    if (isBusy) return;
 
     setBusy(true);
 

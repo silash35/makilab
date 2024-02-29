@@ -2,16 +2,14 @@ import Head from "next/head";
 
 import Index from "@/components/pages/index/index";
 
-const Home = () => {
-  return (
-    <>
-      <Head>
-        <title>Painel de Administração</title>
-      </Head>
+const Home = () => (
+  <>
+    <Head>
+      <title>Painel de Administração</title>
+    </Head>
 
-      <Index />
-    </>
-  );
-};
+    <Index />
+  </>
+);
 
 export default Home;

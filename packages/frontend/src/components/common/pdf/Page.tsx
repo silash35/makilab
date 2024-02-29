@@ -4,8 +4,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Page = ({ children }: Props) => {
-  return <article className={styles.page}>{children}</article>;
-};
+const Page = ({ children }: Props) => <article className={styles.page}>{children}</article>;
 
 export default Page;

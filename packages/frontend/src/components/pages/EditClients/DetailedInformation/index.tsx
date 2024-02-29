@@ -70,9 +70,9 @@ const DetailedInformation = ({ client, mutate }: Props) => {
           <h2>Equipamentos</h2>
 
           <Box className={styles.cardsContainer}>
-            {client.serviceOrders.map((serviceOrder) => {
-              return <ServiceOrderCard key={serviceOrder.id} serviceOrder={serviceOrder} />;
-            })}
+            {client.serviceOrders.map((serviceOrder) => (
+              <ServiceOrderCard key={serviceOrder.id} serviceOrder={serviceOrder} />
+            ))}
           </Box>
         </>
       )}
