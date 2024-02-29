@@ -1,17 +1,15 @@
 import config from "@opensom/config";
+import { z } from "zod";
 
-export default (() => {
-  if (!process.env.SITE_URL) {
-    throw new Error("SITE_URL is not defined");
-  }
+const envSchema = z.object({
+  SITE_URL: z.string().url(),
+  BACKEND_URL: z.string().url(),
+});
 
-  if (!process.env.BACKEND_URL) {
-    throw new Error("BACKEND_URL is not defined");
-  }
-
-  return {
+export default {
+  ...config,
+  ...envSchema.parse({
     SITE_URL: process.env.SITE_URL,
     BACKEND_URL: process.env.BACKEND_URL,
-    ...config,
-  };
-})();
+  }),
+};
