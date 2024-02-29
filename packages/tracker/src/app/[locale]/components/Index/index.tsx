@@ -25,7 +25,7 @@ const Index = () => {
   const numberId = Number(id.replace(/\D/g, ""));
 
   return (
-    <Stack alignItems="center" component="main" direction="column" margin={4} marginBottom="auto">
+    <Stack alignItems="center" direction="column" margin={4} marginBottom="auto">
       <Typography
         sx={{
           fontSize: {

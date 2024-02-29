@@ -1,5 +1,3 @@
-import "@/styles/globals.scss";
-
 import { Viewport } from "next";
 export const viewport: Viewport = {
   themeColor: "#ffffff",
