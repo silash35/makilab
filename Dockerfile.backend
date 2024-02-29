@@ -9,6 +9,7 @@ COPY packages/backend/package.json ./packages/backend/package.json
 RUN pnpm install --frozen-lockfile
 # Copy the rest of the files and build
 COPY . .
+ENV NODE_ENV=production
 RUN pnpm --filter=backend build
 RUN pnpm --filter=backend deploy --prod ./app
 WORKDIR /monorepo/app

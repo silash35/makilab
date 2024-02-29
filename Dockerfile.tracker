@@ -11,7 +11,8 @@ COPY packages/tracker/package.json ./packages/tracker/package.json
 RUN pnpm install --frozen-lockfile
 # Copy the rest of the files and build
 ARG SITE_URL
-ARG API_URL
+ARG BACKEND_URL
+ENV NODE_ENV=production
 COPY . .
 RUN pnpm --filter=tracker build
 RUN pnpm --filter=tracker deploy --prod ./app

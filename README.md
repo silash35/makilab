@@ -121,11 +121,11 @@ dokku builder-dockerfile:set opensom-tracker dockerfile-path Dockerfile.tracker
 
 # Set ENV variables
 dokku config:set opensom-tracker SITE_URL=https://opensom-tracker.seu_dominio.com
-dokku config:set opensom-tracker API_URL=https://opensom-backend.seu_dominio.com/api/public/search
+dokku config:set opensom-tracker BACKEND_URL=https://opensom-backend.seu_dominio.com
 
 # The Env variables have to be visible in the build context too
 dokku docker-options:add opensom-tracker build '--build-arg SITE_URL'
-dokku docker-options:add opensom-tracker build '--build-arg API_URL'
+dokku docker-options:add opensom-tracker build '--build-arg BACKEND_URL'
 ```
 
 4. Frontend
