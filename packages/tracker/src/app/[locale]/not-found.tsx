@@ -9,7 +9,7 @@ const en = {
 };
 
 const pt = {
-  notFound: "Pagina não encontrada",
+  notFound: "Página não encontrada",
 };
 
 const NotFound = () => {

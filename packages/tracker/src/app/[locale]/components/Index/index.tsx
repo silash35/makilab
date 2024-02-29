@@ -1,4 +1,5 @@
 "use client";
+
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -25,7 +26,7 @@ const Index = () => {
   const numberId = Number(id.replace(/\D/g, ""));
 
   return (
-    <Stack alignItems="center" direction="column" margin={4} marginBottom="auto">
+    <Stack alignItems="center" direction="column" gap={4} margin={4} marginBottom="auto">
       <Typography
         sx={{
           fontSize: {
@@ -33,7 +34,7 @@ const Index = () => {
             md: "2rem",
             lg: "3rem",
           },
-          marginBottom: 4,
+
           padding: {
             xs: 0,
             md: 1,

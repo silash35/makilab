@@ -1,12 +1,13 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
 import { blue, green } from "@mui/material/colors";
 import Paper from "@mui/material/Paper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import useLocale from "@/hooks/useLocale";
@@ -21,7 +22,8 @@ interface Props {
 }
 
 const Product = ({ product }: Props) => {
-  const isMobile = useMediaQuery("(max-width: 1100px)");
+  const { breakpoints } = useTheme();
+  const isMobile = useMediaQuery(breakpoints.down("lg"));
   const { locale } = useLocale();
   const t = locale === "en" ? en : pt;
 
@@ -32,24 +34,18 @@ const Product = ({ product }: Props) => {
   });
 
   return (
-    <Paper
-      component="section"
-      elevation={5}
-      sx={{ maxWidth: "90vw", width: "1200px", margin: 10, padding: 5 }}
-    >
+    <Paper component="section" elevation={5} sx={{ maxWidth: "90vw", width: "1200px", padding: 5 }}>
       <Typography fontSize={24} fontWeight="bold" marginBottom={4} textAlign="center" variant="h2">
         {t.so} {product.id}: {product.name}
       </Typography>
 
       <ThemeProvider theme={theme}>
         <Stepper activeStep={product.activeStep} orientation={isMobile ? "vertical" : "horizontal"}>
-          {product.steps.map((step) => {
-            return (
-              <Step key={step.label}>
-                <StepLabel error={step.error}>{step.label}</StepLabel>
-              </Step>
-            );
-          })}
+          {product.steps.map((step) => (
+            <Step key={step.label}>
+              <StepLabel error={step.error}>{step.label}</StepLabel>
+            </Step>
+          ))}
         </Stepper>
       </ThemeProvider>
 

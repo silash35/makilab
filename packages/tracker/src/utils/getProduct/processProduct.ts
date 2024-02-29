@@ -4,7 +4,7 @@ import type { ClientInferResponseBody } from "@ts-rest/core";
 import en from "./locale/en";
 import pt from "./locale/pt";
 
-type Product = ClientInferResponseBody<typeof contract.getProduct, 200>;
+type Product = ClientInferResponseBody<typeof contract.product.get, 200>;
 
 interface Step {
   label: string;

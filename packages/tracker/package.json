@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@types/node": "^20.11.20",
-    "@types/react": "^18.2.58",
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
     "concurrently": "^8.2.2"
   }
 }
