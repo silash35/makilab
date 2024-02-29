@@ -11,7 +11,7 @@ const client = initClient(contract, {
 
 const getProduct = async (id: number, locale?: string) => {
   try {
-    const data = await client.getProduct({ params: { id } });
+    const data = await client.product.get({ params: { id } });
     return {
       ...data,
       product: data.status === 200 ? processProduct(data.body, locale) : undefined,

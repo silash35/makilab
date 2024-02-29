@@ -11,7 +11,7 @@ describe("Search API - POST", () => {
     const { serviceOrderId } = await createClient(client, serviceOrder);
 
     await request(app)
-      .get("/api/public/products/" + serviceOrderId)
+      .get("/api/public/product/" + serviceOrderId)
       .expect(200)
       .then((response) => {
         const createdServiceOrder = response.body;
@@ -28,7 +28,7 @@ describe("Search API - POST", () => {
     const { serviceOrderId } = await createClient(client, serviceOrder);
 
     await request(app)
-      .get("/api/public/products/" + serviceOrderId)
+      .get("/api/public/product/" + serviceOrderId)
       .expect(200)
       .then((response) => {
         const createdServiceOrder = response.body;
@@ -44,7 +44,7 @@ describe("Search API - POST", () => {
 
     for (const testValue of testValues) {
       await request(app)
-        .get("/api/public/products/" + testValue)
+        .get("/api/public/product/" + testValue)
         .expect(400)
         .then((response) => {
           expect(response.notFound).be.equal(false);
@@ -61,7 +61,7 @@ describe("Search API - POST", () => {
 
     for (const testValue of testValues) {
       await request(app)
-        .get("/api/public/products/" + testValue)
+        .get("/api/public/product/" + testValue)
         .expect(400)
         .then((response) => {
           expect(response.notFound).be.equal(false);
@@ -77,7 +77,7 @@ describe("Search API - POST", () => {
     const testValues = [99999999, "99999999"];
     for (const testValue of testValues) {
       await request(app)
-        .get("/api/public/products/" + testValue)
+        .get("/api/public/product/" + testValue)
         .expect(404)
         .then((response) => {
           expect(response.body).toBeNull();

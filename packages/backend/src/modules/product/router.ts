@@ -1,13 +1,14 @@
-import contract from "@opensom/contract";
+import globalContract from "@opensom/contract";
 import { initServer } from "@ts-rest/express";
 
 import serviceOrderService from "../serviceOrder/service";
 import productProcessor from "./processor";
 
+const contract = globalContract.product;
 const s = initServer();
 
 const router = s.router(contract, {
-  getProduct: async ({ params: { id } }) => {
+  get: async ({ params: { id } }) => {
     const serviceOrder = await serviceOrderService.getOne(id);
 
     if (!serviceOrder) {

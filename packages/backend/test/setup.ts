@@ -1,9 +1,9 @@
-import createClients from "@test/utils/createClients";
+import populateDB from "@test/utils/populateDB";
 
 import prisma from "@/database/prisma";
 
 export const setup = async () => {
-  await createClients(2);
+  await populateDB(2);
 };
 
 export const teardown = async () => {
