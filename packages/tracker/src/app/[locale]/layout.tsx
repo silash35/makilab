@@ -1,28 +1,6 @@
 "use client";
-
-import CssBaseline from "@mui/material/CssBaseline";
-import GlobalStyles from "@mui/material/GlobalStyles";
-import { ThemeProvider } from "@mui/material/styles";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-
-import theme from "@/utils/theme";
-
 import Layout from "./components/Layout";
-
-const globalStyles = (
-  <GlobalStyles
-    styles={{
-      body: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        minHeight: "100vh",
-        scrollBehavior: "smooth",
-      },
-      main: { display: "contents" },
-    }}
-  />
-);
+import ThemeProvider from "./components/ThemeProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -35,13 +13,9 @@ const MainLayout = ({ children, params: { locale } }: Props) => (
       <meta content="text/html" httpEquiv="content-type" />
     </head>
     <body>
-      <AppRouterCacheProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {globalStyles}
-          <Layout>{children}</Layout>
-        </ThemeProvider>
-      </AppRouterCacheProvider>
+      <ThemeProvider>
+        <Layout>{children}</Layout>
+      </ThemeProvider>
     </body>
   </html>
 );
