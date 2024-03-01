@@ -16,7 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import useSession from "@/hooks/useSession";
@@ -79,11 +79,11 @@ interface ListLinkProps {
 }
 
 const ListLink = ({ href, text, Icon }: ListLinkProps) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <Link href={href}>
-      <ListItemButton className={router.pathname === href ? styles.active : undefined}>
+      <ListItemButton className={pathname === href ? styles.active : undefined}>
         <ListItemIcon>
           <Icon />
         </ListItemIcon>

@@ -1,3 +1,5 @@
+"use client";
+
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
