@@ -1,3 +1,5 @@
+"use client";
+
 import AddOSIcon from "@mui/icons-material/Add";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";

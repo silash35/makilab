@@ -1,4 +1,4 @@
-import Head from "next/head";
+import type { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 
@@ -7,6 +7,8 @@ import ClientInputs from "@/components/common/inputs/Client";
 import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import addClient from "@/utils/mutations/addClient";
+
+export const metadata: Metadata = { title: "Cadastrar novo Cliente" };
 
 const NewClient = () => {
   const { setError } = useError();
@@ -27,15 +29,9 @@ const NewClient = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>Cadastrar novo Cliente</title>
-      </Head>
-
-      <Form handleSubmit={handleSubmit} title="Cadastrar novo Cliente">
-        <ClientInputs />
-      </Form>
-    </>
+    <Form handleSubmit={handleSubmit} title="Cadastrar novo Cliente">
+      <ClientInputs />
+    </Form>
   );
 };
 

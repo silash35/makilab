@@ -1,4 +1,5 @@
-import Head from "next/head";
+"use client";
+
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
@@ -10,7 +11,7 @@ import { TServiceOrderInput } from "@/types/serviceOrder";
 import addClient from "@/utils/mutations/addClient";
 import updateClient from "@/utils/mutations/updateClient";
 
-const NewServiceOrder = () => {
+const ServiceOrderForm = () => {
   const { setError } = useError();
   const router = useRouter();
 
@@ -35,16 +36,10 @@ const NewServiceOrder = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>Cadastrar nova Ordem de Serviço</title>
-      </Head>
-
-      <Form handleSubmit={handleSubmit} title="Cadastrar Nova Ordem de Serviço">
-        <ClientAndSOInputs setSelectedClientId={setSelectedClientId} />
-      </Form>
-    </>
+    <Form handleSubmit={handleSubmit} title="Cadastrar Nova Ordem de Serviço">
+      <ClientAndSOInputs setSelectedClientId={setSelectedClientId} />
+    </Form>
   );
 };
 
-export default NewServiceOrder;
+export default ServiceOrderForm;
