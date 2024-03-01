@@ -1,3 +1,5 @@
+"use client";
+
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";

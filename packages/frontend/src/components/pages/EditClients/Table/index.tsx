@@ -5,7 +5,7 @@ import TableFooter from "@mui/material/TableFooter";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import TableCellWithSort, { Direction } from "@/components/common/table/CellWithSort";
@@ -25,12 +25,13 @@ interface Props {
 
 const CollapsibleTable = ({ clients, mutate, ...props }: Props) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [rowsPerPage, setRowsPerPage] = useState(50);
-  const page = router.query.page ? parseInt(router.query.page as string) : 0;
+  const page = Number(searchParams.get("page"));
 
   const setPage = (page: number) => {
-    router.push(`/admin/editClients?page=${page}`, undefined, { shallow: true });
+    router.push(`/admin/editClients?page=${page}`);
   };
 
   if (clients.length < page * rowsPerPage && page > 0) {

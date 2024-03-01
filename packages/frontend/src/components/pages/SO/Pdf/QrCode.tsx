@@ -1,3 +1,5 @@
+"use client";
+
 import config from "@config";
 import QRCode from "easyqrcodejs";
 import { useEffect, useRef } from "react";

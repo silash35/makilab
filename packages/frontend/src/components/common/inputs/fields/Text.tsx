@@ -1,3 +1,5 @@
+"use client";
+
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
