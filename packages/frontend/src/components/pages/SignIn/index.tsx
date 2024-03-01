@@ -1,5 +1,5 @@
 import Card from "@mui/material/Card";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import SignInForm from "@/components/pages/SignIn/Form";
 import useSession from "@/hooks/useSession";

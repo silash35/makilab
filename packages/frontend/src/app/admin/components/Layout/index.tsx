@@ -1,6 +1,8 @@
+"use client";
+
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import useSession from "@/hooks/useSession";
 

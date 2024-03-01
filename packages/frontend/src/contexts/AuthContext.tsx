@@ -1,3 +1,5 @@
+"use client";
+
 import { destroyCookie, setCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
 

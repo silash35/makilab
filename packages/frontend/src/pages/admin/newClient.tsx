@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 
 import Form from "@/components/common/Form";

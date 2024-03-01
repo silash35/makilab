@@ -3,7 +3,7 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import { createTheme } from "@mui/material/styles";
-import { ThemeProvider as MUIThemeProvider } from "@mui/material/styles";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Ubuntu } from "next/font/google";
 
@@ -45,11 +45,11 @@ const globalStyles = (
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => (
   <AppRouterCacheProvider>
-    <MUIThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
       {globalStyles}
       {children}
-    </MUIThemeProvider>
+    </MuiThemeProvider>
   </AppRouterCacheProvider>
 );
 

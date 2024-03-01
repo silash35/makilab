@@ -1,7 +1,7 @@
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 import useSession from "@/hooks/useSession";
