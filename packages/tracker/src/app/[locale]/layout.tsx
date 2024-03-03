@@ -1,6 +1,6 @@
 "use client";
-import Layout from "./components/Layout";
-import ThemeProvider from "./components/ThemeProvider";
+import Layout from "./_components/Layout";
+import ThemeProvider from "./_components/ThemeProvider";
 
 interface Props {
   children: React.ReactNode;
