@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 
-import Form from "@/components/common/Form";
-import ClientInputs from "@/components/common/inputs/Client";
+import Form from "@/components/Form";
+import ClientInputs from "@/components/inputs/Client";
 import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import addClient from "@/utils/mutations/addClient";

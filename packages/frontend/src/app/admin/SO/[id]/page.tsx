@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import SO from "@/components/pages/SO";
+import SO from "./_components/SO";
 
 export const metadata: Metadata = { title: "Gerenciar Ordem de Serviço" };
 

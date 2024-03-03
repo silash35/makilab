@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import SignIn from "@/components/pages/SignIn";
+import SignIn from "./_components/SignIn";
 
 export const metadata: Metadata = { title: "Faça Login" };
 

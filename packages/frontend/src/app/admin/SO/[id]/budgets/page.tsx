@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import Budgets from "@/components/pages/SO/Budgets";
+import Budgets from "../_components/Budgets";
 
 export const metadata: Metadata = { title: "Gerenciar Orçamentos" };
 

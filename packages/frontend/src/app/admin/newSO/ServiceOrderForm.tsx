@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-import Form from "@/components/common/Form";
-import ClientAndSOInputs from "@/components/common/inputs/ClientAndSO";
+import Form from "@/components/Form";
+import ClientAndSOInputs from "@/components/inputs/ClientAndSO";
 import useError from "@/hooks/useError";
 import { TClientInput } from "@/types/client";
 import { TServiceOrderInput } from "@/types/serviceOrder";

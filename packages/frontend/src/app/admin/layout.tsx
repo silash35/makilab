@@ -1,4 +1,4 @@
-import Layout from "./components/Layout";
+import Layout from "./_components/Layout";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => <Layout>{children}</Layout>;
 

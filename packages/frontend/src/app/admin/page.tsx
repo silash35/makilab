@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
-import Index from "@/components/pages/index/index";
+import Index from "./_components/index/index";
 
 export const metadata: Metadata = { title: "Painel de Administração" };
 
-const Home = () => <Index />;
+const AdminMenuPage = () => <Index />;
 
-export default Home;
+export default AdminMenuPage;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import Pdf from "@/components/pages/Budget/Pdf";
+import Pdf from "../_components/Pdf";
 
 export const metadata: Metadata = { title: "Imprimir Orçamento" };
 
