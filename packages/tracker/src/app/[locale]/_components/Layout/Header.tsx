@@ -51,7 +51,7 @@ const LayoutHeader = () => {
   return (
     <Header>
       <ImageLink href="/">
-        <img alt={`${COMPANY.name} logo`} height="40" src="/wordmark.svg" />
+        <img alt={`OpenSOM logo`} height="40" src="/wordmark.svg" />
       </ImageLink>
 
       <Nav>

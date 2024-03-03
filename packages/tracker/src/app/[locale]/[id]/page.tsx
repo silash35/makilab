@@ -7,20 +7,22 @@ import { notFound } from "next/navigation";
 import ProductFetcher from "@/components/ProductFetcher";
 import useServerLocale from "@/hooks/useServerLocale";
 
-const en = {
-  unknownError: "Unknown error, please try again later",
-};
+import en from "./locales/en";
+import pt from "./locales/pt";
 
-const pt = {
-  unknownError: "Erro desconhecido, tente novamente mais tarde",
-};
+interface Props {
+  params: { locale?: string; id: string };
+}
 
-const NotFound = () => {
-  notFound();
-  return null;
-};
+export function generateMetadata({ params: { locale, id } }: Props) {
+  const { t } = useServerLocale({ en, pt }, locale);
 
-const ProductPage = ({ params: { locale, id } }: { params: { locale?: string; id: string } }) => {
+  return {
+    title: `${t.SO} ${Number(id.replace(/\D/g, ""))}`,
+  };
+}
+
+const ProductPage = ({ params: { locale, id } }: Props) => {
   const { t } = useServerLocale({ en, pt }, locale);
 
   return (
@@ -42,3 +44,8 @@ const ProductPage = ({ params: { locale, id } }: { params: { locale?: string; id
 };
 
 export default ProductPage;
+
+const NotFound = () => {
+  notFound();
+  return null;
+};

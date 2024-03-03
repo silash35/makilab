@@ -2,7 +2,6 @@ export default {
   COMPANY: {
     name: "OpenSOM",
     color: "#2ec27e",
-    description: "Your Company Description",
     email: "example@example.com",
     phones: ["71 9999-9999", "71 9999-9999"],
     whatsapp: "55 71 9999-9999", // don't forget to add the country code

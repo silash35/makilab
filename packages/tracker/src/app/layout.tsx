@@ -1,13 +1,17 @@
 export { default as viewport } from "@opensom/next-common/viewport";
 
 import config from "@config";
-const { COMPANY, SITE_URL } = config;
+const { SITE_URL } = config;
 
 import createMetadata from "@opensom/next-common/metadata";
 export const metadata = createMetadata(
   {
-    title: COMPANY.name,
-    description: COMPANY.description,
+    title: {
+      template: "%s | OpenSOM Tracker",
+      default: "OpenSOM Tracker",
+    },
+    description:
+      "Example of site that consumes the OpenSOM API, it provides a nice interface for clients track their service orders status.",
   },
   SITE_URL,
 );

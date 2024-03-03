@@ -20,7 +20,7 @@ This package contains the contract of the application API. It is what defines th
 
 ### frontend
 
-The frontend package contains the main application. The manager interface where the employees and the administrator can manage the orders, the customers and etc.
+The frontend package contains the main application. The interface where the employees and the administrator can manage the orders, the customers and etc.
 
 ### next-common
 
@@ -28,7 +28,7 @@ Common things between the frontend and the tracker package.
 
 ### tracker
 
-The tracker package is a example of site consuming the OpenSOM API, it provides a nice interface for clients track their service orders status. You can modify this project to use it as a real application for your business or make a new website that consumes the OpenSOM API.
+The tracker package is a example of site that consumes the OpenSOM API, it provides a nice interface for clients track their service orders status. You can modify this project to use it as a real application for your business or make a new website that consumes the OpenSOM API.
 
 ## How to deploy a offline instance?
 
@@ -106,6 +106,9 @@ dokku builder-dockerfile:set opensom-backend dockerfile-path Dockerfile.backend
 # set ENV variables
 dokku config:set opensom-backend SITE_URL=https://opensom-backend.your_domain.com
 dokku config:set opensom-backend ADMIN_PASSWORD=admin USER1_PASSWORD=user1 USER2_PASSWORD=user2
+
+# set JWT secret
+# You can generate one with running "openssl rand -base64 32"
 dokku config:set opensom-backend JWT_SECRET=ZZOJoGBuOiFiPWd9JA7L7q2WGdLBgF2RR4tX5PEbZWs
 
 # optional (Only if you use the email feature)

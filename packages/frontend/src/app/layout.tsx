@@ -4,14 +4,17 @@ import config from "@config";
 
 import Providers from "@/components/Providers";
 
-const { COMPANY, SITE_URL } = config;
+const { SITE_URL } = config;
 
 import createMetadata from "@opensom/next-common/metadata";
 
 export const metadata = createMetadata(
   {
-    title: COMPANY.name,
-    description: COMPANY.description,
+    title: {
+      template: "%s | OpenSOM",
+      default: "OpenSOM",
+    },
+    description: "The open source and Self-Hosted Service Order Manager",
   },
   SITE_URL,
 );
