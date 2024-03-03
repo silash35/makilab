@@ -1,48 +1,22 @@
+export { default as viewport } from "@opensom/next-common/viewport";
+
 import "@/styles/globals.scss";
 
 import config from "@config";
-import { Metadata } from "next";
-import { Viewport } from "next";
 
 import Providers from "@/components/Providers";
 
 const { COMPANY, SITE_URL } = config;
 
-export const viewport: Viewport = {
-  themeColor: "#ffffff",
-};
+import createMetadata from "@opensom/next-common/metadata";
 
-export const metadata: Metadata = {
-  title: COMPANY.name,
-  description: COMPANY.description,
-  authors: [{ name: "Silas Henrique Alves Araújo" }],
-  metadataBase: new URL(SITE_URL),
-
-  twitter: {
-    creator: "@silash35",
+export const metadata = createMetadata(
+  {
+    title: COMPANY.name,
+    description: COMPANY.description,
   },
-  openGraph: {
-    url: SITE_URL,
-    type: "website",
-    locale: "pt_BR",
-    images: [
-      {
-        url: "/card.png",
-        width: 1200,
-        height: 628,
-        alt: "OpenSOM Logo",
-      },
-    ],
-  },
-  icons: {
-    shortcut: `${SITE_URL}/favicon.ico`,
-    other: {
-      rel: "mask-icon",
-      color: "#0070f3",
-      url: `${SITE_URL}/icons/safari-pinned-tab.svg`,
-    },
-  },
-};
+  SITE_URL,
+);
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html dir="ltr" lang="pt-BR">

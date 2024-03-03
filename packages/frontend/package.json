@@ -19,6 +19,7 @@
     "@mui/material-nextjs": "^5.15.11",
     "@mui/x-date-pickers": "6.19.5",
     "@opensom/config": "workspace:*",
+    "@opensom/next-common": "workspace:*",
     "date-fns": "^3.3.1",
     "easyqrcodejs": "^4.6.1",
     "next": "^14.1.0",

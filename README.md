@@ -22,6 +22,10 @@ This package contains the contract of the application API. It is what defines th
 
 The frontend package contains the main application. The manager interface where the employees and the administrator can manage the orders, the customers and etc.
 
+### next-common
+
+Common things between the frontend and the tracker package.
+
 ### tracker
 
 The tracker package is a example of site consuming the OpenSOM API, it provides a nice interface for clients track their service orders status. You can modify this project to use it as a real application for your business or make a new website that consumes the OpenSOM API.

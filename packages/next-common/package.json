@@ -1,10 +1,10 @@
 {
-  "name": "@opensom/config",
+  "name": "@opensom/next-common",
   "type": "module",
   "version": "0.1.0",
-  "main": "index.ts",
   "license": "Unlicense",
   "devDependencies": {
+    "next": "^14.1.1",
     "typescript": "^5.3.3"
   }
 }
