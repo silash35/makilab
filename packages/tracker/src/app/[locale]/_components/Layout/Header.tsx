@@ -52,7 +52,7 @@ const LayoutHeader = () => {
   return (
     <Header>
       <ImageLink href="/">
-        <img alt={`${COMPANY.name} logo`} height="40" src="/YOUR_COMPANY_LOGO.svg" />
+        <img alt={`${COMPANY.name} logo`} height="40" src="/wordmark.svg" />
       </ImageLink>
 
       <Nav>
