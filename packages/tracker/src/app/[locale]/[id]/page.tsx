@@ -1,6 +1,11 @@
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { notFound } from "next/navigation";
 
 import ProductFetcher from "@/components/ProductFetcher";
+import useServerLocale from "@/hooks/useServerLocale";
 
 const en = {
   unknownError: "Unknown error, please try again later",
@@ -16,17 +21,24 @@ const NotFound = () => {
 };
 
 const ProductPage = ({ params: { locale, id } }: { params: { locale?: string; id: string } }) => {
-  const t = locale === "en" ? en : pt;
+  const { t } = useServerLocale({ en, pt }, locale);
 
   return (
-    <ProductFetcher
-      fallback={{
-        notFound: <NotFound />,
-        default: <p>{t.unknownError}</p>,
-      }}
-      id={Number(id.replace(/\D/g, ""))}
-      locale={locale}
-    />
+    <Stack alignItems="center">
+      <ProductFetcher
+        fallback={{
+          loading: (
+            <Box margin={8}>
+              <CircularProgress />
+            </Box>
+          ),
+          notFound: <NotFound />,
+          default: <Typography textAlign="center">{t.unknownError}</Typography>,
+        }}
+        id={Number(id.replace(/\D/g, ""))}
+      />
+    </Stack>
   );
 };
+
 export default ProductPage;

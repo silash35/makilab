@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import useLocale from "@/hooks/useLocale";
-import type { Product as TProduct } from "@/utils/getProduct";
+import type { Product as TProduct } from "@/hooks/useProduct";
 
 import Dates from "./Dates";
 import en from "./locales/en";

@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { format } from "date-fns/format";
 
 import useLocale from "@/hooks/useLocale";
-import type { Product } from "@/utils/getProduct";
+import type { Product } from "@/hooks/useProduct";
 
 import en from "./locales/en";
 import pt from "./locales/pt";

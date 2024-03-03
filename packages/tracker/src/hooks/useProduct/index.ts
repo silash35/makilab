@@ -1,22 +1,25 @@
 import config from "@config";
 import contract from "@opensom/contract";
-import { initClient } from "@ts-rest/core";
+import { initQueryClient } from "@ts-rest/react-query";
 
 import processProduct, { ProcessedProduct } from "./processProduct";
 
-const client = initClient(contract, {
+const client = initQueryClient(contract, {
   baseUrl: config.BACKEND_URL,
   baseHeaders: { "Content-Type": "application/json" },
 });
 
-const getProduct = async (id: number, locale?: string) => {
-  const data = await client.product.get({
+const getProduct = (id: number) => {
+  const data = client.product.get.useQuery(["product", id], {
     params: { id },
   });
 
   return {
     ...data,
-    product: data.status === 200 ? processProduct(data.body, locale) : undefined,
+    data: {
+      ...data.data,
+      body: data.data?.status === 200 ? processProduct(data.data.body) : undefined,
+    },
   };
 };
 

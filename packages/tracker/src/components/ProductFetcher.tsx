@@ -1,32 +1,34 @@
-import getProduct from "@/utils/getProduct";
+"use client";
+
+import useProduct from "@/hooks/useProduct";
 
 import ProductComponent from "./Product";
 
 interface ProductFetcherProps {
   id: number;
-  locale?: string;
   fallback: {
+    loading: JSX.Element;
     notFound: JSX.Element;
     default: JSX.Element;
   };
 }
 
-const ProductFetcher = async ({ id, locale, fallback }: ProductFetcherProps) => {
-  try {
-    const queryResult = await getProduct(id, locale);
+const ProductFetcher = ({ id, fallback }: ProductFetcherProps) => {
+  const { isLoading, isFetching, data, error } = useProduct(id);
 
-    if (queryResult.status === 404) {
-      return fallback.notFound;
-    }
-
-    if (queryResult.status !== 200 || !queryResult.product) {
-      return fallback.default;
-    }
-
-    return <ProductComponent product={queryResult.product} />;
-  } catch {
-    return fallback.default;
+  if (isLoading || isFetching) {
+    return fallback.loading;
   }
+
+  if (data.status === 200 && data.body) {
+    return <ProductComponent product={data.body} />;
+  }
+
+  if (error?.status === 404) {
+    return fallback.notFound;
+  }
+
+  return fallback.default;
 };
 
 export default ProductFetcher;

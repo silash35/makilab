@@ -1,10 +1,12 @@
 import contract from "@opensom/contract";
-import type { ClientInferResponseBody } from "@ts-rest/core";
+import type { DataResponse } from "@ts-rest/react-query";
+
+import useLocale from "@/hooks/useLocale";
 
 import en from "./locale/en";
 import pt from "./locale/pt";
 
-type Product = ClientInferResponseBody<typeof contract.product.get, 200>;
+type Product = DataResponse<typeof contract.product.get>["body"];
 
 interface Step {
   label: string;
@@ -19,8 +21,8 @@ interface ProcessedProduct extends Product {
   steps: Step[];
 }
 
-function processProduct(product: Product, locale?: string) {
-  const t = locale === "en" ? en : pt;
+function processProduct(product: Product) {
+  const { t } = useLocale({ pt, en });
 
   let isFinished = false;
   let activeStep = 0;
