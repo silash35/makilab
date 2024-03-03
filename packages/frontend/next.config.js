@@ -13,6 +13,13 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? true : false,
   },
+  redirects: async () => [
+    {
+      source: "/",
+      destination: "/admin",
+      permanent: false,
+    },
+  ],
 };
 
 export default nextConfig;
