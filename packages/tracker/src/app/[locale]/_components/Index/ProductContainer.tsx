@@ -21,9 +21,8 @@ interface Props {
   productId: number;
 }
 
-function productContainer({ productId }: Props) {
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+const ProductContainer = ({ productId }: Props) => {
+  const { t, locale } = useLocale({ en, pt });
 
   return (
     <Suspense
@@ -43,6 +42,6 @@ function productContainer({ productId }: Props) {
       />
     </Suspense>
   );
-}
+};
 
-export default productContainer;
+export default ProductContainer;

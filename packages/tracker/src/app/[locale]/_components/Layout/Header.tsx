@@ -46,8 +46,7 @@ const Link = styled(NextLink)({
 });
 
 const LayoutHeader = () => {
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   return (
     <Header>

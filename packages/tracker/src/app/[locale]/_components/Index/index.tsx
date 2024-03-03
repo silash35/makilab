@@ -20,8 +20,7 @@ const Index = () => {
   const [id, setId] = useState("");
   const [enabled, setEnabled] = useState(false);
 
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   const numberId = Number(id.replace(/\D/g, ""));
 

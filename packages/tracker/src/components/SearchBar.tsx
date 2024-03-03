@@ -26,8 +26,7 @@ interface Props {
 }
 
 const SearchBar = ({ handleSearch, inputProps }: Props) => {
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   const [paperElevation, setPaperElevation] = useState(4);
 

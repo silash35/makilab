@@ -12,8 +12,7 @@ interface Props {
 }
 
 const SearchBar = ({ setSearch, setEnabled }: Props) => {
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   const inputId = useId();
 

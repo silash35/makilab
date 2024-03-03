@@ -17,8 +17,7 @@ const Ul = styled("ul")({ padding: 0, listStyle: "none", margin: 0 });
 const P = styled("p")({ margin: 0 });
 
 const Dates = ({ product }: Props) => {
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   const dates = [];
 
@@ -51,8 +50,7 @@ interface DateItemProps {
 }
 
 const DateItem = ({ text, date }: DateItemProps) => {
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   return (
     <li>

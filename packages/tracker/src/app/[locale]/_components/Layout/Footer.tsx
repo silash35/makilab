@@ -12,8 +12,7 @@ import pt from "./locales/pt";
 const P = styled("p")({ marginTop: 0, fontWeight: "normal" });
 
 const Footer = () => {
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   return (
     <Box component="footer" padding={4}>

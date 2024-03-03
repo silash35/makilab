@@ -24,8 +24,7 @@ interface Props {
 const Product = ({ product }: Props) => {
   const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down("lg"));
-  const { locale } = useLocale();
-  const t = locale === "en" ? en : pt;
+  const { t } = useLocale({ en, pt });
 
   const theme = createTheme({
     palette: {
