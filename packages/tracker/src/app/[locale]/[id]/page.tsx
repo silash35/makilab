@@ -24,7 +24,7 @@ const ProductPage = ({ params: { locale, id } }: { params: { locale?: string; id
   const { t } = useServerLocale({ en, pt }, locale);
 
   return (
-    <Stack alignItems="center">
+    <Stack component="main" margin="auto">
       <ProductFetcher
         fallback={{
           loading: (

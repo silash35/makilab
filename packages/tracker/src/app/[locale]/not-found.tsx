@@ -16,8 +16,8 @@ const NotFound = () => {
   const { t } = useLocale({ en, pt });
 
   return (
-    <Stack alignItems="center" justifyContent="center" margin="auto">
-      <h1>404 - {t.notFound}</h1>
+    <Stack component="main" margin="auto">
+      <h1>404 - {t.notFound}</h1>;
     </Stack>
   );
 };

@@ -1,7 +1,5 @@
 export { default as viewport } from "@opensom/next-common/viewport";
 
-import "@/styles/globals.scss";
-
 import config from "@config";
 
 import Providers from "@/components/Providers";

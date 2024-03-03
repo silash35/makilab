@@ -1,17 +1,7 @@
 "use client";
 
-import CssBaseline from "@mui/material/CssBaseline";
 import { ptBR } from "@mui/material/locale";
-import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { Ubuntu } from "next/font/google";
-
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "700"],
-});
-
+import BaseThemeProvider from "@opensom/next-common/providers/ThemeProvider";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 type PaletteMode = "light" | "dark";
@@ -22,11 +12,7 @@ const ThemeContext = createContext({
 });
 export { ThemeContext };
 
-interface Props {
-  children: ReactNode;
-}
-
-export const ThemeProvider = ({ children }: Props) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<PaletteMode>("light");
 
   const toggleTheme = () => {
@@ -47,38 +33,11 @@ export const ThemeProvider = ({ children }: Props) => {
     }
   }, []);
 
-  const muiTheme = createTheme(
-    {
-      palette: {
-        mode: theme,
-        primary: {
-          light: "#6cf6ae",
-          main: "#2ec27e",
-          dark: "#009051",
-          contrastText: "#fff",
-        },
-      },
-      typography: {
-        fontFamily: ubuntu.style.fontFamily,
-      },
-      components: {
-        MuiButton: { styleOverrides: { root: { fontWeight: "bold", letterSpacing: 1 } } },
-        MuiTableFooter: {
-          styleOverrides: { root: { ">:last-child td": { border: 0 } } },
-        },
-      },
-    },
-    ptBR,
-  );
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <AppRouterCacheProvider>
-        <MuiThemeProvider theme={muiTheme}>
-          <CssBaseline />
-          {children}
-        </MuiThemeProvider>
-      </AppRouterCacheProvider>
+      <BaseThemeProvider localization={ptBR} mode={theme}>
+        {children}
+      </BaseThemeProvider>
     </ThemeContext.Provider>
   );
 };

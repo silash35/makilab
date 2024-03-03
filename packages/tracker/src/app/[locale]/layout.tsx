@@ -1,8 +1,8 @@
 "use client";
+import ThemeProvider from "@opensom/next-common/providers/ThemeProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Layout from "./_components/Layout";
-import ThemeProvider from "./_components/ThemeProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {

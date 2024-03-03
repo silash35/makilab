@@ -6,7 +6,7 @@ import Text from "./_components/Text";
 
 const SearchPage = () => {
   return (
-    <Stack alignItems="center" direction="column" gap={4} margin={4} marginBottom="auto">
+    <Stack alignItems="center" component="main" direction="column" gap={4} marginBottom="auto">
       <Text />
       <SearchBar />
       <ProductContainer />
