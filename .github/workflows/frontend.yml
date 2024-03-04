@@ -5,6 +5,7 @@ on:
     paths:
       - "packages/frontend/**"
       - "packages/config/**"
+      - "packages/next-common/**"
       - ".github/workflows/frontend.yml"
       - "Dockerfile.frontend"
       - "package.json"

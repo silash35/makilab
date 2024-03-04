@@ -5,6 +5,7 @@ on:
     paths:
       - "packages/tracker/**"
       - "packages/config/**"
+      - "packages/next-common/**"
       - ".github/workflows/tracker.yml"
       - "Dockerfile.tracker"
       - "package.json"
