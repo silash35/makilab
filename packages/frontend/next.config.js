@@ -7,9 +7,6 @@ const nextConfig = {
     SITE_URL: process.env.SITE_URL,
     BACKEND_URL: process.env.BACKEND_URL,
   },
-  sassOptions: {
-    includePaths: ["/src/styles"],
-  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? true : false,
   },
