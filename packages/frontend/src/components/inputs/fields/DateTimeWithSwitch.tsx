@@ -1,9 +1,9 @@
+import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
 import type TextField from "@mui/material/TextField";
 import type { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { ComponentProps, useEffect, useState } from "react";
 
-import styles from "../inputs.module.scss";
 import DateTime from "./DateTime";
 
 interface Props {
@@ -45,7 +45,7 @@ const DateTimeWithSwitch = ({
 
   return (
     <>
-      <div className={styles.flexNoWrap}>
+      <Stack alignItems="center" direction="row" gap={1} minWidth={400}>
         <Switch
           onChange={() => {
             setSwitch(!switchState);
@@ -60,7 +60,7 @@ const DateTimeWithSwitch = ({
           name={name}
           textFieldProps={textFieldProps}
         />
-      </div>
+      </Stack>
 
       {switchState && children}
     </>

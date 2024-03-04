@@ -2,13 +2,19 @@
 
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
 import { FormDialogButton } from "@/components/dialogs/FormDialog";
 import request from "@/utils/request";
 
-import styles from "./sendMailDialog.module.scss";
+const SelectFileText = styled("div")({
+  maxWidth: 150,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
 
 interface Props {
   to: string;
@@ -36,7 +42,7 @@ const SendMailDialog = ({ to, defaultText }: Props) => {
   return (
     <FormDialogButton
       formDialogProps={{
-        title: `Confirmar Envio do Email para ${to}`,
+        title: `Confirmar envio de Email para ${to}`,
         children: (
           <>
             {text === undefined && (
@@ -61,9 +67,7 @@ const SendMailDialog = ({ to, defaultText }: Props) => {
               required
             />
             <Button component="label" variant="outlined">
-              <div className={styles.selectFileText}>
-                {selectedFile ? selectedFile.name : "Anexar Arquivo"}
-              </div>
+              <SelectFileText>{selectedFile ? selectedFile.name : "Anexar Arquivo"}</SelectFileText>
               <input
                 name="attachment"
                 onChange={(e) => setSelectedFile(e.target.files?.[0])}

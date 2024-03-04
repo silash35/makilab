@@ -3,7 +3,7 @@ import { TextFieldProps } from "@mui/material/TextField";
 import type TClient from "@/types/client";
 
 import Text from "./fields/Text";
-import styles from "./inputs.module.scss";
+import Flex from "./Flex";
 
 interface Props {
   client?: TClient;
@@ -43,7 +43,7 @@ const ClientInputs = ({ client }: Props) => {
         defaultValue={client?.cpfOrCnpj}
       />
 
-      <div className={styles.flex}>
+      <Flex>
         <Text
           textFieldProps={{
             name: "address",
@@ -60,9 +60,9 @@ const ClientInputs = ({ client }: Props) => {
           }}
           defaultValue={client?.zip}
         />
-      </div>
+      </Flex>
 
-      <div className={styles.flex}>
+      <Flex>
         <Text
           textFieldProps={{
             name: "whatsapp",
@@ -81,7 +81,7 @@ const ClientInputs = ({ client }: Props) => {
           }}
           defaultValue={client?.whatsapp}
         />
-      </div>
+      </Flex>
     </>
   );
 };

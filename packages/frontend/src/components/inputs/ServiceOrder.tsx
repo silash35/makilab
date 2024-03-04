@@ -8,7 +8,7 @@ import type TServiceOrder from "@/types/serviceOrder";
 
 import DateTime from "./fields/DateTime";
 import Text from "./fields/Text";
-import styles from "./inputs.module.scss";
+import Flex from "./Flex";
 
 const { ATTENDANTS, SERVICE_PLACES, VOLTAGES_OPTIONS } = config;
 
@@ -20,7 +20,7 @@ const ServiceOrderInputs = ({ serviceOrder }: Props) => {
   const common = { variant: "outlined", margin: "normal", fullWidth: true } as TextFieldProps;
   return (
     <>
-      <div className={styles.flex}>
+      <Flex>
         <Text
           textFieldProps={{
             name: "equipment",
@@ -35,14 +35,14 @@ const ServiceOrderInputs = ({ serviceOrder }: Props) => {
           renderInput={(params) => (
             <TextField {...params} label="Tensão" name="voltage" required {...common} />
           )}
-          className={styles.minWidth}
           defaultValue={serviceOrder?.voltage ? serviceOrder?.voltage : VOLTAGES_OPTIONS[0]}
           options={VOLTAGES_OPTIONS}
+          sx={{ minWidth: 200, width: { xs: "100%", md: "auto" } }}
           freeSolo
         />
-      </div>
+      </Flex>
 
-      <div className={styles.flex}>
+      <Flex>
         <Text
           defaultValue={serviceOrder?.brand}
           textFieldProps={{ name: "brand", label: "Marca", ...common }}
@@ -51,9 +51,9 @@ const ServiceOrderInputs = ({ serviceOrder }: Props) => {
           defaultValue={serviceOrder?.model}
           textFieldProps={{ name: "model", label: "Modelo", ...common }}
         />
-      </div>
+      </Flex>
 
-      <div className={styles.flex}>
+      <Flex>
         <Text
           defaultValue={serviceOrder?.productNumber}
           textFieldProps={{ name: "productNumber", label: "Product Number", ...common }}
@@ -62,7 +62,7 @@ const ServiceOrderInputs = ({ serviceOrder }: Props) => {
           defaultValue={serviceOrder?.batchOrImei}
           textFieldProps={{ name: "batchOrImei", label: "N° de Serie ou IMEI", ...common }}
         />
-      </div>
+      </Flex>
 
       <Text
         defaultValue={serviceOrder?.accessories}
@@ -86,15 +86,15 @@ const ServiceOrderInputs = ({ serviceOrder }: Props) => {
         textFieldProps={{ name: "listOfServices", label: "Lista de serviços", ...common }}
       />
 
-      <div className={styles.flex}>
+      <Flex>
         <Autocomplete
           renderInput={(params) => (
             <TextField {...params} label="Atendente" name="attendedBy" required {...common} />
           )}
-          className={styles.maxWidth}
           defaultValue={serviceOrder?.attendedBy}
           options={ATTENDANTS}
           freeSolo
+          fullWidth
         />
 
         <Autocomplete
@@ -107,13 +107,14 @@ const ServiceOrderInputs = ({ serviceOrder }: Props) => {
               {...common}
             />
           )}
-          className={styles.maxWidth}
           defaultValue={serviceOrder?.attendedOn ? serviceOrder?.attendedOn : SERVICE_PLACES[0]}
           options={SERVICE_PLACES}
+          sx={{ width: "100%" }}
           freeSolo
+          fullWidth
         />
-      </div>
-      <div className={styles.flex}>
+      </Flex>
+      <Flex>
         <DateTime
           defaultValue={serviceOrder?.createdAt}
           label="Data de criação da OS"
@@ -127,7 +128,7 @@ const ServiceOrderInputs = ({ serviceOrder }: Props) => {
           }
           label="Garantia"
         />
-      </div>
+      </Flex>
 
       <Text
         defaultValue={serviceOrder?.notes}

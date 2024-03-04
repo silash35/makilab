@@ -5,7 +5,7 @@ import TBudgetItem from "@/types/budgetItem";
 import Integer from "./fields/Integer";
 import Money from "./fields/Money";
 import Text from "./fields/Text";
-import styles from "./inputs.module.scss";
+import Flex from "./Flex";
 
 interface Props {
   item?: TBudgetItem;
@@ -24,7 +24,7 @@ const BudgetItemInputs = ({ item }: Props) => {
         }}
         defaultValue={item?.name}
       />
-      <div className={styles.flex}>
+      <Flex>
         <Money
           textFieldProps={{
             name: "price",
@@ -41,7 +41,7 @@ const BudgetItemInputs = ({ item }: Props) => {
           }}
           defaultValue={item?.quantity ? String(item.quantity) : undefined}
         />
-      </div>
+      </Flex>
     </>
   );
 };
